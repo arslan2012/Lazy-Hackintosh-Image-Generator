@@ -21,6 +21,7 @@ class ViewController: NSViewController {
         super.viewDidLoad()
         progress.hidden = true
         progressLable.hidden = true
+        //self.view.window.title = "懒人镜像制作器";
 
         // Do any additional setup after loading the view.
     }
@@ -51,6 +52,8 @@ class ViewController: NSViewController {
         progress.hidden = false
         progressLable.hidden = false
         progress.startAnimation(self)
+        progressLable.stringValue = "请输入密码"
+        privilegedShellCommand("/bin/ls",arg: ["/bin"], progress: 0)
         shellCommand("/usr/bin/hdiutil",arg: ["attach",filePath.stringValue,"-noverify"], label: "挂载镜像", progress: 2)
         shellCommand("/usr/bin/hdiutil",arg: ["attach",filePath.stringValue + "/Contents/SharedSupport/InstallESD.dmg","-noverify"], label: "挂载ESD镜像", progress: 0)
         shellCommand("/usr/bin/hdiutil",arg: ["attach","/Volumes/Install OS X El Capitan/Install OS X El Capitan.app/Contents/SharedSupport/InstallESD.dmg","-noverify"], label: "挂载ESD镜像", progress: 0)

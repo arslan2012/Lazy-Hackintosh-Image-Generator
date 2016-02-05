@@ -177,14 +177,7 @@ OSStatus const errAuthorizationFnNoLongerExists = -70001;
 {
     OSStatus err = noErr;
     const char *toolPath = [launchPath fileSystemRepresentation];
-    
     static AuthorizationRef authorizationRef;
-    @synchronized(self) {
-        if (!authorizationRef) {
-            err = AuthorizationCreate(NULL, kAuthorizationEmptyEnvironment, kAuthorizationFlagDefaults, &authorizationRef);
-            if (err != errAuthorizationSuccess) { return err; }
-        }
-    }
     AuthorizationItem myItems = {kAuthorizationRightExecute, strlen(toolPath), &toolPath, 0};
     AuthorizationRights myRights = {1, &myItems};
     AuthorizationFlags flags = kAuthorizationFlagDefaults | kAuthorizationFlagInteractionAllowed | kAuthorizationFlagPreAuthorize | kAuthorizationFlagExtendRights;
@@ -221,9 +214,11 @@ OSStatus const errAuthorizationFnNoLongerExists = -70001;
     // These Apple APIs are quite possibly the most horrible of the Mac OS X APIs
     
     // create authorization reference
-    err = AuthorizationCreate(NULL, kAuthorizationEmptyEnvironment, kAuthorizationFlagDefaults, &authorizationRef);
-    if (err != errAuthorizationSuccess) {
-        return err;
+    @synchronized(self) {
+        if (!authorizationRef) {
+            err = AuthorizationCreate(NULL, kAuthorizationEmptyEnvironment, kAuthorizationFlagDefaults, &authorizationRef);
+            if (err != errAuthorizationSuccess) { return err; }
+        }
     }
     
     // pre-authorize the privileged operation
