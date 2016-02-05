@@ -178,7 +178,13 @@ OSStatus const errAuthorizationFnNoLongerExists = -70001;
     OSStatus err = noErr;
     const char *toolPath = [launchPath fileSystemRepresentation];
     
-    AuthorizationRef authorizationRef;
+    static AuthorizationRef authorizationRef;
+    @synchronized(self) {
+        if (!authorizationRef) {
+            err = AuthorizationCreate(NULL, kAuthorizationEmptyEnvironment, kAuthorizationFlagDefaults, &authorizationRef);
+            if (err != errAuthorizationSuccess) { return err; }
+        }
+    }
     AuthorizationItem myItems = {kAuthorizationRightExecute, strlen(toolPath), &toolPath, 0};
     AuthorizationRights myRights = {1, &myItems};
     AuthorizationFlags flags = kAuthorizationFlagDefaults | kAuthorizationFlagInteractionAllowed | kAuthorizationFlagPreAuthorize | kAuthorizationFlagExtendRights;
@@ -255,7 +261,7 @@ OSStatus const errAuthorizationFnNoLongerExists = -70001;
     }
     
     // free the auth ref
-    AuthorizationFree(authorizationRef, kAuthorizationFlagDefaults);
+    //AuthorizationFree(authorizationRef, kAuthorizationFlagDefaults);
     
     // we return err if execution failed
     if (err != errAuthorizationSuccess) {
