@@ -700,54 +700,18 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nrp-ld-LkO">
-                                <rect key="frame" x="122" y="86" width="73" height="56"/>
-                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="OSInstall.mpkg" id="2BX-zF-jWg">
-                                    <font key="font" metaFont="system" size="19"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wJu-Gx-yEc">
-                                <rect key="frame" x="245" y="89" width="72" height="46"/>
+                                <rect key="frame" x="90" y="90" width="72" height="46"/>
                                 <textFieldCell key="cell" lineBreakMode="charWrapping" sendsActionOnEndEditing="YES" title="kernel" id="KCe-Sx-Z00">
                                     <font key="font" metaFont="system" size="24"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D6a-p3-BpF">
-                                <rect key="frame" x="364" y="89" width="98" height="46"/>
-                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="/Extra" id="YJc-LV-gDD">
-                                    <font key="font" metaFont="system" size="32"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="teh-IK-gzo" customClass="OtherFileDrop" customModule="LazyHackintoshGenerator" customModuleProvider="target">
-                                <rect key="frame" x="20" y="89" width="62" height="51"/>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="27G-Vl-r2i"/>
-                            </imageView>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7bS-zj-NgH" customClass="OtherFileDrop" customModule="LazyHackintoshGenerator" customModuleProvider="target">
-                                <rect key="frame" x="124" y="89" width="69" height="53"/>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="x8a-p2-l8W"/>
-                            </imageView>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iVZ-oS-ips" customClass="OtherFileDrop" customModule="LazyHackintoshGenerator" customModuleProvider="target">
-                                <rect key="frame" x="247" y="89" width="68" height="51"/>
+                                <rect key="frame" x="92" y="90" width="68" height="51"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="nE2-g3-bch"/>
                             </imageView>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="600-wD-mII" customClass="OtherFileDrop" customModule="LazyHackintoshGenerator" customModuleProvider="target">
-                                <rect key="frame" x="366" y="86" width="83" height="50"/>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="oVv-hy-Ug5"/>
-                            </imageView>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VnP-gp-IiQ">
-                                <rect key="frame" x="18" y="86" width="66" height="60"/>
-                                <textFieldCell key="cell" lineBreakMode="charWrapping" sendsActionOnEndEditing="YES" title="OSInstaller" id="JuH-CV-miS">
-                                    <font key="font" metaFont="system" size="23"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cq3-tM-ywW" customClass="FileDropZone" customModule="LazyHackintoshGenerator" customModuleProvider="target">
                                 <rect key="frame" x="20" y="207" width="440" height="57"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="RUM-f6-V2X"/>
@@ -765,16 +729,27 @@
                                     <action selector="StartProcessing:" target="XfG-lQ-9wD" id="Lsu-y1-Lc7"/>
                                 </connections>
                             </button>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D6a-p3-BpF">
+                                <rect key="frame" x="253" y="93" width="98" height="46"/>
+                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="/Extra" id="YJc-LV-gDD">
+                                    <font key="font" metaFont="system" size="32"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="600-wD-mII" customClass="OtherFileDrop" customModule="LazyHackintoshGenerator" customModuleProvider="target">
+                                <rect key="frame" x="255" y="90" width="83" height="50"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="oVv-hy-Ug5"/>
+                            </imageView>
                         </subviews>
                     </view>
                     <connections>
-                        <outlet property="OSInstaller" destination="teh-IK-gzo" id="Pcw-QD-c5W"/>
                         <outlet property="extra" destination="600-wD-mII" id="Okx-Yj-tjI"/>
                         <outlet property="filePath" destination="VoB-1g-tUe" id="0zt-QG-aDt"/>
                         <outlet property="kernel" destination="iVZ-oS-ips" id="1Rh-c2-0ji"/>
-                        <outlet property="mpkg" destination="7bS-zj-NgH" id="cjv-lj-rSL"/>
                         <outlet property="progress" destination="NQo-RU-twe" id="J9g-OF-90R"/>
                         <outlet property="progressLable" destination="NJY-iS-VYr" id="lUA-3M-dHs"/>
+                        <outlet property="start" destination="XWH-IZ-EgC" id="EPB-Qt-YKd"/>
                         <outlet property="view" destination="m2S-Jp-Qdl" id="0rQ-xT-g7w"/>
                     </connections>
                 </viewController>
