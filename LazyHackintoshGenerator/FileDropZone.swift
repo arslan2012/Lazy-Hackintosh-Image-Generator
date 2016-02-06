@@ -52,9 +52,11 @@ class FileDropZone: NSImageView {
         return false
     }
     override func draggingEnded(sender: NSDraggingInfo?) {
-        let view = self.superview!.nextResponder! as! ViewController
-        view.filePath.stringValue = self.droppedFilePath
-        view.startGenerating()
+        if self.fileTypeIsOk && self.droppedFilePath != ""{
+            let view = self.superview!.nextResponder! as! ViewController
+            view.filePath.stringValue = self.droppedFilePath
+            view.startGenerating()
+        }
     }
     
     func checkExtension(drag: NSDraggingInfo) -> Bool {
@@ -73,15 +75,39 @@ class FileDropZone: NSImageView {
     }
     
 }
-class OtherFileDrop : FileDropZone{
-    var path: String = ""
+class OtherFileDrop : NSImageView{
+    var droppedFilePath = ""
     override func draggingUpdated(sender: NSDraggingInfo) -> NSDragOperation {
             return .Copy
     }
     override func draggingEnded(sender: NSDraggingInfo?) {
+        if self.droppedFilePath != "" {
         let layer = CALayer()
         layer.backgroundColor = CGColorCreateGenericRGB(0.0, 0.0, 0.0, 0.4)
         self.wantsLayer = true
-        self.layer = layer
+            self.layer = layer
+        }
+    }
+    override func drawRect(dirtyRect: NSRect) {
+        super.drawRect(dirtyRect)
+    }
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        registerForDraggedTypes([NSFilenamesPboardType, NSURLPboardType, NSPasteboardTypeTIFF])
+    }
+    
+    override func draggingEntered(sender: NSDraggingInfo) -> NSDragOperation {
+            return .Copy
+    }
+    
+    override func performDragOperation(sender: NSDraggingInfo) -> Bool {
+        if let board = sender.draggingPasteboard().propertyListForType("NSFilenamesPboardType") as? NSArray {
+            if let imagePath = board[0] as? String {
+                // THIS IS WERE YOU GET THE PATH FOR THE DROPPED FILE
+                self.droppedFilePath = imagePath
+                return true
+            }
+        }
+        return false
     }
 }

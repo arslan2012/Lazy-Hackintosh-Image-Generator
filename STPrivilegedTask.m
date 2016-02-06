@@ -33,7 +33,7 @@
 #import <dlfcn.h>
 
 /* New error code denoting that AuthorizationExecuteWithPrivileges no longer exists */
-OSStatus const errAuthorizationFnNoLongerExists = -70001;
+OSStatus const errAuthorizationFnNoLongerExists = -700000001;
 
 @implementation STPrivilegedTask
 

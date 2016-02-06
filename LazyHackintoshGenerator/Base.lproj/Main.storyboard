@@ -681,13 +681,6 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cq3-tM-ywW" customClass="FileDropZone" customModule="LazyHackintoshGenerator" customModuleProvider="target">
-                                <rect key="frame" x="20" y="193" width="440" height="57"/>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="RUM-f6-V2X"/>
-                                <connections>
-                                    <action selector="getFile:" target="XfG-lQ-9wD" id="fyt-ul-Fao"/>
-                                </connections>
-                            </imageView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VoB-1g-tUe">
                                 <rect key="frame" x="18" y="187" width="444" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="请拖动各个文件到相应位置" id="qeC-H5-IUy">
@@ -755,6 +748,13 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cq3-tM-ywW" customClass="FileDropZone" customModule="LazyHackintoshGenerator" customModuleProvider="target">
+                                <rect key="frame" x="20" y="207" width="440" height="57"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="RUM-f6-V2X"/>
+                                <connections>
+                                    <action selector="getFile:" target="XfG-lQ-9wD" id="fyt-ul-Fao"/>
+                                </connections>
+                            </imageView>
                         </subviews>
                     </view>
                     <connections>
@@ -765,6 +765,7 @@
                         <outlet property="mpkg" destination="7bS-zj-NgH" id="cjv-lj-rSL"/>
                         <outlet property="progress" destination="NQo-RU-twe" id="J9g-OF-90R"/>
                         <outlet property="progressLable" destination="NJY-iS-VYr" id="lUA-3M-dHs"/>
+                        <outlet property="view" destination="m2S-Jp-Qdl" id="0rQ-xT-g7w"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
