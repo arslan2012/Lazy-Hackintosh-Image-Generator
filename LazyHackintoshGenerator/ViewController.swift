@@ -174,9 +174,14 @@ class ViewController: NSViewController {
         shellCommand("/usr/bin/sed",arg: ["-i","\'\'","--","/\\<volume-check script=\"volCheckScript()\"\\/>/d","\(NSHomeDirectory())/Desktop/osinstallmpkg/Distribution"], label: "破解OSInstall", progress: 0)
         shellCommand("/usr/bin/sed",arg: ["-i","\'\'","--","/osVersion=\"10.11.3\" osBuildVersion=\"15D21\"/d","\(NSHomeDirectory())/Desktop/osinstallmpkg/Distribution"], label: "破解OSInstall", progress: 0)
         shellCommand("/bin/rm",arg: ["/Volumes/"+lazypath+"/System/Installation/Packages/OSInstall.mpkg"], label: "破解OSInstall", progress: 0)
-        shellCommand("/bin/rm",arg: ["\(NSHomeDirectory())/Desktop/osinstallmpkg/Distribution\""], label: "破解OSInstall", progress: 0)
-        shellCommand("/usr/bin/xar",arg: ["-cf","/Volumes/"+lazypath+"/System/Installation/Packages/OSInstall.mpkg","\(NSHomeDirectory())/Desktop/osinstallmpkg"], label: "破解OSInstall", progress: 2)
-        shellCommand("/bin/rm",arg: ["-rf","\(NSHomeDirectory())/Desktop/osinstallmpkg"], label: "破解OSInstall", progress: 0)
+        shellCommand("/bin/rm",arg: ["\(NSHomeDirectory())/Desktop/osinstallmpkg/Distribution\'\'"], label: "破解OSInstall", progress: 0)
+        let task = NSTask()
+        task.launchPath = "/usr/bin/xar"
+        task.arguments = ["-cf","/Volumes/"+lazypath+"/System/Installation/Packages/OSInstall.mpkg","."]
+        task.currentDirectoryPath = "\(NSHomeDirectory())/Desktop/osinstallmpkg"
+        task.launch()
+        task.waitUntilExit()
+        shellCommand("/bin/rm",arg: ["-rf","\(NSHomeDirectory())/Desktop/osinstallmpkg"], label: "破解OSInstall", progress: 2)
         
         
         shellCommand("/bin/cp",arg: [kernel.droppedFilePath,"/Volumes/"+lazypath+"/System/Library/Kernels"], label: "复制Kernel文件", progress: 2)
@@ -187,6 +192,7 @@ class ViewController: NSViewController {
         shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/"+lazypath], label: "卸载懒人镜像", progress: 0)
         progress.stopAnimation(self)
         progressLable.stringValue = "已经完成"
+        filePath.stringValue = ""
         start.enabled = true
     }
 
