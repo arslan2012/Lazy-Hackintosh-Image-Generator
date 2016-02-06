@@ -1,0 +1,32 @@
+/* 
+  Localizable.strings
+  LazyHackintoshGenerator
+
+  Created by ئ‍ارسلان ئابلىكىم on 2/6/16.
+  Copyright © 2016 PCBETA. All rights reserved.
+*/
+
+"懒人镜像制作器" =  "懒人镜像制作器";
+"未设置镜像！" =  "未设置镜像！";
+"请先添加kernel！" =  "请先添加kernel！";
+"挂载镜像" =  "挂载镜像";
+"挂载ESD镜像" =  "挂载ESD镜像";
+"对不起未找到ESD镜像挂载点" =  "对不起未找到ESD镜像挂载点";
+"正在创建镜像，请稍候..." =  "正在创建镜像，请稍候...";
+"挂载生成的镜像" =  "挂载生成的镜像";
+"复制Base System文件" =  "复制Base System文件";
+"对不起懒人镜像写入失败" =  "对不起懒人镜像写入失败";
+"对不起未找到Base System镜像挂载点" =  "对不起未找到Base System镜像挂载点";
+"复制Install ESD文件" =  "复制Install ESD文件";
+"删除Packages文件夹" =  "删除Packages文件夹";
+"复制Packages文件夹到S/I。时间很长，期间程序卡顿为正常现象" =  "复制Packages文件夹到S/I。时间很长，期间程序卡顿为正常现象";
+"创建kernels文件夹" =  "创建kernels文件夹";
+"破解OSInstall" =  "破解OSInstall";
+"复制Kernel文件" =  "复制Kernel文件";
+"XCPM补丁" =  "XCPM补丁";
+"复制Extra文件夹" =  "复制Extra文件夹";
+"卸载Base System镜像" =  "卸载Base System镜像";
+"卸载ESD镜像" =  "卸载ESD镜像";
+"卸载镜像" =  "卸载镜像";
+"卸载懒人镜像" =  "卸载懒人镜像";
+"已经完成" = "已经完成";

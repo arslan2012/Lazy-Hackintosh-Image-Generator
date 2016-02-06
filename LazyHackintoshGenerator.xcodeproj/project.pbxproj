@@ -12,6 +12,8 @@
 		F504118B1C644987003311DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F504118A1C644987003311DA /* Assets.xcassets */; };
 		F504118E1C644987003311DA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F504118C1C644987003311DA /* Main.storyboard */; };
 		F50411961C644B0C003311DA /* FileDropZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50411951C644B0C003311DA /* FileDropZone.swift */; };
+		F546B0451C660DDD00613AFE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F546B0471C660DDD00613AFE /* Localizable.strings */; };
+		F546B0491C660EB600613AFE /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F546B0481C660EB600613AFE /* StringExtension.swift */; };
 		F57F43071C64A1AA004C1EB5 /* STPrivilegedTask.m in Sources */ = {isa = PBXBuildFile; fileRef = F57F43061C64A1AA004C1EB5 /* STPrivilegedTask.m */; };
 /* End PBXBuildFile section */
 
@@ -20,9 +22,13 @@
 		F50411861C644987003311DA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F50411881C644987003311DA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		F504118A1C644987003311DA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		F504118D1C644987003311DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F504118F1C644987003311DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F50411951C644B0C003311DA /* FileDropZone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileDropZone.swift; sourceTree = "<group>"; };
+		F546B0411C660C4800613AFE /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F546B0421C660C5900613AFE /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "zh-Hans"; path = "zh-Hans.lproj/Main.storyboard"; sourceTree = "<group>"; };
+		F546B0461C660DDD00613AFE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F546B0481C660EB600613AFE /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StringExtension.swift; path = ../StringExtension.swift; sourceTree = "<group>"; };
+		F546B04A1C6617E700613AFE /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		F57F43051C64A1AA004C1EB5 /* LazyHackintoshGenerator-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LazyHackintoshGenerator-Bridging-Header.h"; sourceTree = "<group>"; };
 		F57F43061C64A1AA004C1EB5 /* STPrivilegedTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STPrivilegedTask.m; sourceTree = "<group>"; };
 		F57F43081C64A1CE004C1EB5 /* STPrivilegedTask.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STPrivilegedTask.h; sourceTree = "<group>"; };
@@ -60,7 +66,9 @@
 			isa = PBXGroup;
 			children = (
 				F50411861C644987003311DA /* AppDelegate.swift */,
+				F546B0481C660EB600613AFE /* StringExtension.swift */,
 				F50411881C644987003311DA /* ViewController.swift */,
+				F546B0471C660DDD00613AFE /* Localizable.strings */,
 				F504118A1C644987003311DA /* Assets.xcassets */,
 				F504118C1C644987003311DA /* Main.storyboard */,
 				F50411951C644B0C003311DA /* FileDropZone.swift */,
@@ -119,8 +127,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
-				Base,
+				"zh-Hans",
 			);
 			mainGroup = F504117A1C644987003311DA;
 			productRefGroup = F50411841C644987003311DA /* Products */;
@@ -138,6 +145,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F504118B1C644987003311DA /* Assets.xcassets in Resources */,
+				F546B0451C660DDD00613AFE /* Localizable.strings in Resources */,
 				F504118E1C644987003311DA /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -151,6 +159,7 @@
 			files = (
 				F50411891C644987003311DA /* ViewController.swift in Sources */,
 				F50411871C644987003311DA /* AppDelegate.swift in Sources */,
+				F546B0491C660EB600613AFE /* StringExtension.swift in Sources */,
 				F57F43071C64A1AA004C1EB5 /* STPrivilegedTask.m in Sources */,
 				F50411961C644B0C003311DA /* FileDropZone.swift in Sources */,
 			);
@@ -162,9 +171,19 @@
 		F504118C1C644987003311DA /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				F504118D1C644987003311DA /* Base */,
+				F546B0411C660C4800613AFE /* en */,
+				F546B0421C660C5900613AFE /* zh-Hans */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		F546B0471C660DDD00613AFE /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F546B0461C660DDD00613AFE /* en */,
+				F546B04A1C6617E700613AFE /* zh-Hans */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -247,6 +266,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};
@@ -278,6 +298,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = Arslan.LazyHackintoshGenerator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "LazyHackintoshGenerator-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};

@@ -17,9 +17,14 @@ class ViewController: NSViewController {
     @IBOutlet weak var MBRPatch: NSButton!
     @IBOutlet weak var XCPMPatch: NSButton!
     @IBOutlet weak var extra: OtherFileDrop!
+    var language: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.language = NSLocale.preferredLanguages()[0]
+        if self.language != "zh-Hans" || self.language != "en" {
+            self.language = "en"
+        }
         progress.hidden = true
         progressLable.hidden = true
         XCPMPatch.state = NSOffState
@@ -27,7 +32,7 @@ class ViewController: NSViewController {
     }
     override func viewDidAppear() {
         super.viewDidAppear()
-        self.view.window!.title = "懒人镜像制作器"
+        self.view.window!.title = "懒人镜像制作器".localized(self.language!)
     }
     
     override var representedObject: AnyObject? {
@@ -40,7 +45,7 @@ class ViewController: NSViewController {
             startGenerating()
         }else{
             let a = NSAlert()
-            a.messageText = "未设置镜像！"
+            a.messageText = "未设置镜像！".localized(self.language!)
             a.runModal()
         }
     }
@@ -48,7 +53,7 @@ class ViewController: NSViewController {
         if XCPMPatch.state == NSOnState {
             if kernel.droppedFilePath == "" {
                 let a = NSAlert()
-                a.messageText = "请先添加kernel！"
+                a.messageText = "请先添加kernel！".localized(self.language!)
                 a.runModal()
                 XCPMPatch.state = NSOffState
             }
@@ -61,7 +66,7 @@ class ViewController: NSViewController {
         let pipe = NSPipe()
         task.standardOutput = pipe
         task.launch()
-        progressLable.stringValue = label
+        progressLable.stringValue = label.localized(self.language!)
         task.waitUntilExit()
         self.progress.incrementBy(progress)
         let data = pipe.fileHandleForReading.readDataToEndOfFile()
