@@ -14,22 +14,25 @@ class ViewController: NSViewController {
     @IBOutlet weak var progressLable: NSTextField!
     @IBOutlet weak var kernel: OtherFileDrop!
     @IBOutlet weak var start: NSButton!
+    @IBOutlet weak var MBRPatch: NSButton!
+    @IBOutlet weak var XCPMPatch: NSButton!
     @IBOutlet weak var extra: OtherFileDrop!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         progress.hidden = true
         progressLable.hidden = true
+        XCPMPatch.state = NSOffState
         // Do any additional setup after loading the view.
     }
     override func viewDidAppear() {
         super.viewDidAppear()
         self.view.window!.title = "懒人镜像制作器"
     }
-
+    
     override var representedObject: AnyObject? {
         didSet {
-        // Update the view, if already loaded.
+            // Update the view, if already loaded.
         }
     }
     @IBAction func StartProcessing(sender: NSButton) {
@@ -39,6 +42,16 @@ class ViewController: NSViewController {
             let a = NSAlert()
             a.messageText = "未设置镜像！"
             a.runModal()
+        }
+    }
+    @IBAction func XCPMClicked(sender: NSButton) {
+        if XCPMPatch.state == NSOnState {
+            if kernel.droppedFilePath == "" {
+                let a = NSAlert()
+                a.messageText = "请先添加kernel！"
+                a.runModal()
+                XCPMPatch.state = NSOffState
+            }
         }
     }
     func shellCommand(path:String, arg: [String],label: String,progress: Double)->String{
@@ -81,7 +94,7 @@ class ViewController: NSViewController {
             }
         }
         catch{
-
+            
         }
         shellCommand("/usr/bin/hdiutil",arg: ["attach","/Volumes/"+esdpath+"/Install OS X El Capitan.app/Contents/SharedSupport/InstallESD.dmg","-noverify"], label: "挂载ESD镜像", progress: 0)
         do{
@@ -150,41 +163,47 @@ class ViewController: NSViewController {
             a.runModal()
             exit(0)
         }
-        privilegedShellCommand("/bin/cp",arg: ["-R","/Volumes/"+basepath+"/","/Volumes/"+lazypath], progress: 32)
+        privilegedShellCommand("/bin/cp",arg: ["-R","/Volumes/"+basepath+"/","/Volumes/"+lazypath], progress: 26)
         shellCommand("/bin/cp",arg: ["/Volumes/"+esdpath+"/BaseSystem.chunklist","/Volumes/"+lazypath], label: "复制Install ESD文件", progress: 2)
         shellCommand("/bin/cp",arg: ["/Volumes/"+esdpath+"/BaseSystem.dmg","/Volumes/"+lazypath], label: "复制Install ESD文件", progress: 2)
         shellCommand("/bin/cp",arg: ["/Volumes/"+esdpath+"/AppleDiagnostics.chunklist","/Volumes/"+lazypath], label: "复制Install ESD文件", progress: 2)
         shellCommand("/bin/cp",arg: ["/Volumes/"+esdpath+"/AppleDiagnostics.dmg","/Volumes/"+lazypath], label: "复制Install ESD文件", progress: 2)
         shellCommand("/bin/rm",arg: ["-rf","/Volumes/"+lazypath+"/System/Installation/Packages"], label: "删除Packages文件夹", progress: 2)
         shellCommand("/bin/ls",arg: ["/bin"], label: "复制Packages文件夹到S/I。时间很长，期间程序卡顿为正常现象", progress: 0)
-        privilegedShellCommand("/bin/cp",arg: ["-R","/Volumes/"+esdpath+"/Packages","/Volumes/"+lazypath+"/System/Installation"], progress: 20)
+        privilegedShellCommand("/bin/cp",arg: ["-R","/Volumes/"+esdpath+"/Packages","/Volumes/"+lazypath+"/System/Installation"], progress: 26)
         shellCommand("/bin/mkdir",arg: ["/Volumes/"+lazypath+"/System/Library/Kernels"], label: "创建kernels文件夹", progress: 0)
         
-        privilegedShellCommand("/usr/bin/perl",arg: ["-pi","-e","\'s|x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\x74\\x5F\\x48\\x8B\\x85|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\xEB\\x5F\\x48\\x8B\\x85|g\'","/Volumes/"+lazypath+"/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller"], progress: 1)
-        privilegedShellCommand("/usr/bin/codesign",arg: ["-f","-s","-","/Volumes/"+lazypath+"/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller"], progress: 1)
-        
-        //shellCommand("/bin/cp",arg: [OSInstaller.droppedFilePath,"/Volumes/"+lazypath+"/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A"], label: "复制OSInstaller文件", progress: 2)
-        //shellCommand("/bin/cp",arg: [mpkg.droppedFilePath,"/Volumes/"+lazypath+"/System/Installation/Packages"], label: "复制OSInstall.mpkg文件", progress: 2)
-        
-        shellCommand("/bin/mkdir",arg: ["\(NSHomeDirectory())/Desktop/osinstallmpkg"], label: "破解OSInstall", progress: 0)
-        shellCommand("/usr/bin/xar",arg: ["-x","-f","/Volumes/"+lazypath+"/System/Installation/Packages/OSInstall.mpkg","-C","\(NSHomeDirectory())/Desktop/osinstallmpkg"], label: "破解OSInstall", progress: 0)
-        shellCommand("/usr/bin/sed",arg: ["-i","\'\'","--","s/1024/512/g","\(NSHomeDirectory())/Desktop/osinstallmpkg/Distribution"], label: "破解OSInstall", progress: 0)
-        shellCommand("/usr/bin/sed",arg: ["-i","\'\'","--","s/var minRam = 2048/var minRam = 1024/g","\(NSHomeDirectory())/Desktop/osinstallmpkg/Distribution"], label: "破解OSInstall", progress: 0)
-        shellCommand("/usr/bin/sed",arg: ["-i","\'\'","--","/\\<installation-check script=\"installCheckScript()\"\\/>/d","\(NSHomeDirectory())/Desktop/osinstallmpkg/Distribution"], label: "破解OSInstall", progress: 0)
-        shellCommand("/usr/bin/sed",arg: ["-i","\'\'","--","/\\<volume-check script=\"volCheckScript()\"\\/>/d","\(NSHomeDirectory())/Desktop/osinstallmpkg/Distribution"], label: "破解OSInstall", progress: 0)
-        shellCommand("/usr/bin/sed",arg: ["-i","\'\'","--","/osVersion=\"10.11.3\" osBuildVersion=\"15D21\"/d","\(NSHomeDirectory())/Desktop/osinstallmpkg/Distribution"], label: "破解OSInstall", progress: 0)
-        shellCommand("/bin/rm",arg: ["/Volumes/"+lazypath+"/System/Installation/Packages/OSInstall.mpkg"], label: "破解OSInstall", progress: 0)
-        shellCommand("/bin/rm",arg: ["\(NSHomeDirectory())/Desktop/osinstallmpkg/Distribution\'\'"], label: "破解OSInstall", progress: 0)
-        let task = NSTask()
-        task.launchPath = "/usr/bin/xar"
-        task.arguments = ["-cf","/Volumes/"+lazypath+"/System/Installation/Packages/OSInstall.mpkg","."]
-        task.currentDirectoryPath = "\(NSHomeDirectory())/Desktop/osinstallmpkg"
-        task.launch()
-        task.waitUntilExit()
-        shellCommand("/bin/rm",arg: ["-rf","\(NSHomeDirectory())/Desktop/osinstallmpkg"], label: "破解OSInstall", progress: 2)
-        
-        
-        shellCommand("/bin/cp",arg: [kernel.droppedFilePath,"/Volumes/"+lazypath+"/System/Library/Kernels"], label: "复制Kernel文件", progress: 2)
+        if MBRPatch.state == NSOnState {
+            privilegedShellCommand("/usr/bin/perl",arg: ["-pi","-e","\'s|x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\x74\\x5F\\x48\\x8B\\x85|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\xEB\\x5F\\x48\\x8B\\x85|g\'","/Volumes/"+lazypath+"/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller"], progress: 1)
+            privilegedShellCommand("/usr/bin/codesign",arg: ["-f","-s","-","/Volumes/"+lazypath+"/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller"], progress: 1)
+            
+            shellCommand("/bin/mkdir",arg: ["\(NSHomeDirectory())/Desktop/osinstallmpkg"], label: "破解OSInstall", progress: 0)
+            shellCommand("/usr/bin/xar",arg: ["-x","-f","/Volumes/"+lazypath+"/System/Installation/Packages/OSInstall.mpkg","-C","\(NSHomeDirectory())/Desktop/osinstallmpkg"], label: "破解OSInstall", progress: 0)
+            shellCommand("/usr/bin/sed",arg: ["-i","\'\'","--","s/1024/512/g","\(NSHomeDirectory())/Desktop/osinstallmpkg/Distribution"], label: "破解OSInstall", progress: 0)
+            shellCommand("/usr/bin/sed",arg: ["-i","\'\'","--","s/var minRam = 2048/var minRam = 1024/g","\(NSHomeDirectory())/Desktop/osinstallmpkg/Distribution"], label: "破解OSInstall", progress: 0)
+            shellCommand("/usr/bin/sed",arg: ["-i","\'\'","--","/\\<installation-check script=\"installCheckScript()\"\\/>/d","\(NSHomeDirectory())/Desktop/osinstallmpkg/Distribution"], label: "破解OSInstall", progress: 0)
+            shellCommand("/usr/bin/sed",arg: ["-i","\'\'","--","/\\<volume-check script=\"volCheckScript()\"\\/>/d","\(NSHomeDirectory())/Desktop/osinstallmpkg/Distribution"], label: "破解OSInstall", progress: 0)
+            shellCommand("/usr/bin/sed",arg: ["-i","\'\'","--","/osVersion=\"10.11.3\" osBuildVersion=\"15D21\"/d","\(NSHomeDirectory())/Desktop/osinstallmpkg/Distribution"], label: "破解OSInstall", progress: 0)
+            shellCommand("/bin/rm",arg: ["/Volumes/"+lazypath+"/System/Installation/Packages/OSInstall.mpkg"], label: "破解OSInstall", progress: 0)
+            shellCommand("/bin/rm",arg: ["\(NSHomeDirectory())/Desktop/osinstallmpkg/Distribution\'\'"], label: "破解OSInstall", progress: 0)
+            let task = NSTask()
+            task.launchPath = "/usr/bin/xar"
+            task.arguments = ["-cf","/Volumes/"+lazypath+"/System/Installation/Packages/OSInstall.mpkg","."]
+            task.currentDirectoryPath = "\(NSHomeDirectory())/Desktop/osinstallmpkg"
+            task.launch()
+            task.waitUntilExit()
+            shellCommand("/bin/rm",arg: ["-rf","\(NSHomeDirectory())/Desktop/osinstallmpkg"], label: "破解OSInstall", progress: 2)
+        }else {
+            self.progress.incrementBy(2)
+        }
+        if XCPMPatch.state == NSOnState {
+            shellCommand("/bin/cp",arg: [kernel.droppedFilePath,"/Volumes/"+lazypath+"/System/Library/Kernels"], label: "复制Kernel文件", progress: 1)
+            shellCommand("/usr/bin/perl",arg: ["-pi","-e","\'s|\\xe2\\x00\\x00\\x00\\x02\\x00\\x00\\x00|\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00|g\'","/Volumes/"+lazypath+"/System/Library/Kernels/kernel"], label: "XCPM补丁",progress: 0)
+            shellCommand("/usr/bin/perl",arg: ["-pi","-e","\'s|\\xe2\\x00\\x00\\x00\\x4c\\x00\\x00\\x00|\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00|g\'","/Volumes/"+lazypath+"/System/Library/Kernels/kernel"], label: "XCPM补丁",progress: 0)
+            shellCommand("/usr/bin/perl",arg: ["-pi","-e","\'s|\\xe2\\x00\\x00\\x00\\x90\\x01\\x00\\x00|\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00|g\'","/Volumes/"+lazypath+"/System/Library/Kernels/kernel"], label: "XCPM补丁",progress: 1)
+        }else {
+            shellCommand("/bin/cp",arg: [kernel.droppedFilePath,"/Volumes/"+lazypath+"/System/Library/Kernels"], label: "复制Kernel文件", progress: 2)
+        }
         shellCommand("/bin/cp",arg: ["-R",extra.droppedFilePath,"/Volumes/"+lazypath+"/"], label: "复制Extra文件夹", progress: 2)
         shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/"+basepath], label: "卸载Base System镜像", progress: 2)
         shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/"+esdpath], label: "卸载ESD镜像", progress: 2)
@@ -195,7 +214,7 @@ class ViewController: NSViewController {
         filePath.stringValue = ""
         start.enabled = true
     }
-
-
+    
+    
 }
 

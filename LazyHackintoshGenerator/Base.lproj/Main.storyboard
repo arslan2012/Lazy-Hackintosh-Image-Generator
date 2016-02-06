@@ -700,18 +700,6 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wJu-Gx-yEc">
-                                <rect key="frame" x="90" y="90" width="72" height="46"/>
-                                <textFieldCell key="cell" lineBreakMode="charWrapping" sendsActionOnEndEditing="YES" title="kernel" id="KCe-Sx-Z00">
-                                    <font key="font" metaFont="system" size="24"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iVZ-oS-ips" customClass="OtherFileDrop" customModule="LazyHackintoshGenerator" customModuleProvider="target">
-                                <rect key="frame" x="92" y="90" width="68" height="51"/>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="nE2-g3-bch"/>
-                            </imageView>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cq3-tM-ywW" customClass="FileDropZone" customModule="LazyHackintoshGenerator" customModuleProvider="target">
                                 <rect key="frame" x="20" y="207" width="440" height="57"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="RUM-f6-V2X"/>
@@ -730,7 +718,7 @@
                                 </connections>
                             </button>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D6a-p3-BpF">
-                                <rect key="frame" x="253" y="93" width="98" height="46"/>
+                                <rect key="frame" x="364" y="94" width="98" height="46"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="/Extra" id="YJc-LV-gDD">
                                     <font key="font" metaFont="system" size="32"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -738,12 +726,43 @@
                                 </textFieldCell>
                             </textField>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="600-wD-mII" customClass="OtherFileDrop" customModule="LazyHackintoshGenerator" customModuleProvider="target">
-                                <rect key="frame" x="255" y="90" width="83" height="50"/>
+                                <rect key="frame" x="366" y="91" width="83" height="50"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="oVv-hy-Ug5"/>
+                            </imageView>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wDg-Us-Bko">
+                                <rect key="frame" x="30" y="126" width="77" height="18"/>
+                                <buttonCell key="cell" type="check" title="破解MBR" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="q5G-N8-8sb">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" size="13" name=".PingFangSC-Regular"/>
+                                </buttonCell>
+                            </button>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x2t-of-KJz">
+                                <rect key="frame" x="30" y="97" width="112" height="18"/>
+                                <buttonCell key="cell" type="check" title="XCPM内核补丁" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="pvR-jb-Lfe">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="XCPMClicked:" target="XfG-lQ-9wD" id="06M-vN-FAd"/>
+                                </connections>
+                            </button>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wJu-Gx-yEc">
+                                <rect key="frame" x="242" y="90" width="72" height="46"/>
+                                <textFieldCell key="cell" lineBreakMode="charWrapping" sendsActionOnEndEditing="YES" title="kernel" id="KCe-Sx-Z00">
+                                    <font key="font" metaFont="system" size="24"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iVZ-oS-ips" customClass="OtherFileDrop" customModule="LazyHackintoshGenerator" customModuleProvider="target">
+                                <rect key="frame" x="244" y="90" width="68" height="51"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="nE2-g3-bch"/>
                             </imageView>
                         </subviews>
                     </view>
                     <connections>
+                        <outlet property="MBRPatch" destination="wDg-Us-Bko" id="6l1-cr-hxW"/>
+                        <outlet property="XCPMPatch" destination="x2t-of-KJz" id="jwr-Sk-6qy"/>
                         <outlet property="extra" destination="600-wD-mII" id="Okx-Yj-tjI"/>
                         <outlet property="filePath" destination="VoB-1g-tUe" id="0zt-QG-aDt"/>
                         <outlet property="kernel" destination="iVZ-oS-ips" id="1Rh-c2-0ji"/>
