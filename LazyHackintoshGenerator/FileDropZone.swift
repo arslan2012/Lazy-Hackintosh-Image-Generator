@@ -55,7 +55,6 @@ class FileDropZone: NSImageView {
         if self.fileTypeIsOk && self.droppedFilePath != ""{
             let view = self.superview!.nextResponder! as! ViewController
             view.filePath.stringValue = self.droppedFilePath
-            view.startGenerating()
         }
     }
     
