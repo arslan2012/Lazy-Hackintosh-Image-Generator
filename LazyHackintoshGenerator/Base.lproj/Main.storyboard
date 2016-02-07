@@ -723,21 +723,11 @@
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="oVv-hy-Ug5"/>
                             </imageView>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wDg-Us-Bko">
-                                <rect key="frame" x="30" y="126" width="90" height="18"/>
+                                <rect key="frame" x="18" y="145" width="90" height="18"/>
                                 <buttonCell key="cell" type="check" title="Patch MBR" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="q5G-N8-8sb">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" size="13" name=".PingFangSC-Regular"/>
                                 </buttonCell>
-                            </button>
-                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x2t-of-KJz">
-                                <rect key="frame" x="30" y="97" width="138" height="18"/>
-                                <buttonCell key="cell" type="check" title="kernel XCPM patch" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="pvR-jb-Lfe">
-                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="XCPMClicked:" target="XfG-lQ-9wD" id="06M-vN-FAd"/>
-                                </connections>
                             </button>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wJu-Gx-yEc">
                                 <rect key="frame" x="242" y="90" width="72" height="46"/>
@@ -758,11 +748,29 @@
                                     <action selector="getFile:" target="XfG-lQ-9wD" id="fyt-ul-Fao"/>
                                 </connections>
                             </imageView>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x2t-of-KJz">
+                                <rect key="frame" x="18" y="120" width="138" height="18"/>
+                                <buttonCell key="cell" type="check" title="kernel XCPM patch" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="pvR-jb-Lfe">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="XCPMClicked:" target="XfG-lQ-9wD" id="06M-vN-FAd"/>
+                                </connections>
+                            </button>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="caW-BX-KDk">
+                                <rect key="frame" x="18" y="92" width="135" height="18"/>
+                                <buttonCell key="cell" type="check" title="also generate CDR" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="znd-va-Rf7">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
                         </subviews>
                     </view>
                     <connections>
                         <outlet property="MBRPatch" destination="wDg-Us-Bko" id="6l1-cr-hxW"/>
                         <outlet property="XCPMPatch" destination="x2t-of-KJz" id="jwr-Sk-6qy"/>
+                        <outlet property="cdr" destination="caW-BX-KDk" id="D3c-LK-Il0"/>
                         <outlet property="extra" destination="600-wD-mII" id="Okx-Yj-tjI"/>
                         <outlet property="filePath" destination="VoB-1g-tUe" id="0zt-QG-aDt"/>
                         <outlet property="kernel" destination="iVZ-oS-ips" id="1Rh-c2-0ji"/>

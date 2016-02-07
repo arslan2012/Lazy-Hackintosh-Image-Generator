@@ -16,6 +16,7 @@ class ViewController: NSViewController {
     @IBOutlet weak var start: NSButton!
     @IBOutlet weak var MBRPatch: NSButton!
     @IBOutlet weak var XCPMPatch: NSButton!
+    @IBOutlet weak var cdr: NSButton!
     @IBOutlet weak var extra: OtherFileDrop!
     var language: String?
     
@@ -28,6 +29,7 @@ class ViewController: NSViewController {
         progress.hidden = true
         progressLable.hidden = true
         XCPMPatch.state = NSOffState
+        cdr.state = NSOffState
         // Do any additional setup after loading the view.
     }
     override func viewDidAppear() {
@@ -210,10 +212,18 @@ class ViewController: NSViewController {
             shellCommand("/bin/cp",arg: [kernel.droppedFilePath,"/Volumes/"+lazypath+"/System/Library/Kernels"], label: "复制Kernel文件", progress: 2)
         }
         shellCommand("/bin/cp",arg: ["-R",extra.droppedFilePath,"/Volumes/"+lazypath+"/"], label: "复制Extra文件夹", progress: 2)
+        if cdr.state == NSOnState {
+            shellCommand("/usr/bin/hdiutil",arg: ["convert","\(NSHomeDirectory())/Desktop/Lazy Installer.dmg","-format","UDTO","-o","\(NSHomeDirectory())/Desktop/Lazy Installer.cdr"], label: "生成CDR", progress: 2)
+            shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/"+basepath], label: "卸载Base System镜像", progress: 1)
+            shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/"+esdpath], label: "卸载ESD镜像", progress: 1)
+            shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/Install OS X El Capitan"], label: "卸载镜像", progress: 0)
+            shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/"+lazypath], label: "卸载懒人镜像", progress: 0)
+        }else{
         shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/"+basepath], label: "卸载Base System镜像", progress: 2)
         shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/"+esdpath], label: "卸载ESD镜像", progress: 2)
         shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/Install OS X El Capitan"], label: "卸载镜像", progress: 0)
-        shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/"+lazypath], label: "卸载懒人镜像", progress: 0)
+            shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/"+lazypath], label: "卸载懒人镜像", progress: 0)
+        }
         progress.stopAnimation(self)
         progressLable.stringValue = "已经完成"
         filePath.stringValue = ""
