@@ -213,11 +213,11 @@ class ViewController: NSViewController {
         }
         shellCommand("/bin/cp",arg: ["-R",extra.droppedFilePath,"/Volumes/"+lazypath+"/"], label: "复制Extra文件夹", progress: 2)
         if cdr.state == NSOnState {
+            shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/"+lazypath], label: "卸载懒人镜像", progress: 0)
             shellCommand("/usr/bin/hdiutil",arg: ["convert","\(NSHomeDirectory())/Desktop/Lazy Installer.dmg","-format","UDTO","-o","\(NSHomeDirectory())/Desktop/Lazy Installer.cdr"], label: "生成CDR", progress: 2)
             shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/"+basepath], label: "卸载Base System镜像", progress: 1)
             shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/"+esdpath], label: "卸载ESD镜像", progress: 1)
             shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/Install OS X El Capitan"], label: "卸载镜像", progress: 0)
-            shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/"+lazypath], label: "卸载懒人镜像", progress: 0)
         }else{
         shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/"+basepath], label: "卸载Base System镜像", progress: 2)
         shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/"+esdpath], label: "卸载ESD镜像", progress: 2)
