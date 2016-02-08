@@ -190,7 +190,7 @@ class ViewController: NSViewController {
             shellCommand("/usr/bin/sed",arg: ["-i","\'\'","--","s/var minRam = 2048/var minRam = 1024/g","\(NSHomeDirectory())/Desktop/osinstallmpkg/Distribution"], label: "破解OSInstall", progress: 0)
             shellCommand("/usr/bin/sed",arg: ["-i","\'\'","--","/\\<installation-check script=\"installCheckScript()\"\\/>/d","\(NSHomeDirectory())/Desktop/osinstallmpkg/Distribution"], label: "破解OSInstall", progress: 0)
             shellCommand("/usr/bin/sed",arg: ["-i","\'\'","--","/\\<volume-check script=\"volCheckScript()\"\\/>/d","\(NSHomeDirectory())/Desktop/osinstallmpkg/Distribution"], label: "破解OSInstall", progress: 0)
-            shellCommand("/usr/bin/sed",arg: ["-i","\'\'","--","/osVersion=\"10.11.3\" osBuildVersion=\"15D21\"/d","\(NSHomeDirectory())/Desktop/osinstallmpkg/Distribution"], label: "破解OSInstall", progress: 0)
+            shellCommand("/usr/bin/sed",arg: ["-i","\'\'","--","s/osVersion=......... osBuildVersion=.......//g","\(NSHomeDirectory())/Desktop/osinstallmpkg/Distribution"], label: "破解OSInstall", progress: 0)
             shellCommand("/bin/rm",arg: ["/Volumes/"+lazypath+"/System/Installation/Packages/OSInstall.mpkg"], label: "破解OSInstall", progress: 0)
             shellCommand("/bin/rm",arg: ["\(NSHomeDirectory())/Desktop/osinstallmpkg/Distribution\'\'"], label: "破解OSInstall", progress: 0)
             let task = NSTask()
@@ -225,7 +225,7 @@ class ViewController: NSViewController {
             shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/"+lazypath], label: "卸载懒人镜像", progress: 0)
         }
         progress.stopAnimation(self)
-        progressLable.stringValue = "已经完成"
+        progressLable.stringValue = "已经完成".localized(self.language!)
         filePath.stringValue = ""
         start.enabled = true
     }
