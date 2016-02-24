@@ -20,7 +20,7 @@ class ViewController: NSViewController {
     @IBOutlet weak var extra: OtherFileDrop!
     var language: String?
     
-    @available(OSX 10.10, *)
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.language = NSLocale.preferredLanguages()[0]
@@ -33,7 +33,6 @@ class ViewController: NSViewController {
         cdr.state = NSOffState
         // Do any additional setup after loading the view.
     }
-    @available(OSX 10.10, *)
     override func viewDidAppear() {
         super.viewDidAppear()
         self.view.window!.title = "懒人镜像制作器".localized(self.language!)

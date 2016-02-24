@@ -104,6 +104,7 @@ class OtherFileDrop : NSImageView{
             if let imagePath = board[0] as? String {
                 // THIS IS WERE YOU GET THE PATH FOR THE DROPPED FILE
                 self.droppedFilePath = imagePath
+                Swift.print(self.droppedFilePath)
                 return true
             }
         }
