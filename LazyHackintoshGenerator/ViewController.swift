@@ -184,14 +184,18 @@ class ViewController: NSViewController {
                 exit(0)
             }
             ////////////////////////////copying processes/////////////////////////
-            self.privilegedShellCommand("/bin/cp",arg: ["-R","/Volumes/"+basepath+"/","/Volumes/"+lazypath], label: "#COPYBASE#",progress: 26)
+            self.privilegedShellCommand("/bin/cp",arg: ["-R","/Volumes/"+basepath+"/","/Volumes/"+lazypath], label: "#COPYBASE#",progress: 22)
             self.shellCommand("/bin/cp",arg: ["/Volumes/"+esdpath+"/BaseSystem.chunklist","/Volumes/"+lazypath], label: "#COPYESD#", progress: 2)
             self.shellCommand("/bin/cp",arg: ["/Volumes/"+esdpath+"/BaseSystem.dmg","/Volumes/"+lazypath], label: "#COPYESD#", progress: 2)
             self.shellCommand("/bin/cp",arg: ["/Volumes/"+esdpath+"/AppleDiagnostics.chunklist","/Volumes/"+lazypath], label: "#COPYESD#", progress: 2)
             self.shellCommand("/bin/cp",arg: ["/Volumes/"+esdpath+"/AppleDiagnostics.dmg","/Volumes/"+lazypath], label: "#COPYESD#", progress: 2)
             self.shellCommand("/bin/rm",arg: ["-rf","/Volumes/"+lazypath+"/System/Installation/Packages"], label: "#DELETEPACKAGE#", progress: 2)
-            self.privilegedShellCommand("/bin/cp",arg: ["-R","/Volumes/"+esdpath+"/Packages","/Volumes/"+lazypath+"/System/Installation"], label: "#COPYPACKAGE#",progress: 24)
+            self.privilegedShellCommand("/bin/cp",arg: ["-R","/Volumes/"+esdpath+"/Packages","/Volumes/"+lazypath+"/System/Installation"], label: "#COPYPACKAGE#",progress: 22)
             self.shellCommand("/bin/mkdir",arg: ["/Volumes/"+lazypath+"/System/Library/Kernels"], label: "#CREATEKERNELSF#", progress: 0)
+            self.shellCommand("/bin/mkdir",arg: ["/tmp/com.pcbeta.lazy/kernel"], label: "#COPYKERNEL#", progress: 2)
+            self.shellCommand("/usr/bin/xar",arg: ["-x","-f","/Volumes/"+lazypath+"/System/Installation/Packages/Essentials.pkg","-C","/tmp/com.pcbeta.lazy/kernel"], label: "#COPYKERNEL#", progress: 4)
+            self.shellCommand("/bin/cp",arg: ["-R","/tmp/com.pcbeta.lazy/kernel/KerberosPlugins","/Volumes/"+lazypath+"/System/Library/"], label: "#COPYKERNEL#", progress: 2)
+            self.shellCommand("/bin/cp",arg: ["-R","/tmp/com.pcbeta.lazy/kernel/Kernels","/Volumes/"+lazypath+"/System/Library/"], label: "#COPYKERNEL#", progress: 2)
             ////////////////////////////patching processes////////////////////////
             if self.MBRPatch.state == NSOnState {
                 self.privilegedShellCommand("/usr/bin/perl",arg: ["-pi","-e","\'s|x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\x74\\x5F\\x48\\x8B\\x85|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\xEB\\x5F\\x48\\x8B\\x85|g\'","/Volumes/"+lazypath+"/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller"], label: "#PATCH01#",progress: 1)
@@ -212,16 +216,12 @@ class ViewController: NSViewController {
                 task.currentDirectoryPath = "/tmp/com.pcbeta.lazy/osinstallmpkg"
                 task.launch()
                 task.waitUntilExit()
-                self.shellCommand("/bin/rm",arg: ["-rf","/tmp/com.pcbeta.lazy/osinstallmpkg"], label: "#PATCH02#", progress: 2)
+                
             }else {
                 dispatch_sync(self.concurrentInsertingQueue,{
                     self.progress.incrementBy(2)
                 })
             }
-            self.shellCommand("/bin/mkdir",arg: ["/tmp/com.pcbeta.lazy/kernel"], label: "#COPYKERNEL#", progress: 0)
-            self.shellCommand("/usr/bin/xar",arg: ["-x","-f","/Volumes/"+lazypath+"/System/Installation/Packages/Essentials.pkg","-C","/tmp/com.pcbeta.lazy/kernel"], label: "#COPYKERNEL#", progress: 0)
-            self.shellCommand("/bin/cp",arg: ["-R","/tmp/com.pcbeta.lazy/kernel/KerberosPlugins","/Volumes/"+lazypath+"/System/Library/"], label: "#COPYKERNEL#", progress: 1)
-            self.shellCommand("/bin/cp",arg: ["-R","/tmp/com.pcbeta.lazy/kernel/Kernels","/Volumes/"+lazypath+"/System/Library/"], label: "#COPYKERNEL#", progress: 1)
             if self.XCPMPatch.state == NSOnState {
                 self.shellCommand("/bin/cp",arg: [self.kernel.droppedFilePath,"/Volumes/"+lazypath+"/System/Library/Kernels"], label: "#COPYKERNEL#", progress: 1)
                 self.shellCommand("/usr/bin/perl",arg: ["-pi","-e","\'s|\\xe2\\x00\\x00\\x00\\x02\\x00\\x00\\x00|\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00|g\'","/Volumes/"+lazypath+"/System/Library/Kernels/kernel"], label: "#XCPMPATCH#",progress: 0)
@@ -247,6 +247,7 @@ class ViewController: NSViewController {
                 self.shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/"+lazypath], label: "#EJECTLAZY#", progress: 0)
                 self.shellCommand("/bin/mv",arg: ["/tmp/com.pcbeta.lazy/Lazy Installer.dmg","\(NSHomeDirectory())/Desktop/"], label: "#MV#", progress: 0)
             }
+            self.shellCommand("/bin/rm",arg: ["-rf","/tmp/com.pcbeta.lazy"], label: "MV", progress: 0)
             self.progress.stopAnimation(self)
             self.progressLable.stringValue = "#FINISH#".localized(self.language!)
             self.filePath.stringValue = ""
