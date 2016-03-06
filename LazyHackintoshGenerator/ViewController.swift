@@ -238,14 +238,14 @@ class ViewController: NSViewController {
                 self.shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/"+basepath], label: "#EJECTBASE#", progress: 1)
                 self.shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/"+esdpath], label: "#EJECTESD#", progress: 1)
                 self.shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/Install OS X El Capitan"], label: "#EJECTORG#", progress: 0)
-                self.shellCommand("/usr/bin/hdiutil",arg: ["/tmp/com.pcbeta.lazy/Lazy Installer.dmg","\(NSHomeDirectory())/Desktop/"], label: "#MV#", progress: 0)
-                self.shellCommand("/usr/bin/hdiutil",arg: ["/tmp/com.pcbeta.lazy/Lazy Installer.cdr","\(NSHomeDirectory())/Desktop/"], label: "#MV#", progress: 0)
+                self.shellCommand("/bin/mv",arg: ["/tmp/com.pcbeta.lazy/Lazy Installer.dmg","\(NSHomeDirectory())/Desktop/"], label: "#MV#", progress: 0)
+                self.shellCommand("/bin/mv",arg: ["/tmp/com.pcbeta.lazy/Lazy Installer.cdr","\(NSHomeDirectory())/Desktop/"], label: "#MV#", progress: 0)
             }else{
                 self.shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/"+basepath], label: "#EJECTBASE#", progress: 2)
                 self.shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/"+esdpath], label: "#EJECTESD#", progress: 2)
                 self.shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/Install OS X El Capitan"], label: "#EJECTORG#", progress: 0)
                 self.shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/"+lazypath], label: "#EJECTLAZY#", progress: 0)
-                self.shellCommand("/usr/bin/hdiutil",arg: ["/tmp/com.pcbeta.lazy/Lazy Installer.dmg","\(NSHomeDirectory())/Desktop/"], label: "#MV#", progress: 0)
+                self.shellCommand("/bin/mv",arg: ["/tmp/com.pcbeta.lazy/Lazy Installer.dmg","\(NSHomeDirectory())/Desktop/"], label: "#MV#", progress: 0)
             }
             self.progress.stopAnimation(self)
             self.progressLable.stringValue = "#FINISH#".localized(self.language!)
