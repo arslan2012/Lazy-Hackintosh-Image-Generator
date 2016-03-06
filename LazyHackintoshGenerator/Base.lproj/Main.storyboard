@@ -673,7 +673,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zbt-vV-DQl">
-                                <rect key="frame" x="18" y="193" width="444" height="51"/>
+                                <rect key="frame" x="18" y="205" width="444" height="37"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" enabled="NO" sendsActionOnEndEditing="YES" state="on" alignment="center" title="DMG Image or Installer app here" id="ALJ-VZ-gfi">
                                     <font key="font" size="29" name=".PingFangSC-Regular"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -722,7 +722,7 @@ AwEVARgBHQAAAAAAAAIBAAAAAAAAACgAAAAAAAAAAAAAAAAAAAEfA
                                     <action selector="StartProcessing:" target="XfG-lQ-9wD" id="Lsu-y1-Lc7"/>
                                 </connections>
                             </button>
-                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D6a-p3-BpF">
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="D6a-p3-BpF">
                                 <rect key="frame" x="364" y="94" width="98" height="46"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="/Extra" id="YJc-LV-gDD">
                                     <font key="font" metaFont="system" size="32"/>
@@ -741,7 +741,7 @@ AwEVARgBHQAAAAAAAAIBAAAAAAAAACgAAAAAAAAAAAAAAAAAAAEfA
                                     <font key="font" size="13" name=".PingFangSC-Regular"/>
                                 </buttonCell>
                             </button>
-                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wJu-Gx-yEc">
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="wJu-Gx-yEc">
                                 <rect key="frame" x="242" y="90" width="72" height="46"/>
                                 <textFieldCell key="cell" lineBreakMode="charWrapping" sendsActionOnEndEditing="YES" title="kernel" id="KCe-Sx-Z00">
                                     <font key="font" metaFont="system" size="24"/>

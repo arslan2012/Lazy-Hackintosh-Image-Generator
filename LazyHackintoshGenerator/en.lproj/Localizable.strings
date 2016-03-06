@@ -31,4 +31,5 @@
 "#EJECTORG#" =  "unmounting . .";
 "#EJECTLAZY#" =  "unmounting .";
 "#FINISH#" = "Complete!";
-"生成CDR" = "Generating CDR";
+"#MV#" = "Moving files to desktop";
+"#CREATECDR#" = "Generating CDR";

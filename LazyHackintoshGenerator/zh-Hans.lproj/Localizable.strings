@@ -31,4 +31,5 @@
 "#EJECTORG#" =  "卸载镜像";
 "#EJECTLAZY#" =  "卸载懒人镜像";
 "#FINISH#" = "已经完成";
+"#MV#" = "将文件移动到桌面上";
 "#CREATECDR#" = "生成CDR";

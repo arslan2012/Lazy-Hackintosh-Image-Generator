@@ -100,6 +100,7 @@ class ViewController: NSViewController {
         progressLable.hidden = false
         progress.startAnimation(self)
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0),{
+            ////////////////////////////mounting processes////////////////////////
             self.shellCommand("/usr/bin/hdiutil",arg: ["attach",self.filePath.stringValue,"-noverify"], label: "#MOUNTORG#", progress: 2)
             self.shellCommand("/usr/bin/hdiutil",arg: ["attach",self.filePath.stringValue + "/Contents/SharedSupport/InstallESD.dmg","-noverify"], label: "#MOUNTESD#", progress: 0)
             let fileManager = NSFileManager.defaultManager()
@@ -126,19 +127,20 @@ class ViewController: NSViewController {
             }
             catch{
                 let a = NSAlert()
-                a.messageText = "#ESDFAILURE#"
+                a.messageText = "#ESDFAILURE#".localized(self.language!)
                 a.runModal()
                 exit(0)
             }
             if esdpath == "" {
                 let b = NSAlert()
-                b.messageText = "#ESDFAILURE#"
+                b.messageText = "#ESDFAILURE#".localized(self.language!)
                 b.runModal()
                 exit(0)
             }
             self.shellCommand("/usr/bin/hdiutil",arg: ["attach","/Volumes/"+esdpath+"/BaseSystem.dmg","-noverify"], label: "#MOUNTESD#", progress: 2)
-            self.shellCommand("/usr/bin/hdiutil",arg: ["create","-megabytes","7650","-layout","SPUD","-fs","HFS+J","-volname","OS X El Capitan Lazy Installer","\(NSHomeDirectory())/Desktop/Lazy Installer.dmg"], label: "#CREATE#", progress: 20)
-            self.shellCommand("/usr/bin/hdiutil",arg: ["attach","\(NSHomeDirectory())/Desktop/Lazy Installer.dmg"], label: "#MOUNTLAZY#", progress: 2)
+            self.shellCommand("/bin/mkdir",arg: ["/tmp/com.pcbeta.lazy"], label: "#CREATE#", progress: 0)
+            self.shellCommand("/usr/bin/hdiutil",arg: ["create","-megabytes","7650","-layout","SPUD","-fs","HFS+J","-volname","OS X El Capitan Lazy Installer","/tmp/com.pcbeta.lazy/Lazy Installer.dmg"], label: "#CREATE#", progress: 20)
+            self.shellCommand("/usr/bin/hdiutil",arg: ["attach","/tmp/com.pcbeta.lazy/Lazy Installer.dmg"], label: "#MOUNTLAZY#", progress: 2)
             var lazypath = ""
             do{
                 let enumerator = try fileManager.contentsOfDirectoryAtPath("/Volumes")
@@ -150,14 +152,14 @@ class ViewController: NSViewController {
             }
             catch{
                 let a = NSAlert()
-                a.messageText = "#LAZYFAILURE#"
+                a.messageText = "#LAZYFAILURE#".localized(self.language!)
                 a.runModal()
                 exit(0)
             }
             if lazypath == ""{
-                let a = NSAlert()
-                a.messageText = "#LAZYFAILURE#"
-                a.runModal()
+                let b = NSAlert()
+                b.messageText = "#LAZYFAILURE#".localized(self.language!)
+                b.runModal()
                 exit(0)
             }
             var basepath = ""
@@ -171,48 +173,55 @@ class ViewController: NSViewController {
             }
             catch{
                 let a = NSAlert()
-                a.messageText = "#BASEFAILURE#"
+                a.messageText = "#BASEFAILURE#".localized(self.language!)
                 a.runModal()
                 exit(0)
             }
             if basepath == ""{
-                let a = NSAlert()
-                a.messageText = "#BASEFAILURE#"
-                a.runModal()
+                let b = NSAlert()
+                b.messageText = "#BASEFAILURE#".localized(self.language!)
+                b.runModal()
                 exit(0)
             }
+            ////////////////////////////copying processes/////////////////////////
             self.privilegedShellCommand("/bin/cp",arg: ["-R","/Volumes/"+basepath+"/","/Volumes/"+lazypath], label: "#COPYBASE#",progress: 26)
             self.shellCommand("/bin/cp",arg: ["/Volumes/"+esdpath+"/BaseSystem.chunklist","/Volumes/"+lazypath], label: "#COPYESD#", progress: 2)
             self.shellCommand("/bin/cp",arg: ["/Volumes/"+esdpath+"/BaseSystem.dmg","/Volumes/"+lazypath], label: "#COPYESD#", progress: 2)
             self.shellCommand("/bin/cp",arg: ["/Volumes/"+esdpath+"/AppleDiagnostics.chunklist","/Volumes/"+lazypath], label: "#COPYESD#", progress: 2)
             self.shellCommand("/bin/cp",arg: ["/Volumes/"+esdpath+"/AppleDiagnostics.dmg","/Volumes/"+lazypath], label: "#COPYESD#", progress: 2)
             self.shellCommand("/bin/rm",arg: ["-rf","/Volumes/"+lazypath+"/System/Installation/Packages"], label: "#DELETEPACKAGE#", progress: 2)
-            self.privilegedShellCommand("/bin/cp",arg: ["-R","/Volumes/"+esdpath+"/Packages","/Volumes/"+lazypath+"/System/Installation"], label: "#COPYPACKAGE#",progress: 26)
+            self.privilegedShellCommand("/bin/cp",arg: ["-R","/Volumes/"+esdpath+"/Packages","/Volumes/"+lazypath+"/System/Installation"], label: "#COPYPACKAGE#",progress: 24)
             self.shellCommand("/bin/mkdir",arg: ["/Volumes/"+lazypath+"/System/Library/Kernels"], label: "#CREATEKERNELSF#", progress: 0)
-            
+            ////////////////////////////patching processes////////////////////////
             if self.MBRPatch.state == NSOnState {
                 self.privilegedShellCommand("/usr/bin/perl",arg: ["-pi","-e","\'s|x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\x74\\x5F\\x48\\x8B\\x85|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\xEB\\x5F\\x48\\x8B\\x85|g\'","/Volumes/"+lazypath+"/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller"], label: "#PATCH01#",progress: 1)
                 self.privilegedShellCommand("/usr/bin/codesign",arg: ["-f","-s","-","/Volumes/"+lazypath+"/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller"], label: "#PATCH01#",progress: 1)
                 
-                self.shellCommand("/bin/mkdir",arg: ["\(NSHomeDirectory())/Desktop/osinstallmpkg"], label: "#PATCH02#", progress: 0)
-                self.shellCommand("/usr/bin/xar",arg: ["-x","-f","/Volumes/"+lazypath+"/System/Installation/Packages/OSInstall.mpkg","-C","\(NSHomeDirectory())/Desktop/osinstallmpkg"], label: "#PATCH02#", progress: 0)
-                self.shellCommand("/usr/bin/sed",arg: ["-i","\'\'","--","s/1024/512/g","\(NSHomeDirectory())/Desktop/osinstallmpkg/Distribution"], label: "#PATCH02#", progress: 0)
-                self.shellCommand("/usr/bin/sed",arg: ["-i","\'\'","--","s/var minRam = 2048/var minRam = 1024/g","\(NSHomeDirectory())/Desktop/osinstallmpkg/Distribution"], label: "#PATCH02#", progress: 0)
-                self.shellCommand("/usr/bin/sed",arg: ["-i","\'\'","--","/\\<installation-check script=\"installCheckScript()\"\\/>/d","\(NSHomeDirectory())/Desktop/osinstallmpkg/Distribution"], label: "#PATCH02#", progress: 0)
-                self.shellCommand("/usr/bin/sed",arg: ["-i","\'\'","--","/\\<volume-check script=\"volCheckScript()\"\\/>/d","\(NSHomeDirectory())/Desktop/osinstallmpkg/Distribution"], label: "#PATCH02#", progress: 0)
-                self.shellCommand("/usr/bin/sed",arg: ["-i","\'\'","--","s/osVersion=......... osBuildVersion=.......//g","\(NSHomeDirectory())/Desktop/osinstallmpkg/Distribution"], label: "#PATCH02#", progress: 0)
+                self.shellCommand("/bin/mkdir",arg: ["/tmp/com.pcbeta.lazy/osinstallmpkg"], label: "#PATCH02#", progress: 0)
+                self.shellCommand("/usr/bin/xar",arg: ["-x","-f","/Volumes/"+lazypath+"/System/Installation/Packages/OSInstall.mpkg","-C","/tmp/com.pcbeta.lazy/osinstallmpkg"], label: "#PATCH02#", progress: 0)
+                self.shellCommand("/usr/bin/sed",arg: ["-i","\'\'","--","s/1024/512/g","/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution"], label: "#PATCH02#", progress: 0)
+                self.shellCommand("/usr/bin/sed",arg: ["-i","\'\'","--","s/var minRam = 2048/var minRam = 1024/g","/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution"], label: "#PATCH02#", progress: 0)
+                self.shellCommand("/usr/bin/sed",arg: ["-i","\'\'","--","/\\<installation-check script=\"installCheckScript()\"\\/>/d","/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution"], label: "#PATCH02#", progress: 0)
+                self.shellCommand("/usr/bin/sed",arg: ["-i","\'\'","--","/\\<volume-check script=\"volCheckScript()\"\\/>/d","/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution"], label: "#PATCH02#", progress: 0)
+                self.shellCommand("/usr/bin/sed",arg: ["-i","\'\'","--","s/osVersion=......... osBuildVersion=.......//g","/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution"], label: "#PATCH02#", progress: 0)
                 self.shellCommand("/bin/rm",arg: ["/Volumes/"+lazypath+"/System/Installation/Packages/OSInstall.mpkg"], label: "#PATCH02#", progress: 0)
-                self.shellCommand("/bin/rm",arg: ["\(NSHomeDirectory())/Desktop/osinstallmpkg/Distribution\'\'"], label: "#PATCH02#", progress: 0)
+                self.shellCommand("/bin/rm",arg: ["/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution\'\'"], label: "#PATCH02#", progress: 0)
                 let task = NSTask()
                 task.launchPath = "/usr/bin/xar"
                 task.arguments = ["-cf","/Volumes/"+lazypath+"/System/Installation/Packages/OSInstall.mpkg","."]
-                task.currentDirectoryPath = "\(NSHomeDirectory())/Desktop/osinstallmpkg"
+                task.currentDirectoryPath = "/tmp/com.pcbeta.lazy/osinstallmpkg"
                 task.launch()
                 task.waitUntilExit()
-                self.shellCommand("/bin/rm",arg: ["-rf","\(NSHomeDirectory())/Desktop/osinstallmpkg"], label: "#PATCH02#", progress: 2)
+                self.shellCommand("/bin/rm",arg: ["-rf","/tmp/com.pcbeta.lazy/osinstallmpkg"], label: "#PATCH02#", progress: 2)
             }else {
-                self.progress.incrementBy(2)
+                dispatch_sync(self.concurrentInsertingQueue,{
+                    self.progress.incrementBy(2)
+                })
             }
+            self.shellCommand("/bin/mkdir",arg: ["/tmp/com.pcbeta.lazy/kernel"], label: "#COPYKERNEL#", progress: 0)
+            self.shellCommand("/usr/bin/xar",arg: ["-x","-f","/Volumes/"+lazypath+"/System/Installation/Packages/Essentials.pkg","-C","/tmp/com.pcbeta.lazy/kernel"], label: "#COPYKERNEL#", progress: 0)
+            self.shellCommand("/bin/cp",arg: ["-R","/tmp/com.pcbeta.lazy/kernel/KerberosPlugins","/Volumes/"+lazypath+"/System/Library/"], label: "#COPYKERNEL#", progress: 1)
+            self.shellCommand("/bin/cp",arg: ["-R","/tmp/com.pcbeta.lazy/kernel/Kernels","/Volumes/"+lazypath+"/System/Library/"], label: "#COPYKERNEL#", progress: 1)
             if self.XCPMPatch.state == NSOnState {
                 self.shellCommand("/bin/cp",arg: [self.kernel.droppedFilePath,"/Volumes/"+lazypath+"/System/Library/Kernels"], label: "#COPYKERNEL#", progress: 1)
                 self.shellCommand("/usr/bin/perl",arg: ["-pi","-e","\'s|\\xe2\\x00\\x00\\x00\\x02\\x00\\x00\\x00|\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00|g\'","/Volumes/"+lazypath+"/System/Library/Kernels/kernel"], label: "#XCPMPATCH#",progress: 0)
@@ -222,17 +231,21 @@ class ViewController: NSViewController {
                 self.shellCommand("/bin/cp",arg: [self.kernel.droppedFilePath,"/Volumes/"+lazypath+"/System/Library/Kernels"], label: "#COPYKERNEL#", progress: 2)
             }
             self.shellCommand("/bin/cp",arg: ["-R",self.extra.droppedFilePath,"/Volumes/"+lazypath+"/"], label: "#COPYEXTRA#", progress: 2)
+            ////////////////////////////ejecting processes////////////////////////
             if self.cdr.state == NSOnState {
                 self.shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/"+lazypath], label: "#EJECTLAZY#", progress: 0)
-                self.shellCommand("/usr/bin/hdiutil",arg: ["convert","\(NSHomeDirectory())/Desktop/Lazy Installer.dmg","-format","UDTO","-o","\(NSHomeDirectory())/Desktop/Lazy Installer.cdr"], label: "#CREATECDR#", progress: 2)
+                self.shellCommand("/usr/bin/hdiutil",arg: ["convert","/tmp/com.pcbeta.lazy/Lazy Installer.dmg","-format","UDTO","-o","/tmp/com.pcbeta.lazy/Lazy Installer.cdr"], label: "#CREATECDR#", progress: 2)
                 self.shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/"+basepath], label: "#EJECTBASE#", progress: 1)
                 self.shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/"+esdpath], label: "#EJECTESD#", progress: 1)
                 self.shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/Install OS X El Capitan"], label: "#EJECTORG#", progress: 0)
+                self.shellCommand("/usr/bin/hdiutil",arg: ["/tmp/com.pcbeta.lazy/Lazy Installer.dmg","\(NSHomeDirectory())/Desktop/"], label: "#MV#", progress: 0)
+                self.shellCommand("/usr/bin/hdiutil",arg: ["/tmp/com.pcbeta.lazy/Lazy Installer.cdr","\(NSHomeDirectory())/Desktop/"], label: "#MV#", progress: 0)
             }else{
                 self.shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/"+basepath], label: "#EJECTBASE#", progress: 2)
                 self.shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/"+esdpath], label: "#EJECTESD#", progress: 2)
                 self.shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/Install OS X El Capitan"], label: "#EJECTORG#", progress: 0)
                 self.shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/"+lazypath], label: "#EJECTLAZY#", progress: 0)
+                self.shellCommand("/usr/bin/hdiutil",arg: ["/tmp/com.pcbeta.lazy/Lazy Installer.dmg","\(NSHomeDirectory())/Desktop/"], label: "#MV#", progress: 0)
             }
             self.progress.stopAnimation(self)
             self.progressLable.stringValue = "#FINISH#".localized(self.language!)
