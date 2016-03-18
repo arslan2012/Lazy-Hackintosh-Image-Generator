@@ -45,13 +45,20 @@ class ViewController: NSViewController {
         }
     }
     @IBAction func StartProcessing(sender: NSButton) {
-        if filePath.stringValue != "Please drag every file to its responding place" && filePath.stringValue != ""{
+        if NSURL(fileURLWithPath:filePath.stringValue).checkResourceIsReachableAndReturnError(nil){
             startGenerating()
         }else{
             let a = NSAlert()
             a.messageText = "#INPUTVOID#".localized(self.language!)
             a.runModal()
         }
+//        do {
+//            try NSURL(fileURLWithPath:filePath.stringValue).checkResourceIsReachableAndReturnError(nil)
+//        }catch{
+//                        let a = NSAlert()
+//                        a.messageText = "#INPUTVOID#".localized(self.language!)
+//                        a.runModal()
+//        }
     }
     @IBAction func XCPMClicked(sender: NSButton) {
         if XCPMPatch.state == NSOnState {
