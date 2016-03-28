@@ -24,7 +24,7 @@ class ViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.language = NSLocale.preferredLanguages()[0]
+        language = NSLocale.preferredLanguages()[0]
         if self.language != "zh-Hans" || self.language != "en" {
             self.language = "en"
         }
@@ -52,13 +52,13 @@ class ViewController: NSViewController {
             a.messageText = "#INPUTVOID#".localized(self.language!)
             a.runModal()
         }
-//        do {
-//            try NSURL(fileURLWithPath:filePath.stringValue).checkResourceIsReachableAndReturnError(nil)
-//        }catch{
-//                        let a = NSAlert()
-//                        a.messageText = "#INPUTVOID#".localized(self.language!)
-//                        a.runModal()
-//        }
+        //        do {
+        //            try NSURL(fileURLWithPath:filePath.stringValue).checkResourceIsReachableAndReturnError(nil)
+        //        }catch{
+        //                        let a = NSAlert()
+        //                        a.messageText = "#INPUTVOID#".localized(self.language!)
+        //                        a.runModal()
+        //        }
     }
     @IBAction func XCPMClicked(sender: NSButton) {
         if XCPMPatch.state == NSOnState {
@@ -111,24 +111,46 @@ class ViewController: NSViewController {
             self.shellCommand("/usr/bin/hdiutil",arg: ["attach",self.filePath.stringValue,"-noverify"], label: "#MOUNTORG#", progress: 2)
             self.shellCommand("/usr/bin/hdiutil",arg: ["attach",self.filePath.stringValue + "/Contents/SharedSupport/InstallESD.dmg","-noverify"], label: "#MOUNTESD#", progress: 0)
             let fileManager = NSFileManager.defaultManager()
-            var esdpath = ""
+            var esdpath = "",apppath = ""
             do{
                 let enumerator = try fileManager.contentsOfDirectoryAtPath("/Volumes")
                 for element in enumerator {
                     if element.hasPrefix("Install OS X"){
                         esdpath = element
+                        if NSURL(fileURLWithPath:"/Volumes/"+esdpath).checkResourceIsReachableAndReturnError(nil){
+                            break
+                        }
                     }
                 }
             }
             catch{
                 
             }
-            self.shellCommand("/usr/bin/hdiutil",arg: ["attach","/Volumes/"+esdpath+"/Install OS X El Capitan.app/Contents/SharedSupport/InstallESD.dmg","-noverify"], label: "#MOUNTESD#", progress: 0)
+            if esdpath != "" {
+                do{
+                    let enumerator = try fileManager.contentsOfDirectoryAtPath("/Volumes/"+esdpath)
+                    for element in enumerator {
+                        if element.hasPrefix("Install OS "){
+                            apppath = element
+                            if NSURL(fileURLWithPath:"/Volumes/"+esdpath+"/"+apppath+"/Contents/SharedSupport/InstallESD.dmg").checkResourceIsReachableAndReturnError(nil){
+                                break
+                            }
+                        }
+                    }
+                }
+                catch{
+                    
+                }
+                self.shellCommand("/usr/bin/hdiutil",arg: ["attach","/Volumes/"+esdpath+"/"+apppath+"/Contents/SharedSupport/InstallESD.dmg","-noverify"], label: "#MOUNTESD#", progress: 0)
+            }
             do{
                 let enumerator = try fileManager.contentsOfDirectoryAtPath("/Volumes")
                 for element in enumerator {
                     if element.hasPrefix("OS X Install ESD"){
                         esdpath = element
+                        if NSURL(fileURLWithPath:"/Volumes/"+esdpath+"/BaseSystem.dmg").checkResourceIsReachableAndReturnError(nil){
+                            break
+                        }
                     }
                 }
             }
@@ -146,14 +168,17 @@ class ViewController: NSViewController {
             }
             self.shellCommand("/usr/bin/hdiutil",arg: ["attach","/Volumes/"+esdpath+"/BaseSystem.dmg","-noverify"], label: "#MOUNTESD#", progress: 2)
             self.shellCommand("/bin/mkdir",arg: ["/tmp/com.pcbeta.lazy"], label: "#CREATE#", progress: 0)
-            self.shellCommand("/usr/bin/hdiutil",arg: ["create","-megabytes","7650","-layout","SPUD","-fs","HFS+J","-volname","OS X El Capitan Lazy Installer","/tmp/com.pcbeta.lazy/Lazy Installer.dmg"], label: "#CREATE#", progress: 20)
+            self.shellCommand("/usr/bin/hdiutil",arg: ["create","-megabytes","7650","-layout","SPUD","-fs","-ov","HFS+J","-volname","OS X Lazy Installer","/tmp/com.pcbeta.lazy/Lazy Installer.dmg"], label: "#CREATE#", progress: 20)
             self.shellCommand("/usr/bin/hdiutil",arg: ["attach","/tmp/com.pcbeta.lazy/Lazy Installer.dmg"], label: "#MOUNTLAZY#", progress: 2)
             var lazypath = ""
             do{
                 let enumerator = try fileManager.contentsOfDirectoryAtPath("/Volumes")
                 for element in enumerator {
-                    if element.hasPrefix("OS X El Capitan Lazy Installer"){
+                    if element.hasPrefix("OS X Lazy Installer"){
                         lazypath = element
+                        if NSURL(fileURLWithPath:"/Volumes/"+lazypath).checkResourceIsReachableAndReturnError(nil){
+                            break
+                        }
                     }
                 }
             }
@@ -175,6 +200,9 @@ class ViewController: NSViewController {
                 for element in enumerator {
                     if element.hasPrefix("OS X Base System"){
                         basepath = element
+                        if NSURL(fileURLWithPath:"/Volumes/"+basepath).checkResourceIsReachableAndReturnError(nil){
+                            break
+                        }
                     }
                 }
             }
@@ -241,7 +269,7 @@ class ViewController: NSViewController {
             ////////////////////////////ejecting processes////////////////////////
             if self.cdr.state == NSOnState {
                 self.shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/"+lazypath], label: "#EJECTLAZY#", progress: 0)
-                self.shellCommand("/usr/bin/hdiutil",arg: ["convert","/tmp/com.pcbeta.lazy/Lazy Installer.dmg","-format","UDTO","-o","/tmp/com.pcbeta.lazy/Lazy Installer.cdr"], label: "#CREATECDR#", progress: 2)
+                self.shellCommand("/usr/bin/hdiutil",arg: ["convert","/tmp/com.pcbeta.lazy/Lazy Installer.dmg","-ov","-format","UDTO","-o","/tmp/com.pcbeta.lazy/Lazy Installer.cdr"], label: "#CREATECDR#", progress: 2)
                 self.shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/"+basepath], label: "#EJECTBASE#", progress: 1)
                 self.shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/"+esdpath], label: "#EJECTESD#", progress: 1)
                 self.shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/Install OS X El Capitan"], label: "#EJECTORG#", progress: 0)
@@ -254,7 +282,7 @@ class ViewController: NSViewController {
                 self.shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/"+lazypath], label: "#EJECTLAZY#", progress: 0)
                 self.shellCommand("/bin/mv",arg: ["/tmp/com.pcbeta.lazy/Lazy Installer.dmg","\(NSHomeDirectory())/Desktop/"], label: "#MV#", progress: 0)
             }
-            self.shellCommand("/bin/rm",arg: ["-rf","/tmp/com.pcbeta.lazy"], label: "MV", progress: 0)
+            self.shellCommand("/bin/rm",arg: ["-rf","/tmp/com.pcbeta.lazy"], label: "#MV#", progress: 0)
             self.progress.stopAnimation(self)
             self.progressLable.stringValue = "#FINISH#".localized(self.language!)
             self.filePath.stringValue = ""
