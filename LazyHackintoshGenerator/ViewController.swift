@@ -18,6 +18,9 @@ class ViewController: NSViewController {
     @IBOutlet weak var XCPMPatch: NSButton!
     @IBOutlet weak var cdr: NSButton!
     @IBOutlet weak var extra: OtherFileDrop!
+    @IBOutlet weak var SizeCustomize: NSButton!
+    @IBOutlet weak var CustomSize: NSTextField!
+    @IBOutlet weak var SizeUnit: NSTextField!
     var language: String?
     let concurrentInsertingQueue = dispatch_queue_create("kext inserting", DISPATCH_QUEUE_CONCURRENT)
     
@@ -30,6 +33,8 @@ class ViewController: NSViewController {
         }
         progress.hidden = true
         progressLable.hidden = true
+        CustomSize.hidden = true
+        SizeUnit.hidden = true
         XCPMPatch.state = NSOffState
         cdr.state = NSOffState
         // Do any additional setup after loading the view.
@@ -70,6 +75,15 @@ class ViewController: NSViewController {
             }
         }
     }
+    @IBAction func SizeClicked(sender: NSButton) {
+        if SizeCustomize.state == NSOnState {
+            CustomSize.hidden = false
+            SizeUnit.hidden = false
+        }else {
+            CustomSize.hidden = true
+            SizeUnit.hidden = true
+        }
+    }
     func shellCommand(path:String, arg: [String],label: String,progress: Double)->String{
         let task = NSTask()
         task.launchPath = path
@@ -102,6 +116,17 @@ class ViewController: NSViewController {
         })
     }
     func startGenerating(){
+        var UsingCustomSize = false
+        if SizeCustomize.state == NSOnState {
+            if Int(CustomSize.stringValue) <= 0 || Int(CustomSize.stringValue) > 102400 {
+                let a = NSAlert()
+                a.messageText = "#WRONGSIZE#".localized(self.language!)
+                a.runModal()
+                exit(0)
+            }else{
+                UsingCustomSize = true
+            }
+        }
         start.enabled = false
         progress.hidden = false
         progressLable.hidden = false
@@ -168,7 +193,11 @@ class ViewController: NSViewController {
             }
             self.shellCommand("/usr/bin/hdiutil",arg: ["attach","/Volumes/"+esdpath+"/BaseSystem.dmg","-noverify"], label: "#MOUNTESD#", progress: 2)
             self.shellCommand("/bin/mkdir",arg: ["/tmp/com.pcbeta.lazy"], label: "#CREATE#", progress: 0)
-            self.shellCommand("/usr/bin/hdiutil",arg: ["create","-megabytes","7650","-layout","SPUD","-fs","-ov","HFS+J","-volname","OS X Lazy Installer","/tmp/com.pcbeta.lazy/Lazy Installer.dmg"], label: "#CREATE#", progress: 20)
+            if UsingCustomSize {
+                self.shellCommand("/usr/bin/hdiutil",arg: ["create","-megabytes",self.CustomSize.stringValue,"-layout","SPUD","-fs","-ov","HFS+J","-volname","OS X Lazy Installer","/tmp/com.pcbeta.lazy/Lazy Installer.dmg"], label: "#CREATE#", progress: 20)
+            }else{
+                self.shellCommand("/usr/bin/hdiutil",arg: ["create","-megabytes","7650","-layout","SPUD","-fs","-ov","HFS+J","-volname","OS X Lazy Installer","/tmp/com.pcbeta.lazy/Lazy Installer.dmg"], label: "#CREATE#", progress: 20)
+            }
             self.shellCommand("/usr/bin/hdiutil",arg: ["attach","/tmp/com.pcbeta.lazy/Lazy Installer.dmg"], label: "#MOUNTLAZY#", progress: 2)
             var lazypath = ""
             do{

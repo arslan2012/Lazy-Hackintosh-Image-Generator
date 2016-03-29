@@ -36,14 +36,14 @@
       "scale" : "1x"
     },
     {
-      "idiom" : "mac",
       "size" : "256x256",
+      "idiom" : "mac",
+      "filename" : "icon.png",
       "scale" : "2x"
     },
     {
-      "size" : "512x512",
       "idiom" : "mac",
-      "filename" : "Untitled.png",
+      "size" : "512x512",
       "scale" : "1x"
     },
     {

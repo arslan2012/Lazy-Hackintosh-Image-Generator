@@ -33,3 +33,4 @@
 "#FINISH#" = "Complete!";
 "#MV#" = "Moving files to desktop";
 "#CREATECDR#" = "Generating CDR";
+"#WRONGSIZE#" = "Sorry, your input size exceeds the maximum size limit";

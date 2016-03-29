@@ -24,7 +24,7 @@ I'm using STprivilagedTask to do the authrization for me, if you know how to fix
 
 And if you have any issue report or suggestions, it would be great.
 
-## I'm good at Shell Script
+### Good at Shell Script?
 If you are good at shell scripting and have spare time to kill, why dont you try translating my app into shell script, my app core is in ViewController.swift func startGenerating(), and I'm pretty confident it's convertable.
 
 What I'm expecting is that turning this into a shell script would fix the authoriation problem. and make this more usable(currently this app only works on 10.10+,because i wrote it in Swift)
