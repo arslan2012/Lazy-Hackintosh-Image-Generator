@@ -77,7 +77,6 @@ class ViewController: NSViewController,BatchProcessAPIProtocol {
 			api.startGenerating(filePath.stringValue,SizeVal: SizeVal,MBRPatchState: MBRPatchState,XCPMPatchState: XCPMPatchState,cdrState: cdrState,kernelDroppedFilePath: kernel.droppedFilePath,extraDroppedFilePath: extra.droppedFilePath)
 			
 			self.progress.stopAnimation(self)
-			self.progressLable.stringValue = "#FINISH#".localized(self.language!)
 			self.filePath.stringValue = ""
 			self.start.enabled = true
         }else{

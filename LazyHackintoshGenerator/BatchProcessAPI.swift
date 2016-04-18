@@ -199,6 +199,7 @@ class BatchProcessAPI{
 				self.shellCommand("/bin/mv",arg: ["/tmp/com.pcbeta.lazy/Lazy Installer.dmg","\(NSHomeDirectory())/Desktop/"], label: "#MV#", progress: 0)
 			}
 			self.shellCommand("/bin/rm",arg: ["-rf","/tmp/com.pcbeta.lazy"], label: "#MV#", progress: 0)
+			self.delegate.didReceiveProcessName("#FINISH#")
 		})
 	}
 }
