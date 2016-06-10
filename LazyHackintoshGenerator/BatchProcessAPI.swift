@@ -186,10 +186,10 @@ class BatchProcessAPI{
 			////////////////////////////ejecting processes////////////////////////
 			if cdrState {
 				self.shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/"+lazypath], label: "#EJECTLAZY#", progress: 0)
-				self.shellCommand("/usr/bin/hdiutil",arg: ["convert","/tmp/com.pcbeta.lazy/Lazy Installer.dmg","-ov","-format","UDTO","-o","/tmp/com.pcbeta.lazy/Lazy Installer.cdr"], label: "#CREATECDR#", progress: 2)
 				self.shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/"+basepath], label: "#EJECTBASE#", progress: 1)
 				self.shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/"+esdpath], label: "#EJECTESD#", progress: 1)
 				self.shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/Install OS X El Capitan"], label: "#EJECTORG#", progress: 0)
+				self.shellCommand("/usr/bin/hdiutil",arg: ["convert","/tmp/com.pcbeta.lazy/Lazy Installer.dmg","-ov","-format","UDTO","-o","/tmp/com.pcbeta.lazy/Lazy Installer.cdr"], label: "#CREATECDR#", progress: 2)
 				self.shellCommand("/bin/mv",arg: ["/tmp/com.pcbeta.lazy/Lazy Installer.dmg","\(NSHomeDirectory())/Desktop/"], label: "#MV#", progress: 0)
 				self.shellCommand("/bin/mv",arg: ["/tmp/com.pcbeta.lazy/Lazy Installer.cdr","\(NSHomeDirectory())/Desktop/"], label: "#MV#", progress: 0)
 			}else{

@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class ViewController: NSViewController,BatchProcessAPIProtocol {
+class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol {
     @IBOutlet weak var filePath: NSTextField!
     @IBOutlet weak var progress: NSProgressIndicator!
     @IBOutlet weak var progressLable: NSTextField!
@@ -44,6 +44,7 @@ class ViewController: NSViewController,BatchProcessAPIProtocol {
     }
     override func viewDidAppear() {
         super.viewDidAppear()
+		self.view.window?.delegate = self
         self.view.window!.title = "#TITLE#".localized(self.language!)
     }
     
@@ -52,6 +53,9 @@ class ViewController: NSViewController,BatchProcessAPIProtocol {
             // Update the view, if already loaded.
         }
     }
+	func windowShouldClose(sender: AnyObject) -> Bool {
+		exit(0)
+	}
     @IBAction func StartProcessing(sender: NSButton) {
         if NSURL(fileURLWithPath:filePath.stringValue).checkResourceIsReachableAndReturnError(nil){
 			start.hidden = true
@@ -86,13 +90,6 @@ class ViewController: NSViewController,BatchProcessAPIProtocol {
             a.messageText = "#INPUTVOID#".localized(self.language!)
             a.runModal()
         }
-        //        do {
-        //            try NSURL(fileURLWithPath:filePath.stringValue).checkResourceIsReachableAndReturnError(nil)
-        //        }catch{
-        //                        let a = NSAlert()
-        //                        a.messageText = "#INPUTVOID#".localized(self.language!)
-        //                        a.runModal()
-        //        }
     }
     @IBAction func XCPMClicked(sender: NSButton) {
         if XCPMPatch.state == NSOnState {
