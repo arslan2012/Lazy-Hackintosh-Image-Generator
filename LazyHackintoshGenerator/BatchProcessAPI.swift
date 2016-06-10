@@ -98,7 +98,7 @@ class BatchProcessAPI{
 			}
 			self.shellCommand("/usr/bin/hdiutil",arg: ["attach","/Volumes/"+esdpath+"/BaseSystem.dmg","-noverify"], label: "#MOUNTESD#", progress: 2)
 			self.shellCommand("/bin/mkdir",arg: ["/tmp/com.pcbeta.lazy"], label: "#CREATE#", progress: 0)
-			self.shellCommand("/usr/bin/hdiutil",arg: ["create","-megabytes",SizeVal,"-layout","SPUD","-ov","-fs","HFS+J","-volname","OS X Lazy Installer","/tmp/com.pcbeta.lazy/Lazy Installer.dmg"], label: "#CREATE#", progress: 20)
+			self.shellCommand("/usr/bin/hdiutil",arg: ["create","-size",SizeVal+"g","-layout","SPUD","-ov","-fs","HFS+J","-volname","OS X Lazy Installer","/tmp/com.pcbeta.lazy/Lazy Installer.dmg"], label: "#CREATE#", progress: 20)
 			self.shellCommand("/usr/bin/hdiutil",arg: ["attach","/tmp/com.pcbeta.lazy/Lazy Installer.dmg"], label: "#MOUNTLAZY#", progress: 2)
 			var lazypath = ""
 			do{
@@ -137,7 +137,8 @@ class BatchProcessAPI{
 				self.delegate.didReceiveErrorMessage("#BASEFAILURE#")
 			}
 			////////////////////////////copying processes/////////////////////////
-			self.privilegedShellCommand("/bin/cp",arg: ["-R","/Volumes/"+basepath+"/","/Volumes/"+lazypath], label: "#COPYBASE#",progress: 22)
+			self.privilegedShellCommand("/usr/sbin/asr",arg: ["restore","-source","/Volumes/"+basepath+"/","-target","/Volumes/"+lazypath,"-erase","-format","HFS+","-noprompt"], label: "#COPYBASE#",progress: 22)
+			self.privilegedShellCommand("/usr/sbin/diskutil",arg: ["rename","OS X Base System",lazypath], label: "#COPYBASE#",progress: 0)
 			self.shellCommand("/bin/cp",arg: ["/Volumes/"+esdpath+"/BaseSystem.chunklist","/Volumes/"+lazypath], label: "#COPYESD#", progress: 2)
 			self.shellCommand("/bin/cp",arg: ["/Volumes/"+esdpath+"/BaseSystem.dmg","/Volumes/"+lazypath], label: "#COPYESD#", progress: 2)
 			self.shellCommand("/bin/cp",arg: ["/Volumes/"+esdpath+"/AppleDiagnostics.chunklist","/Volumes/"+lazypath], label: "#COPYESD#", progress: 2)

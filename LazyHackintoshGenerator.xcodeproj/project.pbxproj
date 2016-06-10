@@ -9,9 +9,9 @@
 /* Begin PBXBuildFile section */
 		F50411871C644987003311DA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50411861C644987003311DA /* AppDelegate.swift */; };
 		F50411891C644987003311DA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50411881C644987003311DA /* ViewController.swift */; };
-		F504118B1C644987003311DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F504118A1C644987003311DA /* Assets.xcassets */; };
 		F504118E1C644987003311DA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F504118C1C644987003311DA /* Main.storyboard */; };
 		F50411961C644B0C003311DA /* FileDropZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50411951C644B0C003311DA /* FileDropZone.swift */; };
+		F53A2C701D09AE160037268D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F504118A1C644987003311DA /* Assets.xcassets */; };
 		F546B0451C660DDD00613AFE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F546B0471C660DDD00613AFE /* Localizable.strings */; };
 		F546B0491C660EB600613AFE /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F546B0481C660EB600613AFE /* StringExtension.swift */; };
 		F57F43071C64A1AA004C1EB5 /* STPrivilegedTask.m in Sources */ = {isa = PBXBuildFile; fileRef = F57F43061C64A1AA004C1EB5 /* STPrivilegedTask.m */; };
@@ -29,12 +29,14 @@
 		F546B0481C660EB600613AFE /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StringExtension.swift; path = ../StringExtension.swift; sourceTree = "<group>"; };
 		F546B04A1C6617E700613AFE /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		F56157E21CAA344700D1F581 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		F56157E81CAA3B8A00D1F581 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		F57F43051C64A1AA004C1EB5 /* LazyHackintoshGenerator-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LazyHackintoshGenerator-Bridging-Header.h"; sourceTree = "<group>"; };
 		F57F43061C64A1AA004C1EB5 /* STPrivilegedTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STPrivilegedTask.m; sourceTree = "<group>"; };
 		F57F43081C64A1CE004C1EB5 /* STPrivilegedTask.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STPrivilegedTask.h; sourceTree = "<group>"; };
 		F5C563E81CC49242001C00FF /* BatchProcessAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatchProcessAPI.swift; sourceTree = "<group>"; };
 		F5C606411C66D8E30092EDA6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F5FA59131D0A552B001F7542 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "zh-Hans"; path = "zh-Hans.lproj/Main.storyboard"; sourceTree = "<group>"; };
+		F5FA59151D0A5785001F7542 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F5FA59161D0A5899001F7542 /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = ja; path = ja.lproj/Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +136,7 @@
 			knownRegions = (
 				"zh-Hans",
 				Base,
+				ja,
 			);
 			mainGroup = F504117A1C644987003311DA;
 			productRefGroup = F50411841C644987003311DA /* Products */;
@@ -150,8 +153,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F504118B1C644987003311DA /* Assets.xcassets in Resources */,
 				F546B0451C660DDD00613AFE /* Localizable.strings in Resources */,
+				F53A2C701D09AE160037268D /* Assets.xcassets in Resources */,
 				F504118E1C644987003311DA /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -179,7 +182,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				F5C606411C66D8E30092EDA6 /* Base */,
-				F56157E81CAA3B8A00D1F581 /* zh-Hans */,
+				F5FA59131D0A552B001F7542 /* zh-Hans */,
+				F5FA59161D0A5899001F7542 /* ja */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -189,6 +193,7 @@
 			children = (
 				F546B0461C660DDD00613AFE /* en */,
 				F546B04A1C6617E700613AFE /* zh-Hans */,
+				F5FA59151D0A5785001F7542 /* ja */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -216,6 +221,7 @@
 				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -260,6 +266,7 @@
 				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;

@@ -21,6 +21,7 @@ class ViewController: NSViewController,BatchProcessAPIProtocol {
     @IBOutlet weak var SizeCustomize: NSButton!
     @IBOutlet weak var CustomSize: NSTextField!
     @IBOutlet weak var SizeUnit: NSTextField!
+	@IBOutlet weak var exitButton: NSButton!
     var language: String?
 	lazy var api : BatchProcessAPI = BatchProcessAPI(delegate: self)
     let concurrentInsertingQueue = dispatch_queue_create("kext inserting", DISPATCH_QUEUE_CONCURRENT)
@@ -29,7 +30,7 @@ class ViewController: NSViewController,BatchProcessAPIProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         language = NSLocale.preferredLanguages()[0]
-        if self.language != "zh-Hans" || self.language != "en" {
+        if self.language != "zh-Hans" || self.language != "en" || self.language != "ja" {
             self.language = "en"
         }
         progress.hidden = true
@@ -38,6 +39,7 @@ class ViewController: NSViewController,BatchProcessAPIProtocol {
         SizeUnit.hidden = true
         XCPMPatch.state = NSOffState
         cdr.state = NSOffState
+		exitButton.hidden = true
         // Do any additional setup after loading the view.
     }
     override func viewDidAppear() {
@@ -52,13 +54,13 @@ class ViewController: NSViewController,BatchProcessAPIProtocol {
     }
     @IBAction func StartProcessing(sender: NSButton) {
         if NSURL(fileURLWithPath:filePath.stringValue).checkResourceIsReachableAndReturnError(nil){
-			start.enabled = false
+			start.hidden = true
 			progress.hidden = false
 			progressLable.hidden = false
 			progress.startAnimation(self)
 			var UsingCustomSize = false
 			if SizeCustomize.state == NSOnState {
-				if Int(CustomSize.stringValue) <= 0 || Int(CustomSize.stringValue) > 102400 {
+				if Double(CustomSize.stringValue) <= 0 || Double(CustomSize.stringValue) > 100 {
 					let a = NSAlert()
 					a.messageText = "#WRONGSIZE#".localized(self.language!)
 					a.runModal()
@@ -67,7 +69,7 @@ class ViewController: NSViewController,BatchProcessAPIProtocol {
 					UsingCustomSize = true
 				}
 			}
-			var SizeVal = "7650"
+			var SizeVal = "7.65"
 			if UsingCustomSize {
 				SizeVal = CustomSize.stringValue
 			}
@@ -76,9 +78,9 @@ class ViewController: NSViewController,BatchProcessAPIProtocol {
 			let cdrState = (cdr.state == NSOnState) ? true : false
 			api.startGenerating(filePath.stringValue,SizeVal: SizeVal,MBRPatchState: MBRPatchState,XCPMPatchState: XCPMPatchState,cdrState: cdrState,kernelDroppedFilePath: kernel.droppedFilePath,extraDroppedFilePath: extra.droppedFilePath)
 			
-			self.progress.stopAnimation(self)
-			self.filePath.stringValue = ""
-			self.start.enabled = true
+			progress.stopAnimation(self)
+			filePath.stringValue = ""
+			exitButton.hidden = false
         }else{
             let a = NSAlert()
             a.messageText = "#INPUTVOID#".localized(self.language!)
@@ -111,6 +113,9 @@ class ViewController: NSViewController,BatchProcessAPIProtocol {
             SizeUnit.hidden = true
         }
     }
+	@IBAction func exitButtonPressed(sender: NSButton) {
+		exit(0)
+	}
 	func didReceiveProcessName(results: String){
 		dispatch_sync(self.concurrentInsertingQueue,{
 			self.progressLable.stringValue = results.localized(self.language!)

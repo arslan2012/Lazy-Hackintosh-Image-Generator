@@ -6,7 +6,7 @@
   Copyright © 2016 PCBETA. All rights reserved.
 */
 
-"#TITLE#" =  "Lazy Hackintosh Image Patcher";
+"#TITLE#" =  "Lazy Hackintosh Image Generator";
 "#INPUTVOID#" =  "Image didn't set";
 "#NOKERNEL#" =  "Please add kernel file first";
 "#MOUNTORG#" =  "Mounting image";
