@@ -80,6 +80,13 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
 			let MBRPatchState = (MBRPatch.state == NSOnState) ? true : false
 			let XCPMPatchState = (XCPMPatch.state == NSOnState) ? true : false
 			let cdrState = (cdr.state == NSOnState) ? true : false
+			MBRPatch.enabled=false
+			XCPMPatch.enabled=false
+			cdr.enabled=false
+			SizeCustomize.enabled=false
+			CustomSize.enabled=false
+			kernel.hidden=true
+			extra.hidden=true
 			api.startGenerating(filePath.stringValue,SizeVal: SizeVal,MBRPatchState: MBRPatchState,XCPMPatchState: XCPMPatchState,cdrState: cdrState,kernelDroppedFilePath: kernel.droppedFilePath,extraDroppedFilePath: extra.droppedFilePath)
 			
 			progress.stopAnimation(self)
