@@ -10,7 +10,7 @@
 "#INPUTVOID#" =  "Image didn't set";
 "#NOKERNEL#" =  "Please add kernel file first";
 "#MOUNTORG#" =  "Mounting image";
-"#MOUNTESD#" =  "Moungting esd image";
+"#MOUNTESD#" =  "Mounting esd image";
 "#ESDFAILURE#" =  "ERROR: Couldn't find Install ESD mount point";
 "#CREATE#" =  "Creating image";
 "#MOUNTLAZY#" =  "Mounting created image";
