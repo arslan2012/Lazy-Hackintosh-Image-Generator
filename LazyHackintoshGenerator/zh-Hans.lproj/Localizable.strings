@@ -23,7 +23,8 @@
 "#CREATEKERNELSF#" =  "创建kernels文件夹";
 "#PATCH01#" =  "破解OSInstaller";
 "#PATCH02#" =  "破解OSInstall.mpkg";
-"#COPYKERNEL#" =  "复制Kernel文件";
+"#COPYKERNEL#" =  "复制Essential.pkg内容";
+"#COPYKERNELF#" =  "复制Kernel文件";
 "#XCPMPATCH#" =  "XCPM补丁";
 "#COPYEXTRA#" =  "复制Extra文件夹";
 "#EJECTBASE#" =  "卸载Base System镜像";

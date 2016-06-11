@@ -23,7 +23,8 @@
 "#CREATEKERNELSF#" =  "Kernelsフォルダーは作成され";
 "#PATCH01#" =  "OSInstaller　をパッチ";
 "#PATCH02#" =  "OSInstall.mpkg　をパッチ";
-"#COPYKERNEL#" =  "kernelをコピーします";
+"#COPYKERNEL#" =  "Essential.pkgをコピーします";
+"#COPYKERNELF#" =  "kernelをコピーします";
 "#XCPMPATCH#" =  "XCPMのパッチ";
 "#COPYEXTRA#" =  "Extraをコピーします";
 "#EJECTBASE#" =  "BaseSystem　をアンマウント";

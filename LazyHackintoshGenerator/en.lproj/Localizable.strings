@@ -23,7 +23,8 @@
 "#CREATEKERNELSF#" =  "Creating kernels folder";
 "#PATCH01#" =  "Patching OSInstaller";
 "#PATCH02#" =  "Patching OSInstall.mpkg";
-"#COPYKERNEL#" =  "Copying kernel file";
+"#COPYKERNEL#" =  "Copying Essential.pkg content";
+"#COPYKERNELF#" =  "Copying kernel file";
 "#XCPMPATCH#" =  "Patching XCPM";
 "#COPYEXTRA#" =  "Copying /Extra folder";
 "#EJECTBASE#" =  "Unmounting Base System";

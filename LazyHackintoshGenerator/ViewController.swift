@@ -88,10 +88,6 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
 			kernel.hidden=true
 			extra.hidden=true
 			api.startGenerating(filePath.stringValue,SizeVal: SizeVal,MBRPatchState: MBRPatchState,XCPMPatchState: XCPMPatchState,cdrState: cdrState,kernelDroppedFilePath: kernel.droppedFilePath,extraDroppedFilePath: extra.droppedFilePath)
-			
-			progress.stopAnimation(self)
-			filePath.stringValue = ""
-			exitButton.hidden = false
         }else{
             let a = NSAlert()
             a.messageText = "#INPUTVOID#".localized(self.language!)
@@ -135,6 +131,11 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
 		a.messageText = results.localized(self.language!)
 		a.runModal()
 		exit(0)
+	}
+	func didReceiveThreadExitMessage(){
+		progress.stopAnimation(self)
+		filePath.stringValue = ""
+		exitButton.hidden = false
 	}
 }
 
