@@ -22,9 +22,9 @@ As you can see, beacase I used Swift to code this, app authorization is really a
 
 I'm using STprivilagedTask to do the authrization for me, if you know how to fix the issue, I would be very appriciated.
 
-And if you have any issue report or suggestions, it would be great.
+And if you have any issue report or suggestions, feel free to open up an issue and tell me about it.
 
-### Shell Script edition
+### Shell Script Edition
 by [PMheart](https://github.com/PMheart)
 
 [Hackintosh OS X El Capitan Lazy Installer Generator](https://github.com/PMheart/Hackintosh-OS-X-El-Capitan-Lazy-Installer-Image-Generator)
