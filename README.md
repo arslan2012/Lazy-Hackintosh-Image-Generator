@@ -26,4 +26,5 @@ And if you have any issue report or suggestions, it would be great.
 
 ### Shell Script edition
 by [PMheart](https://github.com/PMheart)
-http://bbs.pcbeta.com/viewthread-1694153-1-1.html
+
+[Hackintosh OS X El Capitan Lazy Installer Generator](https://github.com/PMheart/Hackintosh-OS-X-El-Capitan-Lazy-Installer-Image-Generator)
