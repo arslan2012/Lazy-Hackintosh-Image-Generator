@@ -124,16 +124,6 @@ AwEVARgBHQAAAAAAAAIBAAAAAAAAACgAAAAAAAAAAAAAAAAAAAEfA
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XWH-IZ-EgC">
-                                <rect key="frame" x="419" y="-8" width="68" height="32"/>
-                                <buttonCell key="cell" type="push" title="start" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="78f-UZ-JFI">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" size="13" name=".PingFangSC-Regular"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="StartProcessing:" target="XfG-lQ-9wD" id="Lsu-y1-Lc7"/>
-                                </connections>
-                            </button>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="D6a-p3-BpF">
                                 <rect key="frame" x="364" y="94" width="98" height="46"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="/Extra" id="YJc-LV-gDD">
@@ -216,13 +206,23 @@ AwEVARgBHQAAAAAAAAIBAAAAAAAAACgAAAAAAAAAAAAAAAAAAAEfA
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ujW-iU-6TA">
-                                <rect key="frame" x="419" y="-8" width="68" height="32"/>
+                                <rect key="frame" x="387" y="13" width="68" height="32"/>
                                 <buttonCell key="cell" type="push" title="exit" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="4oe-lq-Fmn">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
                                     <action selector="exitButtonPressed:" target="XfG-lQ-9wD" id="zbg-iZ-HnB"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XWH-IZ-EgC">
+                                <rect key="frame" x="387" y="13" width="68" height="32"/>
+                                <buttonCell key="cell" type="push" title="start" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="78f-UZ-JFI">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" size="13" name=".PingFangSC-Regular"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="StartProcessing:" target="XfG-lQ-9wD" id="Lsu-y1-Lc7"/>
                                 </connections>
                             </button>
                         </subviews>

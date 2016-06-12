@@ -65,7 +65,7 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
 			let a = NSAlert()
 			a.messageText = "#KernelNameError#".localized(self.language!)
 			a.runModal()
-		}else if extra.droppedFilePath != "" && NSURL(fileURLWithPath: extra.droppedFilePath).lastPathComponent! !=  "extra"{
+		}else if extra.droppedFilePath != "" && NSURL(fileURLWithPath: extra.droppedFilePath).lastPathComponent! !=  "Extra"{
 			let a = NSAlert()
 			a.messageText = "#ExtraNameError#".localized(self.language!)
 			a.runModal()

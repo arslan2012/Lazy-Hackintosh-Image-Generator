@@ -1,0 +1,63 @@
+
+/* Class = "NSMenuItem"; title = "懒人镜像制作器"; ObjectID = "1Xt-HY-uBw"; */
+"1Xt-HY-uBw.title" = "懒人镜像制作器";
+
+/* Class = "NSButtonCell"; title = "退出"; ObjectID = "4oe-lq-Fmn"; */
+"4oe-lq-Fmn.title" = "退出";
+
+/* Class = "NSMenuItem"; title = "退出 懒人镜像制作器"; ObjectID = "4sb-4s-VLi"; */
+"4sb-4s-VLi.title" = "退出 懒人镜像制作器";
+
+/* Class = "NSMenuItem"; title = "关于 懒人镜像制作器"; ObjectID = "5kV-Vb-QxS"; */
+"5kV-Vb-QxS.title" = "关于 懒人镜像制作器";
+
+/* Class = "NSButtonCell"; title = "开始"; ObjectID = "78f-UZ-JFI"; */
+"78f-UZ-JFI.title" = "开始";
+
+/* Class = "NSTextFieldCell"; title = "DMG镜像或者安装包拖这里"; ObjectID = "ALJ-VZ-gfi"; */
+"ALJ-VZ-gfi.title" = "DMG镜像或者安装包拖这里";
+
+/* Class = "NSMenu"; title = "主菜单"; ObjectID = "AYu-sK-qS6"; */
+"AYu-sK-qS6.title" = "主菜单";
+
+/* Class = "NSWindow"; title = "窗口"; ObjectID = "IQv-IB-iLA"; */
+"IQv-IB-iLA.title" = "窗口";
+
+/* Class = "NSTextFieldCell"; title = "kernel"; ObjectID = "KCe-Sx-Z00"; */
+"KCe-Sx-Z00.title" = "kernel";
+
+/* Class = "NSMenuItem"; title = "显示所有窗口"; ObjectID = "Kd2-mp-pUS"; */
+"Kd2-mp-pUS.title" = "显示所有窗口";
+
+/* Class = "NSMenuItem"; title = "隐藏 懒人镜像制作器"; ObjectID = "Olw-nP-bQN"; */
+"Olw-nP-bQN.title" = "隐藏 懒人镜像制作器";
+
+/* Class = "NSButtonCell"; title = "自定义生成镜像大小"; ObjectID = "T6N-SL-jmh"; */
+"T6N-SL-jmh.title" = "自定义生成镜像大小";
+
+/* Class = "NSMenuItem"; title = "隐藏其他窗口"; ObjectID = "Vdr-fp-XzO"; */
+"Vdr-fp-XzO.title" = "隐藏其他窗口";
+
+/* Class = "NSTextFieldCell"; title = "/Extra"; ObjectID = "YJc-LV-gDD"; */
+"YJc-LV-gDD.title" = "/Extra";
+
+/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "k82-n4-Qi8"; */
+"k82-n4-Qi8.title" = "Label";
+
+/* Class = "NSTextFieldCell"; title = "GB"; ObjectID = "nus-BF-iqV"; */
+"nus-BF-iqV.title" = "GB";
+
+/* Class = "NSButtonCell"; title = "XCPM内核破解"; ObjectID = "pvR-jb-Lfe"; */
+"pvR-jb-Lfe.title" = "XCPM内核破解";
+
+/* Class = "NSButtonCell"; title = "破解MBR"; ObjectID = "q5G-N8-8sb"; */
+"q5G-N8-8sb.title" = "破解MBR";
+
+/* Class = "NSTextFieldCell"; title = "请将每个文件拖动到其相应的位置"; ObjectID = "qeC-H5-IUy"; */
+"qeC-H5-IUy.title" = "请将每个文件拖动到其相应的位置";
+
+/* Class = "NSMenu"; title = "懒人镜像制作器"; ObjectID = "uQy-DD-JDr"; */
+"uQy-DD-JDr.title" = "懒人镜像制作器";
+
+/* Class = "NSButtonCell"; title = "同时生成CDR"; ObjectID = "znd-va-Rf7"; */
+"znd-va-Rf7.title" = "同时生成CDR";

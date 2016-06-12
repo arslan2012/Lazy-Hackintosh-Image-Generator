@@ -9,7 +9,7 @@
 "#TITLE#" =  "懒人镜像制作器";
 "#INPUTVOID#" =  "未设置镜像！";
 "#KernelNameError#" =  "kernel文件名错误(应该为'kernel')";
-"#ExtraNameError#" =  "extra文件夹名错误(应该为'extra')";
+"#ExtraNameError#" =  "Extra文件夹名错误(应该为'Extra')";
 "#NOKERNEL#" =  "请先添加kernel！";
 "#MOUNTORG#" =  "挂载镜像";
 "#MOUNTESD#" =  "挂载ESD镜像";

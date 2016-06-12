@@ -9,7 +9,7 @@
 "#TITLE#" =  "Lazy Hackintosh Image Generator";
 "#INPUTVOID#" =  "Image didn't set";
 "#KernelNameError#" =  "kernel file name is not right(should be 'kernel')";
-"#ExtraNameError#" =  "extra folder name is not right(should be 'extra')";
+"#ExtraNameError#" =  "Extra folder name is not right(should be 'Extra')";
 "#NOKERNEL#" =  "Please add kernel file first";
 "#MOUNTORG#" =  "Mounting image";
 "#MOUNTESD#" =  "Mounting esd image";
