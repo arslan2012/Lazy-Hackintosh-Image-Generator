@@ -45,8 +45,8 @@ class BatchProcessAPI{
 	func startGenerating(filePath:String,SizeVal:String,MBRPatchState:Bool,XCPMPatchState:Bool,cdrState:Bool,kernelDroppedFilePath:String,extraDroppedFilePath:String){
 		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0),{
 			////////////////////////////mounting processes////////////////////////
-			self.shellCommand("/usr/bin/hdiutil",arg: ["attach",filePath,"-noverify","-nobrowse","-quiet"], label: "#MOUNTORG#", progress: 1)
-			self.shellCommand("/usr/bin/hdiutil",arg: ["attach",filePath + "/Contents/SharedSupport/InstallESD.dmg","-noverify","-nobrowse","-quiet"], label: "#MOUNTESD#", progress: 1)
+			self.shellCommand("/usr/bin/hdiutil",arg: ["attach",filePath,"-noverify","-nobrowse","-quiet"], label: "#MOUNTORG#", progress: 2)
+			self.shellCommand("/usr/bin/hdiutil",arg: ["attach",filePath + "/Contents/SharedSupport/InstallESD.dmg","-noverify","-nobrowse","-quiet"], label: "#MOUNTESD#", progress: 2)
 			let fileManager = NSFileManager.defaultManager()
 			var esdpath = "",apppath = ""
 			do{
@@ -78,7 +78,7 @@ class BatchProcessAPI{
 				catch{
 					
 				}
-				self.shellCommand("/usr/bin/hdiutil",arg: ["attach","/Volumes/"+esdpath+"/"+apppath+"/Contents/SharedSupport/InstallESD.dmg","-noverify","-nobrowse","-quiet"], label: "#MOUNTESD#", progress: 0)
+				self.shellCommand("/usr/bin/hdiutil",arg: ["attach","/Volumes/"+esdpath+"/"+apppath+"/Contents/SharedSupport/InstallESD.dmg","-noverify","-nobrowse","-quiet"], label: "#MOUNTESD#", progress: 2)
 			}
 			do{
 				let enumerator = try fileManager.contentsOfDirectoryAtPath("/Volumes")
@@ -97,11 +97,11 @@ class BatchProcessAPI{
 			if esdpath == "" {
 				self.delegate.didReceiveErrorMessage("#ESDFAILURE#")
 			}
-			self.shellCommand("/usr/bin/hdiutil",arg: ["attach","/Volumes/"+esdpath+"/BaseSystem.dmg","-noverify","-nobrowse","-quiet"], label: "#MOUNTESD#", progress: 1)
+			self.shellCommand("/usr/bin/hdiutil",arg: ["attach","/Volumes/"+esdpath+"/BaseSystem.dmg","-noverify","-nobrowse","-quiet"], label: "#MOUNTESD#", progress: 2)
 			self.shellCommand("/bin/mkdir",arg: ["/tmp/com.pcbeta.lazy"], label: "#CREATE#", progress: 1)
-			self.shellCommand("/usr/bin/hdiutil",arg: ["create","-size",SizeVal+"g","-layout","SPUD","-ov","-fs","HFS+J","-volname","OS X Lazy Installer","/tmp/com.pcbeta.lazy/Lazy Installer.dmg"], label: "#CREATE#", progress: 20)
+			self.shellCommand("/usr/bin/hdiutil",arg: ["create","-size",SizeVal+"g","-layout","SPUD","-ov","-fs","HFS+J","-volname","OS X Lazy Installer","/tmp/com.pcbeta.lazy/Lazy Installer.dmg"], label: "#CREATE#", progress: 22)
 			let lazypath = "/tmp/com.pcbeta.lazy/LazyMount"
-			self.shellCommand("/usr/bin/hdiutil",arg: ["attach","/tmp/com.pcbeta.lazy/Lazy Installer.dmg","-noverify","-nobrowse","-quiet","-mountpoint",lazypath], label: "#MOUNTLAZY#", progress: 1)
+			self.shellCommand("/usr/bin/hdiutil",arg: ["attach","/tmp/com.pcbeta.lazy/Lazy Installer.dmg","-noverify","-nobrowse","-quiet","-mountpoint",lazypath], label: "#MOUNTLAZY#", progress: 2)
 			if !NSURL(fileURLWithPath:lazypath).checkResourceIsReachableAndReturnError(nil){
 				self.delegate.didReceiveErrorMessage("#LAZYFAILURE#")
 			}
@@ -139,8 +139,8 @@ class BatchProcessAPI{
 			catch{
 				self.delegate.didReceiveErrorMessage("#LAZYFAILURE#")
 			}
-			self.shellCommand("/usr/bin/hdiutil",arg: ["attach","/tmp/com.pcbeta.lazy/Lazy Installer.dmg","-noverify","-nobrowse","-quiet","-mountpoint",lazypath], label: "#MOUNTLAZY#", progress: 1)
-			self.privilegedShellCommand("/usr/sbin/diskutil",arg: ["rename","OS X Base System","OS X Lazy Installer"], label: "#COPYBASE#",progress: 1)
+			self.shellCommand("/usr/bin/hdiutil",arg: ["attach","/tmp/com.pcbeta.lazy/Lazy Installer.dmg","-noverify","-nobrowse","-quiet","-mountpoint",lazypath], label: "#MOUNTLAZY#", progress: 2)
+			self.privilegedShellCommand("/usr/sbin/diskutil",arg: ["rename","OS X Base System","OS X Lazy Installer"], label: "#COPYBASE#",progress: 2)
 			self.shellCommand("/bin/cp",arg: ["/Volumes/"+esdpath+"/BaseSystem.chunklist",lazypath], label: "#COPYESD#", progress: 2)
 			self.shellCommand("/bin/cp",arg: ["/Volumes/"+esdpath+"/BaseSystem.dmg",lazypath], label: "#COPYESD#", progress: 2)
 			self.shellCommand("/bin/cp",arg: ["/Volumes/"+esdpath+"/AppleDiagnostics.chunklist",lazypath], label: "#COPYESD#", progress: 2)
@@ -148,10 +148,6 @@ class BatchProcessAPI{
 			self.shellCommand("/bin/rm",arg: ["-rf",lazypath+"/System/Installation/Packages"], label: "#DELETEPACKAGE#", progress: 2)
 			self.privilegedShellCommand("/bin/cp",arg: ["-R","/Volumes/"+esdpath+"/Packages",lazypath+"/System/Installation"], label: "#COPYPACKAGE#",progress: 22)
 			self.shellCommand("/bin/mkdir",arg: [lazypath+"/System/Library/Kernels"], label: "#CREATEKERNELSF#", progress: 1)
-			self.shellCommand("/bin/mkdir",arg: ["/tmp/com.pcbeta.lazy/kernel"], label: "#COPYKERNEL#", progress: 2)
-			self.shellCommand("/usr/bin/xar",arg: ["-x","-f",lazypath+"/System/Installation/Packages/Essentials.pkg","-C","/tmp/com.pcbeta.lazy/kernel"], label: "#COPYKERNEL#", progress: 4)
-			self.shellCommand("/bin/cp",arg: ["-R","/tmp/com.pcbeta.lazy/kernel/KerberosPlugins",lazypath+"/System/Library/"], label: "#COPYKERNEL#", progress: 2)
-			self.shellCommand("/bin/cp",arg: ["-R","/tmp/com.pcbeta.lazy/kernel/Kernels",lazypath+"/System/Library/"], label: "#COPYKERNEL#", progress: 2)
 			////////////////////////////patching processes////////////////////////
 			if MBRPatchState {
 				self.privilegedShellCommand("/usr/bin/perl",arg: ["-pi","-e","\'s|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\x74\\x5F\\x48\\x8B\\x85|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\xEB\\x5F\\x48\\x8B\\x85|g\'",lazypath+"/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller"], label: "#PATCH01#",progress: 1)
