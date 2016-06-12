@@ -30,7 +30,7 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
     override func viewDidLoad() {
         super.viewDidLoad()
         language = NSLocale.preferredLanguages()[0]
-        if self.language != "zh-Hans" || self.language != "en" || self.language != "ja" {
+		if self.language != "zh-Hans" || self.language != "en" { //|| self.language != "ja"
             self.language = "en"
         }
         progress.hidden = true
@@ -57,7 +57,19 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
 		exit(0)
 	}
     @IBAction func StartProcessing(sender: NSButton) {
-        if NSURL(fileURLWithPath:filePath.stringValue).checkResourceIsReachableAndReturnError(nil){
+		if !NSURL(fileURLWithPath:filePath.stringValue).checkResourceIsReachableAndReturnError(nil){
+			let a = NSAlert()
+			a.messageText = "#INPUTVOID#".localized(self.language!)
+			a.runModal()
+		}else if kernel.droppedFilePath != "" && NSURL(fileURLWithPath: kernel.droppedFilePath).lastPathComponent! !=  "kernel"{
+			let a = NSAlert()
+			a.messageText = "#KernelNameError#".localized(self.language!)
+			a.runModal()
+		}else if extra.droppedFilePath != "" && NSURL(fileURLWithPath: extra.droppedFilePath).lastPathComponent! !=  "extra"{
+			let a = NSAlert()
+			a.messageText = "#ExtraNameError#".localized(self.language!)
+			a.runModal()
+		}else {
 			start.hidden = true
 			progress.hidden = false
 			progressLable.hidden = false
@@ -88,10 +100,6 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
 			kernel.hidden=true
 			extra.hidden=true
 			api.startGenerating(filePath.stringValue,SizeVal: SizeVal,MBRPatchState: MBRPatchState,XCPMPatchState: XCPMPatchState,cdrState: cdrState,kernelDroppedFilePath: kernel.droppedFilePath,extraDroppedFilePath: extra.droppedFilePath)
-        }else{
-            let a = NSAlert()
-            a.messageText = "#INPUTVOID#".localized(self.language!)
-            a.runModal()
         }
     }
     @IBAction func XCPMClicked(sender: NSButton) {

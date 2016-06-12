@@ -8,6 +8,8 @@
 
 "#TITLE#" =  "懒人镜像制作器";
 "#INPUTVOID#" =  "未设置镜像！";
+"#KernelNameError#" =  "kernel文件名错误(应该为'kernel')";
+"#ExtraNameError#" =  "extra文件夹名错误(应该为'extra')";
 "#NOKERNEL#" =  "请先添加kernel！";
 "#MOUNTORG#" =  "挂载镜像";
 "#MOUNTESD#" =  "挂载ESD镜像";
@@ -23,7 +25,6 @@
 "#CREATEKERNELSF#" =  "创建kernels文件夹";
 "#PATCH01#" =  "破解OSInstaller";
 "#PATCH02#" =  "破解OSInstall.mpkg";
-"#COPYKERNEL#" =  "复制Essential.pkg内容";
 "#COPYKERNELF#" =  "复制Kernel文件";
 "#XCPMPATCH#" =  "XCPM补丁";
 "#COPYEXTRA#" =  "复制Extra文件夹";

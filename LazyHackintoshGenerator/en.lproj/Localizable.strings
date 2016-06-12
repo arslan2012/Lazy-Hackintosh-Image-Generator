@@ -8,6 +8,8 @@
 
 "#TITLE#" =  "Lazy Hackintosh Image Generator";
 "#INPUTVOID#" =  "Image didn't set";
+"#KernelNameError#" =  "kernel file name is not right(should be 'kernel')";
+"#ExtraNameError#" =  "extra folder name is not right(should be 'extra')";
 "#NOKERNEL#" =  "Please add kernel file first";
 "#MOUNTORG#" =  "Mounting image";
 "#MOUNTESD#" =  "Mounting esd image";
@@ -23,7 +25,6 @@
 "#CREATEKERNELSF#" =  "Creating kernels folder";
 "#PATCH01#" =  "Patching OSInstaller";
 "#PATCH02#" =  "Patching OSInstall.mpkg";
-"#COPYKERNEL#" =  "Copying Essential.pkg content";
 "#COPYKERNELF#" =  "Copying kernel file";
 "#XCPMPATCH#" =  "Patching XCPM";
 "#COPYEXTRA#" =  "Copying /Extra folder";
