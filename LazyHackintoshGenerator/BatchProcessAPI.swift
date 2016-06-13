@@ -150,7 +150,7 @@ class BatchProcessAPI{
 			self.shellCommand("/bin/mkdir",arg: [lazypath+"/System/Library/Kernels"], label: "#CREATEKERNELSF#", progress: 1)
 			////////////////////////////patching processes////////////////////////
 			if MBRPatchState {
-				self.privilegedShellCommand("/usr/bin/perl",arg: ["-pi","-e","\'s|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\x74\\x5F\\x48\\x8B\\x85|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\xEB\\x5F\\x48\\x8B\\x85|g\'",lazypath+"/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller"], label: "#PATCH01#",progress: 1)
+				self.privilegedShellCommand("/bin/sh",arg: ["/usr/bin/perl","-pi","-e","'s|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\x74\\x5F\\x48\\x8B\\x85|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\xEB\\x5F\\x48\\x8B\\x85|g'",lazypath+"/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller"], label: "#PATCH01#",progress: 1)
 				self.privilegedShellCommand("/usr/bin/codesign",arg: ["-f","-s","-",lazypath+"/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller"], label: "#PATCH01#",progress: 1)
 				
 				self.shellCommand("/bin/mkdir",arg: ["/tmp/com.pcbeta.lazy/osinstallmpkg"], label: "#PATCH02#", progress: 0)
