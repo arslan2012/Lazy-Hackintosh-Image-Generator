@@ -10,6 +10,7 @@
 "#INPUTVOID#" =  "未设置镜像！";
 "#KernelNameError#" =  "kernel文件名错误(应该为'kernel')";
 "#ExtraNameError#" =  "Extra文件夹名错误(应该为'Extra')";
+"#AskVersion#" =  "请选择镜像版本";
 "#NOKERNEL#" =  "请先添加kernel！";
 "#MOUNTORG#" =  "挂载镜像";
 "#MOUNTESD#" =  "挂载ESD镜像";

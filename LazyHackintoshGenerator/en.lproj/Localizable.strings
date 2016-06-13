@@ -10,7 +10,9 @@
 "#INPUTVOID#" =  "Image didn't set";
 "#KernelNameError#" =  "kernel file name is not right(should be 'kernel')";
 "#ExtraNameError#" =  "Extra folder name is not right(should be 'Extra')";
+"#AskVersion#" =  "what version of image are you processing?";
 "#NOKERNEL#" =  "Please add kernel file first";
+"#CREATECDR#" = "Generating CDR";
 "#MOUNTORG#" =  "Mounting image";
 "#MOUNTESD#" =  "Mounting esd image";
 "#ESDFAILURE#" =  "ERROR: Couldn't find Install ESD mount point";
