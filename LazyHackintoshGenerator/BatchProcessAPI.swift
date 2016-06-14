@@ -23,15 +23,15 @@ class BatchProcessAPI{
 		let task = NSTask()
 		task.launchPath = path
 		task.arguments = arg
-//		let pipe = NSPipe()
-//		task.standardOutput = pipe
+		//		let pipe = NSPipe()
+		//		task.standardOutput = pipe
 		task.launch()
 		self.delegate.didReceiveProcessName(label)
 		task.waitUntilExit()
 		self.delegate.didReceiveProgress(progress)
-//		let data = pipe.fileHandleForReading.readDataToEndOfFile()
-//		let output: String = String(data: data, encoding: NSUTF8StringEncoding)!
-//		Swift.print(output)
+		//		let data = pipe.fileHandleForReading.readDataToEndOfFile()
+		//		let output: String = String(data: data, encoding: NSUTF8StringEncoding)!
+		//		Swift.print(output)
 	}
 	func privilegedShellCommand(path:String, arg: [String],label: String,progress: Double){
 		let task = STPrivilegedTask()

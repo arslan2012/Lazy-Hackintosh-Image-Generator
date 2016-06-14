@@ -158,9 +158,6 @@ AwEVARgBHQAAAAAAAAIBAAAAAAAAACgAAAAAAAAAAAAAAAAAAAEfA
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cq3-tM-ywW" customClass="FileDropZone" customModule="LazyHackintoshGenerator" customModuleProvider="target">
                                 <rect key="frame" x="20" y="205" width="440" height="57"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="RUM-f6-V2X"/>
-                                <connections>
-                                    <action selector="getFile:" target="XfG-lQ-9wD" id="fyt-ul-Fao"/>
-                                </connections>
                             </imageView>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x2t-of-KJz">
                                 <rect key="frame" x="18" y="112" width="138" height="18"/>
