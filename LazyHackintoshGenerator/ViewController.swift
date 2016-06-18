@@ -16,7 +16,6 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
 	@IBOutlet weak var start: NSButton!
 	@IBOutlet weak var MBRPatch: NSButton!
 	@IBOutlet weak var XCPMPatch: NSButton!
-	lazy var XCPMver:Int = 0;
 	@IBOutlet weak var cdr: NSButton!
 	@IBOutlet weak var extra: OtherFileDrop!
 	@IBOutlet weak var SizeCustomize: NSButton!
@@ -91,9 +90,7 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
 				SizeVal = CustomSize.stringValue
 			}
 			let MBRPatchState = (MBRPatch.state == NSOnState) ? true : false
-			if XCPMPatch.state == NSOffState {
-				XCPMver=0
-			}
+			let XCPMPatchState = (XCPMPatch.state == NSOnState) ? true : false
 			let cdrState = (cdr.state == NSOnState) ? true : false
 			MBRPatch.enabled=false
 			XCPMPatch.enabled=false
@@ -102,7 +99,7 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
 			CustomSize.enabled=false
 			kernel.hidden=true
 			extra.hidden=true
-			api.startGenerating(filePath.stringValue,SizeVal: SizeVal,MBRPatchState: MBRPatchState,XCPMver: XCPMver,cdrState: cdrState,kernelDroppedFilePath: kernel.droppedFilePath,extraDroppedFilePath: extra.droppedFilePath)
+			api.startGenerating(filePath.stringValue,SizeVal: SizeVal,MBRPatchState: MBRPatchState,XCPMPatchState: XCPMPatchState,cdrState: cdrState,kernelDroppedFilePath: kernel.droppedFilePath,extraDroppedFilePath: extra.droppedFilePath)
 		}
 	}
 	@IBAction func XCPMClicked(sender: NSButton) {
@@ -112,18 +109,6 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
 				a.messageText = "#NOKERNEL#".localized(self.language!)
 				a.runModal()
 				XCPMPatch.state = NSOffState
-			}else {
-				let myPopup: NSAlert = NSAlert()
-				myPopup.messageText = "#AskVersion#".localized(self.language!)
-				myPopup.alertStyle = NSAlertStyle.WarningAlertStyle
-				myPopup.addButtonWithTitle("10.10.0 ~ 10.11.0")
-				myPopup.addButtonWithTitle(">10.11.1 beta 15B38b")
-				let res = myPopup.runModal()
-				if res == NSAlertFirstButtonReturn {
-					XCPMver=1
-				}else {
-					XCPMver=2
-				}
 			}
 		}
 	}

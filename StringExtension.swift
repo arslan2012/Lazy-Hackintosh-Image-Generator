@@ -15,4 +15,10 @@ extension String {
         
         return NSLocalizedString(self, tableName: nil, bundle: bundle!, value: "", comment: "")
     }
+	func versionToInt() -> [Int] {
+		return self.componentsSeparatedByString(".")
+			.map {
+				Int.init($0) ?? 0
+		}
+	}
 }

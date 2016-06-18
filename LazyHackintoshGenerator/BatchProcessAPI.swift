@@ -42,7 +42,7 @@ class BatchProcessAPI{
 		task.waitUntilExit()
 		self.delegate.didReceiveProgress(progress)
 	}
-	func startGenerating(filePath:String,SizeVal:String,MBRPatchState:Bool,XCPMver:Int,cdrState:Bool,kernelDroppedFilePath:String,extraDroppedFilePath:String){
+	func startGenerating(filePath:String,SizeVal:String,MBRPatchState:Bool,XCPMPatchState:Bool,cdrState:Bool,kernelDroppedFilePath:String,extraDroppedFilePath:String){
 		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0),{
 			////////////////////////////mounting processes////////////////////////
 			self.shellCommand("/usr/bin/hdiutil",arg: ["attach",filePath,"-noverify","-nobrowse","-quiet"], label: "#MOUNTORG#", progress: 2)
@@ -97,7 +97,6 @@ class BatchProcessAPI{
 			if esdpath == "" {
 				self.delegate.didReceiveErrorMessage("#ESDFAILURE#")
 			}
-			self.shellCommand("/usr/bin/hdiutil",arg: ["attach","/Volumes/\(esdpath)/BaseSystem.dmg","-noverify","-nobrowse","-quiet"], label: "#MOUNTESD#", progress: 2)
 			self.shellCommand("/bin/mkdir",arg: ["/tmp/com.pcbeta.lazy"], label: "#CREATE#", progress: 1)
 			self.shellCommand("/usr/bin/hdiutil",arg: ["create","-size","\(SizeVal)g","-layout","SPUD","-ov","-fs","HFS+J","-volname","OS X Lazy Installer","/tmp/com.pcbeta.lazy/Lazy Installer.dmg"], label: "#CREATE#", progress: 22)
 			let lazypath = "/tmp/com.pcbeta.lazy/LazyMount"
@@ -105,33 +104,14 @@ class BatchProcessAPI{
 			if !NSURL(fileURLWithPath:lazypath).checkResourceIsReachableAndReturnError(nil){
 				self.delegate.didReceiveErrorMessage("#LAZYFAILURE#")
 			}
-			var basepath = ""
-			do{
-				let enumerator = try fileManager.contentsOfDirectoryAtPath("/Volumes")
-				for element in enumerator {
-					if element.hasPrefix("OS X Base System"){
-						basepath = element
-						if NSURL(fileURLWithPath:"/Volumes/\(basepath)").checkResourceIsReachableAndReturnError(nil){
-							break
-						}
-					}
-				}
-			}
-			catch{
-				self.delegate.didReceiveErrorMessage("#BASEFAILURE#")
-			}
-			if basepath == ""{
-				self.delegate.didReceiveErrorMessage("#BASEFAILURE#")
-			}
 			////////////////////////////copying processes/////////////////////////
-			self.privilegedShellCommand("/usr/sbin/asr",arg: ["restore","--source","/Volumes/\(basepath)/","--target",lazypath,"--erase","--format","HFS+","--noprompt","--noverify"], label: "#COPYBASE#",progress: 15)
+			self.privilegedShellCommand("/usr/sbin/asr",arg: ["restore","--source","/Volumes/\(esdpath)/BaseSystem.dmg","--target",lazypath,"--erase","--format","HFS+","--noprompt","--noverify"], label: "#COPYBASE#",progress: 17)
 			do{
 				let enumerator = try fileManager.contentsOfDirectoryAtPath("/Volumes")
 				for element in enumerator {
 					if element.hasPrefix("OS X Base System"){
-						basepath = element
-						if NSURL(fileURLWithPath:"/Volumes/\(basepath)").checkResourceIsReachableAndReturnError(nil){
-							self.shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/\(basepath)"], label: "", progress: 0)
+						if NSURL(fileURLWithPath:"/Volumes/\(element)").checkResourceIsReachableAndReturnError(nil){
+							self.shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/\(element)"], label: "", progress: 0)
 						}
 					}
 				}
@@ -148,6 +128,11 @@ class BatchProcessAPI{
 			self.shellCommand("/bin/rm",arg: ["-rf","\(lazypath)/System/Installation/Packages"], label: "#DELETEPACKAGE#", progress: 2)
 			self.privilegedShellCommand("/bin/cp",arg: ["-R","/Volumes/\(esdpath)/Packages","\(lazypath)/System/Installation"], label: "#COPYPACKAGE#",progress: 22)
 			self.shellCommand("/bin/mkdir",arg: ["\(lazypath)/System/Library/Kernels"], label: "#CREATEKERNELSF#", progress: 1)
+			/////////////////////////version checking processes////////////////////
+			let SystemVersionPlistPath = "\(lazypath)/System/Library/CoreServices/SystemVersion.plist"
+			let myDict = NSDictionary(contentsOfFile: SystemVersionPlistPath)
+			let SystemVersion = myDict?.valueForKey("ProductVersion") as! String
+			let XCPMver = SystemVersion.versionToInt().lexicographicalCompare("10.11.1".versionToInt())
 			////////////////////////////patching processes////////////////////////
 			if MBRPatchState {
 				self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\x74\\x5F\\x48\\x8B\\x85|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\xEB\\x5F\\x48\\x8B\\x85|g' \(lazypath)/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller"], label: "#PATCH01#",progress: 1)
@@ -172,11 +157,11 @@ class BatchProcessAPI{
 			}else {
 				self.delegate.didReceiveProgress(2)
 			}
-			if XCPMver != 0 {
+			if XCPMPatchState == true {
 				self.shellCommand("/bin/cp",arg: [kernelDroppedFilePath,"\(lazypath)/System/Library/Kernels"], label: "#COPYKERNELF#", progress: 1)
 				self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xe2\\x00\\x00\\x00\\x02\\x00\\x00\\x00|\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00|g' \(lazypath)/System/Library/Kernels/kernel"], label: "#XCPMPATCH#",progress: 0)
 				self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xe2\\x00\\x00\\x00\\x4c\\x00\\x00\\x00|\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00|g' \(lazypath)/System/Library/Kernels/kernel"], label: "#XCPMPATCH#",progress: 0)
-				if XCPMver == 1 {
+				if XCPMver == false {
 					self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xe2\\x00\\x00\\x00\\x90\\x01\\x00\\x00|\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00|g' \(lazypath)/System/Library/Kernels/kernel"], label: "#XCPMPATCH#",progress: 1)
 				}else{
 					self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xe2\\x00\\x00\\x00\\x90\\x13\\x00\\x00|\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00|g' \(lazypath)/System/Library/Kernels/kernel"], label: "#XCPMPATCH#",progress: 1)
@@ -187,19 +172,17 @@ class BatchProcessAPI{
 			self.shellCommand("/bin/cp",arg: ["-R",extraDroppedFilePath,"\(lazypath)/"], label: "#COPYEXTRA#", progress: 2)
 			////////////////////////////ejecting processes////////////////////////
 			if cdrState {
-				self.shellCommand("/usr/bin/hdiutil",arg: ["detach",lazypath], label: "#EJECTLAZY#", progress: 0)
-				self.shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/\(basepath)"], label: "#EJECTBASE#", progress: 1)
+				self.shellCommand("/usr/bin/hdiutil",arg: ["detach",lazypath], label: "#EJECTLAZY#", progress: 1)
 				self.shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/\(esdpath)"], label: "#EJECTESD#", progress: 1)
 				self.shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/Install OS X El Capitan"], label: "#EJECTORG#", progress: 0)
 				self.shellCommand("/usr/bin/hdiutil",arg: ["convert","/tmp/com.pcbeta.lazy/Lazy Installer.dmg","-ov","-format","UDTO","-o","/tmp/com.pcbeta.lazy/Lazy Installer.cdr"], label: "#CREATECDR#", progress: 7)
 				self.shellCommand("/bin/mv",arg: ["/tmp/com.pcbeta.lazy/Lazy Installer.dmg","\(NSHomeDirectory())/Desktop/"], label: "#MV#", progress: 0)
 				self.shellCommand("/bin/mv",arg: ["/tmp/com.pcbeta.lazy/Lazy Installer.cdr","\(NSHomeDirectory())/Desktop/"], label: "#MV#", progress: 0)
 			}else{
-				self.shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/\(basepath)"], label: "#EJECTBASE#", progress: 2)
 				self.shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/\(esdpath)"], label: "#EJECTESD#", progress: 2)
 				self.shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/Install OS X El Capitan"], label: "#EJECTORG#", progress: 2)
 				self.shellCommand("/usr/bin/hdiutil",arg: ["detach",lazypath], label: "#EJECTLAZY#", progress: 2)
-				self.shellCommand("/bin/mv",arg: ["/tmp/com.pcbeta.lazy/Lazy Installer.dmg","\(NSHomeDirectory())/Desktop/"], label: "#MV#", progress: 1)
+				self.shellCommand("/bin/mv",arg: ["/tmp/com.pcbeta.lazy/Lazy Installer.dmg","\(NSHomeDirectory())/Desktop/"], label: "#MV#", progress: 3)
 			}
 			self.shellCommand("/bin/rm",arg: ["-rf","/tmp/com.pcbeta.lazy"], label: "#MV#", progress: 0)
 			self.delegate.didReceiveProcessName("#FINISH#")
