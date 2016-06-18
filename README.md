@@ -15,7 +15,7 @@ Just drag the Install app, or Install app image, or Install ESD image onto the t
 >>If you use Chameleon Bootloader, you can drop your Chameleon Extra folder onto the /Extra lable to make this a Chameleon bootable image.
 
 ##Shut up and gimmi the app
-Just download the LazyHackintoshGenerator.app.zip in the repository. It will keep updating to the latest version.
+Just download the [LazyHackintoshGenerator.app.zip](https://raw.githubusercontent.com/arslan2012/Lazy-Hackintosh-Image-Generator/master/LazyHackintoshGenerator.app.zip). It will keep updating to the latest version.
 
 # Support needed
 As you can see, beacase I used Swift to code this, app authorization is really a pain in the ass. sometimes you need to type in your password twice to make this work.
