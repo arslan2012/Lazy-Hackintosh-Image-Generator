@@ -32,6 +32,7 @@ class BatchProcessAPI{
 		//		let data = pipe.fileHandleForReading.readDataToEndOfFile()
 		//		let output: String = String(data: data, encoding: NSUTF8StringEncoding)!
 		//		Swift.print(output)
+		//Swift.print("\(path) \(arg[0]),progress:\(progress)")
 	}
 	func privilegedShellCommand(path:String, arg: [String],label: String,progress: Double){
 		let task = STPrivilegedTask()
@@ -44,7 +45,7 @@ class BatchProcessAPI{
 	}
 	func startGenerating(filePath:String,SizeVal:String,MBRPatchState:Bool,XCPMPatchState:Bool,cdrState:Bool,kernelDroppedFilePath:String,extraDroppedFilePath:String){
 		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0),{
-			////////////////////////////mounting processes////////////////////////
+			////////////////////////////mounting processes////////////////////////progress:31%
 			self.shellCommand("/usr/bin/hdiutil",arg: ["attach",filePath,"-noverify","-nobrowse","-quiet"], label: "#MOUNTORG#", progress: 2)
 			self.shellCommand("/usr/bin/hdiutil",arg: ["attach","\(filePath)/Contents/SharedSupport/InstallESD.dmg","-noverify","-nobrowse","-quiet"], label: "#MOUNTESD#", progress: 2)
 			let fileManager = NSFileManager.defaultManager()
@@ -78,8 +79,9 @@ class BatchProcessAPI{
 				catch{
 					
 				}
-				self.shellCommand("/usr/bin/hdiutil",arg: ["attach","/Volumes/\(esdpath)/\(apppath)/Contents/SharedSupport/InstallESD.dmg","-noverify","-nobrowse","-quiet"], label: "#MOUNTESD#", progress: 2)
+				self.shellCommand("/usr/bin/hdiutil",arg: ["attach","/Volumes/\(esdpath)/\(apppath)/Contents/SharedSupport/InstallESD.dmg","-noverify","-nobrowse","-quiet"], label: "#MOUNTESD#", progress: 0)
 			}
+			self.delegate.didReceiveProgress(2)
 			do{
 				let enumerator = try fileManager.contentsOfDirectoryAtPath("/Volumes")
 				for element in enumerator {
@@ -104,7 +106,7 @@ class BatchProcessAPI{
 			if !NSURL(fileURLWithPath:lazypath).checkResourceIsReachableAndReturnError(nil){
 				self.delegate.didReceiveErrorMessage("#LAZYFAILURE#")
 			}
-			////////////////////////////copying processes/////////////////////////
+			////////////////////////////copying processes/////////////////////////progress:54%
 			self.privilegedShellCommand("/usr/sbin/asr",arg: ["restore","--source","/Volumes/\(esdpath)/BaseSystem.dmg","--target",lazypath,"--erase","--format","HFS+","--noprompt","--noverify"], label: "#COPYBASE#",progress: 17)
 			do{
 				let enumerator = try fileManager.contentsOfDirectoryAtPath("/Volumes")
@@ -128,12 +130,12 @@ class BatchProcessAPI{
 			self.shellCommand("/bin/rm",arg: ["-rf","\(lazypath)/System/Installation/Packages"], label: "#DELETEPACKAGE#", progress: 2)
 			self.privilegedShellCommand("/bin/cp",arg: ["-R","/Volumes/\(esdpath)/Packages","\(lazypath)/System/Installation"], label: "#COPYPACKAGE#",progress: 22)
 			self.shellCommand("/bin/mkdir",arg: ["\(lazypath)/System/Library/Kernels"], label: "#CREATEKERNELSF#", progress: 1)
-			/////////////////////////version checking processes////////////////////
+			/////////////////////////version checking processes////////////////////progress:0%
 			let SystemVersionPlistPath = "\(lazypath)/System/Library/CoreServices/SystemVersion.plist"
 			let myDict = NSDictionary(contentsOfFile: SystemVersionPlistPath)
 			let SystemVersion = myDict?.valueForKey("ProductVersion") as! String
 			let XCPMver = SystemVersion.versionToInt().lexicographicalCompare("10.11.1".versionToInt())
-			////////////////////////////patching processes////////////////////////
+			////////////////////////////patching processes////////////////////////progress:6%
 			if MBRPatchState {
 				self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\x74\\x5F\\x48\\x8B\\x85|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\xEB\\x5F\\x48\\x8B\\x85|g' \(lazypath)/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller"], label: "#PATCH01#",progress: 1)
 				self.privilegedShellCommand("/usr/bin/codesign",arg: ["-f","-s","-","\(lazypath)/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller"], label: "#PATCH01#",progress: 1)
@@ -170,7 +172,7 @@ class BatchProcessAPI{
 				self.shellCommand("/bin/cp",arg: [kernelDroppedFilePath,"\(lazypath)/System/Library/Kernels"], label: "#COPYKERNELF#", progress: 2)
 			}
 			self.shellCommand("/bin/cp",arg: ["-R",extraDroppedFilePath,"\(lazypath)/"], label: "#COPYEXTRA#", progress: 2)
-			////////////////////////////ejecting processes////////////////////////
+			////////////////////////////ejecting processes////////////////////////progress:9%
 			if cdrState {
 				self.shellCommand("/usr/bin/hdiutil",arg: ["detach",lazypath], label: "#EJECTLAZY#", progress: 1)
 				self.shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/\(esdpath)"], label: "#EJECTESD#", progress: 1)
