@@ -104,6 +104,11 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
 				dropKernel.state = NSOnState
 		}
 	}
+	@IBAction func dropKernelClicked(sender: NSButton) {
+		if dropKernel.state == NSOffState {
+			XCPMPatch.state = NSOffState
+		}
+	}
 	@IBAction func SizeClicked(sender: NSButton) {
 		if SizeCustomize.state == NSOnState {
 			CustomSize.hidden = false
