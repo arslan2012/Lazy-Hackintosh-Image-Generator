@@ -134,8 +134,8 @@ class BatchProcessAPI{
 			let SystemVersionPlistPath = "\(lazypath)/System/Library/CoreServices/SystemVersion.plist"
 			let myDict = NSDictionary(contentsOfFile: SystemVersionPlistPath)
 			let SystemVersion = myDict?.valueForKey("ProductVersion") as! String
-			let SystemVersionBiggerThanElCapitan = SystemVersion.versionToInt().lexicographicalCompare("10.11.1".versionToInt())
-			let SystemVersionBiggerThanSierra = SystemVersion.versionToInt().lexicographicalCompare("10.11.99".versionToInt())
+			let SystemVersionBiggerThanElCapitan = "10.11.1".versionToInt().lexicographicalCompare(SystemVersion.versionToInt())
+			let SystemVersionBiggerThanSierra = "10.11.99".versionToInt().lexicographicalCompare(SystemVersion.versionToInt())
 			////////////////////////////patching processes////////////////////////progress:6%
 			if MBRPatchState {
 				if SystemVersionBiggerThanSierra {
@@ -168,8 +168,13 @@ class BatchProcessAPI{
 				self.delegate.didReceiveProgress(2)
 			}
 			if dropKernelState {
-				self.shellCommand(NSBundle.mainBundle().pathForResource("lzvn", ofType: nil)!,arg:["-d","\(lazypath)/System/Library/PrelinkedKernels/prelinkedkernel","/tmp/com.pcbeta.lazy/kernel"],label:"#COPYKERNELF#",progress:1)
-				self.shellCommand("/bin/cp",arg: ["/tmp/com.pcbeta.lazy/kernel","\(lazypath)/System/Library/Kernels"], label: "#COPYKERNELF#", progress: 0)
+				let task = NSTask()
+				task.launchPath = NSBundle.mainBundle().pathForResource("lzvn", ofType: nil)!
+				task.arguments = ["-d","\(lazypath)/System/Library/PrelinkedKernels/prelinkedkernel","kernel"]
+				task.currentDirectoryPath = "/tmp/com.pcbeta.lazy/"
+				task.launch()
+				task.waitUntilExit()
+				self.shellCommand("/bin/cp",arg: ["/tmp/com.pcbeta.lazy/kernel","\(lazypath)/System/Library/Kernels"], label: "#COPYKERNELF#", progress: 1)
 			}else {
 				self.delegate.didReceiveProgress(1)
 			}
