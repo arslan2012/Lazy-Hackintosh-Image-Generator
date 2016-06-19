@@ -81,7 +81,7 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
 					UsingCustomSize = true
 				}
 			}
-			var SizeVal = "7.65"
+			var SizeVal = "7.15"
 			if UsingCustomSize {
 				SizeVal = CustomSize.stringValue
 			}
