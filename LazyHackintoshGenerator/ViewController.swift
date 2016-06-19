@@ -12,7 +12,6 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
 	@IBOutlet weak var filePath: NSTextField!
 	@IBOutlet weak var progress: NSProgressIndicator!
 	@IBOutlet weak var progressLable: NSTextField!
-	@IBOutlet weak var kernel: OtherFileDrop!
 	@IBOutlet weak var start: NSButton!
 	@IBOutlet weak var MBRPatch: NSButton!
 	@IBOutlet weak var XCPMPatch: NSButton!
@@ -24,6 +23,7 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
 	@IBOutlet weak var exitButton: NSButton!
 	var language: String?
 	lazy var api : BatchProcessAPI = BatchProcessAPI(delegate: self)
+	@IBOutlet weak var dropKernel: NSButton!
 	let concurrentInsertingQueue = dispatch_queue_create("kext inserting", DISPATCH_QUEUE_CONCURRENT)
 	
 	
@@ -61,10 +61,6 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
 			let a = NSAlert()
 			a.messageText = "#INPUTVOID#".localized(self.language!)
 			a.runModal()
-		}else if kernel.droppedFilePath != "" && NSURL(fileURLWithPath: kernel.droppedFilePath).lastPathComponent! !=  "kernel"{
-			let a = NSAlert()
-			a.messageText = "#KernelNameError#".localized(self.language!)
-			a.runModal()
 		}else if extra.droppedFilePath != "" && NSURL(fileURLWithPath: extra.droppedFilePath).lastPathComponent! !=  "Extra"{
 			let a = NSAlert()
 			a.messageText = "#ExtraNameError#".localized(self.language!)
@@ -92,24 +88,20 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
 			let MBRPatchState = (MBRPatch.state == NSOnState) ? true : false
 			let XCPMPatchState = (XCPMPatch.state == NSOnState) ? true : false
 			let cdrState = (cdr.state == NSOnState) ? true : false
+			let dropKernelState = (dropKernel.state == NSOnState) ? true : false
 			MBRPatch.enabled=false
 			XCPMPatch.enabled=false
 			cdr.enabled=false
 			SizeCustomize.enabled=false
 			CustomSize.enabled=false
-			kernel.hidden=true
+			dropKernel.enabled=false
 			extra.hidden=true
-			api.startGenerating(filePath.stringValue,SizeVal: SizeVal,MBRPatchState: MBRPatchState,XCPMPatchState: XCPMPatchState,cdrState: cdrState,kernelDroppedFilePath: kernel.droppedFilePath,extraDroppedFilePath: extra.droppedFilePath)
+			api.startGenerating(filePath.stringValue,SizeVal: SizeVal,MBRPatchState: MBRPatchState,XCPMPatchState: XCPMPatchState,cdrState: cdrState,dropKernelState:dropKernelState,extraDroppedFilePath: extra.droppedFilePath)
 		}
 	}
 	@IBAction func XCPMClicked(sender: NSButton) {
 		if XCPMPatch.state == NSOnState {
-			if kernel.droppedFilePath == "" {
-				let a = NSAlert()
-				a.messageText = "#NOKERNEL#".localized(self.language!)
-				a.runModal()
-				XCPMPatch.state = NSOffState
-			}
+				dropKernel.state = NSOnState
 		}
 	}
 	@IBAction func SizeClicked(sender: NSButton) {

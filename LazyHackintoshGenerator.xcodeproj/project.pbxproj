@@ -16,6 +16,7 @@
 		F546B0491C660EB600613AFE /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F546B0481C660EB600613AFE /* StringExtension.swift */; };
 		F57F43071C64A1AA004C1EB5 /* STPrivilegedTask.m in Sources */ = {isa = PBXBuildFile; fileRef = F57F43061C64A1AA004C1EB5 /* STPrivilegedTask.m */; };
 		F5C563E91CC49242001C00FF /* BatchProcessAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C563E81CC49242001C00FF /* BatchProcessAPI.swift */; };
+		F5E197CF1D168D0E006620F8 /* lzvn in Resources */ = {isa = PBXBuildFile; fileRef = F5E197CE1D168374006620F8 /* lzvn */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		F57F43081C64A1CE004C1EB5 /* STPrivilegedTask.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STPrivilegedTask.h; sourceTree = "<group>"; };
 		F5C563E81CC49242001C00FF /* BatchProcessAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatchProcessAPI.swift; sourceTree = "<group>"; };
 		F5C606411C66D8E30092EDA6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F5E197CE1D168374006620F8 /* lzvn */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = lzvn; sourceTree = "<group>"; };
 		F5FA59151D0A5785001F7542 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -53,6 +55,7 @@
 		F504117A1C644987003311DA = {
 			isa = PBXGroup;
 			children = (
+				F5E197CD1D168351006620F8 /* LZVN */,
 				F56157E21CAA344700D1F581 /* README.md */,
 				F57F43041C64A173004C1EB5 /* STPrivilegedTask */,
 				F50411851C644987003311DA /* LazyHackintoshGenerator */,
@@ -92,6 +95,14 @@
 				F57F43051C64A1AA004C1EB5 /* LazyHackintoshGenerator-Bridging-Header.h */,
 			);
 			name = STPrivilegedTask;
+			sourceTree = "<group>";
+		};
+		F5E197CD1D168351006620F8 /* LZVN */ = {
+			isa = PBXGroup;
+			children = (
+				F5E197CE1D168374006620F8 /* lzvn */,
+			);
+			name = LZVN;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -156,6 +167,7 @@
 			files = (
 				F546B0451C660DDD00613AFE /* Localizable.strings in Resources */,
 				F53A2C701D09AE160037268D /* Assets.xcassets in Resources */,
+				F5E197CF1D168D0E006620F8 /* lzvn in Resources */,
 				F504118E1C644987003311DA /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

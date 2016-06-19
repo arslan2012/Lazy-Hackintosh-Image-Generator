@@ -143,18 +143,6 @@ AwEVARgBHQAAAAAAAAIBAAAAAAAAACgAAAAAAAAAAAAAAAAAAAEfA
                                     <font key="font" size="13" name=".PingFangSC-Regular"/>
                                 </buttonCell>
                             </button>
-                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="wJu-Gx-yEc">
-                                <rect key="frame" x="242" y="90" width="72" height="46"/>
-                                <textFieldCell key="cell" lineBreakMode="charWrapping" sendsActionOnEndEditing="YES" title="kernel" id="KCe-Sx-Z00">
-                                    <font key="font" metaFont="system" size="24"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iVZ-oS-ips" customClass="OtherFileDrop" customModule="LazyHackintoshGenerator" customModuleProvider="target">
-                                <rect key="frame" x="244" y="90" width="68" height="51"/>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="nE2-g3-bch"/>
-                            </imageView>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cq3-tM-ywW" customClass="FileDropZone" customModule="LazyHackintoshGenerator" customModuleProvider="target">
                                 <rect key="frame" x="20" y="205" width="440" height="57"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="RUM-f6-V2X"/>
@@ -222,6 +210,13 @@ AwEVARgBHQAAAAAAAAIBAAAAAAAAACgAAAAAAAAAAAAAAAAAAAEfA
                                     <action selector="StartProcessing:" target="XfG-lQ-9wD" id="Lsu-y1-Lc7"/>
                                 </connections>
                             </button>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wCZ-xc-JJt">
+                                <rect key="frame" x="161" y="132" width="94" height="18"/>
+                                <buttonCell key="cell" type="check" title="Drop Kernel" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="ryD-dv-ejv">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
                         </subviews>
                     </view>
                     <connections>
@@ -231,10 +226,10 @@ AwEVARgBHQAAAAAAAAIBAAAAAAAAACgAAAAAAAAAAAAAAAAAAAEfA
                         <outlet property="SizeUnit" destination="PFY-ia-UbP" id="Cy4-Lf-oQU"/>
                         <outlet property="XCPMPatch" destination="x2t-of-KJz" id="jwr-Sk-6qy"/>
                         <outlet property="cdr" destination="caW-BX-KDk" id="D3c-LK-Il0"/>
+                        <outlet property="dropKernel" destination="wCZ-xc-JJt" id="czZ-fQ-Myx"/>
                         <outlet property="exitButton" destination="ujW-iU-6TA" id="Gy8-1S-ZIp"/>
                         <outlet property="extra" destination="600-wD-mII" id="Okx-Yj-tjI"/>
                         <outlet property="filePath" destination="VoB-1g-tUe" id="0zt-QG-aDt"/>
-                        <outlet property="kernel" destination="iVZ-oS-ips" id="1Rh-c2-0ji"/>
                         <outlet property="progress" destination="NQo-RU-twe" id="J9g-OF-90R"/>
                         <outlet property="progressLable" destination="NJY-iS-VYr" id="lUA-3M-dHs"/>
                         <outlet property="start" destination="XWH-IZ-EgC" id="EPB-Qt-YKd"/>

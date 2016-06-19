@@ -23,15 +23,15 @@ class BatchProcessAPI{
 		let task = NSTask()
 		task.launchPath = path
 		task.arguments = arg
-		//		let pipe = NSPipe()
-		//		task.standardOutput = pipe
+		let pipe = NSPipe()
+		task.standardOutput = pipe
 		task.launch()
 		self.delegate.didReceiveProcessName(label)
 		task.waitUntilExit()
 		self.delegate.didReceiveProgress(progress)
-		//		let data = pipe.fileHandleForReading.readDataToEndOfFile()
-		//		let output: String = String(data: data, encoding: NSUTF8StringEncoding)!
-		//		Swift.print(output)
+		let data = pipe.fileHandleForReading.readDataToEndOfFile()
+		let output: String = String(data: data, encoding: NSUTF8StringEncoding)!
+		Swift.print(output)
 		//Swift.print("\(path) \(arg[0]),progress:\(progress)")
 	}
 	func privilegedShellCommand(path:String, arg: [String],label: String,progress: Double){
@@ -43,7 +43,7 @@ class BatchProcessAPI{
 		task.waitUntilExit()
 		self.delegate.didReceiveProgress(progress)
 	}
-	func startGenerating(filePath:String,SizeVal:String,MBRPatchState:Bool,XCPMPatchState:Bool,cdrState:Bool,kernelDroppedFilePath:String,extraDroppedFilePath:String){
+	func startGenerating(filePath:String,SizeVal:String,MBRPatchState:Bool,XCPMPatchState:Bool,cdrState:Bool,dropKernelState:Bool,extraDroppedFilePath:String){
 		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0),{
 			////////////////////////////mounting processes////////////////////////progress:31%
 			self.shellCommand("/usr/bin/hdiutil",arg: ["attach",filePath,"-noverify","-nobrowse","-quiet"], label: "#MOUNTORG#", progress: 2)
@@ -135,7 +135,7 @@ class BatchProcessAPI{
 			let myDict = NSDictionary(contentsOfFile: SystemVersionPlistPath)
 			let SystemVersion = myDict?.valueForKey("ProductVersion") as! String
 			let SystemVersionBiggerThanElCapitan = SystemVersion.versionToInt().lexicographicalCompare("10.11.1".versionToInt())
-			let SystemVersionBiggerThanSierra = SystemVersion.versionToInt().lexicographicalCompare("10.12".versionToInt())
+			let SystemVersionBiggerThanSierra = SystemVersion.versionToInt().lexicographicalCompare("10.11.99".versionToInt())
 			////////////////////////////patching processes////////////////////////progress:6%
 			if MBRPatchState {
 				if SystemVersionBiggerThanSierra {
@@ -164,8 +164,13 @@ class BatchProcessAPI{
 			}else {
 				self.delegate.didReceiveProgress(2)
 			}
-			if XCPMPatchState == true {
-				self.shellCommand("/bin/cp",arg: [kernelDroppedFilePath,"\(lazypath)/System/Library/Kernels"], label: "#COPYKERNELF#", progress: 1)
+			if dropKernelState {
+				self.shellCommand(NSBundle.mainBundle().pathForResource("lzvn", ofType: nil)!,arg:["-d","\(lazypath)/System/Library/PrelinkedKernels/prelinkedkernel","/tmp/com.pcbeta.lazy/kernel"],label:"#COPYKERNELF#",progress:1)
+				self.shellCommand("/bin/cp",arg: ["/tmp/com.pcbeta.lazy/kernel","\(lazypath)/System/Library/Kernels"], label: "#COPYKERNELF#", progress: 0)
+			}else {
+				self.delegate.didReceiveProgress(1)
+			}
+			if XCPMPatchState {
 				if !SystemVersionBiggerThanSierra {
 					self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xe2\\x00\\x00\\x00\\x02\\x00\\x00\\x00|\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00|g' \(lazypath)/System/Library/Kernels/kernel"], label: "#XCPMPATCH#",progress: 0)
 				}
@@ -178,7 +183,7 @@ class BatchProcessAPI{
 					self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xe2\\x00\\x00\\x00\\x90\\x13\\x00\\x00|\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00|g' \(lazypath)/System/Library/Kernels/kernel"], label: "#XCPMPATCH#",progress: 1)
 				}
 			}else {
-				self.shellCommand("/bin/cp",arg: [kernelDroppedFilePath,"\(lazypath)/System/Library/Kernels"], label: "#COPYKERNELF#", progress: 2)
+				self.delegate.didReceiveProgress(1)
 			}
 			self.shellCommand("/bin/cp",arg: ["-R",extraDroppedFilePath,"\(lazypath)/"], label: "#COPYEXTRA#", progress: 2)
 			////////////////////////////ejecting processes////////////////////////progress:9%
