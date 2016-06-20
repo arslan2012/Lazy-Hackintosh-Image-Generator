@@ -6,26 +6,26 @@
   Copyright © 2016 PCBETA. All rights reserved.
 */
 
-"#TITLE#" =  "懒人镜像制作器";
-"#INPUTVOID#" =  "未设置镜像！";
+"#Title#" =  "懒人镜像制作器";
+"#Input is void#" =  "未设置镜像！";
 "#KernelNameError#" =  "kernel文件名错误(应该为'kernel')";
 "#ExtraNameError#" =  "Extra文件夹名错误(应该为'Extra')";
 "#AskVersion#" =  "请选择镜像版本";
-"#NOKERNEL#" =  "请先添加kernel！";
+"#No kernel#" =  "请先添加kernel！";
 "#MOUNTORG#" =  "挂载镜像";
 "#MOUNTESD#" =  "挂载ESD镜像";
-"#ESDFAILURE#" =  "对不起未找到ESD镜像挂载点";
-"#CREATE#" =  "正在创建镜像，请稍候...";
-"#MOUNTLAZY#" =  "挂载生成的镜像";
+"#Error in InstallESD image#" =  "对不起未找到ESD镜像挂载点";
+"#Create Lazy image#" =  "正在创建镜像，请稍候...";
+"#Mount Lazy image#" =  "挂载生成的镜像";
 "#COPYBASE#" =  "复制Base System文件";
-"#LAZYFAILURE#" =  "对不起懒人镜像写入失败";
-"#BASEFAILURE#" =  "对不起未找到Base System镜像挂载点";
-"#COPYESD#" =  "复制Install ESD文件";
+"#Error in lazy image#" =  "对不起懒人镜像写入失败";
+"#Error in base system image#" =  "对不起未找到Base System镜像挂载点";
+"#Copy ESD#" =  "复制Install ESD文件";
 "#DELETEPACKAGE#" =  "删除Packages文件夹";
 "#COPYPACKAGE#" =  "复制Packages文件夹到S/I。时间很长，期间程序卡顿为正常现象";
-"#CREATEKERNELSF#" =  "创建kernels文件夹";
-"#PATCH01#" =  "破解OSInstaller";
-"#PATCH02#" =  "破解OSInstall.mpkg";
+"#Create Kernels folder#" =  "创建kernels文件夹";
+"#Patch osinstaller#" =  "破解OSInstaller";
+"#Patch osinstalle.mpkg#" =  "破解OSInstall.mpkg";
 "#COPYKERNELF#" =  "复制Kernel文件";
 "#XCPMPATCH#" =  "XCPM补丁";
 "#COPYEXTRA#" =  "复制Extra文件夹";
@@ -35,5 +35,5 @@
 "#EJECTLAZY#" =  "卸载懒人镜像";
 "#FINISH#" = "已经完成";
 "#MV#" = "将文件移动到桌面上";
-"#CREATECDR#" = "生成CDR";
+"#Create CDR#" = "生成CDR";
 "#WRONGSIZE#" = "对不起，你输入的格式不对或者超过了最大限制";

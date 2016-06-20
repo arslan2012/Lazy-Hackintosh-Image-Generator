@@ -6,27 +6,27 @@
   Copyright © 2016 PCBETA. All rights reserved.
 */
 
-"#TITLE#" =  "Lazy Hackintosh Image Generator";
-"#INPUTVOID#" =  "Image didn't set";
+"#Title#" =  "Lazy Hackintosh Image Generator";
+"#Input is void#" =  "Image didn't set";
 "#KernelNameError#" =  "kernel file name is not right(should be 'kernel')";
 "#ExtraNameError#" =  "Extra folder name is not right(should be 'Extra')";
 "#AskVersion#" =  "what version of image are you processing?";
-"#NOKERNEL#" =  "Please add kernel file first";
-"#CREATECDR#" = "Generating CDR";
+"#No kernel#" =  "Please add kernel file first";
+"#Create CDR#" = "Generating CDR";
 "#MOUNTORG#" =  "Mounting image";
 "#MOUNTESD#" =  "Mounting esd image";
-"#ESDFAILURE#" =  "ERROR: Couldn't find Install ESD mount point";
-"#CREATE#" =  "Creating image";
-"#MOUNTLAZY#" =  "Mounting created image";
+"#Error in InstallESD image#" =  "ERROR: Couldn't find Install ESD mount point";
+"#Create Lazy image#" =  "Creating image";
+"#Mount Lazy image#" =  "Mounting created image";
 "#COPYBASE#" =  "Copying Base System file";
-"#LAZYFAILURE#" =  "ERROR: Couldn't write to output image";
-"#BASEFAILURE#" =  "ERROR: Couldn't find Base System mount point";
-"#COPYESD#" =  "Copying Install ESD file";
+"#Error in lazy image#" =  "ERROR: Couldn't write to output image";
+"#Error in base system image#" =  "ERROR: Couldn't find Base System mount point";
+"#Copy ESD#" =  "Copying Install ESD file";
 "#DELETEPACKAGE#" =  "Deleting package folder";
 "#COPYPACKAGE#" =  "Copying Packages folder to System/Installation";
-"#CREATEKERNELSF#" =  "Creating kernels folder";
-"#PATCH01#" =  "Patching OSInstaller";
-"#PATCH02#" =  "Patching OSInstall.mpkg";
+"#Create Kernels folder#" =  "Creating kernels folder";
+"#Patch osinstaller#" =  "Patching OSInstaller";
+"#Patch osinstalle.mpkg#" =  "Patching OSInstall.mpkg";
 "#COPYKERNELF#" =  "Copying kernel file";
 "#XCPMPATCH#" =  "Patching XCPM";
 "#COPYEXTRA#" =  "Copying /Extra folder";
@@ -36,5 +36,4 @@
 "#EJECTLAZY#" =  "Unmounting .";
 "#FINISH#" = "Complete!";
 "#MV#" = "Moving files to desktop";
-"#CREATECDR#" = "Generating CDR";
 "#WRONGSIZE#" = "Sorry, your input size exceeds the maximum size limit";

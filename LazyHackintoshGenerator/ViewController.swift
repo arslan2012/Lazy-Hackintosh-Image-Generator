@@ -41,7 +41,7 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
 	override func viewDidAppear() {
 		super.viewDidAppear()
 		self.view.window?.delegate = self
-		self.view.window!.title = "#TITLE#".localized()
+		self.view.window!.title = "#Title#".localized()
 	}
 	
 	override var representedObject: AnyObject? {
@@ -55,7 +55,7 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
 	@IBAction func StartProcessing(sender: NSButton) {
 		if !NSURL(fileURLWithPath:filePath.stringValue).checkResourceIsReachableAndReturnError(nil){
 			let a = NSAlert()
-			a.messageText = "#INPUTVOID#".localized()
+			a.messageText = "#Input is void#".localized()
 			a.runModal()
 		}else if extra.droppedFilePath != "" && NSURL(fileURLWithPath: extra.droppedFilePath).lastPathComponent! !=  "Extra"{
 			let a = NSAlert()

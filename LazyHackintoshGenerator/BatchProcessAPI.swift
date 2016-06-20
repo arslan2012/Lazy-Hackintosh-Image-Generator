@@ -94,17 +94,17 @@ class BatchProcessAPI{
 				}
 			}
 			catch{
-				self.delegate.didReceiveErrorMessage("#ESDFAILURE#")
+				self.delegate.didReceiveErrorMessage("#Error in InstallESD image#")
 			}
 			if esdpath == "" {
-				self.delegate.didReceiveErrorMessage("#ESDFAILURE#")
+				self.delegate.didReceiveErrorMessage("#Error in InstallESD image#")
 			}
-			self.shellCommand("/bin/mkdir",arg: ["/tmp/com.pcbeta.lazy"], label: "#CREATE#", progress: 1)
-			self.shellCommand("/usr/bin/hdiutil",arg: ["create","-size","\(SizeVal)g","-layout","SPUD","-ov","-fs","HFS+J","-volname","OS X Lazy Installer","/tmp/com.pcbeta.lazy/Lazy Installer.dmg"], label: "#CREATE#", progress: 22)
+			self.shellCommand("/bin/mkdir",arg: ["/tmp/com.pcbeta.lazy"], label: "#Create Lazy image#", progress: 1)
+			self.shellCommand("/usr/bin/hdiutil",arg: ["create","-size","\(SizeVal)g","-layout","SPUD","-ov","-fs","HFS+J","-volname","OS X Lazy Installer","/tmp/com.pcbeta.lazy/Lazy Installer.dmg"], label: "#Create Lazy image#", progress: 22)
 			let lazypath = "/tmp/com.pcbeta.lazy/LazyMount"
-			self.shellCommand("/usr/bin/hdiutil",arg: ["attach","/tmp/com.pcbeta.lazy/Lazy Installer.dmg","-noverify","-nobrowse","-quiet","-mountpoint",lazypath], label: "#MOUNTLAZY#", progress: 2)
+			self.shellCommand("/usr/bin/hdiutil",arg: ["attach","/tmp/com.pcbeta.lazy/Lazy Installer.dmg","-noverify","-nobrowse","-quiet","-mountpoint",lazypath], label: "#Mount Lazy image#", progress: 2)
 			if !NSURL(fileURLWithPath:lazypath).checkResourceIsReachableAndReturnError(nil){
-				self.delegate.didReceiveErrorMessage("#LAZYFAILURE#")
+				self.delegate.didReceiveErrorMessage("#Error in lazy image#")
 			}
 			////////////////////////////copying processes/////////////////////////progress:54%
 			self.privilegedShellCommand("/usr/sbin/asr",arg: ["restore","--source","/Volumes/\(esdpath)/BaseSystem.dmg","--target",lazypath,"--erase","--format","HFS+","--noprompt","--noverify"], label: "#COPYBASE#",progress: 17)
@@ -119,17 +119,17 @@ class BatchProcessAPI{
 				}
 			}
 			catch{
-				self.delegate.didReceiveErrorMessage("#LAZYFAILURE#")
+				self.delegate.didReceiveErrorMessage("#Error in lazy image#")
 			}
-			self.shellCommand("/usr/bin/hdiutil",arg: ["attach","/tmp/com.pcbeta.lazy/Lazy Installer.dmg","-noverify","-nobrowse","-quiet","-mountpoint",lazypath], label: "#MOUNTLAZY#", progress: 2)
+			self.shellCommand("/usr/bin/hdiutil",arg: ["attach","/tmp/com.pcbeta.lazy/Lazy Installer.dmg","-noverify","-nobrowse","-quiet","-mountpoint",lazypath], label: "#Mount Lazy image#", progress: 2)
 			self.privilegedShellCommand("/usr/sbin/diskutil",arg: ["rename","OS X Base System","OS X Lazy Installer"], label: "#COPYBASE#",progress: 2)
-			self.shellCommand("/bin/cp",arg: ["/Volumes/\(esdpath)/BaseSystem.chunklist",lazypath], label: "#COPYESD#", progress: 2)
-			self.shellCommand("/bin/cp",arg: ["/Volumes/\(esdpath)/BaseSystem.dmg",lazypath], label: "#COPYESD#", progress: 2)
-			self.shellCommand("/bin/cp",arg: ["/Volumes/\(esdpath)/AppleDiagnostics.chunklist",lazypath], label: "#COPYESD#", progress: 2)
-			self.shellCommand("/bin/cp",arg: ["/Volumes/\(esdpath)/AppleDiagnostics.dmg",lazypath], label: "#COPYESD#", progress: 2)
+			self.shellCommand("/bin/cp",arg: ["/Volumes/\(esdpath)/BaseSystem.chunklist",lazypath], label: "#Copy ESD#", progress: 2)
+			self.shellCommand("/bin/cp",arg: ["/Volumes/\(esdpath)/BaseSystem.dmg",lazypath], label: "#Copy ESD#", progress: 2)
+			self.shellCommand("/bin/cp",arg: ["/Volumes/\(esdpath)/AppleDiagnostics.chunklist",lazypath], label: "#Copy ESD#", progress: 2)
+			self.shellCommand("/bin/cp",arg: ["/Volumes/\(esdpath)/AppleDiagnostics.dmg",lazypath], label: "#Copy ESD#", progress: 2)
 			self.shellCommand("/bin/rm",arg: ["-rf","\(lazypath)/System/Installation/Packages"], label: "#DELETEPACKAGE#", progress: 2)
 			self.privilegedShellCommand("/bin/cp",arg: ["-R","/Volumes/\(esdpath)/Packages","\(lazypath)/System/Installation"], label: "#COPYPACKAGE#",progress: 22)
-			self.shellCommand("/bin/mkdir",arg: ["\(lazypath)/System/Library/Kernels"], label: "#CREATEKERNELSF#", progress: 1)
+			self.shellCommand("/bin/mkdir",arg: ["\(lazypath)/System/Library/Kernels"], label: "#Create Kernels folder#", progress: 1)
 			/////////////////////////version checking processes////////////////////progress:0%
 			let SystemVersionPlistPath = "\(lazypath)/System/Library/CoreServices/SystemVersion.plist"
 			let myDict = NSDictionary(contentsOfFile: SystemVersionPlistPath)
@@ -139,26 +139,26 @@ class BatchProcessAPI{
 			////////////////////////////patching processes////////////////////////progress:6%
 			if MBRPatchState {
 				if SystemVersionBiggerThanSierra {
-					self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\x0F\\x84\\x96\\x00\\x00\\x00\\x48|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\xE9\\x97\\x00\\x00\\x00\\x90\\x48|g' \(lazypath)/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller"], label: "#PATCH01#",progress: 1)
+					self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\x0F\\x84\\x96\\x00\\x00\\x00\\x48|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\xE9\\x97\\x00\\x00\\x00\\x90\\x48|g' \(lazypath)/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller"], label: "#Patch osinstaller#",progress: 1)
 				}else {
-					self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\x74\\x5F\\x48\\x8B\\x85|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\xEB\\x5F\\x48\\x8B\\x85|g' \(lazypath)/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller"], label: "#PATCH01#",progress: 1)
+					self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\x74\\x5F\\x48\\x8B\\x85|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\xEB\\x5F\\x48\\x8B\\x85|g' \(lazypath)/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller"], label: "#Patch osinstaller#",progress: 1)
 				}
-				self.privilegedShellCommand("/usr/bin/codesign",arg: ["-f","-s","-","\(lazypath)/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller"], label: "#PATCH01#",progress: 1)
+				self.privilegedShellCommand("/usr/bin/codesign",arg: ["-f","-s","-","\(lazypath)/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller"], label: "#Patch osinstaller#",progress: 1)
 				
-				self.shellCommand("/bin/mkdir",arg: ["/tmp/com.pcbeta.lazy/osinstallmpkg"], label: "#PATCH02#", progress: 0)
-				self.shellCommand("/usr/bin/xar",arg: ["-x","-f","\(lazypath)/System/Installation/Packages/OSInstall.mpkg","-C","/tmp/com.pcbeta.lazy/osinstallmpkg"], label: "#PATCH02#", progress: 0)
+				self.shellCommand("/bin/mkdir",arg: ["/tmp/com.pcbeta.lazy/osinstallmpkg"], label: "#Patch osinstalle.mpkg#", progress: 0)
+				self.shellCommand("/usr/bin/xar",arg: ["-x","-f","\(lazypath)/System/Installation/Packages/OSInstall.mpkg","-C","/tmp/com.pcbeta.lazy/osinstallmpkg"], label: "#Patch osinstalle.mpkg#", progress: 0)
 				if !SystemVersionBiggerThanSierra {
-					self.shellCommand("/usr/bin/sed",arg: ["-i","\'\'","--","s/1024/512/g","/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution"], label: "#PATCH02#", progress: 0)
-					self.shellCommand("/usr/bin/sed",arg: ["-i","\'\'","--","s/var minRam = 2048/var minRam = 1024/g","/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution"], label: "#PATCH02#", progress: 0)
-					self.shellCommand("/usr/bin/sed",arg: ["-i","\'\'","--","s/osVersion=......... osBuildVersion=.......//g","/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution"], label: "#PATCH02#", progress: 0)
-					self.shellCommand("/usr/bin/sed",arg: ["-i","\'\'","--","/\\<installation-check script=\"installCheckScript()\"\\/>/d","/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution"], label: "#PATCH02#", progress: 0)
-					self.shellCommand("/usr/bin/sed",arg: ["-i","\'\'","--","/\\<volume-check script=\"volCheckScript()\"\\/>/d","/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution"], label: "#PATCH02#", progress: 0)
+					self.shellCommand("/usr/bin/sed",arg: ["-i","\'\'","--","s/1024/512/g","/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution"], label: "#Patch osinstalle.mpkg#", progress: 0)
+					self.shellCommand("/usr/bin/sed",arg: ["-i","\'\'","--","s/var minRam = 2048/var minRam = 1024/g","/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution"], label: "#Patch osinstalle.mpkg#", progress: 0)
+					self.shellCommand("/usr/bin/sed",arg: ["-i","\'\'","--","s/osVersion=......... osBuildVersion=.......//g","/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution"], label: "#Patch osinstalle.mpkg#", progress: 0)
+					self.shellCommand("/usr/bin/sed",arg: ["-i","\'\'","--","/\\<installation-check script=\"installCheckScript()\"\\/>/d","/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution"], label: "#Patch osinstalle.mpkg#", progress: 0)
+					self.shellCommand("/usr/bin/sed",arg: ["-i","\'\'","--","/\\<volume-check script=\"volCheckScript()\"\\/>/d","/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution"], label: "#Patch osinstalle.mpkg#", progress: 0)
 				}else {
-					self.shellCommand("/usr/bin/sed",arg: ["-i","\'\'","--","/\\<installation-check script=\"InstallationCheck()\"\\/>/d","/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution"], label: "#PATCH02#", progress: 0)
-					self.shellCommand("/usr/bin/sed",arg: ["-i","\'\'","--","/\\<volume-check script=\"VolumeCheck()\"\\/>/d","/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution"], label: "#PATCH02#", progress: 0)
+					self.shellCommand("/usr/bin/sed",arg: ["-i","\'\'","--","/\\<installation-check script=\"InstallationCheck()\"\\/>/d","/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution"], label: "#Patch osinstalle.mpkg#", progress: 0)
+					self.shellCommand("/usr/bin/sed",arg: ["-i","\'\'","--","/\\<volume-check script=\"VolumeCheck()\"\\/>/d","/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution"], label: "#Patch osinstalle.mpkg#", progress: 0)
 				}
-				self.shellCommand("/bin/rm",arg: ["\(lazypath)/System/Installation/Packages/OSInstall.mpkg"], label: "#PATCH02#", progress: 0)
-				self.shellCommand("/bin/rm",arg: ["/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution\'\'"], label: "#PATCH02#", progress: 0)
+				self.shellCommand("/bin/rm",arg: ["\(lazypath)/System/Installation/Packages/OSInstall.mpkg"], label: "#Patch osinstalle.mpkg#", progress: 0)
+				self.shellCommand("/bin/rm",arg: ["/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution\'\'"], label: "#Patch osinstalle.mpkg#", progress: 0)
 				let task = NSTask()
 				task.launchPath = "/usr/bin/xar"
 				task.arguments = ["-cf","\(lazypath)/System/Installation/Packages/OSInstall.mpkg","."]
@@ -201,7 +201,7 @@ class BatchProcessAPI{
 				self.shellCommand("/usr/bin/hdiutil",arg: ["detach",lazypath], label: "#EJECTLAZY#", progress: 1)
 				self.shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/\(esdpath)"], label: "#EJECTESD#", progress: 1)
 				self.shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/Install OS X El Capitan"], label: "#EJECTORG#", progress: 0)
-				self.shellCommand("/usr/bin/hdiutil",arg: ["convert","/tmp/com.pcbeta.lazy/Lazy Installer.dmg","-ov","-format","UDTO","-o","/tmp/com.pcbeta.lazy/Lazy Installer.cdr"], label: "#CREATECDR#", progress: 7)
+				self.shellCommand("/usr/bin/hdiutil",arg: ["convert","/tmp/com.pcbeta.lazy/Lazy Installer.dmg","-ov","-format","UDTO","-o","/tmp/com.pcbeta.lazy/Lazy Installer.cdr"], label: "#Create CDR#", progress: 7)
 				self.shellCommand("/bin/mv",arg: ["/tmp/com.pcbeta.lazy/Lazy Installer.dmg","\(NSHomeDirectory())/Desktop/"], label: "#MV#", progress: 0)
 				self.shellCommand("/bin/mv",arg: ["/tmp/com.pcbeta.lazy/Lazy Installer.cdr","\(NSHomeDirectory())/Desktop/"], label: "#MV#", progress: 0)
 			}else{
