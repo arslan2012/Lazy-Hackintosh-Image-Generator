@@ -29,10 +29,6 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		language = NSLocale.preferredLanguages()[0]
-		if self.language != "zh-Hans" || self.language != "en" { //|| self.language != "ja"
-			self.language = "en"
-		}
 		progress.hidden = true
 		progressLable.hidden = true
 		CustomSize.hidden = true
@@ -45,7 +41,7 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
 	override func viewDidAppear() {
 		super.viewDidAppear()
 		self.view.window?.delegate = self
-		self.view.window!.title = "#TITLE#".localized(self.language!)
+		self.view.window!.title = "#TITLE#".localized()
 	}
 	
 	override var representedObject: AnyObject? {
@@ -59,11 +55,11 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
 	@IBAction func StartProcessing(sender: NSButton) {
 		if !NSURL(fileURLWithPath:filePath.stringValue).checkResourceIsReachableAndReturnError(nil){
 			let a = NSAlert()
-			a.messageText = "#INPUTVOID#".localized(self.language!)
+			a.messageText = "#INPUTVOID#".localized()
 			a.runModal()
 		}else if extra.droppedFilePath != "" && NSURL(fileURLWithPath: extra.droppedFilePath).lastPathComponent! !=  "Extra"{
 			let a = NSAlert()
-			a.messageText = "#ExtraNameError#".localized(self.language!)
+			a.messageText = "#ExtraNameError#".localized()
 			a.runModal()
 		}else {
 			start.hidden = true
@@ -74,7 +70,7 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
 			if SizeCustomize.state == NSOnState {
 				if Double(CustomSize.stringValue) <= 0 || Double(CustomSize.stringValue) > 100 {
 					let a = NSAlert()
-					a.messageText = "#WRONGSIZE#".localized(self.language!)
+					a.messageText = "#WRONGSIZE#".localized()
 					a.runModal()
 					exit(0)
 				}else{
@@ -123,7 +119,7 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
 	}
 	func didReceiveProcessName(results: String){
 		dispatch_sync(self.concurrentInsertingQueue,{
-			self.progressLable.stringValue = results.localized(self.language!)
+			self.progressLable.stringValue = results.localized()
 		})
 	}
 	func didReceiveProgress(results: Double){
@@ -133,7 +129,7 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
 	}
 	func didReceiveErrorMessage(results: String){
 		let a = NSAlert()
-		a.messageText = results.localized(self.language!)
+		a.messageText = results.localized()
 		a.runModal()
 		exit(0)
 	}

@@ -8,16 +8,16 @@
 /* Class = "NSMenuItem"; title = "退出 懒人镜像制作器"; ObjectID = "4sb-4s-VLi"; */
 "4sb-4s-VLi.title" = "退出 懒人镜像制作器";
 
-/* Class = "NSMenuItem"; title = "About LazyHackintoshGenerator"; ObjectID = "5kV-Vb-QxS"; */
+/* Class = "NSMenuItem"; title = "关于 懒人镜像制作器"; ObjectID = "5kV-Vb-QxS"; */
 "5kV-Vb-QxS.title" = "关于 懒人镜像制作器";
 
-/* Class = "NSButtonCell"; title = "start"; ObjectID = "78f-UZ-JFI"; */
+/* Class = "NSButtonCell"; title = "开始"; ObjectID = "78f-UZ-JFI"; */
 "78f-UZ-JFI.title" = "开始";
 
 /* Class = "NSTextFieldCell"; title = "DMG镜像或者安装包拖这里"; ObjectID = "ALJ-VZ-gfi"; */
 "ALJ-VZ-gfi.title" = "DMG镜像或者安装包拖这里";
 
-/* Class = "NSMenu"; title = "Main Menu"; ObjectID = "AYu-sK-qS6"; */
+/* Class = "NSMenu"; title = "主界面"; ObjectID = "AYu-sK-qS6"; */
 "AYu-sK-qS6.title" = "主界面";
 
 /* Class = "NSWindow"; title = "窗口"; ObjectID = "IQv-IB-iLA"; */
@@ -47,7 +47,7 @@
 /* Class = "NSButtonCell"; title = "XCPM内核破解"; ObjectID = "pvR-jb-Lfe"; */
 "pvR-jb-Lfe.title" = "XCPM内核破解";
 
-/* Class = "NSButtonCell"; title = "Patch MBR"; ObjectID = "q5G-N8-8sb"; */
+/* Class = "NSButtonCell"; title = "MBR破解"; ObjectID = "q5G-N8-8sb"; */
 "q5G-N8-8sb.title" = "MBR破解";
 
 /* Class = "NSTextFieldCell"; title = "请将每个文件拖动到其相应的位置"; ObjectID = "qeC-H5-IUy"; */
@@ -56,7 +56,7 @@
 /* Class = "NSButtonCell"; title = "放入原版内核"; ObjectID = "ryD-dv-ejv"; */
 "ryD-dv-ejv.title" = "放入原版内核";
 
-/* Class = "NSMenu"; title = "Lazy Hackintosh Image Generator"; ObjectID = "uQy-DD-JDr"; */
+/* Class = "NSMenu"; title = "懒人镜像制作器"; ObjectID = "uQy-DD-JDr"; */
 "uQy-DD-JDr.title" = "懒人镜像制作器";
 
 /* Class = "NSButtonCell"; title = "同时生成CDR"; ObjectID = "znd-va-Rf7"; */
