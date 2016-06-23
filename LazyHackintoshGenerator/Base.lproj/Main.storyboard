@@ -20,6 +20,12 @@
                                                 <action selector="orderFrontStandardAboutPanel:" target="Ady-hI-5gd" id="Exp-CZ-Vem"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem title="Enable debug logging" id="m5L-xw-t0a">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="DebugMenuPressed:" target="Voe-Tx-rLC" id="kSa-aN-G6o"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="4je-JR-u6R"/>
                                         <menuItem title="Hide LazyHackintoshGenerator" keyEquivalent="h" id="Olw-nP-bQN">
                                             <connections>

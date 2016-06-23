@@ -7,6 +7,8 @@
 */
 
 "#Title#" =  "懒人镜像制作器";
+"#Debug On#" = "开启纠错日志";
+"#Debug Off#" = "关闭纠错日志";
 "#CleanDir#" = "清理并新建临时文件夹";
 "#Input is void#" =  "未设置镜像！";
 "#KernelNameError#" =  "kernel文件名错误(应该为'kernel')";

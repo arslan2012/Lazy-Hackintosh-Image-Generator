@@ -21,8 +21,8 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
 	@IBOutlet weak var CustomSize: NSTextField!
 	@IBOutlet weak var SizeUnit: NSTextField!
 	@IBOutlet weak var exitButton: NSButton!
-	var language: String?
-	lazy var api : BatchProcessAPI = BatchProcessAPI(delegate: self)
+	lazy var debugLog: Bool = false
+	lazy var api : BatchProcessAPI = BatchProcessAPI(viewDelegate: self)
 	@IBOutlet weak var dropKernel: NSButton!
 	let concurrentInsertingQueue = dispatch_queue_create("kext inserting", DISPATCH_QUEUE_CONCURRENT)
 	
@@ -62,6 +62,8 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
 			a.messageText = "#ExtraNameError#".localized()
 			a.runModal()
 		}else {
+			let appDelegate = NSApplication.sharedApplication().delegate as! AppDelegate
+			debugLog = appDelegate.getDebugStatus()
 			start.hidden = true
 			progress.hidden = false
 			progressLable.hidden = false

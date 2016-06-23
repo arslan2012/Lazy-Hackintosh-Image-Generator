@@ -41,6 +41,9 @@
 /* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "k82-n4-Qi8"; */
 "k82-n4-Qi8.title" = "Label";
 
+/* Class = "NSMenuItem"; title = "开启纠错日志"; ObjectID = "m5L-xw-t0a"; */
+"m5L-xw-t0a.title" = "开启纠错日志";
+
 /* Class = "NSTextFieldCell"; title = "GB"; ObjectID = "nus-BF-iqV"; */
 "nus-BF-iqV.title" = "GB";
 

@@ -8,6 +8,7 @@
 
 import Foundation
 protocol BatchProcessAPIProtocol {
+	var debugLog:Bool{get set}
 	func didReceiveProcessName(results: String)
 	func didReceiveProgress(results: Double)
 	func didReceiveErrorMessage(results: String)
@@ -15,9 +16,9 @@ protocol BatchProcessAPIProtocol {
 }
 
 class BatchProcessAPI{
-	var delegate: BatchProcessAPIProtocol
-	init(delegate: BatchProcessAPIProtocol) {
-		self.delegate = delegate
+	var viewDelegate: BatchProcessAPIProtocol
+	init(viewDelegate: BatchProcessAPIProtocol) {
+		self.viewDelegate = viewDelegate
 	}
 	func shellCommand(path:String, arg: [String],label: String,progress: Double){
 		let task = NSTask()
@@ -26,22 +27,39 @@ class BatchProcessAPI{
 		let pipe = NSPipe()
 		task.standardOutput = pipe
 		task.launch()
-		self.delegate.didReceiveProcessName(label)
+		self.viewDelegate.didReceiveProcessName(label)
 		task.waitUntilExit()
-		self.delegate.didReceiveProgress(progress)
-		let data = pipe.fileHandleForReading.readDataToEndOfFile()
-		let output: String = String(data: data, encoding: NSUTF8StringEncoding)!
-		Swift.print(output)
-		//Swift.print("\(path) \(arg[0]),progress:\(progress)")
+		self.viewDelegate.didReceiveProgress(progress)
+		if self.viewDelegate.debugLog {
+			let data = pipe.fileHandleForReading.readDataToEndOfFile()
+			let output: String = String(data: data, encoding: NSUTF8StringEncoding)!
+			let date = NSDate()
+			let calendar = NSCalendar.currentCalendar()
+			let components = calendar.components([.Hour, .Minute, .Second], fromDate: date)
+			do{
+				try "\(path) \(arg[0]),progress:\(progress)".appendLineToURL(NSURL(fileURLWithPath:"\(NSHomeDirectory())/Lazy log.txt"))
+				try output.appendLineToURL(NSURL(fileURLWithPath:"\(NSHomeDirectory())/Lazy log.txt"))
+				try "==========\(components.hour):\(components.minute):\(components.second)==========".appendLineToURL(NSURL(fileURLWithPath:"\(NSHomeDirectory())/Lazy log.txt"))
+			}catch{}
+		}
 	}
 	func privilegedShellCommand(path:String, arg: [String],label: String,progress: Double){
 		let task = STPrivilegedTask()
 		task.setLaunchPath(path)
 		task.setArguments(arg)
 		task.launch()
-		self.delegate.didReceiveProcessName(label)
+		self.viewDelegate.didReceiveProcessName(label)
 		task.waitUntilExit()
-		self.delegate.didReceiveProgress(progress)
+		self.viewDelegate.didReceiveProgress(progress)
+		if self.viewDelegate.debugLog {
+			let date = NSDate()
+			let calendar = NSCalendar.currentCalendar()
+			let components = calendar.components([.Hour, .Minute, .Second], fromDate: date)
+			do{
+				try "sudo \(path) \(arg[0]),progress:\(progress)".appendLineToURL(NSURL(fileURLWithPath:"\(NSHomeDirectory())/Lazy log.txt"))
+				try "==========\(components.hour):\(components.minute):\(components.second)==========".appendLineToURL(NSURL(fileURLWithPath:"\(NSHomeDirectory())/Lazy log.txt"))
+			}catch{}
+		}
 	}
 	func startGenerating(filePath:String,SizeVal:String,MBRPatchState:Bool,XCPMPatchState:Bool,cdrState:Bool,dropKernelState:Bool,extraDroppedFilePath:String){
 		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0),{
@@ -69,26 +87,26 @@ class BatchProcessAPI{
 							if NSURL(fileURLWithPath:"\(orgpath)/\(element)").checkResourceIsReachableAndReturnError(nil){
 								self.shellCommand("/usr/bin/hdiutil",arg: ["attach","\(orgpath)/\(element)/Contents/SharedSupport/InstallESD.dmg","-noverify","-nobrowse","-quiet","-mountpoint",esdpath], label: "#MOUNTESD#", progress: 2)
 							}else {
-								self.delegate.didReceiveErrorMessage("#Error in InstallESD image#")
+								self.viewDelegate.didReceiveErrorMessage("#Error in InstallESD image#")
 							}
 						}
 					}
 				}
 				catch{
-					self.delegate.didReceiveErrorMessage("#Error in InstallESD image#")
+					self.viewDelegate.didReceiveErrorMessage("#Error in InstallESD image#")
 				}
 			} else if filePath.hasSuffix("app") {
 				if NSURL(fileURLWithPath:"\(filePath)/Contents/SharedSupport/InstallESD.dmg").checkResourceIsReachableAndReturnError(nil){
 					self.shellCommand("/usr/bin/hdiutil",arg: ["attach","\(filePath)/Contents/SharedSupport/InstallESD.dmg","-noverify","-nobrowse","-quiet","-mountpoint",esdpath], label: "#MOUNTESD#", progress: 4)
 				}else {
-					self.delegate.didReceiveErrorMessage("#Error in InstallESD image#")
+					self.viewDelegate.didReceiveErrorMessage("#Error in InstallESD image#")
 				}
 			}
 			////////////////////////////creating processes////////////////////////progress:24%
 			self.shellCommand("/usr/bin/hdiutil",arg: ["create","-size","\(SizeVal)g","-layout","SPUD","-ov","-fs","HFS+J","-volname","OS X Lazy Installer","/tmp/com.pcbeta.lazy/Lazy Installer.dmg"], label: "#Create Lazy image#", progress: 22)
 			self.shellCommand("/usr/bin/hdiutil",arg: ["attach","/tmp/com.pcbeta.lazy/Lazy Installer.dmg","-noverify","-nobrowse","-quiet","-mountpoint",lazypath], label: "#Mount Lazy image#", progress: 2)
 			if !NSURL(fileURLWithPath:lazypath).checkResourceIsReachableAndReturnError(nil){
-				self.delegate.didReceiveErrorMessage("#Error in lazy image#")
+				self.viewDelegate.didReceiveErrorMessage("#Error in lazy image#")
 			}
 			////////////////////////////copying processes/////////////////////////progress:54%
 			self.privilegedShellCommand("/usr/sbin/asr",arg: ["restore","--source","/Volumes/\(esdpath)/BaseSystem.dmg","--target",lazypath,"--erase","--format","HFS+","--noprompt","--noverify"], label: "#COPYBASE#",progress: 17)
@@ -103,7 +121,7 @@ class BatchProcessAPI{
 				}
 			}
 			catch{
-				self.delegate.didReceiveErrorMessage("#Error in lazy image#")
+				self.viewDelegate.didReceiveErrorMessage("#Error in lazy image#")
 			}
 			self.shellCommand("/usr/bin/hdiutil",arg: ["attach","/tmp/com.pcbeta.lazy/Lazy Installer.dmg","-noverify","-nobrowse","-quiet","-mountpoint",lazypath], label: "#Mount Lazy image#", progress: 2)
 			self.privilegedShellCommand("/usr/sbin/diskutil",arg: ["rename","OS X Base System","OS X Lazy Installer"], label: "#COPYBASE#",progress: 2)
@@ -151,7 +169,7 @@ class BatchProcessAPI{
 				task.waitUntilExit()
 				
 			}else {
-				self.delegate.didReceiveProgress(2)
+				self.viewDelegate.didReceiveProgress(2)
 			}
 			if dropKernelState {
 				let task = NSTask()
@@ -162,7 +180,7 @@ class BatchProcessAPI{
 				task.waitUntilExit()
 				self.shellCommand("/bin/cp",arg: ["/tmp/com.pcbeta.lazy/kernel","\(lazypath)/System/Library/Kernels"], label: "#COPYKERNELF#", progress: 1)
 			}else {
-				self.delegate.didReceiveProgress(1)
+				self.viewDelegate.didReceiveProgress(1)
 			}
 			if XCPMPatchState {
 				if !SystemVersionBiggerThanSierra {
@@ -177,7 +195,7 @@ class BatchProcessAPI{
 					self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xe2\\x00\\x00\\x00\\x90\\x13\\x00\\x00|\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00|g' \(lazypath)/System/Library/Kernels/kernel"], label: "#XCPMPATCH#",progress: 1)
 				}
 			}else {
-				self.delegate.didReceiveProgress(1)
+				self.viewDelegate.didReceiveProgress(1)
 			}
 			self.shellCommand("/bin/cp",arg: ["-R",extraDroppedFilePath,"\(lazypath)/"], label: "#COPYEXTRA#", progress: 2)
 			////////////////////////////ejecting processes////////////////////////progress:9%
@@ -195,8 +213,8 @@ class BatchProcessAPI{
 				self.shellCommand("/bin/mv",arg: ["/tmp/com.pcbeta.lazy/Lazy Installer.dmg","\(NSHomeDirectory())/Desktop/"], label: "#MV#", progress: 3)
 			}
 			self.shellCommand("/bin/rm",arg: ["-rf","/tmp/com.pcbeta.lazy"], label: "#MV#", progress: 0)
-			self.delegate.didReceiveProcessName("#FINISH#")
-			self.delegate.didReceiveThreadExitMessage()
+			self.viewDelegate.didReceiveProcessName("#FINISH#")
+			self.viewDelegate.didReceiveThreadExitMessage()
 		})
 	}
 }
