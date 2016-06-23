@@ -45,63 +45,47 @@ class BatchProcessAPI{
 	}
 	func startGenerating(filePath:String,SizeVal:String,MBRPatchState:Bool,XCPMPatchState:Bool,cdrState:Bool,dropKernelState:Bool,extraDroppedFilePath:String){
 		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0),{
-			////////////////////////////mounting processes////////////////////////progress:31%
-			self.shellCommand("/usr/bin/hdiutil",arg: ["attach",filePath,"-noverify","-nobrowse","-quiet"], label: "#MOUNTORG#", progress: 2)
-			self.shellCommand("/usr/bin/hdiutil",arg: ["attach","\(filePath)/Contents/SharedSupport/InstallESD.dmg","-noverify","-nobrowse","-quiet"], label: "#MOUNTESD#", progress: 2)
+			////////////////////////////mounting processes////////////////////////progress:7%
+			let esdpath="/tmp/com.pcbeta.lazy/ESDMount"
+			let lazypath = "/tmp/com.pcbeta.lazy/LazyMount"
 			let fileManager = NSFileManager.defaultManager()
-			var esdpath = "",apppath = ""
 			do{
-				let enumerator = try fileManager.contentsOfDirectoryAtPath("/Volumes")
+				let enumerator = try fileManager.contentsOfDirectoryAtPath("/tmp/com.pcbeta.lazy")
 				for element in enumerator {
-					if element.hasPrefix("Install OS X"){
-						esdpath = element
-						if NSURL(fileURLWithPath:"/Volumes/\(esdpath)").checkResourceIsReachableAndReturnError(nil){
-							break
-						}
+					if NSURL(fileURLWithPath:"/tmp/com.pcbeta.lazy/\(element)").checkResourceIsReachableAndReturnError(nil){
+						self.shellCommand("/usr/bin/hdiutil",arg: ["detach","/tmp/com.pcbeta.lazy/\(element)"], label: "#CleanDir#", progress: 0)
 					}
 				}
-			}
-			catch{
-				
-			}
-			if esdpath != "" {
+			}catch{}
+			self.shellCommand("/bin/rm",arg: ["-rf","/tmp/com.pcbeta.lazy"], label: "#CleanDir#", progress: 0)
+			self.shellCommand("/bin/mkdir",arg: ["/tmp/com.pcbeta.lazy"], label: "#CleanDir#", progress: 3)
+			if filePath.hasSuffix("dmg") {
+				let orgpath = "/tmp/com.pcbeta.lazy/OriginMount"
+				self.shellCommand("/usr/bin/hdiutil",arg: ["attach",filePath,"-noverify","-nobrowse","-quiet","-mountpoint",orgpath], label: "#MOUNTORG#", progress: 2)
 				do{
-					let enumerator = try fileManager.contentsOfDirectoryAtPath("/Volumes/\(esdpath)")
+					let enumerator = try fileManager.contentsOfDirectoryAtPath(orgpath)
 					for element in enumerator {
-						if element.hasPrefix("Install OS "){
-							apppath = element
-							if NSURL(fileURLWithPath:"/Volumes/\(esdpath)/\(apppath)/Contents/SharedSupport/InstallESD.dmg").checkResourceIsReachableAndReturnError(nil){
-								break
+						if element.hasSuffix("app"){
+							if NSURL(fileURLWithPath:"\(orgpath)/\(element)").checkResourceIsReachableAndReturnError(nil){
+								self.shellCommand("/usr/bin/hdiutil",arg: ["attach","\(orgpath)/\(element)/Contents/SharedSupport/InstallESD.dmg","-noverify","-nobrowse","-quiet","-mountpoint",esdpath], label: "#MOUNTESD#", progress: 2)
+							}else {
+								self.delegate.didReceiveErrorMessage("#Error in InstallESD image#")
 							}
 						}
 					}
 				}
 				catch{
-					
+					self.delegate.didReceiveErrorMessage("#Error in InstallESD image#")
 				}
-				self.shellCommand("/usr/bin/hdiutil",arg: ["attach","/Volumes/\(esdpath)/\(apppath)/Contents/SharedSupport/InstallESD.dmg","-noverify","-nobrowse","-quiet"], label: "#MOUNTESD#", progress: 0)
-			}
-			self.delegate.didReceiveProgress(2)
-			do{
-				let enumerator = try fileManager.contentsOfDirectoryAtPath("/Volumes")
-				for element in enumerator {
-					if element.hasPrefix("OS X Install ESD"){
-						esdpath = element
-						if NSURL(fileURLWithPath:"/Volumes/\(esdpath)/BaseSystem.dmg").checkResourceIsReachableAndReturnError(nil){
-							break
-						}
-					}
+			} else if filePath.hasSuffix("app") {
+				if NSURL(fileURLWithPath:"\(filePath)/Contents/SharedSupport/InstallESD.dmg").checkResourceIsReachableAndReturnError(nil){
+					self.shellCommand("/usr/bin/hdiutil",arg: ["attach","\(filePath)/Contents/SharedSupport/InstallESD.dmg","-noverify","-nobrowse","-quiet","-mountpoint",esdpath], label: "#MOUNTESD#", progress: 4)
+				}else {
+					self.delegate.didReceiveErrorMessage("#Error in InstallESD image#")
 				}
 			}
-			catch{
-				self.delegate.didReceiveErrorMessage("#Error in InstallESD image#")
-			}
-			if esdpath == "" {
-				self.delegate.didReceiveErrorMessage("#Error in InstallESD image#")
-			}
-			self.shellCommand("/bin/mkdir",arg: ["/tmp/com.pcbeta.lazy"], label: "#Create Lazy image#", progress: 1)
+			////////////////////////////creating processes////////////////////////progress:24%
 			self.shellCommand("/usr/bin/hdiutil",arg: ["create","-size","\(SizeVal)g","-layout","SPUD","-ov","-fs","HFS+J","-volname","OS X Lazy Installer","/tmp/com.pcbeta.lazy/Lazy Installer.dmg"], label: "#Create Lazy image#", progress: 22)
-			let lazypath = "/tmp/com.pcbeta.lazy/LazyMount"
 			self.shellCommand("/usr/bin/hdiutil",arg: ["attach","/tmp/com.pcbeta.lazy/Lazy Installer.dmg","-noverify","-nobrowse","-quiet","-mountpoint",lazypath], label: "#Mount Lazy image#", progress: 2)
 			if !NSURL(fileURLWithPath:lazypath).checkResourceIsReachableAndReturnError(nil){
 				self.delegate.didReceiveErrorMessage("#Error in lazy image#")
