@@ -109,7 +109,7 @@ class BatchProcessAPI{
 				self.viewDelegate.didReceiveErrorMessage("#Error in lazy image#")
 			}
 			////////////////////////////copying processes/////////////////////////progress:54%
-			self.privilegedShellCommand("/usr/sbin/asr",arg: ["restore","--source","/Volumes/\(esdpath)/BaseSystem.dmg","--target",lazypath,"--erase","--format","HFS+","--noprompt","--noverify"], label: "#COPYBASE#",progress: 17)
+			self.privilegedShellCommand("/usr/sbin/asr",arg: ["restore","--source","\(esdpath)/BaseSystem.dmg","--target",lazypath,"--erase","--format","HFS+","--noprompt","--noverify"], label: "#COPYBASE#",progress: 17)
 			do{
 				let enumerator = try fileManager.contentsOfDirectoryAtPath("/Volumes")
 				for element in enumerator {
@@ -125,12 +125,12 @@ class BatchProcessAPI{
 			}
 			self.shellCommand("/usr/bin/hdiutil",arg: ["attach","/tmp/com.pcbeta.lazy/Lazy Installer.dmg","-noverify","-nobrowse","-quiet","-mountpoint",lazypath], label: "#Mount Lazy image#", progress: 2)
 			self.privilegedShellCommand("/usr/sbin/diskutil",arg: ["rename","OS X Base System","OS X Lazy Installer"], label: "#COPYBASE#",progress: 2)
-			self.shellCommand("/bin/cp",arg: ["/Volumes/\(esdpath)/BaseSystem.chunklist",lazypath], label: "#Copy ESD#", progress: 2)
-			self.shellCommand("/bin/cp",arg: ["/Volumes/\(esdpath)/BaseSystem.dmg",lazypath], label: "#Copy ESD#", progress: 2)
-			self.shellCommand("/bin/cp",arg: ["/Volumes/\(esdpath)/AppleDiagnostics.chunklist",lazypath], label: "#Copy ESD#", progress: 2)
-			self.shellCommand("/bin/cp",arg: ["/Volumes/\(esdpath)/AppleDiagnostics.dmg",lazypath], label: "#Copy ESD#", progress: 2)
+			self.shellCommand("/bin/cp",arg: ["\(esdpath)/BaseSystem.chunklist",lazypath], label: "#Copy ESD#", progress: 2)
+			self.shellCommand("/bin/cp",arg: ["\(esdpath)/BaseSystem.dmg",lazypath], label: "#Copy ESD#", progress: 2)
+			self.shellCommand("/bin/cp",arg: ["\(esdpath)/AppleDiagnostics.chunklist",lazypath], label: "#Copy ESD#", progress: 2)
+			self.shellCommand("/bin/cp",arg: ["\(esdpath)/AppleDiagnostics.dmg",lazypath], label: "#Copy ESD#", progress: 2)
 			self.shellCommand("/bin/rm",arg: ["-rf","\(lazypath)/System/Installation/Packages"], label: "#DELETEPACKAGE#", progress: 2)
-			self.privilegedShellCommand("/bin/cp",arg: ["-R","/Volumes/\(esdpath)/Packages","\(lazypath)/System/Installation"], label: "#COPYPACKAGE#",progress: 22)
+			self.privilegedShellCommand("/bin/cp",arg: ["-R","\(esdpath)/Packages","\(lazypath)/System/Installation"], label: "#COPYPACKAGE#",progress: 22)
 			self.shellCommand("/bin/mkdir",arg: ["\(lazypath)/System/Library/Kernels"], label: "#Create Kernels folder#", progress: 1)
 			/////////////////////////version checking processes////////////////////progress:0%
 			let SystemVersionPlistPath = "\(lazypath)/System/Library/CoreServices/SystemVersion.plist"
@@ -201,14 +201,12 @@ class BatchProcessAPI{
 			////////////////////////////ejecting processes////////////////////////progress:9%
 			if cdrState {
 				self.shellCommand("/usr/bin/hdiutil",arg: ["detach",lazypath], label: "#EJECTLAZY#", progress: 1)
-				self.shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/\(esdpath)"], label: "#EJECTESD#", progress: 1)
-				self.shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/Install OS X El Capitan"], label: "#EJECTORG#", progress: 0)
+				self.shellCommand("/usr/bin/hdiutil",arg: ["detach","\(esdpath)"], label: "#EJECTESD#", progress: 1)
 				self.shellCommand("/usr/bin/hdiutil",arg: ["convert","/tmp/com.pcbeta.lazy/Lazy Installer.dmg","-ov","-format","UDTO","-o","/tmp/com.pcbeta.lazy/Lazy Installer.cdr"], label: "#Create CDR#", progress: 7)
 				self.shellCommand("/bin/mv",arg: ["/tmp/com.pcbeta.lazy/Lazy Installer.dmg","\(NSHomeDirectory())/Desktop/"], label: "#MV#", progress: 0)
 				self.shellCommand("/bin/mv",arg: ["/tmp/com.pcbeta.lazy/Lazy Installer.cdr","\(NSHomeDirectory())/Desktop/"], label: "#MV#", progress: 0)
 			}else{
-				self.shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/\(esdpath)"], label: "#EJECTESD#", progress: 2)
-				self.shellCommand("/usr/bin/hdiutil",arg: ["detach","/Volumes/Install OS X El Capitan"], label: "#EJECTORG#", progress: 2)
+				self.shellCommand("/usr/bin/hdiutil",arg: ["detach","\(esdpath)"], label: "#EJECTESD#", progress: 2)
 				self.shellCommand("/usr/bin/hdiutil",arg: ["detach",lazypath], label: "#EJECTLAZY#", progress: 2)
 				self.shellCommand("/bin/mv",arg: ["/tmp/com.pcbeta.lazy/Lazy Installer.dmg","\(NSHomeDirectory())/Desktop/"], label: "#MV#", progress: 3)
 			}
