@@ -11,8 +11,7 @@ This is an simple app that automatically modifies the OS X Installation app/disk
 you'll need this app to alter the original installation image.
 ##How does this work
 Just drag the Install app, or Install app image, or Install ESD image onto the top, click start and enjoy.
->If you use custom kernel, you can drop your kernel onto the big black Kernel lable right there.
->>If you use Chameleon Bootloader, you can drop your Chameleon Extra folder onto the /Extra lable to make this a Chameleon bootable image.
+>If you use Chameleon Bootloader, you can drop your Chameleon Extra folder onto the /Extra lable to make this a Chameleon bootable image.
 
 ##Shut up and gimmi the app
 Just download the [LazyHackintoshGenerator.app.zip](https://raw.githubusercontent.com/arslan2012/Lazy-Hackintosh-Image-Generator/master/LazyHackintoshGenerator.app.zip). It will keep updating to the latest version.
