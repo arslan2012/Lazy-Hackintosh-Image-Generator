@@ -86,6 +86,8 @@ class OtherFileDrop : NSImageView{
 
     override func draggingEnded(sender: NSDraggingInfo?) {
         if self.droppedFilePath != "" && self.fileTypeIsOk{
+			let view = self.superview!.nextResponder! as! ViewController
+			view.extraPath.stringValue = self.droppedFilePath
 			let icn = NSImage(named:"Chameleon")
 			icn?.size = NSMakeSize(CGFloat(100), CGFloat(100))
 			self.image = icn
@@ -136,7 +138,9 @@ class OtherFileDrop : NSImageView{
 			let path = board[0] as? String {
 			let url = NSURL(fileURLWithPath: path)
 			if let suffix = url.lastPathComponent {
-					if suffix.caseInsensitiveCompare("extra") == NSComparisonResult.OrderedSame{
+				var isDirectory: ObjCBool = ObjCBool(false)
+				NSFileManager.defaultManager().fileExistsAtPath(path, isDirectory: &isDirectory)
+					if isDirectory && suffix.caseInsensitiveCompare("extra") == NSComparisonResult.OrderedSame{
 						return true
 					}
 			}

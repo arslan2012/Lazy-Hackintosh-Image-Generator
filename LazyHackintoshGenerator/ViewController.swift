@@ -11,6 +11,7 @@ import Cocoa
 class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol {
 	@IBOutlet weak var filePath: NSTextField!
 	@IBOutlet weak var progress: NSProgressIndicator!
+	@IBOutlet weak var extraPath: NSTextField!
 	@IBOutlet weak var progressLable: NSTextField!
 	@IBOutlet weak var start: NSButton!
 	@IBOutlet weak var MBRPatch: NSButton!

@@ -199,7 +199,7 @@ AwEVARgBHQAAAAAAAAIBAAAAAAAAACgAAAAAAAAAAAAAAAAAAAEfA
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VoB-1g-tUe">
-                                <rect key="frame" x="8" y="113" width="228" height="40"/>
+                                <rect key="frame" x="8" y="113" width="228" height="56"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="drag image or app here" id="qeC-H5-IUy">
                                     <font key="font" size="13" name=".PingFangSC-Regular"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -207,7 +207,7 @@ AwEVARgBHQAAAAAAAAIBAAAAAAAAACgAAAAAAAAAAAAAAAAAAAEfA
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LQe-hg-4ci">
-                                <rect key="frame" x="256" y="113" width="217" height="40"/>
+                                <rect key="frame" x="256" y="113" width="217" height="56"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="drag Extra folder here (optional)" id="dYT-MI-ERe">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -230,6 +230,7 @@ AwEVARgBHQAAAAAAAAIBAAAAAAAAACgAAAAAAAAAAAAAAAAAAAEfA
                         <outlet property="dropKernel" destination="wCZ-xc-JJt" id="czZ-fQ-Myx"/>
                         <outlet property="exitButton" destination="ujW-iU-6TA" id="Gy8-1S-ZIp"/>
                         <outlet property="extra" destination="600-wD-mII" id="Okx-Yj-tjI"/>
+                        <outlet property="extraPath" destination="LQe-hg-4ci" id="ofu-iP-sYy"/>
                         <outlet property="filePath" destination="VoB-1g-tUe" id="0zt-QG-aDt"/>
                         <outlet property="progress" destination="NQo-RU-twe" id="J9g-OF-90R"/>
                         <outlet property="progressLable" destination="NJY-iS-VYr" id="lUA-3M-dHs"/>
