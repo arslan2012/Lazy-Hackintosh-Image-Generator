@@ -15,6 +15,10 @@
 		F546B0451C660DDD00613AFE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F546B0471C660DDD00613AFE /* Localizable.strings */; };
 		F546B0491C660EB600613AFE /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F546B0481C660EB600613AFE /* StringExtension.swift */; };
 		F57F43071C64A1AA004C1EB5 /* STPrivilegedTask.m in Sources */ = {isa = PBXBuildFile; fileRef = F57F43061C64A1AA004C1EB5 /* STPrivilegedTask.m */; };
+		F5A0F04B1D23ED4700D1C791 /* image.png in Resources */ = {isa = PBXBuildFile; fileRef = F5A0F04A1D23ED4700D1C791 /* image.png */; };
+		F5A0F04D1D23F1B800D1C791 /* Chameleon.png in Resources */ = {isa = PBXBuildFile; fileRef = F5A0F04C1D23F1B800D1C791 /* Chameleon.png */; };
+		F5A0F0551D23F90700D1C791 /* drive.png in Resources */ = {isa = PBXBuildFile; fileRef = F5A0F0541D23F90700D1C791 /* drive.png */; };
+		F5A0F0571D23F96600D1C791 /* icon-osx.png in Resources */ = {isa = PBXBuildFile; fileRef = F5A0F0561D23F96600D1C791 /* icon-osx.png */; };
 		F5C563E91CC49242001C00FF /* BatchProcessAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C563E81CC49242001C00FF /* BatchProcessAPI.swift */; };
 		F5E197CF1D168D0E006620F8 /* lzvn in Resources */ = {isa = PBXBuildFile; fileRef = F5E197CE1D168374006620F8 /* lzvn */; };
 /* End PBXBuildFile section */
@@ -30,10 +34,14 @@
 		F546B0481C660EB600613AFE /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StringExtension.swift; path = ../StringExtension.swift; sourceTree = "<group>"; };
 		F546B04A1C6617E700613AFE /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		F56157E21CAA344700D1F581 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		F577B9601D1C339D0068585B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		F57F43051C64A1AA004C1EB5 /* LazyHackintoshGenerator-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LazyHackintoshGenerator-Bridging-Header.h"; sourceTree = "<group>"; };
 		F57F43061C64A1AA004C1EB5 /* STPrivilegedTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STPrivilegedTask.m; sourceTree = "<group>"; };
 		F57F43081C64A1CE004C1EB5 /* STPrivilegedTask.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STPrivilegedTask.h; sourceTree = "<group>"; };
+		F5A0F04A1D23ED4700D1C791 /* image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image.png; sourceTree = "<group>"; };
+		F5A0F04C1D23F1B800D1C791 /* Chameleon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Chameleon.png; sourceTree = "<group>"; };
+		F5A0F0531D23F4BF00D1C791 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		F5A0F0541D23F90700D1C791 /* drive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = drive.png; sourceTree = "<group>"; };
+		F5A0F0561D23F96600D1C791 /* icon-osx.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-osx.png"; sourceTree = "<group>"; };
 		F5C563E81CC49242001C00FF /* BatchProcessAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatchProcessAPI.swift; sourceTree = "<group>"; };
 		F5C606411C66D8E30092EDA6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F5E197CE1D168374006620F8 /* lzvn */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = lzvn; sourceTree = "<group>"; };
@@ -53,6 +61,7 @@
 		F504117A1C644987003311DA = {
 			isa = PBXGroup;
 			children = (
+				F5A0F0491D23ED3800D1C791 /* Resources */,
 				F5E197CD1D168351006620F8 /* LZVN */,
 				F56157E21CAA344700D1F581 /* README.md */,
 				F57F43041C64A173004C1EB5 /* STPrivilegedTask */,
@@ -93,6 +102,17 @@
 				F57F43051C64A1AA004C1EB5 /* LazyHackintoshGenerator-Bridging-Header.h */,
 			);
 			name = STPrivilegedTask;
+			sourceTree = "<group>";
+		};
+		F5A0F0491D23ED3800D1C791 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F5A0F0561D23F96600D1C791 /* icon-osx.png */,
+				F5A0F0541D23F90700D1C791 /* drive.png */,
+				F5A0F04C1D23F1B800D1C791 /* Chameleon.png */,
+				F5A0F04A1D23ED4700D1C791 /* image.png */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		F5E197CD1D168351006620F8 /* LZVN */ = {
@@ -167,6 +187,10 @@
 				F53A2C701D09AE160037268D /* Assets.xcassets in Resources */,
 				F5E197CF1D168D0E006620F8 /* lzvn in Resources */,
 				F504118E1C644987003311DA /* Main.storyboard in Resources */,
+				F5A0F04D1D23F1B800D1C791 /* Chameleon.png in Resources */,
+				F5A0F0551D23F90700D1C791 /* drive.png in Resources */,
+				F5A0F04B1D23ED4700D1C791 /* image.png in Resources */,
+				F5A0F0571D23F96600D1C791 /* icon-osx.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,7 +234,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				F5C606411C66D8E30092EDA6 /* Base */,
-				F577B9601D1C339D0068585B /* zh-Hans */,
+				F5A0F0531D23F4BF00D1C791 /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

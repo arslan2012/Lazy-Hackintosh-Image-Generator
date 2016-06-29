@@ -21,6 +21,9 @@ class FileDropZone: NSImageView {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         registerForDraggedTypes([NSFilenamesPboardType, NSURLPboardType, NSPasteboardTypeTIFF])
+		let icn = NSImage(named:"image")
+		icn?.size = NSMakeSize(CGFloat(100), CGFloat(100))
+		self.image = icn
     }
     
     override func draggingEntered(sender: NSDraggingInfo) -> NSDragOperation {
@@ -55,6 +58,9 @@ class FileDropZone: NSImageView {
         if self.fileTypeIsOk && self.droppedFilePath != ""{
             let view = self.superview!.nextResponder! as! ViewController
             view.filePath.stringValue = self.droppedFilePath
+				let icn = NSImage(named:"icon-osx")
+				icn?.size = NSMakeSize(CGFloat(100), CGFloat(100))
+				self.image = icn
         }
     }
     
@@ -81,10 +87,9 @@ class OtherFileDrop : NSImageView{
     }
     override func draggingEnded(sender: NSDraggingInfo?) {
         if self.droppedFilePath != "" {
-        let layer = CALayer()
-        layer.backgroundColor = CGColorCreateGenericRGB(0.0, 0.0, 0.0, 0.4)
-        self.wantsLayer = true
-            self.layer = layer
+			let icn = NSImage(named:"Chameleon")
+			icn?.size = NSMakeSize(CGFloat(100), CGFloat(100))
+			self.image = icn
         }
     }
     override func drawRect(dirtyRect: NSRect) {
@@ -93,6 +98,9 @@ class OtherFileDrop : NSImageView{
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         registerForDraggedTypes([NSFilenamesPboardType, NSURLPboardType, NSPasteboardTypeTIFF])
+		let icn = NSImage(named:"drive")
+		icn?.size = NSMakeSize(CGFloat(100), CGFloat(100))
+		self.image = icn
     }
     
     override func draggingEntered(sender: NSDraggingInfo) -> NSDragOperation {

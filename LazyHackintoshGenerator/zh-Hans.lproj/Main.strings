@@ -1,66 +1,63 @@
 
-/* Class = "NSMenuItem"; title = "懒人镜像制作器"; ObjectID = "1Xt-HY-uBw"; */
+/* Class = "NSMenuItem"; title = "Lazy Hackintosh Image Generator"; ObjectID = "1Xt-HY-uBw"; */
 "1Xt-HY-uBw.title" = "懒人镜像制作器";
 
-/* Class = "NSButtonCell"; title = "退出"; ObjectID = "4oe-lq-Fmn"; */
+/* Class = "NSButtonCell"; title = "exit"; ObjectID = "4oe-lq-Fmn"; */
 "4oe-lq-Fmn.title" = "退出";
 
-/* Class = "NSMenuItem"; title = "退出 懒人镜像制作器"; ObjectID = "4sb-4s-VLi"; */
+/* Class = "NSMenuItem"; title = "Quit LazyHackintoshGenerator"; ObjectID = "4sb-4s-VLi"; */
 "4sb-4s-VLi.title" = "退出 懒人镜像制作器";
 
-/* Class = "NSMenuItem"; title = "关于 懒人镜像制作器"; ObjectID = "5kV-Vb-QxS"; */
+/* Class = "NSMenuItem"; title = "About LazyHackintoshGenerator"; ObjectID = "5kV-Vb-QxS"; */
 "5kV-Vb-QxS.title" = "关于 懒人镜像制作器";
 
-/* Class = "NSButtonCell"; title = "开始"; ObjectID = "78f-UZ-JFI"; */
+/* Class = "NSButtonCell"; title = "start"; ObjectID = "78f-UZ-JFI"; */
 "78f-UZ-JFI.title" = "开始";
 
-/* Class = "NSTextFieldCell"; title = "DMG镜像或者安装包拖这里"; ObjectID = "ALJ-VZ-gfi"; */
-"ALJ-VZ-gfi.title" = "DMG镜像或者安装包拖这里";
+/* Class = "NSMenu"; title = "Main Menu"; ObjectID = "AYu-sK-qS6"; */
+"AYu-sK-qS6.title" = "主菜单";
 
-/* Class = "NSMenu"; title = "主界面"; ObjectID = "AYu-sK-qS6"; */
-"AYu-sK-qS6.title" = "主界面";
-
-/* Class = "NSWindow"; title = "窗口"; ObjectID = "IQv-IB-iLA"; */
+/* Class = "NSWindow"; title = "Window"; ObjectID = "IQv-IB-iLA"; */
 "IQv-IB-iLA.title" = "窗口";
 
-/* Class = "NSMenuItem"; title = "显示所有窗口"; ObjectID = "Kd2-mp-pUS"; */
+/* Class = "NSMenuItem"; title = "Show All"; ObjectID = "Kd2-mp-pUS"; */
 "Kd2-mp-pUS.title" = "显示所有窗口";
 
-/* Class = "NSMenuItem"; title = "隐藏 懒人镜像制作器"; ObjectID = "Olw-nP-bQN"; */
+/* Class = "NSMenuItem"; title = "Hide LazyHackintoshGenerator"; ObjectID = "Olw-nP-bQN"; */
 "Olw-nP-bQN.title" = "隐藏 懒人镜像制作器";
 
-/* Class = "NSButtonCell"; title = "自定义生成镜像大小"; ObjectID = "T6N-SL-jmh"; */
+/* Class = "NSButtonCell"; title = "Custom Image Size"; ObjectID = "T6N-SL-jmh"; */
 "T6N-SL-jmh.title" = "自定义生成镜像大小";
 
-/* Class = "NSMenuItem"; title = "隐藏其他窗口"; ObjectID = "Vdr-fp-XzO"; */
+/* Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "Vdr-fp-XzO"; */
 "Vdr-fp-XzO.title" = "隐藏其他窗口";
 
-/* Class = "NSTextFieldCell"; title = "/Extra"; ObjectID = "YJc-LV-gDD"; */
-"YJc-LV-gDD.title" = "/Extra";
+/* Class = "NSTextFieldCell"; title = "drag Extra folder here (optional)"; ObjectID = "dYT-MI-ERe"; */
+"dYT-MI-ERe.title" = "拖入Extra文件夹(可选)";
 
 /* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "k82-n4-Qi8"; */
 "k82-n4-Qi8.title" = "Label";
 
-/* Class = "NSMenuItem"; title = "开启纠错日志"; ObjectID = "m5L-xw-t0a"; */
+/* Class = "NSMenuItem"; title = "Enable debug logging"; ObjectID = "m5L-xw-t0a"; */
 "m5L-xw-t0a.title" = "开启纠错日志";
 
 /* Class = "NSTextFieldCell"; title = "GB"; ObjectID = "nus-BF-iqV"; */
 "nus-BF-iqV.title" = "GB";
 
-/* Class = "NSButtonCell"; title = "XCPM内核破解"; ObjectID = "pvR-jb-Lfe"; */
+/* Class = "NSButtonCell"; title = "kernel XCPM patch"; ObjectID = "pvR-jb-Lfe"; */
 "pvR-jb-Lfe.title" = "XCPM内核破解";
 
-/* Class = "NSButtonCell"; title = "MBR破解"; ObjectID = "q5G-N8-8sb"; */
+/* Class = "NSButtonCell"; title = "Patch MBR"; ObjectID = "q5G-N8-8sb"; */
 "q5G-N8-8sb.title" = "MBR破解";
 
-/* Class = "NSTextFieldCell"; title = "请将每个文件拖动到其相应的位置"; ObjectID = "qeC-H5-IUy"; */
-"qeC-H5-IUy.title" = "请将每个文件拖动到其相应的位置";
+/* Class = "NSTextFieldCell"; title = "drag image or app here"; ObjectID = "qeC-H5-IUy"; */
+"qeC-H5-IUy.title" = "拖入DMG镜像或者安装包";
 
-/* Class = "NSButtonCell"; title = "放入原版内核"; ObjectID = "ryD-dv-ejv"; */
+/* Class = "NSButtonCell"; title = "Drop Kernel"; ObjectID = "ryD-dv-ejv"; */
 "ryD-dv-ejv.title" = "放入原版内核";
 
-/* Class = "NSMenu"; title = "懒人镜像制作器"; ObjectID = "uQy-DD-JDr"; */
+/* Class = "NSMenu"; title = "Lazy Hackintosh Image Generator"; ObjectID = "uQy-DD-JDr"; */
 "uQy-DD-JDr.title" = "懒人镜像制作器";
 
-/* Class = "NSButtonCell"; title = "同时生成CDR"; ObjectID = "znd-va-Rf7"; */
+/* Class = "NSButtonCell"; title = "also generate CDR"; ObjectID = "znd-va-Rf7"; */
 "znd-va-Rf7.title" = "同时生成CDR";

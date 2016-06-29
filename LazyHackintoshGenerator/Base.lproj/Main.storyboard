@@ -90,22 +90,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zbt-vV-DQl">
-                                <rect key="frame" x="18" y="205" width="444" height="37"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" enabled="NO" sendsActionOnEndEditing="YES" state="on" alignment="center" title="DMG Image or Installer app here" id="ALJ-VZ-gfi">
-                                    <font key="font" size="29" name=".PingFangSC-Regular"/>
-                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VoB-1g-tUe">
-                                <rect key="frame" x="18" y="187" width="444" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Please drag every file to its responding place" id="qeC-H5-IUy">
-                                    <font key="font" size="13" name=".PingFangSC-Regular"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                             <progressIndicator wantsLayer="YES" fixedFrame="YES" maxValue="100" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="NQo-RU-twe">
                                 <rect key="frame" x="20" y="51" width="440" height="20"/>
                                 <animations>
@@ -130,31 +114,19 @@ AwEVARgBHQAAAAAAAAIBAAAAAAAAACgAAAAAAAAAAAAAAAAAAAEfA
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="D6a-p3-BpF">
-                                <rect key="frame" x="364" y="94" width="98" height="46"/>
-                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="/Extra" id="YJc-LV-gDD">
-                                    <font key="font" metaFont="system" size="32"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="600-wD-mII" customClass="OtherFileDrop" customModule="LazyHackintoshGenerator" customModuleProvider="target">
-                                <rect key="frame" x="366" y="91" width="83" height="50"/>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="oVv-hy-Ug5"/>
-                            </imageView>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wDg-Us-Bko">
-                                <rect key="frame" x="18" y="132" width="90" height="18"/>
+                                <rect key="frame" x="331" y="69" width="90" height="18"/>
                                 <buttonCell key="cell" type="check" title="Patch MBR" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="q5G-N8-8sb">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" size="13" name=".PingFangSC-Regular"/>
                                 </buttonCell>
                             </button>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cq3-tM-ywW" customClass="FileDropZone" customModule="LazyHackintoshGenerator" customModuleProvider="target">
-                                <rect key="frame" x="20" y="205" width="440" height="57"/>
+                                <rect key="frame" x="20" y="170" width="180" height="92"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="RUM-f6-V2X"/>
                             </imageView>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x2t-of-KJz">
-                                <rect key="frame" x="18" y="112" width="138" height="18"/>
+                                <rect key="frame" x="19" y="89" width="138" height="18"/>
                                 <buttonCell key="cell" type="check" title="kernel XCPM patch" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="pvR-jb-Lfe">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -164,14 +136,14 @@ AwEVARgBHQAAAAAAAAIBAAAAAAAAACgAAAAAAAAAAAAAAAAAAAEfA
                                 </connections>
                             </button>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="caW-BX-KDk">
-                                <rect key="frame" x="18" y="92" width="135" height="18"/>
+                                <rect key="frame" x="331" y="89" width="135" height="18"/>
                                 <buttonCell key="cell" type="check" title="also generate CDR" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="znd-va-Rf7">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                             </button>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fQS-po-7KX">
-                                <rect key="frame" x="18" y="152" width="139" height="18"/>
+                                <rect key="frame" x="18" y="69" width="139" height="18"/>
                                 <buttonCell key="cell" type="check" title="Custom Image Size" bezelStyle="regularSquare" imagePosition="left" inset="2" id="T6N-SL-jmh">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -181,7 +153,7 @@ AwEVARgBHQAAAAAAAAIBAAAAAAAAACgAAAAAAAAAAAAAAAAAAAEfA
                                 </connections>
                             </button>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7mX-Nv-YCf">
-                                <rect key="frame" x="163" y="150" width="96" height="22"/>
+                                <rect key="frame" x="178" y="66" width="96" height="22"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="57E-nL-3ym">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -189,7 +161,7 @@ AwEVARgBHQAAAAAAAAIBAAAAAAAAACgAAAAAAAAAAAAAAAAAAAEfA
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PFY-ia-UbP">
-                                <rect key="frame" x="265" y="152" width="24" height="17"/>
+                                <rect key="frame" x="280" y="68" width="24" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="GB" id="nus-BF-iqV">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -217,7 +189,7 @@ AwEVARgBHQAAAAAAAAIBAAAAAAAAACgAAAAAAAAAAAAAAAAAAAEfA
                                 </connections>
                             </button>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wCZ-xc-JJt">
-                                <rect key="frame" x="161" y="132" width="128" height="18"/>
+                                <rect key="frame" x="176" y="89" width="128" height="18"/>
                                 <buttonCell key="cell" type="check" title="Drop Kernel" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="ryD-dv-ejv">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -226,6 +198,26 @@ AwEVARgBHQAAAAAAAAIBAAAAAAAAACgAAAAAAAAAAAAAAAAAAAEfA
                                     <action selector="dropKernelClicked:" target="XfG-lQ-9wD" id="wxj-eb-ugM"/>
                                 </connections>
                             </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VoB-1g-tUe">
+                                <rect key="frame" x="8" y="113" width="228" height="40"/>
+                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="drag image or app here" id="qeC-H5-IUy">
+                                    <font key="font" size="13" name=".PingFangSC-Regular"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LQe-hg-4ci">
+                                <rect key="frame" x="256" y="113" width="217" height="40"/>
+                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="drag Extra folder here (optional)" id="dYT-MI-ERe">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="600-wD-mII" customClass="OtherFileDrop" customModule="LazyHackintoshGenerator" customModuleProvider="target">
+                                <rect key="frame" x="299" y="170" width="138" height="95"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="oVv-hy-Ug5"/>
+                            </imageView>
                         </subviews>
                     </view>
                     <connections>

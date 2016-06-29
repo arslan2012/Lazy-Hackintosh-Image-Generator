@@ -21,9 +21,9 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
 	@IBOutlet weak var CustomSize: NSTextField!
 	@IBOutlet weak var SizeUnit: NSTextField!
 	@IBOutlet weak var exitButton: NSButton!
+	@IBOutlet weak var dropKernel: NSButton!
 	lazy var debugLog: Bool = false
 	lazy var api : BatchProcessAPI = BatchProcessAPI(viewDelegate: self)
-	@IBOutlet weak var dropKernel: NSButton!
 	let concurrentInsertingQueue = dispatch_queue_create("kext inserting", DISPATCH_QUEUE_CONCURRENT)
 	
 	
@@ -36,12 +36,17 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
 		XCPMPatch.state = NSOffState
 		cdr.state = NSOffState
 		exitButton.hidden = true
-		// Do any additional setup after loading the view.
+		
+		for button in [MBRPatch,XCPMPatch,cdr,SizeCustomize,dropKernel]{
+			button.attributedTitle = NSAttributedString(string: button.title, attributes: [ NSForegroundColorAttributeName : NSColor.whiteColor()])
+		}
 	}
 	override func viewDidAppear() {
 		super.viewDidAppear()
 		self.view.window?.delegate = self
 		self.view.window!.title = "#Title#".localized()
+		self.view.wantsLayer = true
+		self.view.layer?.backgroundColor = CGColorCreateGenericRGB(83/255, 87/255, 96/255, 1);
 	}
 	
 	override var representedObject: AnyObject? {
