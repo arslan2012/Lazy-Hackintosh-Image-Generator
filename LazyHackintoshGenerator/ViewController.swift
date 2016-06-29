@@ -62,10 +62,6 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
 			let a = NSAlert()
 			a.messageText = "#Input is void#".localized()
 			a.runModal()
-		}else if extra.droppedFilePath != "" && NSURL(fileURLWithPath: extra.droppedFilePath).lastPathComponent! !=  "Extra"{
-			let a = NSAlert()
-			a.messageText = "#ExtraNameError#".localized()
-			a.runModal()
 		}else {
 			let appDelegate = NSApplication.sharedApplication().delegate as! AppDelegate
 			debugLog = appDelegate.getDebugStatus()

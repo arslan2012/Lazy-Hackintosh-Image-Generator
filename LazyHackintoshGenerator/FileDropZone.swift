@@ -82,11 +82,10 @@ class FileDropZone: NSImageView {
 }
 class OtherFileDrop : NSImageView{
     var droppedFilePath = ""
-    override func draggingUpdated(sender: NSDraggingInfo) -> NSDragOperation {
-            return .Copy
-    }
+	var fileTypeIsOk = false
+
     override func draggingEnded(sender: NSDraggingInfo?) {
-        if self.droppedFilePath != "" {
+        if self.droppedFilePath != "" && self.fileTypeIsOk{
 			let icn = NSImage(named:"Chameleon")
 			icn?.size = NSMakeSize(CGFloat(100), CGFloat(100))
 			self.image = icn
@@ -103,10 +102,23 @@ class OtherFileDrop : NSImageView{
 		self.image = icn
     }
     
-    override func draggingEntered(sender: NSDraggingInfo) -> NSDragOperation {
-            return .Copy
-    }
-    
+	override func draggingEntered(sender: NSDraggingInfo) -> NSDragOperation {
+		if checkExtension(sender) == true {
+			self.fileTypeIsOk = true
+			return .Copy
+		} else {
+			self.fileTypeIsOk = false
+			return .None
+		}
+	}
+	
+	override func draggingUpdated(sender: NSDraggingInfo) -> NSDragOperation {
+		if self.fileTypeIsOk {
+			return .Copy
+		} else {
+			return .None
+		}
+	}
     override func performDragOperation(sender: NSDraggingInfo) -> Bool {
         if let board = sender.draggingPasteboard().propertyListForType("NSFilenamesPboardType") as? NSArray {
             if let imagePath = board[0] as? String {
@@ -118,4 +130,17 @@ class OtherFileDrop : NSImageView{
         }
         return false
     }
+	
+	func checkExtension(drag: NSDraggingInfo) -> Bool {
+		if let board = drag.draggingPasteboard().propertyListForType("NSFilenamesPboardType") as? NSArray,
+			let path = board[0] as? String {
+			let url = NSURL(fileURLWithPath: path)
+			if let suffix = url.lastPathComponent {
+					if suffix.caseInsensitiveCompare("extra") == NSComparisonResult.OrderedSame{
+						return true
+					}
+			}
+		}
+		return false
+	}
 }
