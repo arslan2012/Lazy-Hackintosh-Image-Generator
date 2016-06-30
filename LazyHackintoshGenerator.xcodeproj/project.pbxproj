@@ -20,6 +20,7 @@
 		F5A0F0551D23F90700D1C791 /* drive.png in Resources */ = {isa = PBXBuildFile; fileRef = F5A0F0541D23F90700D1C791 /* drive.png */; };
 		F5A0F0571D23F96600D1C791 /* icon-osx.png in Resources */ = {isa = PBXBuildFile; fileRef = F5A0F0561D23F96600D1C791 /* icon-osx.png */; };
 		F5C563E91CC49242001C00FF /* BatchProcessAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C563E81CC49242001C00FF /* BatchProcessAPI.swift */; };
+		F5D4A33B1D25A26D0013EB42 /* Credits.rtfd in Resources */ = {isa = PBXBuildFile; fileRef = F5D4A33A1D25A26D0013EB42 /* Credits.rtfd */; };
 		F5E197CF1D168D0E006620F8 /* lzvn in Resources */ = {isa = PBXBuildFile; fileRef = F5E197CE1D168374006620F8 /* lzvn */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +45,7 @@
 		F5A0F0561D23F96600D1C791 /* icon-osx.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-osx.png"; sourceTree = "<group>"; };
 		F5C563E81CC49242001C00FF /* BatchProcessAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatchProcessAPI.swift; sourceTree = "<group>"; };
 		F5C606411C66D8E30092EDA6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F5D4A33A1D25A26D0013EB42 /* Credits.rtfd */ = {isa = PBXFileReference; lastKnownFileType = wrapper.rtfd; path = Credits.rtfd; sourceTree = "<group>"; };
 		F5E197CE1D168374006620F8 /* lzvn */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = lzvn; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -61,6 +63,7 @@
 		F504117A1C644987003311DA = {
 			isa = PBXGroup;
 			children = (
+				F5D4A3371D25A1110013EB42 /* Supporting Files */,
 				F5A0F0491D23ED3800D1C791 /* Resources */,
 				F5E197CD1D168351006620F8 /* LZVN */,
 				F56157E21CAA344700D1F581 /* README.md */,
@@ -113,6 +116,14 @@
 				F5A0F04A1D23ED4700D1C791 /* image.png */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		F5D4A3371D25A1110013EB42 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F5D4A33A1D25A26D0013EB42 /* Credits.rtfd */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		F5E197CD1D168351006620F8 /* LZVN */ = {
@@ -189,6 +200,7 @@
 				F504118E1C644987003311DA /* Main.storyboard in Resources */,
 				F5A0F04D1D23F1B800D1C791 /* Chameleon.png in Resources */,
 				F5A0F0551D23F90700D1C791 /* drive.png in Resources */,
+				F5D4A33B1D25A26D0013EB42 /* Credits.rtfd in Resources */,
 				F5A0F04B1D23ED4700D1C791 /* image.png in Resources */,
 				F5A0F0571D23F96600D1C791 /* icon-osx.png in Resources */,
 			);
