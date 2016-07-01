@@ -1,6 +1,7 @@
 #!/bin/bash
 
 cd $(dirname "$0")
+hash xcodebuild 2>/dev/null || { echo >&2 "Please install Xcode command line tools"; exit 1; }
 
 function head
 {
@@ -13,19 +14,20 @@ echo "                                 by arslan2012, optimized by Vanilla."
 
 function menu
 {
-echo "1.Compile app directly without zip compressed"
-echo "2.Compile app with zip compressed"
+echo "1.Compile zip package(default)"
+echo "2.Compile pkg package"
 echo "Q.Exit"
 echo " "
 echo " "
-echo "Press the corresponding key to continue..."
+echo "Press the corresponding key to continue,or press enter for default..."
 read -n 1 option
 }
 
-function cmpwithzip
+function cmpZip
 {
-    head
+	xcodebuild archive -scheme LazyHackintoshGenerator -archivePath product
     xcodebuild -exportArchive -archivePath product.xcarchive -exportFormat app -exportPath ./LazyHackintoshGenerator
+	rm -rf product.xcarchive
     zip -r LazyHackintoshGenerator.app.zip LazyHackintoshGenerator.app
     rm -rf LazyHackintoshGenerator.app
     zip -d LazyHackintoshGenerator.app.zip __MACOSX/\*
@@ -36,10 +38,11 @@ function cmpwithzip
     exit 0
 }
 
-function cmpwithoutzip
+function cmpPkg
 {
-    head
+	xcodebuild archive -scheme LazyHackintoshGenerator -archivePath product
     xcodebuild -exportArchive -archivePath product.xcarchive -exportPath ./LazyHackintoshGenerator
+	rm -rf product.xcarchive
     echo " "
     echo " "
     echo "Done."
@@ -57,16 +60,17 @@ head
 menu
 case $option in
 
-1)
+1|"")
 echo
-cmpwithoutzip ;;
+cmpZip ;;
 
 2)
 echo
-cmpwithzip ;;
+cmpPkg ;;
 
 q|Q)
 echo
+rm -rf product.xcarchive
 quit ;;
 
 *)

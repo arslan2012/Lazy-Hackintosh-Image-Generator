@@ -65,7 +65,6 @@
 			children = (
 				F5D4A3371D25A1110013EB42 /* Supporting Files */,
 				F5A0F0491D23ED3800D1C791 /* Resources */,
-				F5E197CD1D168351006620F8 /* LZVN */,
 				F56157E21CAA344700D1F581 /* README.md */,
 				F57F43041C64A173004C1EB5 /* STPrivilegedTask */,
 				F50411851C644987003311DA /* LazyHackintoshGenerator */,
@@ -110,6 +109,7 @@
 		F5A0F0491D23ED3800D1C791 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F5E197CE1D168374006620F8 /* lzvn */,
 				F5A0F0561D23F96600D1C791 /* icon-osx.png */,
 				F5A0F0541D23F90700D1C791 /* drive.png */,
 				F5A0F04C1D23F1B800D1C791 /* Chameleon.png */,
@@ -124,14 +124,6 @@
 				F5D4A33A1D25A26D0013EB42 /* Credits.rtfd */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		F5E197CD1D168351006620F8 /* LZVN */ = {
-			isa = PBXGroup;
-			children = (
-				F5E197CE1D168374006620F8 /* lzvn */,
-			);
-			name = LZVN;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
