@@ -147,15 +147,4 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
 		exitButton.hidden = false
 	}
 }
-class CustomSize:NSNumberFormatter{
-	override func isPartialStringValid(partialString: String, newEditingString newString: AutoreleasingUnsafeMutablePointer<NSString?>, errorDescription error: AutoreleasingUnsafeMutablePointer<NSString?>) -> Bool {
-		if (partialString.characters.count==0) {
-			return true
-		}else if (partialString.rangeOfCharacterFromSet(NSCharacterSet.decimalDigitCharacterSet().invertedSet) != nil) {
-			NSBeep()
-			return false
-		}		
-		return true
-	}
-}
 
