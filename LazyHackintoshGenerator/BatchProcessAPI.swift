@@ -53,7 +53,7 @@ class BatchProcessAPI{
             }catch{}
         }
     }
-    func startGenerating(filePath:String,SizeVal:String,MBRPatchState:Bool,XCPMPatchState:Bool,cdrState:Bool,dropKernelState:Bool,extraDroppedFilePath:String){
+    func startGenerating(filePath:String,SizeVal:String,MBRPatchState:Bool,LapicPatchState:Bool,XCPMPatchState:Bool,cdrState:Bool,dropKernelState:Bool,extraDroppedFilePath:String){
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0),{
             ////////////////////////////cleaning processes////////////////////////progress:3%
             let lazypath = "/tmp/com.pcbeta.lazy/LazyMount"
@@ -133,11 +133,9 @@ class BatchProcessAPI{
             let SystemVersionPlistPath = "\(lazypath)/System/Library/CoreServices/SystemVersion.plist"
             let myDict = NSDictionary(contentsOfFile: SystemVersionPlistPath)
             let SystemVersion = myDict?.valueForKey("ProductVersion") as! String
-            let SystemVersionBiggerThanElCapitan = "10.11.1".versionToInt().lexicographicalCompare(SystemVersion.versionToInt())
-            let SystemVersionBiggerThanSierra = "10.11.99".versionToInt().lexicographicalCompare(SystemVersion.versionToInt())
             ////////////////////////////patching processes////////////////////////progress:6%
             if MBRPatchState {
-                if SystemVersionBiggerThanSierra {
+                if SystemVersion.VersionBiggerThan("10.11.99") {
                     self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\x0F\\x84\\x96\\x00\\x00\\x00\\x48|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\xE9\\x97\\x00\\x00\\x00\\x90\\x48|g' \(lazypath)/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller"], label: "#Patch osinstaller#",progress: 1)
                 }else {
                     self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\x74\\x5F\\x48\\x8B\\x85|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\xEB\\x5F\\x48\\x8B\\x85|g' \(lazypath)/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller"], label: "#Patch osinstaller#",progress: 1)
@@ -146,7 +144,7 @@ class BatchProcessAPI{
                 
                 self.shellCommand("/bin/mkdir",arg: ["/tmp/com.pcbeta.lazy/osinstallmpkg"], label: "#Patch osinstall.mpkg#", progress: 0)
                 self.shellCommand("/usr/bin/xar",arg: ["-x","-f","\(lazypath)/System/Installation/Packages/OSInstall.mpkg","-C","/tmp/com.pcbeta.lazy/osinstallmpkg"], label: "#Patch osinstall.mpkg#", progress: 0)
-                if !SystemVersionBiggerThanSierra {
+                if !SystemVersion.VersionBiggerThan("10.11.99") {
                     self.shellCommand("/usr/bin/sed",arg: ["-i","\'\'","--","s/1024/512/g","/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution"], label: "#Patch osinstall.mpkg#", progress: 0)
                     self.shellCommand("/usr/bin/sed",arg: ["-i","\'\'","--","s/var minRam = 2048/var minRam = 1024/g","/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution"], label: "#Patch osinstall.mpkg#", progress: 0)
                     self.shellCommand("/usr/bin/sed",arg: ["-i","\'\'","--","s/osVersion=......... osBuildVersion=.......//g","/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution"], label: "#Patch osinstall.mpkg#", progress: 0)
@@ -176,9 +174,9 @@ class BatchProcessAPI{
                 task.launch()
                 task.waitUntilExit()
                 self.shellCommand("/bin/cp",arg: ["/tmp/com.pcbeta.lazy/kernel","\(lazypath)/System/Library/Kernels"], label: "#COPYKERNELF#", progress: 1)
-                if !SystemVersionBiggerThanElCapitan {
+                if !SystemVersion.VersionBiggerThan("10.11") {
                     self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xE8\\x25\\x00\\x00\\x00\\xEB\\x05\\xE8\\xCE\\x02\\x00\\x00|\\xE8\\x25\\x00\\x00\\x00\\x90\\x90\\xE8\\xCE\\x02\\x00\\x00|g' \(lazypath)/System/Library/Kernels/kernel"], label: "#XCPMPATCH#",progress: 0)
-                }else if SystemVersionBiggerThanSierra{
+                }else if SystemVersion.VersionBiggerThan("10.11.99"){
                     self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xC3\\x48\\x85\\xDB\\x74\\x71\\x48\\x8B\\x03\\x48\\x89\\xDF\\xFF\\x50\\x28\\x48|\\xC3\\x48\\x85\\xDB\\xEB\\x12\\x48\\x8B\\x03\\x48\\x89\\xDF\\xFF\\x50\\x28\\x48|g' \(lazypath)/System/Library/Kernels/kernel"], label: "#XCPMPATCH#",progress: 0)
                 }else {
                     self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xC3\\x48\\x85\\xDB\\x74\\x70\\x48\\x8B\\x03\\x48\\x89\\xDF\\xFF\\x50\\x28\\x48|\\xC3\\x48\\x85\\xDB\\xEB\\x12\\x48\\x8B\\x03\\x48\\x89\\xDF\\xFF\\x50\\x28\\x48|g' \(lazypath)/System/Library/Kernels/kernel"], label: "#XCPMPATCH#",progress: 0)
@@ -186,21 +184,62 @@ class BatchProcessAPI{
             }else {
                 self.viewDelegate.didReceiveProgress(1)
             }
-            
-            /*
-             * The new features that the coder came up with:
-             * Kernel Local APIC fix.
-             * To be updated. 07/02/2016
-             */
+            var failedLapic = false
+            if LapicPatchState{
+                switch (SystemVersion) {
+                case "10.10.0":
+                    self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xe8\\xd4\\x54\\xf1\\xff|\\x90\\x90\\x90\\x90\\x90|g' \(lazypath)/System/Library/Kernels/kernel"], label: "#LAPICPATCH#",progress: 0)
+                    break
+                case "10.10.1":
+                    self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xe8\\xd4\\x54\\xf1\\xff|\\x90\\x90\\x90\\x90\\x90|g' \(lazypath)/System/Library/Kernels/kernel"], label: "#LAPICPATCH#",progress: 0)
+                    break
+                case "10.10.2":
+                    self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xe8\\x54\\xed\\xf0\\xff|\\x90\\x90\\x90\\x90\\x90|g' \(lazypath)/System/Library/Kernels/kernel"], label: "#LAPICPATCH#",progress: 0)
+                    break
+                case "10.10.3":
+                    self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xe8\\x14\\xc8\\xf0\\xff|\\x90\\x90\\x90\\x90\\x90|g' \(lazypath)/System/Library/Kernels/kernel"], label: "#LAPICPATCH#",progress: 0)
+                    break
+                case "10.10.4":
+                    self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xe8\\x14\\xc8\\xf0\\xff|\\x90\\x90\\x90\\x90\\x90|g' \(lazypath)/System/Library/Kernels/kernel"], label: "#LAPICPATCH#",progress: 0)
+                    break
+                case "10.10.5":
+                    self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xe8\\x64\\xc6\\xf0\\xff|\\x90\\x90\\x90\\x90\\x90|g' \(lazypath)/System/Library/Kernels/kernel"], label: "#LAPICPATCH#",progress: 0)
+                    break
+                case "10.11.0":
+                    self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xe8\\xcd\\x6b\\xf0\\xff|\\x90\\x90\\x90\\x90\\x90|g' \(lazypath)/System/Library/Kernels/kernel"], label: "#LAPICPATCH#",progress: 0)
+                    break
+                case "10.11.1":
+                    self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xe8\\xfd\\x68\\xf0\\xff|\\x90\\x90\\x90\\x90\\x90|g' \(lazypath)/System/Library/Kernels/kernel"], label: "#LAPICPATCH#",progress: 0)
+                    break
+                case "10.11.2":
+                    self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xe8\\xed\\x53\\xf0\\xff|\\x90\\x90\\x90\\x90\\x90|g' \(lazypath)/System/Library/Kernels/kernel"], label: "#LAPICPATCH#",progress: 0)
+                    break
+                case "10.11.3":
+                    self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xe8\\xed\\x53\\xf0\\xff|\\x90\\x90\\x90\\x90\\x90|g' \(lazypath)/System/Library/Kernels/kernel"], label: "#LAPICPATCH#",progress: 0)
+                    break
+                case "10.11.4":
+                    self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xe8\\xbd\\x48\\xf0\\xff|\\x90\\x90\\x90\\x90\\x90|g' \(lazypath)/System/Library/Kernels/kernel"], label: "#LAPICPATCH#",progress: 0)
+                    break
+                case "10.11.5":
+                    self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xe8\\xcd\\x46\\xf0\\xff|\\x90\\x90\\x90\\x90\\x90|g' \(lazypath)/System/Library/Kernels/kernel"], label: "#LAPICPATCH#",progress: 0)
+                    break
+                case "10.12.0":
+                    self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xe8\\x3d\\xdf\\xee\\xff|\\x90\\x90\\x90\\x90\\x90|g' \(lazypath)/System/Library/Kernels/kernel"], label: "#LAPICPATCH#",progress: 0)
+                    break
+                default:
+                    failedLapic = true
+                    break
+                }
+            }
             
             if XCPMPatchState {
-                if !SystemVersionBiggerThanSierra {
+                if !SystemVersion.VersionBiggerThan("10.11.99") {
                     self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xe2\\x00\\x00\\x00\\x02\\x00\\x00\\x00|\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00|g' \(lazypath)/System/Library/Kernels/kernel"], label: "#XCPMPATCH#",progress: 0)
                 }
                 self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xe2\\x00\\x00\\x00\\x4c\\x00\\x00\\x00|\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00|g' \(lazypath)/System/Library/Kernels/kernel"], label: "#XCPMPATCH#",progress: 0)
-                if !SystemVersionBiggerThanElCapitan {
+                if !SystemVersion.VersionBiggerThan("10.11.1") {
                     self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xe2\\x00\\x00\\x00\\x90\\x01\\x00\\x00|\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00|g' \(lazypath)/System/Library/Kernels/kernel"], label: "#XCPMPATCH#",progress: 1)
-                }else if SystemVersionBiggerThanSierra {
+                }else if SystemVersion.VersionBiggerThan("10.11.99") {
                     self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xe2\\x00\\x00\\x00\\x90\\x33\\x00\\x00|\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00|g' \(lazypath)/System/Library/Kernels/kernel"], label: "#XCPMPATCH#",progress: 1)
                 }else{
                     self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xe2\\x00\\x00\\x00\\x90\\x13\\x00\\x00|\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00|g' \(lazypath)/System/Library/Kernels/kernel"], label: "#XCPMPATCH#",progress: 1)
@@ -222,7 +261,11 @@ class BatchProcessAPI{
                 self.shellCommand("/bin/mv",arg: ["/tmp/com.pcbeta.lazy/Lazy Installer.dmg","\(NSHomeDirectory())/Desktop/"], label: "#MV#", progress: 3)
             }
             self.shellCommand("/bin/rm",arg: ["-rf","/tmp/com.pcbeta.lazy"], label: "#MV#", progress: 0)
-            self.viewDelegate.didReceiveProcessName("#FINISH#")
+            if failedLapic {
+                self.viewDelegate.didReceiveProcessName("#Failed Lapic#")
+            }else {
+                self.viewDelegate.didReceiveProcessName("#FINISH#")
+            }
             self.viewDelegate.didReceiveThreadExitMessage()
         })
     }

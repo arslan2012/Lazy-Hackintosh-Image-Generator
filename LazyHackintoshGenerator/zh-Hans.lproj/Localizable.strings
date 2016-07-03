@@ -31,3 +31,6 @@
 "#MV#" = "正在将文件移动到桌面上...";
 "#Create CDR#" = "生成CDR";
 "#WRONGSIZE#" = "对不起，您输入的格式不对或者超过了最大限制。";
+"#Custom Size#" = "自定义生成镜像大小";
+"#LAPICPATCH#" = "破解Lapic";
+"#Failed Lapic#" = "Lapic破解失败，未找到该系统的破解方法";

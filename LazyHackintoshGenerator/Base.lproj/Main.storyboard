@@ -126,8 +126,8 @@ AwEVARgBHQAAAAAAAAIBAAAAAAAAACgAAAAAAAAAAAAAAAAAAAEfA
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="RUM-f6-V2X"/>
                             </imageView>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x2t-of-KJz">
-                                <rect key="frame" x="19" y="89" width="138" height="18"/>
-                                <buttonCell key="cell" type="check" title="kernel XCPM patch" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="pvR-jb-Lfe">
+                                <rect key="frame" x="18" y="67" width="138" height="18"/>
+                                <buttonCell key="cell" type="check" title="kernel XCPM patch" bezelStyle="regularSquare" imagePosition="left" inset="2" id="pvR-jb-Lfe">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -143,7 +143,7 @@ AwEVARgBHQAAAAAAAAIBAAAAAAAAACgAAAAAAAAAAAAAAAAAAAEfA
                                 </buttonCell>
                             </button>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fQS-po-7KX">
-                                <rect key="frame" x="18" y="69" width="139" height="18"/>
+                                <rect key="frame" x="18" y="89" width="139" height="18"/>
                                 <buttonCell key="cell" type="check" title="Custom Image Size" bezelStyle="regularSquare" imagePosition="left" inset="2" id="T6N-SL-jmh">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -153,7 +153,7 @@ AwEVARgBHQAAAAAAAAIBAAAAAAAAACgAAAAAAAAAAAAAAAAAAAEfA
                                 </connections>
                             </button>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7mX-Nv-YCf">
-                                <rect key="frame" x="178" y="66" width="96" height="22"/>
+                                <rect key="frame" x="39" y="87" width="96" height="22"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="57E-nL-3ym">
                                     <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="eRJ-r9-gzO" customClass="CustomSize" customModule="LazyHackintoshGenerator" customModuleProvider="target">
                                         <real key="minimum" value="5"/>
@@ -165,10 +165,10 @@ AwEVARgBHQAAAAAAAAIBAAAAAAAAACgAAAAAAAAAAAAAAAAAAAEfA
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PFY-ia-UbP">
-                                <rect key="frame" x="280" y="68" width="24" height="17"/>
+                                <rect key="frame" x="133" y="88" width="24" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="GB" id="nus-BF-iqV">
                                     <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="0.84999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
@@ -194,7 +194,7 @@ AwEVARgBHQAAAAAAAAIBAAAAAAAAACgAAAAAAAAAAAAAAAAAAAEfA
                             </button>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wCZ-xc-JJt">
                                 <rect key="frame" x="176" y="89" width="128" height="18"/>
-                                <buttonCell key="cell" type="check" title="Drop Kernel" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="ryD-dv-ejv">
+                                <buttonCell key="cell" type="check" title="Drop Kernel" bezelStyle="regularSquare" imagePosition="left" inset="2" id="ryD-dv-ejv">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -222,10 +222,21 @@ AwEVARgBHQAAAAAAAAIBAAAAAAAAACgAAAAAAAAAAAAAAAAAAAEfA
                                 <rect key="frame" x="299" y="170" width="138" height="95"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="oVv-hy-Ug5"/>
                             </imageView>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MdN-qM-nVN">
+                                <rect key="frame" x="176" y="67" width="93" height="18"/>
+                                <buttonCell key="cell" type="check" title="Lapic Patch" bezelStyle="regularSquare" imagePosition="left" inset="2" id="9vX-Bi-vQi">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="LapicClicked:" target="XfG-lQ-9wD" id="sec-yX-3iN"/>
+                                </connections>
+                            </button>
                         </subviews>
                     </view>
                     <connections>
                         <outlet property="CustomSize" destination="7mX-Nv-YCf" id="G6x-cO-Gkn"/>
+                        <outlet property="LapicPatch" destination="MdN-qM-nVN" id="8xe-Df-rNo"/>
                         <outlet property="MBRPatch" destination="wDg-Us-Bko" id="6l1-cr-hxW"/>
                         <outlet property="SizeCustomize" destination="fQS-po-7KX" id="r4o-cl-Rir"/>
                         <outlet property="SizeUnit" destination="PFY-ia-UbP" id="Cy4-Lf-oQU"/>

@@ -7,6 +7,7 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
 	@IBOutlet weak var progressLable: NSTextField!
 	@IBOutlet weak var start: NSButton!
 	@IBOutlet weak var MBRPatch: NSButton!
+	@IBOutlet weak var LapicPatch: NSButton!
 	@IBOutlet weak var XCPMPatch: NSButton!
 	@IBOutlet weak var cdr: NSButton!
 	@IBOutlet weak var extra: OtherFileDrop!
@@ -30,7 +31,7 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
 		cdr.state = NSOffState
 		exitButton.hidden = true
 		
-		for button in [MBRPatch,XCPMPatch,cdr,SizeCustomize,dropKernel]{
+		for button in [MBRPatch,LapicPatch,XCPMPatch,cdr,SizeCustomize,dropKernel]{
 			button.attributedTitle = NSAttributedString(string: button.title, attributes: [ NSForegroundColorAttributeName : NSColor.whiteColor()])
 		}
 	}
@@ -78,6 +79,7 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
 				SizeVal = CustomSize.stringValue
 			}
 			let MBRPatchState = (MBRPatch.state == NSOnState) ? true : false
+            let LapicPatchState = (LapicPatch.state == NSOnState) ? true : false
 			let XCPMPatchState = (XCPMPatch.state == NSOnState) ? true : false
 			let cdrState = (cdr.state == NSOnState) ? true : false
 			let dropKernelState = (dropKernel.state == NSOnState) ? true : false
@@ -88,7 +90,7 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
 			CustomSize.enabled=false
 			dropKernel.enabled=false
 			extra.hidden=true
-			api.startGenerating(filePath.stringValue,SizeVal: SizeVal,MBRPatchState: MBRPatchState,XCPMPatchState: XCPMPatchState,cdrState: cdrState,dropKernelState:dropKernelState,extraDroppedFilePath: extra.droppedFilePath)
+            api.startGenerating(filePath.stringValue,SizeVal: SizeVal,MBRPatchState: MBRPatchState,LapicPatchState:LapicPatchState,XCPMPatchState: XCPMPatchState,cdrState: cdrState,dropKernelState:dropKernelState,extraDroppedFilePath: extra.droppedFilePath)
 		}
 	}
 	@IBAction func XCPMClicked(sender: NSButton) {
@@ -96,18 +98,28 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
 				dropKernel.state = NSOnState
 		}
 	}
+	@IBAction func LapicClicked(sender: NSButton) {
+        if LapicPatch.state == NSOnState {
+            dropKernel.state = NSOnState
+        }
+	}
 	@IBAction func dropKernelClicked(sender: NSButton) {
 		if dropKernel.state == NSOffState {
 			XCPMPatch.state = NSOffState
+            LapicPatch.state = NSOffState
 		}
 	}
 	@IBAction func SizeClicked(sender: NSButton) {
 		if SizeCustomize.state == NSOnState {
 			CustomSize.hidden = false
 			SizeUnit.hidden = false
+            SizeCustomize.title = ""
+            SizeCustomize.state = NSOnState
 		}else {
 			CustomSize.hidden = true
 			SizeUnit.hidden = true
+            SizeCustomize.attributedTitle = NSAttributedString(string: "#Custom Size#".localized(), attributes: [ NSForegroundColorAttributeName : NSColor.whiteColor()])
+            SizeCustomize.state = NSOffState
 		}
 	}
 	@IBAction func exitButtonPressed(sender: NSButton) {

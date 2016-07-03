@@ -39,3 +39,6 @@
 "#FINISH#" = "Done!";
 "#MV#" = "Moving files to desktop";
 "#WRONGSIZE#" = "Sorry, your input size exceeds the maximum size limitation.";
+"#Custom Size#" = "Custom Image Size";
+"#LAPICPATCH#" = "Patching Lapic";
+"#Failed Lapic#" = "Lapic patch failed, counldn't determine system version";

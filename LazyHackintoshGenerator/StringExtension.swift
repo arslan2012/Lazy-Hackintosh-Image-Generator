@@ -9,6 +9,9 @@ extension String {
 				Int.init($0) ?? 0
 		}
 	}
+    func VersionBiggerThan(version:String) -> Bool{
+        return version.versionToInt().lexicographicalCompare(self.versionToInt())
+    }
 	func appendLineToURL(fileURL: NSURL) throws {
 		try self.stringByAppendingString("\n").appendToURL(fileURL)
 	}
