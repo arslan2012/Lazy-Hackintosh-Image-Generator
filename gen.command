@@ -25,33 +25,33 @@ read -n 1 option
 
 function cmpZip
 {
-	xcodebuild archive -scheme LazyHackintoshGenerator -archivePath product
-    xcodebuild -exportArchive -archivePath product.xcarchive -exportFormat app -exportPath ./LazyHackintoshGenerator
-	rm -rf product.xcarchive
-    zip -r LazyHackintoshGenerator.app.zip LazyHackintoshGenerator.app
-    rm -rf LazyHackintoshGenerator.app
-    zip -d LazyHackintoshGenerator.app.zip __MACOSX/\*
-    zip -d LazyHackintoshGenerator.app.zip \*/.DS_Store
-    echo " "
-    echo " "
-    echo "Done."
-    exit 0
+xcodebuild archive -scheme LazyHackintoshGenerator -archivePath product
+xcodebuild -exportArchive -archivePath product.xcarchive -exportFormat app -exportPath ./LazyHackintoshGenerator
+rm -rf product.xcarchive
+zip -r LazyHackintoshGenerator.app.zip LazyHackintoshGenerator.app
+rm -rf LazyHackintoshGenerator.app
+zip -d LazyHackintoshGenerator.app.zip __MACOSX/\*
+zip -d LazyHackintoshGenerator.app.zip \*/.DS_Store
+echo " "
+echo " "
+echo "Done."
+exit 0
 }
 
 function cmpPkg
 {
-	xcodebuild archive -scheme LazyHackintoshGenerator -archivePath product
-    xcodebuild -exportArchive -archivePath product.xcarchive -exportPath ./LazyHackintoshGenerator
-	rm -rf product.xcarchive
-    echo " "
-    echo " "
-    echo "Done."
-    exit 0
+xcodebuild archive -scheme LazyHackintoshGenerator -archivePath product
+xcodebuild -exportArchive -archivePath product.xcarchive -exportPath ./LazyHackintoshGenerator
+rm -rf product.xcarchive
+echo " "
+echo " "
+echo "Done."
+exit 0
 }
 
 function quit
 {
-    exit 0
+exit 0
 }
 
 while [ 1 ]

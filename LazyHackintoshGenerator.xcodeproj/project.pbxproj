@@ -25,11 +25,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		834C96CA1D273F2D00E2BA50 /* gen.command */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = gen.command; sourceTree = "<group>"; };
 		F50411831C644987003311DA /* LazyHackintoshGenerator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LazyHackintoshGenerator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F50411861C644987003311DA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F50411881C644987003311DA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F50411881C644987003311DA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ViewController.swift; sourceTree = "<group>"; };
 		F504118A1C644987003311DA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		F504118F1C644987003311DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F504118F1C644987003311DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = LazyHackintoshGenerator/Info.plist; sourceTree = "<group>"; };
 		F50411951C644B0C003311DA /* FileDropZone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileDropZone.swift; sourceTree = "<group>"; };
 		F546B0461C660DDD00613AFE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F546B0481C660EB600613AFE /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
@@ -60,17 +61,45 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		834C96CC1D273FB200E2BA50 /* Introductions */ = {
+			isa = PBXGroup;
+			children = (
+				F56157E21CAA344700D1F581 /* README.md */,
+			);
+			name = Introductions;
+			sourceTree = "<group>";
+		};
+		83E647D81D2878A500C822D1 /* Property lists */ = {
+			isa = PBXGroup;
+			children = (
+				F504118F1C644987003311DA /* Info.plist */,
+			);
+			name = "Property lists";
+			sourceTree = "<group>";
+		};
+		83FF7D3D1D27379900164716 /* Self-compiling */ = {
+			isa = PBXGroup;
+			children = (
+				834C96CA1D273F2D00E2BA50 /* gen.command */,
+			);
+			name = "Self-compiling";
+			sourceTree = "<group>";
+		};
 		F504117A1C644987003311DA = {
 			isa = PBXGroup;
 			children = (
-				F5D4A3371D25A1110013EB42 /* Supporting Files */,
-				F5A0F0491D23ED3800D1C791 /* Resources */,
-				F56157E21CAA344700D1F581 /* README.md */,
-				F57F43041C64A173004C1EB5 /* STPrivilegedTask */,
+				834C96CC1D273FB200E2BA50 /* Introductions */,
 				F50411851C644987003311DA /* LazyHackintoshGenerator */,
+				F57F43041C64A173004C1EB5 /* STPrivilegedTask */,
+				83E647D81D2878A500C822D1 /* Property lists */,
+				F5A0F0491D23ED3800D1C791 /* Pictures */,
+				F5D4A3371D25A1110013EB42 /* Supporting Files */,
+				F5E197CD1D168351006620F8 /* Executable files */,
+				83FF7D3D1D27379900164716 /* Self-compiling */,
 				F50411841C644987003311DA /* Products */,
 			);
 			sourceTree = "<group>";
+			usesTabs = 0;
 		};
 		F50411841C644987003311DA /* Products */ = {
 			isa = PBXGroup;
@@ -87,11 +116,10 @@
 				F546B0481C660EB600613AFE /* StringExtension.swift */,
 				F50411881C644987003311DA /* ViewController.swift */,
 				F5C563E81CC49242001C00FF /* BatchProcessAPI.swift */,
-				F546B0471C660DDD00613AFE /* Localizable.strings */,
-				F504118A1C644987003311DA /* Assets.xcassets */,
-				F504118C1C644987003311DA /* Main.storyboard */,
 				F50411951C644B0C003311DA /* FileDropZone.swift */,
-				F504118F1C644987003311DA /* Info.plist */,
+				F504118C1C644987003311DA /* Main.storyboard */,
+				F504118A1C644987003311DA /* Assets.xcassets */,
+				F546B0471C660DDD00613AFE /* Localizable.strings */,
 			);
 			path = LazyHackintoshGenerator;
 			sourceTree = "<group>";
@@ -106,16 +134,15 @@
 			name = STPrivilegedTask;
 			sourceTree = "<group>";
 		};
-		F5A0F0491D23ED3800D1C791 /* Resources */ = {
+		F5A0F0491D23ED3800D1C791 /* Pictures */ = {
 			isa = PBXGroup;
 			children = (
-				F5E197CE1D168374006620F8 /* lzvn */,
 				F5A0F0561D23F96600D1C791 /* icon-osx.png */,
 				F5A0F0541D23F90700D1C791 /* drive.png */,
 				F5A0F04C1D23F1B800D1C791 /* Chameleon.png */,
 				F5A0F04A1D23ED4700D1C791 /* image.png */,
 			);
-			name = Resources;
+			name = Pictures;
 			sourceTree = "<group>";
 		};
 		F5D4A3371D25A1110013EB42 /* Supporting Files */ = {
@@ -124,6 +151,14 @@
 				F5D4A33A1D25A26D0013EB42 /* Credits.rtfd */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F5E197CD1D168351006620F8 /* Executable files */ = {
+			isa = PBXGroup;
+			children = (
+				F5E197CE1D168374006620F8 /* lzvn */,
+			);
+			name = "Executable files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -155,7 +190,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0720;
-				ORGANIZATIONNAME = PCBETA;
+				ORGANIZATIONNAME = PCBeta;
 				TargetAttributes = {
 					F50411821C644987003311DA = {
 						CreatedOnToolsVersion = 7.2;
@@ -169,7 +204,7 @@
 			knownRegions = (
 				"zh-Hans",
 				Base,
-				ja,
+				en,
 			);
 			mainGroup = F504117A1C644987003311DA;
 			productRefGroup = F50411841C644987003311DA /* Products */;
@@ -293,7 +328,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				MTL_ENABLE_DEBUG_INFO = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -332,7 +367,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_ENABLE_DEBUG_INFO = YES;
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
@@ -347,10 +382,12 @@
 				INFOPLIST_FILE = LazyHackintoshGenerator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				PRODUCT_BUNDLE_IDENTIFIER = Arslan.LazyHackintoshGenerator;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.PCBeta.LazyHackintoshGenerator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "LazyHackintoshGenerator-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALID_ARCHS = x86_64;
 			};
 			name = Debug;
 		};
@@ -363,10 +400,12 @@
 				INFOPLIST_FILE = LazyHackintoshGenerator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				PRODUCT_BUNDLE_IDENTIFIER = Arslan.LazyHackintoshGenerator;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.PCBeta.LazyHackintoshGenerator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "LazyHackintoshGenerator-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALID_ARCHS = x86_64;
 			};
 			name = Release;
 		};

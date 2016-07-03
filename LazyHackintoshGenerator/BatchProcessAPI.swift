@@ -1,11 +1,3 @@
-//
-//  BatchProcessAPI.swift
-//  LazyHackintoshGenerator
-//
-//  Created by ئ‍ارسلان ئابلىكىم on 4/18/16.
-//  Copyright © 2016 PCBETA. All rights reserved.
-//
-
 import Foundation
 protocol BatchProcessAPIProtocol {
 	var debugLog:Bool{get set}
@@ -98,7 +90,7 @@ class BatchProcessAPI{
 			} else if filePath.hasSuffix("app") {
 				if NSURL(fileURLWithPath:"\(filePath)/Contents/SharedSupport/InstallESD.dmg").checkResourceIsReachableAndReturnError(nil){
 					self.shellCommand("/usr/bin/hdiutil",arg: ["attach","\(filePath)/Contents/SharedSupport/InstallESD.dmg","-noverify","-nobrowse","-quiet","-mountpoint",esdpath], label: "#MOUNTESD#", progress: 4)
-				}else {
+                }else {
 					self.viewDelegate.didReceiveErrorMessage("#Error in InstallESD image#")
 				}
 			}
@@ -147,20 +139,20 @@ class BatchProcessAPI{
 				}
 				self.privilegedShellCommand("/usr/bin/codesign",arg: ["-f","-s","-","\(lazypath)/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller"], label: "#Patch osinstaller#",progress: 1)
 				
-				self.shellCommand("/bin/mkdir",arg: ["/tmp/com.pcbeta.lazy/osinstallmpkg"], label: "#Patch osinstalle.mpkg#", progress: 0)
-				self.shellCommand("/usr/bin/xar",arg: ["-x","-f","\(lazypath)/System/Installation/Packages/OSInstall.mpkg","-C","/tmp/com.pcbeta.lazy/osinstallmpkg"], label: "#Patch osinstalle.mpkg#", progress: 0)
+				self.shellCommand("/bin/mkdir",arg: ["/tmp/com.pcbeta.lazy/osinstallmpkg"], label: "#Patch osinstall.mpkg#", progress: 0)
+				self.shellCommand("/usr/bin/xar",arg: ["-x","-f","\(lazypath)/System/Installation/Packages/OSInstall.mpkg","-C","/tmp/com.pcbeta.lazy/osinstallmpkg"], label: "#Patch osinstall.mpkg#", progress: 0)
 				if !SystemVersionBiggerThanSierra {
-					self.shellCommand("/usr/bin/sed",arg: ["-i","\'\'","--","s/1024/512/g","/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution"], label: "#Patch osinstalle.mpkg#", progress: 0)
-					self.shellCommand("/usr/bin/sed",arg: ["-i","\'\'","--","s/var minRam = 2048/var minRam = 1024/g","/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution"], label: "#Patch osinstalle.mpkg#", progress: 0)
-					self.shellCommand("/usr/bin/sed",arg: ["-i","\'\'","--","s/osVersion=......... osBuildVersion=.......//g","/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution"], label: "#Patch osinstalle.mpkg#", progress: 0)
-					self.shellCommand("/usr/bin/sed",arg: ["-i","\'\'","--","/\\<installation-check script=\"installCheckScript()\"\\/>/d","/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution"], label: "#Patch osinstalle.mpkg#", progress: 0)
-					self.shellCommand("/usr/bin/sed",arg: ["-i","\'\'","--","/\\<volume-check script=\"volCheckScript()\"\\/>/d","/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution"], label: "#Patch osinstalle.mpkg#", progress: 0)
+					self.shellCommand("/usr/bin/sed",arg: ["-i","\'\'","--","s/1024/512/g","/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution"], label: "#Patch osinstall.mpkg#", progress: 0)
+					self.shellCommand("/usr/bin/sed",arg: ["-i","\'\'","--","s/var minRam = 2048/var minRam = 1024/g","/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution"], label: "#Patch osinstall.mpkg#", progress: 0)
+					self.shellCommand("/usr/bin/sed",arg: ["-i","\'\'","--","s/osVersion=......... osBuildVersion=.......//g","/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution"], label: "#Patch osinstall.mpkg#", progress: 0)
+					self.shellCommand("/usr/bin/sed",arg: ["-i","\'\'","--","/\\<installation-check script=\"installCheckScript()\"\\/>/d","/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution"], label: "#Patch osinstall.mpkg#", progress: 0)
+					self.shellCommand("/usr/bin/sed",arg: ["-i","\'\'","--","/\\<volume-check script=\"volCheckScript()\"\\/>/d","/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution"], label: "#Patch osinstall.mpkg#", progress: 0)
 				}else {
-					self.shellCommand("/usr/bin/sed",arg: ["-i","\'\'","--","/\\<installation-check script=\"InstallationCheck()\"\\/>/d","/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution"], label: "#Patch osinstalle.mpkg#", progress: 0)
-					self.shellCommand("/usr/bin/sed",arg: ["-i","\'\'","--","/\\<volume-check script=\"VolumeCheck()\"\\/>/d","/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution"], label: "#Patch osinstalle.mpkg#", progress: 0)
+					self.shellCommand("/usr/bin/sed",arg: ["-i","\'\'","--","/\\<installation-check script=\"InstallationCheck()\"\\/>/d","/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution"], label: "#Patch osinstall.mpkg#", progress: 0)
+					self.shellCommand("/usr/bin/sed",arg: ["-i","\'\'","--","/\\<volume-check script=\"VolumeCheck()\"\\/>/d","/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution"], label: "#Patch osinstall.mpkg#", progress: 0)
 				}
-				self.shellCommand("/bin/rm",arg: ["\(lazypath)/System/Installation/Packages/OSInstall.mpkg"], label: "#Patch osinstalle.mpkg#", progress: 0)
-				self.shellCommand("/bin/rm",arg: ["/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution\'\'"], label: "#Patch osinstalle.mpkg#", progress: 0)
+				self.shellCommand("/bin/rm",arg: ["\(lazypath)/System/Installation/Packages/OSInstall.mpkg"], label: "#Patch osinstall.mpkg#", progress: 0)
+				self.shellCommand("/bin/rm",arg: ["/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution\'\'"], label: "#Patch osinstall.mpkg#", progress: 0)
 				let task = NSTask()
 				task.launchPath = "/usr/bin/xar"
 				task.arguments = ["-cf","\(lazypath)/System/Installation/Packages/OSInstall.mpkg","."]
@@ -182,6 +174,14 @@ class BatchProcessAPI{
 			}else {
 				self.viewDelegate.didReceiveProgress(1)
 			}
+            
+            /*
+             * The new features that the coder came up with:
+             * 1. Kernel Local APIC fix.
+             * 2. Extra kexts loading fix for Chameleon.
+             * To be updated. 07/02/2016
+             */
+            
 			if XCPMPatchState {
 				if !SystemVersionBiggerThanSierra {
 					self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xe2\\x00\\x00\\x00\\x02\\x00\\x00\\x00|\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00|g' \(lazypath)/System/Library/Kernels/kernel"], label: "#XCPMPATCH#",progress: 0)

@@ -1,11 +1,3 @@
-//
-//  AppDelegate.swift
-//  LazyHackintoshGenerator
-//
-//  Created by ئ‍ارسلان ئابلىكىم on 2/5/16.
-//  Copyright © 2016 PCBETA. All rights reserved.
-//
-
 import Cocoa
 
 @NSApplicationMain

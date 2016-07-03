@@ -1,7 +1,7 @@
 # Lazy Hackintosh Image Generator
 [![Swift 2.2](https://img.shields.io/badge/Swift-2.2-orange.svg?style=flat)](https://swift.org)
 ##What is this?
-This is an simple app that automatically modifies the OS X Installation app/disk image so that it could be used as a Hackintosh image and install OS X on non-apple computers.
+This is an simple app that automatically modifies the OS X Installer app/disk image so that it could be used as a Hackintosh installer and install OS X on non-apple computers.
 ##Why do I need this?
 * If you are on a computer that does not support UEFI.
 * If you have hardwares on you computer that causes original installation image kernel panic.
@@ -17,13 +17,14 @@ Just drag the Install app, or Install app image, or Install ESD image onto the t
 Just download the [LazyHackintoshGenerator.app.zip](https://raw.githubusercontent.com/arslan2012/Lazy-Hackintosh-Image-Generator/master/LazyHackintoshGenerator.app.zip). It will keep updating to the latest version.
 
 # Support needed
-As you can see, beacase I used Swift to code this, app authorization is really a pain in the ass. sometimes you need to type in your password twice to make this work.
+As you can see, since I used Swift to code this, app authorization is really a pain in the ass. Sometimes you need to type in your password twice to make this work.
 
 I'm using STprivilagedTask to do the authrization for me, if you know how to fix the issue, I would be very appriciated.
 
-And if you have any issue report or suggestions, feel free to open up an issue and tell me about it.
+And if you have any issue to report or ideas, feel free to open up an issue and tell me about it.
 
 ### Shell Script Edition
 by [PMheart](https://github.com/PMheart)
 
 [Hackintosh OS X El Capitan Lazy Installer Generator](https://github.com/PMheart/Hackintosh-OS-X-El-Capitan-Lazy-Installer-Image-Generator)
+Note that her shell script does NOT support v10.12!!!
