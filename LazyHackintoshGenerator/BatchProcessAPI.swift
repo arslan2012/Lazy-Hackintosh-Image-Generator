@@ -133,6 +133,7 @@ class BatchProcessAPI{
             let SystemVersionPlistPath = "\(lazypath)/System/Library/CoreServices/SystemVersion.plist"
             let myDict = NSDictionary(contentsOfFile: SystemVersionPlistPath)
             let SystemVersion = myDict?.valueForKey("ProductVersion") as! String
+            let SystemBuildVersion = myDict?.valueForKey("ProductBuildVersion") as! String
             ////////////////////////////patching processes////////////////////////progress:6%
             if MBRPatchState {
                 if SystemVersion.VersionBiggerThan("10.11.99") {
@@ -186,44 +187,44 @@ class BatchProcessAPI{
             }
             var failedLapic = false
             if LapicPatchState{
-                switch (SystemVersion) {
-                case "10.10.0":
+                switch (SystemBuildVersion) {
+                case "14A389":
                     self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xe8\\xd4\\x54\\xf1\\xff|\\x90\\x90\\x90\\x90\\x90|g' \(lazypath)/System/Library/Kernels/kernel"], label: "#LAPICPATCH#",progress: 0)
                     break
-                case "10.10.1":
+                case "14B25":
                     self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xe8\\xd4\\x54\\xf1\\xff|\\x90\\x90\\x90\\x90\\x90|g' \(lazypath)/System/Library/Kernels/kernel"], label: "#LAPICPATCH#",progress: 0)
                     break
-                case "10.10.2":
+                case "14C109":
                     self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xe8\\x54\\xed\\xf0\\xff|\\x90\\x90\\x90\\x90\\x90|g' \(lazypath)/System/Library/Kernels/kernel"], label: "#LAPICPATCH#",progress: 0)
                     break
-                case "10.10.3":
+                case "14D131":
                     self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xe8\\x14\\xc8\\xf0\\xff|\\x90\\x90\\x90\\x90\\x90|g' \(lazypath)/System/Library/Kernels/kernel"], label: "#LAPICPATCH#",progress: 0)
                     break
-                case "10.10.4":
+                case "14E46":
                     self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xe8\\x14\\xc8\\xf0\\xff|\\x90\\x90\\x90\\x90\\x90|g' \(lazypath)/System/Library/Kernels/kernel"], label: "#LAPICPATCH#",progress: 0)
                     break
-                case "10.10.5":
+                case "14F27":
                     self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xe8\\x64\\xc6\\xf0\\xff|\\x90\\x90\\x90\\x90\\x90|g' \(lazypath)/System/Library/Kernels/kernel"], label: "#LAPICPATCH#",progress: 0)
                     break
-                case "10.11.0":
+                case "15A284":
                     self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xe8\\xcd\\x6b\\xf0\\xff|\\x90\\x90\\x90\\x90\\x90|g' \(lazypath)/System/Library/Kernels/kernel"], label: "#LAPICPATCH#",progress: 0)
                     break
-                case "10.11.1":
+                case "15B42":
                     self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xe8\\xfd\\x68\\xf0\\xff|\\x90\\x90\\x90\\x90\\x90|g' \(lazypath)/System/Library/Kernels/kernel"], label: "#LAPICPATCH#",progress: 0)
                     break
-                case "10.11.2":
+                case "15C50":
                     self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xe8\\xed\\x53\\xf0\\xff|\\x90\\x90\\x90\\x90\\x90|g' \(lazypath)/System/Library/Kernels/kernel"], label: "#LAPICPATCH#",progress: 0)
                     break
-                case "10.11.3":
+                case "15D21":
                     self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xe8\\xed\\x53\\xf0\\xff|\\x90\\x90\\x90\\x90\\x90|g' \(lazypath)/System/Library/Kernels/kernel"], label: "#LAPICPATCH#",progress: 0)
                     break
-                case "10.11.4":
+                case "15E65":
                     self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xe8\\xbd\\x48\\xf0\\xff|\\x90\\x90\\x90\\x90\\x90|g' \(lazypath)/System/Library/Kernels/kernel"], label: "#LAPICPATCH#",progress: 0)
                     break
-                case "10.11.5":
+                case "15F34":
                     self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xe8\\xcd\\x46\\xf0\\xff|\\x90\\x90\\x90\\x90\\x90|g' \(lazypath)/System/Library/Kernels/kernel"], label: "#LAPICPATCH#",progress: 0)
                     break
-                case "10.12.0":
+                case "16A201w":
                     self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xe8\\x3d\\xdf\\xee\\xff|\\x90\\x90\\x90\\x90\\x90|g' \(lazypath)/System/Library/Kernels/kernel"], label: "#LAPICPATCH#",progress: 0)
                     break
                 default:
