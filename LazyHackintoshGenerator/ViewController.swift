@@ -89,7 +89,7 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
 			SizeCustomize.enabled=false
 			CustomSize.enabled=false
 			dropKernel.enabled=false
-			extra.hidden=true
+            LapicPatch.enabled=false
             api.startGenerating(filePath.stringValue,SizeVal: SizeVal,MBRPatchState: MBRPatchState,LapicPatchState:LapicPatchState,XCPMPatchState: XCPMPatchState,cdrState: cdrState,dropKernelState:dropKernelState,extraDroppedFilePath: extra.droppedFilePath)
 		}
 	}
