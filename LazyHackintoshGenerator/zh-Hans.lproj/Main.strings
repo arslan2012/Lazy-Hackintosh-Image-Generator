@@ -20,20 +20,8 @@
 /* Class = "NSMenu"; title = "主菜单"; ObjectID = "AYu-sK-qS6"; */
 "AYu-sK-qS6.title" = "主菜单";
 
-/* Class = "NSWindow"; title = "Window"; ObjectID = "IQv-IB-iLA"; */
-"IQv-IB-iLA.title" = "Window";
-
-/* Class = "NSMenuItem"; title = "Show All"; ObjectID = "Kd2-mp-pUS"; */
-"Kd2-mp-pUS.title" = "Show All";
-
-/* Class = "NSMenuItem"; title = "Hide LazyHackintoshGenerator"; ObjectID = "Olw-nP-bQN"; */
-"Olw-nP-bQN.title" = "隐藏 懒人版镜像制作器";
-
 /* Class = "NSButtonCell"; title = "自定义生成镜像大小"; ObjectID = "T6N-SL-jmh"; */
 "T6N-SL-jmh.title" = "自定义生成镜像大小";
-
-/* Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "Vdr-fp-XzO"; */
-"Vdr-fp-XzO.title" = "Hide Others";
 
 /* Class = "NSTextFieldCell"; title = "拖入Extra文件夹(可选)"; ObjectID = "dYT-MI-ERe"; */
 "dYT-MI-ERe.title" = "拖入Extra文件夹(可选)";
