@@ -1,0 +1,54 @@
+
+/* Class = "NSMenuItem"; title = "Lazy Hackintosh Image Generator"; ObjectID = "1Xt-HY-uBw"; */
+"1Xt-HY-uBw.title" = "Lazy Hackintosh Image Generator";
+
+/* Class = "NSButtonCell"; title = "exit"; ObjectID = "4oe-lq-Fmn"; */
+"4oe-lq-Fmn.title" = "exit";
+
+/* Class = "NSMenuItem"; title = "Quit LazyHackintoshGenerator"; ObjectID = "4sb-4s-VLi"; */
+"4sb-4s-VLi.title" = "Quit LazyHackintoshGenerator";
+
+/* Class = "NSMenuItem"; title = "About LazyHackintoshGenerator"; ObjectID = "5kV-Vb-QxS"; */
+"5kV-Vb-QxS.title" = "About LazyHackintoshGenerator";
+
+/* Class = "NSButtonCell"; title = "start"; ObjectID = "78f-UZ-JFI"; */
+"78f-UZ-JFI.title" = "start";
+
+/* Class = "NSMenu"; title = "Main Menu"; ObjectID = "AYu-sK-qS6"; */
+"AYu-sK-qS6.title" = "Main Menu";
+
+/* Class = "NSWindow"; title = "Window"; ObjectID = "IQv-IB-iLA"; */
+"IQv-IB-iLA.title" = "Window";
+
+/* Class = "NSButtonCell"; title = "Custom Image Size"; ObjectID = "T6N-SL-jmh"; */
+"T6N-SL-jmh.title" = "Custom Image Size";
+
+/* Class = "NSTextFieldCell"; title = "drag Extra folder here (optional)"; ObjectID = "dYT-MI-ERe"; */
+"dYT-MI-ERe.title" = "drag Extra folder here (optional)";
+
+/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "k82-n4-Qi8"; */
+"k82-n4-Qi8.title" = "Label";
+
+/* Class = "NSMenuItem"; title = "Enable debug mode"; ObjectID = "m5L-xw-t0a"; */
+"m5L-xw-t0a.title" = "Enable debug mode";
+
+/* Class = "NSTextFieldCell"; title = "GB"; ObjectID = "nus-BF-iqV"; */
+"nus-BF-iqV.title" = "GB";
+
+/* Class = "NSButtonCell"; title = "kernel XCPM patch"; ObjectID = "pvR-jb-Lfe"; */
+"pvR-jb-Lfe.title" = "kernel XCPM patch";
+
+/* Class = "NSButtonCell"; title = "Patch MBR"; ObjectID = "q5G-N8-8sb"; */
+"q5G-N8-8sb.title" = "Patch MBR";
+
+/* Class = "NSTextFieldCell"; title = "drag image or app here"; ObjectID = "qeC-H5-IUy"; */
+"qeC-H5-IUy.title" = "drag image or app here";
+
+/* Class = "NSButtonCell"; title = "Drop Kernel"; ObjectID = "ryD-dv-ejv"; */
+"ryD-dv-ejv.title" = "Drop Kernel";
+
+/* Class = "NSMenu"; title = "Lazy Hackintosh Image Generator"; ObjectID = "uQy-DD-JDr"; */
+"uQy-DD-JDr.title" = "Lazy Hackintosh Image Generator";
+
+/* Class = "NSButtonCell"; title = "also generate CDR"; ObjectID = "znd-va-Rf7"; */
+"znd-va-Rf7.title" = "also generate CDR";
