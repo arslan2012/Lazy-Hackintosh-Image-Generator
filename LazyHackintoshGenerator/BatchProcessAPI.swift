@@ -106,7 +106,7 @@ class BatchProcessAPI{
             }
             if self.viewDelegate.debugLog {
                 do{
-                    try "========mounting done=======".appendLineToURL(NSURL(fileURLWithPath:"\(NSHomeDirectory())/Lazy log.txt"))
+                    try "=======mounting done=======".appendLineToURL(NSURL(fileURLWithPath:"\(NSHomeDirectory())/Lazy log.txt"))
                 }catch{}
             }
             ////////////////////////////creating processes////////////////////////progress:24%
@@ -117,7 +117,7 @@ class BatchProcessAPI{
             }
             if self.viewDelegate.debugLog {
                 do{
-                    try "========creating done=======".appendLineToURL(NSURL(fileURLWithPath:"\(NSHomeDirectory())/Lazy log.txt"))
+                    try "=======creating done=======".appendLineToURL(NSURL(fileURLWithPath:"\(NSHomeDirectory())/Lazy log.txt"))
                 }catch{}
             }
             ////////////////////////////copying processes/////////////////////////progress:54%
@@ -146,7 +146,7 @@ class BatchProcessAPI{
             self.shellCommand("/bin/mkdir",arg: ["\(lazypath)/System/Library/Kernels"], label: "#Create Kernels folder#", progress: 1)
             if self.viewDelegate.debugLog {
                 do{
-                    try "========copying done========".appendLineToURL(NSURL(fileURLWithPath:"\(NSHomeDirectory())/Lazy log.txt"))
+                    try "========copying done=======".appendLineToURL(NSURL(fileURLWithPath:"\(NSHomeDirectory())/Lazy log.txt"))
                 }catch{}
             }
             /////////////////////////version checking processes////////////////////progress:0%
@@ -157,7 +157,7 @@ class BatchProcessAPI{
             if self.viewDelegate.debugLog {
                 do{
                     try "Detected System Version:\(SystemVersion) \(SystemBuildVersion)".appendLineToURL(NSURL(fileURLWithPath:"\(NSHomeDirectory())/Lazy log.txt"))
-                    try "============================".appendLineToURL(NSURL(fileURLWithPath:"\(NSHomeDirectory())/Lazy log.txt"))
+                    try "===========================".appendLineToURL(NSURL(fileURLWithPath:"\(NSHomeDirectory())/Lazy log.txt"))
                 }catch{}
             }
             ////////////////////////////patching processes////////////////////////progress:6%
@@ -277,7 +277,7 @@ class BatchProcessAPI{
             self.shellCommand("/bin/cp",arg: ["-R",extraDroppedFilePath,"\(lazypath)/"], label: "#COPYEXTRA#", progress: 2)
             if self.viewDelegate.debugLog {
                 do{
-                    try "========patching done=======".appendLineToURL(NSURL(fileURLWithPath:"\(NSHomeDirectory())/Lazy log.txt"))
+                    try "=======patching done=======".appendLineToURL(NSURL(fileURLWithPath:"\(NSHomeDirectory())/Lazy log.txt"))
                 }catch{}
             }
             ////////////////////////////ejecting processes////////////////////////progress:9%
@@ -289,7 +289,7 @@ class BatchProcessAPI{
                 self.shellCommand("/bin/mv",arg: ["/tmp/com.pcbeta.lazy/Lazy Installer.dmg","\(NSHomeDirectory())/Desktop/"], label: "#MV#", progress: 0)
                 self.shellCommand("/bin/mv",arg: ["/tmp/com.pcbeta.lazy/Lazy Installer.cdr","\(NSHomeDirectory())/Desktop/"], label: "#MV#", progress: 0)
             }else{
-                self.shellCommand("/usr/bin/hdiutil",arg: ["detach","\(orgpath)"], label: "#EJECTESD#", progress: 0)
+                self.shellCommand("/usr/bin/hdiutil",arg: ["detach","\(orgpath)"], label: "#EJECTESD#", progress: 2)
                 self.shellCommand("/usr/bin/hdiutil",arg: ["detach","\(esdpath)"], label: "#EJECTESD#", progress: 2)
                 self.shellCommand("/usr/bin/hdiutil",arg: ["detach",lazypath], label: "#EJECTLAZY#", progress: 2)
                 self.shellCommand("/bin/mv",arg: ["/tmp/com.pcbeta.lazy/Lazy Installer.dmg","\(NSHomeDirectory())/Desktop/"], label: "#MV#", progress: 3)
