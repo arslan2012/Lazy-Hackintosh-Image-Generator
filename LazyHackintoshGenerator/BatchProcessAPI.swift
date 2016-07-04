@@ -29,7 +29,7 @@ class BatchProcessAPI{
             let calendar = NSCalendar.currentCalendar()
             let components = calendar.components([.Hour, .Minute, .Second], fromDate: date)
             do{
-                try "\(path) \(arg[0]),progress:\(progress)".appendLineToURL(NSURL(fileURLWithPath:"\(NSHomeDirectory())/Lazy log.txt"))
+                try "\(path) \(arg.joinWithSeparator(" ")),progress:\(progress)".appendLineToURL(NSURL(fileURLWithPath:"\(NSHomeDirectory())/Lazy log.txt"))
                 try output.appendLineToURL(NSURL(fileURLWithPath:"\(NSHomeDirectory())/Lazy log.txt"))
                 try "==========\(components.hour):\(components.minute):\(components.second)==========".appendLineToURL(NSURL(fileURLWithPath:"\(NSHomeDirectory())/Lazy log.txt"))
             }catch{}
@@ -48,7 +48,7 @@ class BatchProcessAPI{
             let calendar = NSCalendar.currentCalendar()
             let components = calendar.components([.Hour, .Minute, .Second], fromDate: date)
             do{
-                try "sudo \(path) \(arg[0]),progress:\(progress)".appendLineToURL(NSURL(fileURLWithPath:"\(NSHomeDirectory())/Lazy log.txt"))
+                try "sudo \(path) \(arg.joinWithSeparator(" ")),progress:\(progress)".appendLineToURL(NSURL(fileURLWithPath:"\(NSHomeDirectory())/Lazy log.txt"))
                 try "==========\(components.hour):\(components.minute):\(components.second)==========".appendLineToURL(NSURL(fileURLWithPath:"\(NSHomeDirectory())/Lazy log.txt"))
             }catch{}
         }
