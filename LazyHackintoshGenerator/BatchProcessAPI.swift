@@ -134,6 +134,12 @@ class BatchProcessAPI{
             let myDict = NSDictionary(contentsOfFile: SystemVersionPlistPath)
             let SystemVersion = myDict?.valueForKey("ProductVersion") as! String
             let SystemBuildVersion = myDict?.valueForKey("ProductBuildVersion") as! String
+            if self.viewDelegate.debugLog {
+                do{
+                    try "Detected System Version:\(SystemVersion) \(SystemBuildVersion)".appendLineToURL(NSURL(fileURLWithPath:"\(NSHomeDirectory())/Lazy log.txt"))
+                    try "============================".appendLineToURL(NSURL(fileURLWithPath:"\(NSHomeDirectory())/Lazy log.txt"))
+                }catch{}
+            }
             ////////////////////////////patching processes////////////////////////progress:6%
             if MBRPatchState {
                 if SystemVersion.VersionBiggerThan("10.11.99") {
