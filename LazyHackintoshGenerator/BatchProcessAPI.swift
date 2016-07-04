@@ -68,6 +68,11 @@ class BatchProcessAPI{
             }catch{}
             self.shellCommand("/bin/rm",arg: ["-rf","/tmp/com.pcbeta.lazy"], label: "#CleanDir#", progress: 0)
             self.shellCommand("/bin/mkdir",arg: ["/tmp/com.pcbeta.lazy"], label: "#CleanDir#", progress: 3)
+            if self.viewDelegate.debugLog {
+                do{
+                    try "========cleaning done=======".appendLineToURL(NSURL(fileURLWithPath:"\(NSHomeDirectory())/Lazy log.txt"))
+                }catch{}
+            }
             ////////////////////////////mounting processes////////////////////////progress:4%
             var esdpath="/tmp/com.pcbeta.lazy/ESDMount"
             if filePath.hasSuffix("dmg") {
@@ -99,11 +104,21 @@ class BatchProcessAPI{
                     self.viewDelegate.didReceiveErrorMessage("#Error in InstallESD image#")
                 }
             }
+            if self.viewDelegate.debugLog {
+                do{
+                    try "========mounting done=======".appendLineToURL(NSURL(fileURLWithPath:"\(NSHomeDirectory())/Lazy log.txt"))
+                }catch{}
+            }
             ////////////////////////////creating processes////////////////////////progress:24%
             self.shellCommand("/usr/bin/hdiutil",arg: ["create","-size","\(SizeVal)g","-layout","SPUD","-ov","-fs","HFS+J","-volname","OS X Lazy Installer","/tmp/com.pcbeta.lazy/Lazy Installer.dmg"], label: "#Create Lazy image#", progress: 22)
             self.shellCommand("/usr/bin/hdiutil",arg: ["attach","/tmp/com.pcbeta.lazy/Lazy Installer.dmg","-noverify","-nobrowse","-quiet","-mountpoint",lazypath], label: "#Mount Lazy image#", progress: 2)
             if !NSURL(fileURLWithPath:lazypath).checkResourceIsReachableAndReturnError(nil){
                 self.viewDelegate.didReceiveErrorMessage("#Error in lazy image#")
+            }
+            if self.viewDelegate.debugLog {
+                do{
+                    try "========creating done=======".appendLineToURL(NSURL(fileURLWithPath:"\(NSHomeDirectory())/Lazy log.txt"))
+                }catch{}
             }
             ////////////////////////////copying processes/////////////////////////progress:54%
             self.privilegedShellCommand("/usr/sbin/asr",arg: ["restore","--source","\(esdpath)/BaseSystem.dmg","--target",lazypath,"--erase","--format","HFS+","--noprompt","--noverify"], label: "#COPYBASE#",progress: 17)
@@ -129,6 +144,11 @@ class BatchProcessAPI{
             self.shellCommand("/bin/rm",arg: ["-rf","\(lazypath)/System/Installation/Packages"], label: "#DELETEPACKAGE#", progress: 2)
             self.privilegedShellCommand("/bin/cp",arg: ["-R","\(esdpath)/Packages","\(lazypath)/System/Installation"], label: "#COPYPACKAGE#",progress: 22)
             self.shellCommand("/bin/mkdir",arg: ["\(lazypath)/System/Library/Kernels"], label: "#Create Kernels folder#", progress: 1)
+            if self.viewDelegate.debugLog {
+                do{
+                    try "========copying done========".appendLineToURL(NSURL(fileURLWithPath:"\(NSHomeDirectory())/Lazy log.txt"))
+                }catch{}
+            }
             /////////////////////////version checking processes////////////////////progress:0%
             let SystemVersionPlistPath = "\(lazypath)/System/Library/CoreServices/SystemVersion.plist"
             let myDict = NSDictionary(contentsOfFile: SystemVersionPlistPath)
@@ -255,6 +275,11 @@ class BatchProcessAPI{
                 self.viewDelegate.didReceiveProgress(1)
             }
             self.shellCommand("/bin/cp",arg: ["-R",extraDroppedFilePath,"\(lazypath)/"], label: "#COPYEXTRA#", progress: 2)
+            if self.viewDelegate.debugLog {
+                do{
+                    try "========patching done=======".appendLineToURL(NSURL(fileURLWithPath:"\(NSHomeDirectory())/Lazy log.txt"))
+                }catch{}
+            }
             ////////////////////////////ejecting processes////////////////////////progress:9%
             if cdrState {
                 self.shellCommand("/usr/bin/hdiutil",arg: ["detach",lazypath], label: "#EJECTLAZY#", progress: 1)
