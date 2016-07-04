@@ -73,7 +73,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <progressIndicator wantsLayer="YES" fixedFrame="YES" maxValue="100" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="NQo-RU-twe">
-                                <rect key="frame" x="20" y="51" width="440" height="20"/>
+                                <rect key="frame" x="20" y="42" width="440" height="20"/>
                                 <animations>
                                     <caTransition key="subviews">
                                         <mutableData key="keyedArchiveRepresentation">
@@ -97,8 +97,8 @@ AwEVARgBHQAAAAAAAAIBAAAAAAAAACgAAAAAAAAAAAAAAAAAAAEfA
                                 </textFieldCell>
                             </textField>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wDg-Us-Bko">
-                                <rect key="frame" x="331" y="69" width="90" height="18"/>
-                                <buttonCell key="cell" type="check" title="Patch MBR" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="q5G-N8-8sb">
+                                <rect key="frame" x="331" y="89" width="90" height="18"/>
+                                <buttonCell key="cell" type="check" title="MBR patch" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="q5G-N8-8sb">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" size="13" name=".PingFangSC-Regular"/>
                                 </buttonCell>
@@ -108,7 +108,7 @@ AwEVARgBHQAAAAAAAAIBAAAAAAAAACgAAAAAAAAAAAAAAAAAAAEfA
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="RUM-f6-V2X"/>
                             </imageView>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x2t-of-KJz">
-                                <rect key="frame" x="18" y="67" width="138" height="18"/>
+                                <rect key="frame" x="176" y="59" width="138" height="18"/>
                                 <buttonCell key="cell" type="check" title="kernel XCPM patch" bezelStyle="regularSquare" imagePosition="left" inset="2" id="pvR-jb-Lfe">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -116,13 +116,6 @@ AwEVARgBHQAAAAAAAAIBAAAAAAAAACgAAAAAAAAAAAAAAAAAAAEfA
                                 <connections>
                                     <action selector="XCPMClicked:" target="XfG-lQ-9wD" id="06M-vN-FAd"/>
                                 </connections>
-                            </button>
-                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="caW-BX-KDk">
-                                <rect key="frame" x="331" y="89" width="135" height="18"/>
-                                <buttonCell key="cell" type="check" title="also generate CDR" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="znd-va-Rf7">
-                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
                             </button>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fQS-po-7KX">
                                 <rect key="frame" x="18" y="89" width="139" height="18"/>
@@ -175,8 +168,8 @@ AwEVARgBHQAAAAAAAAIBAAAAAAAAACgAAAAAAAAAAAAAAAAAAAEfA
                                 </connections>
                             </button>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wCZ-xc-JJt">
-                                <rect key="frame" x="176" y="89" width="128" height="18"/>
-                                <buttonCell key="cell" type="check" title="Drop Kernel" bezelStyle="regularSquare" imagePosition="left" inset="2" id="ryD-dv-ejv">
+                                <rect key="frame" x="18" y="59" width="128" height="18"/>
+                                <buttonCell key="cell" type="check" title="Drop kernel" bezelStyle="regularSquare" imagePosition="left" inset="2" id="ryD-dv-ejv">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -193,7 +186,7 @@ AwEVARgBHQAAAAAAAAIBAAAAAAAAACgAAAAAAAAAAAAAAAAAAAEfA
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LQe-hg-4ci">
-                                <rect key="frame" x="256" y="113" width="217" height="56"/>
+                                <rect key="frame" x="265" y="113" width="217" height="56"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="drag Extra folder here (optional)" id="dYT-MI-ERe">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="0.84999999999999998" colorSpace="calibratedRGB"/>
@@ -205,14 +198,21 @@ AwEVARgBHQAAAAAAAAIBAAAAAAAAACgAAAAAAAAAAAAAAAAAAAEfA
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="oVv-hy-Ug5"/>
                             </imageView>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MdN-qM-nVN">
-                                <rect key="frame" x="176" y="67" width="93" height="18"/>
-                                <buttonCell key="cell" type="check" title="Lapic Patch" bezelStyle="regularSquare" imagePosition="left" inset="2" id="9vX-Bi-vQi">
+                                <rect key="frame" x="331" y="59" width="134" height="18"/>
+                                <buttonCell key="cell" type="check" title="kernel Lapic patch" bezelStyle="regularSquare" imagePosition="left" inset="2" id="9vX-Bi-vQi">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
                                     <action selector="LapicClicked:" target="XfG-lQ-9wD" id="sec-yX-3iN"/>
                                 </connections>
+                            </button>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="caW-BX-KDk">
+                                <rect key="frame" x="176" y="89" width="135" height="18"/>
+                                <buttonCell key="cell" type="check" title="also generate CDR" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="znd-va-Rf7">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
                             </button>
                         </subviews>
                     </view>

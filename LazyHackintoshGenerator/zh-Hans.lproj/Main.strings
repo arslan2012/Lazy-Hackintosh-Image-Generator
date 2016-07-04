@@ -15,7 +15,7 @@
 "78f-UZ-JFI.title" = "开始";
 
 /* Class = "NSButtonCell"; title = "Lapic Patch"; ObjectID = "9vX-Bi-vQi"; */
-"9vX-Bi-vQi.title" = "Lapic破解";
+"9vX-Bi-vQi.title" = "内核Lapic补丁";
 
 /* Class = "NSMenu"; title = "主菜单"; ObjectID = "AYu-sK-qS6"; */
 "AYu-sK-qS6.title" = "主菜单";
@@ -30,7 +30,7 @@
 "m5L-xw-t0a.title" = "开启排错模式";
 
 /* Class = "NSButtonCell"; title = "XCPM补丁"; ObjectID = "pvR-jb-Lfe"; */
-"pvR-jb-Lfe.title" = "XCPM补丁";
+"pvR-jb-Lfe.title" = "内核XCPM补丁";
 
 /* Class = "NSButtonCell"; title = "MBR补丁"; ObjectID = "q5G-N8-8sb"; */
 "q5G-N8-8sb.title" = "MBR补丁";

@@ -21,7 +21,7 @@
 "#Patch osinstaller#" =  "破解OSInstaller";
 "#Patch osinstall.mpkg#" =  "破解OSInstall.mpkg";
 "#COPYKERNELF#" =  "复制kernel";
-"#XCPMPATCH#" =  "破解XCPM";
+"#XCPMPATCH#" =  "内核XCPM补丁";
 "#COPYEXTRA#" =  "复制Extra文件夹";
 "#EJECTBASE#" =  "卸载BaseSystem镜像";
 "#EJECTESD#" =  "卸载ESD镜像 . . .";
@@ -32,5 +32,5 @@
 "#Create CDR#" = "生成CDR";
 "#WRONGSIZE#" = "对不起，您输入的格式不对或者超过了最大限制。";
 "#Custom Size#" = "自定义生成镜像大小";
-"#LAPICPATCH#" = "破解Lapic";
-"#Failed Lapic#" = "Lapic破解失败，未找到该系统的破解方法";
+"#LAPICPATCH#" = "内核Lapic补丁";
+"#Failed Lapic#" = "Lapic破解失败，未找到该系统的破解方法。";
