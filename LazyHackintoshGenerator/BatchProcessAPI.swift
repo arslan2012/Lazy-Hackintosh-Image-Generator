@@ -74,9 +74,9 @@ class BatchProcessAPI{
                 }catch{}
             }
             ////////////////////////////mounting processes////////////////////////progress:4%
+            let orgpath = "/tmp/com.pcbeta.lazy/OriginMount"
             var esdpath="/tmp/com.pcbeta.lazy/ESDMount"
             if filePath.hasSuffix("dmg") {
-                let orgpath = "/tmp/com.pcbeta.lazy/OriginMount"
                 self.shellCommand("/usr/bin/hdiutil",arg: ["attach",filePath,"-noverify","-nobrowse","-quiet","-mountpoint",orgpath], label: "#MOUNTORG#", progress: 2)
                 if NSURL(fileURLWithPath:"\(orgpath)/BaseSystem.dmg").checkResourceIsReachableAndReturnError(nil) {
                     esdpath = orgpath
@@ -282,12 +282,14 @@ class BatchProcessAPI{
             }
             ////////////////////////////ejecting processes////////////////////////progress:9%
             if cdrState {
+                self.shellCommand("/usr/bin/hdiutil",arg: ["detach","\(orgpath)"], label: "#EJECTESD#", progress: 0)
                 self.shellCommand("/usr/bin/hdiutil",arg: ["detach",lazypath], label: "#EJECTLAZY#", progress: 1)
                 self.shellCommand("/usr/bin/hdiutil",arg: ["detach","\(esdpath)"], label: "#EJECTESD#", progress: 1)
                 self.shellCommand("/usr/bin/hdiutil",arg: ["convert","/tmp/com.pcbeta.lazy/Lazy Installer.dmg","-ov","-format","UDTO","-o","/tmp/com.pcbeta.lazy/Lazy Installer.cdr"], label: "#Create CDR#", progress: 7)
                 self.shellCommand("/bin/mv",arg: ["/tmp/com.pcbeta.lazy/Lazy Installer.dmg","\(NSHomeDirectory())/Desktop/"], label: "#MV#", progress: 0)
                 self.shellCommand("/bin/mv",arg: ["/tmp/com.pcbeta.lazy/Lazy Installer.cdr","\(NSHomeDirectory())/Desktop/"], label: "#MV#", progress: 0)
             }else{
+                self.shellCommand("/usr/bin/hdiutil",arg: ["detach","\(orgpath)"], label: "#EJECTESD#", progress: 0)
                 self.shellCommand("/usr/bin/hdiutil",arg: ["detach","\(esdpath)"], label: "#EJECTESD#", progress: 2)
                 self.shellCommand("/usr/bin/hdiutil",arg: ["detach",lazypath], label: "#EJECTLAZY#", progress: 2)
                 self.shellCommand("/bin/mv",arg: ["/tmp/com.pcbeta.lazy/Lazy Installer.dmg","\(NSHomeDirectory())/Desktop/"], label: "#MV#", progress: 3)
