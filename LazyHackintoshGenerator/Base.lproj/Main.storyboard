@@ -179,7 +179,7 @@ AwEVARgBHQAAAAAAAAIBAAAAAAAAACgAAAAAAAAAAAAAAAAAAAEfA
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VoB-1g-tUe">
                                 <rect key="frame" x="8" y="113" width="228" height="56"/>
-                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="drag image or app here" id="qeC-H5-IUy">
+                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="drag installer image or app here" id="qeC-H5-IUy">
                                     <font key="font" size="13" name=".PingFangSC-Regular"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="0.84999999999999998" colorSpace="calibratedRGB"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
