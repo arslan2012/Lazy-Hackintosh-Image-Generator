@@ -282,18 +282,40 @@ class BatchProcessAPI{
                 }catch{}
             }
             ////////////////////////////ejecting processes////////////////////////progress:9%
+            self.shellCommand("/usr/bin/chflags",arg: ["nohidden",lazypath], label: "#EJECTESD#", progress: 0)
             if cdrState {
-                self.shellCommand("/usr/bin/hdiutil",arg: ["detach","\(orgpath)"], label: "#EJECTESD#", progress: 0)
+                self.shellCommand("/usr/bin/hdiutil",arg: ["detach",orgpath], label: "#EJECTESD#", progress: 0)
                 self.shellCommand("/usr/bin/hdiutil",arg: ["detach",lazypath], label: "#EJECTLAZY#", progress: 1)
-                self.shellCommand("/usr/bin/hdiutil",arg: ["detach","\(esdpath)"], label: "#EJECTESD#", progress: 1)
+                self.shellCommand("/usr/bin/hdiutil",arg: ["detach",esdpath], label: "#EJECTESD#", progress: 1)
                 self.shellCommand("/usr/bin/hdiutil",arg: ["convert","/tmp/com.pcbeta.lazy/Lazy Installer.dmg","-ov","-format","UDTO","-o","/tmp/com.pcbeta.lazy/Lazy Installer.cdr"], label: "#Create CDR#", progress: 7)
-                self.shellCommand("/bin/mv",arg: ["/tmp/com.pcbeta.lazy/Lazy Installer.dmg","\(NSHomeDirectory())/Desktop/"], label: "#MV#", progress: 0)
-                self.shellCommand("/bin/mv",arg: ["/tmp/com.pcbeta.lazy/Lazy Installer.cdr","\(NSHomeDirectory())/Desktop/"], label: "#MV#", progress: 0)
+                
+                if SystemVersion.VersionBiggerThan("10.11.99"){
+                    self.shellCommand("/bin/mv",arg: ["/tmp/com.pcbeta.lazy/Lazy Installer.dmg","\(NSHomeDirectory())/Desktop/Sierra Custom Installer.dmg"], label: "#MV#", progress: 0)
+                    self.shellCommand("/bin/mv",arg: ["/tmp/com.pcbeta.lazy/Lazy Installer.cdr","\(NSHomeDirectory())/Desktop/Sierra Custom Installer.cdr"], label: "#MV#", progress: 0)
+                }else if SystemVersion.VersionBiggerThan("10.10.99") {
+                    self.shellCommand("/bin/mv",arg: ["/tmp/com.pcbeta.lazy/Lazy Installer.dmg","\(NSHomeDirectory())/Desktop/El Capitan Custom Installer.dmg"], label: "#MV#", progress: 0)
+                    self.shellCommand("/bin/mv",arg: ["/tmp/com.pcbeta.lazy/Lazy Installer.cdr","\(NSHomeDirectory())/Desktop/El Capitan Custom Installer.cdr"], label: "#MV#", progress: 0)
+                }else if SystemVersion.VersionBiggerThan("10.9.99") {
+                    self.shellCommand("/bin/mv",arg: ["/tmp/com.pcbeta.lazy/Lazy Installer.dmg","\(NSHomeDirectory())/Desktop/Yosemite Custom Installer.dmg"], label: "#MV#", progress: 0)
+                    self.shellCommand("/bin/mv",arg: ["/tmp/com.pcbeta.lazy/Lazy Installer.cdr","\(NSHomeDirectory())/Desktop/Yosemite Custom Installer.cdr"], label: "#MV#", progress: 0)
+                }else {
+                    self.shellCommand("/bin/mv",arg: ["/tmp/com.pcbeta.lazy/Lazy Installer.dmg","\(NSHomeDirectory())/Desktop/"], label: "#MV#", progress: 0)
+                    self.shellCommand("/bin/mv",arg: ["/tmp/com.pcbeta.lazy/Lazy Installer.cdr","\(NSHomeDirectory())/Desktop/"], label: "#MV#", progress: 0)
+                }
             }else{
-                self.shellCommand("/usr/bin/hdiutil",arg: ["detach","\(orgpath)"], label: "#EJECTESD#", progress: 2)
-                self.shellCommand("/usr/bin/hdiutil",arg: ["detach","\(esdpath)"], label: "#EJECTESD#", progress: 2)
+                self.shellCommand("/usr/bin/hdiutil",arg: ["detach",orgpath], label: "#EJECTESD#", progress: 2)
+                self.shellCommand("/usr/bin/hdiutil",arg: ["detach",esdpath], label: "#EJECTESD#", progress: 2)
                 self.shellCommand("/usr/bin/hdiutil",arg: ["detach",lazypath], label: "#EJECTLAZY#", progress: 2)
-                self.shellCommand("/bin/mv",arg: ["/tmp/com.pcbeta.lazy/Lazy Installer.dmg","\(NSHomeDirectory())/Desktop/"], label: "#MV#", progress: 3)
+                
+                if SystemVersion.VersionBiggerThan("10.11.99"){
+                    self.shellCommand("/bin/mv",arg: ["/tmp/com.pcbeta.lazy/Lazy Installer.dmg","\(NSHomeDirectory())/Desktop/Sierra Custom Installer.dmg"], label: "#MV#", progress: 3)
+                }else if SystemVersion.VersionBiggerThan("10.10.99"){
+                    self.shellCommand("/bin/mv",arg: ["/tmp/com.pcbeta.lazy/Lazy Installer.dmg","\(NSHomeDirectory())/Desktop/El Capitan Custom Installer.dmg"], label: "#MV#", progress: 3)
+                }else if SystemVersion.VersionBiggerThan("10.9.99"){
+                    self.shellCommand("/bin/mv",arg: ["/tmp/com.pcbeta.lazy/Lazy Installer.dmg","\(NSHomeDirectory())/Desktop/Yosemite Custom Installer.dmg"], label: "#MV#", progress: 3)
+                }else{
+                    self.shellCommand("/bin/mv",arg: ["/tmp/com.pcbeta.lazy/Lazy Installer.dmg","\(NSHomeDirectory())/Desktop/"], label: "#MV#", progress: 3)
+                }
             }
             self.shellCommand("/bin/rm",arg: ["-rf","/tmp/com.pcbeta.lazy"], label: "#MV#", progress: 0)
             if failedLapic {
