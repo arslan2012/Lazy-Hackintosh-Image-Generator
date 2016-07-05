@@ -18,8 +18,6 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
 	@IBOutlet weak var dropKernel: NSButton!
 	lazy var debugLog: Bool = false
 	lazy var api : BatchProcessAPI = BatchProcessAPI(viewDelegate: self)
-	let concurrentInsertingQueue = dispatch_queue_create("kext inserting", DISPATCH_QUEUE_CONCURRENT)
-	
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -126,12 +124,12 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
 		exit(0)
 	}
 	func didReceiveProcessName(results: String){
-		dispatch_sync(self.concurrentInsertingQueue,{
-			self.progressLable.stringValue = results.localized()
-		})
+        dispatch_async(dispatch_get_main_queue(),{
+                self.progressLable.stringValue = results.localized()
+        })
 	}
 	func didReceiveProgress(results: Double){
-		dispatch_sync(self.concurrentInsertingQueue,{
+		dispatch_async(dispatch_get_main_queue(),{
 			self.progress.incrementBy(results)
 		})
 	}

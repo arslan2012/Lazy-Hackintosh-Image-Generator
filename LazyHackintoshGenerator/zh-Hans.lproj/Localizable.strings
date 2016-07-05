@@ -5,7 +5,6 @@
 "#Input is void#" =  "未设置镜像！";
 "#KernelNameError#" =  "kernel文件名错误(应该为 kernel )";
 "#ExtraNameError#" =  "Extra文件夹名错误(应该为 Extra )";
-"#AskVersion#" =  "请选择镜像版本";
 "#MOUNTORG#" =  "挂载镜像...";
 "#MOUNTESD#" =  "挂载ESD镜像...";
 "#Error in InstallESD image#" =  "对不起，似乎未找到ESD镜像挂载点。";
@@ -16,7 +15,7 @@
 "#Error in base system image#" =  "对不起，似乎未找到Base System镜像挂载点。";
 "#Copy ESD#" =  "拷贝Install ESD文件";
 "#DELETEPACKAGE#" =  "删除Packages文件夹替身";
-"#COPYPACKAGE#" =  "复制Packages文件夹到 System/Installation。时间很长，期间程序可能会引起死机。";
+"#COPYPACKAGE#" =  "复制Packages文件夹到 System/Installation。时间很长";
 "#Create Kernels folder#" =  "创建Kernels文件夹";
 "#Patch osinstaller#" =  "破解OSInstaller";
 "#Patch osinstall.mpkg#" =  "破解OSInstall.mpkg";

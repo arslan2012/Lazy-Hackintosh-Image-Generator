@@ -13,13 +13,13 @@ class BatchProcessAPI{
         self.viewDelegate = viewDelegate
     }
     func shellCommand(path:String, arg: [String],label: String,progress: Double){
+        self.viewDelegate.didReceiveProcessName(label)
         let task = NSTask()
         task.launchPath = path
         task.arguments = arg
         let pipe = NSPipe()
         task.standardOutput = pipe
         task.launch()
-        self.viewDelegate.didReceiveProcessName(label)
         task.waitUntilExit()
         self.viewDelegate.didReceiveProgress(progress)
         if self.viewDelegate.debugLog {
@@ -36,11 +36,11 @@ class BatchProcessAPI{
         }
     }
     func privilegedShellCommand(path:String, arg: [String],label: String,progress: Double){
+        self.viewDelegate.didReceiveProcessName(label)
         let task = STPrivilegedTask()
         task.setLaunchPath(path)
         task.setArguments(arg)
         task.launch()
-        self.viewDelegate.didReceiveProcessName(label)
         task.waitUntilExit()
         self.viewDelegate.didReceiveProgress(progress)
         if self.viewDelegate.debugLog {
@@ -202,12 +202,13 @@ class BatchProcessAPI{
                 task.waitUntilExit()
                 self.shellCommand("/bin/cp",arg: ["/tmp/com.pcbeta.lazy/kernel","\(lazypath)/System/Library/Kernels"], label: "#COPYKERNELF#", progress: 1)
                 if !SystemVersion.VersionBiggerThan("10.11") {
-                    self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xE8\\x25\\x00\\x00\\x00\\xEB\\x05\\xE8\\xCE\\x02\\x00\\x00|\\xE8\\x25\\x00\\x00\\x00\\x90\\x90\\xE8\\xCE\\x02\\x00\\x00|g' \(lazypath)/System/Library/Kernels/kernel"], label: "#XCPMPATCH#",progress: 0)
+                    self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xE8\\x25\\x00\\x00\\x00\\xEB\\x05\\xE8\\xCE\\x02\\x00\\x00|\\xE8\\x25\\x00\\x00\\x00\\x90\\x90\\xE8\\xCE\\x02\\x00\\x00|g' \(lazypath)/System/Library/Kernels/kernel"], label: "#COPYKERNELF#",progress: 0)
                 }else if SystemVersion.VersionBiggerThan("10.11.99"){
-                    self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xC3\\x48\\x85\\xDB\\x74\\x71\\x48\\x8B\\x03\\x48\\x89\\xDF\\xFF\\x50\\x28\\x48|\\xC3\\x48\\x85\\xDB\\xEB\\x12\\x48\\x8B\\x03\\x48\\x89\\xDF\\xFF\\x50\\x28\\x48|g' \(lazypath)/System/Library/Kernels/kernel"], label: "#XCPMPATCH#",progress: 0)
+                    self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xC3\\x48\\x85\\xDB\\x74\\x71\\x48\\x8B\\x03\\x48\\x89\\xDF\\xFF\\x50\\x28\\x48|\\xC3\\x48\\x85\\xDB\\xEB\\x12\\x48\\x8B\\x03\\x48\\x89\\xDF\\xFF\\x50\\x28\\x48|g' \(lazypath)/System/Library/Kernels/kernel"], label: "#COPYKERNELF#",progress: 0)
                 }else {
-                    self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xC3\\x48\\x85\\xDB\\x74\\x70\\x48\\x8B\\x03\\x48\\x89\\xDF\\xFF\\x50\\x28\\x48|\\xC3\\x48\\x85\\xDB\\xEB\\x12\\x48\\x8B\\x03\\x48\\x89\\xDF\\xFF\\x50\\x28\\x48|g' \(lazypath)/System/Library/Kernels/kernel"], label: "#XCPMPATCH#",progress: 0)
+                    self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xC3\\x48\\x85\\xDB\\x74\\x70\\x48\\x8B\\x03\\x48\\x89\\xDF\\xFF\\x50\\x28\\x48|\\xC3\\x48\\x85\\xDB\\xEB\\x12\\x48\\x8B\\x03\\x48\\x89\\xDF\\xFF\\x50\\x28\\x48|g' \(lazypath)/System/Library/Kernels/kernel"], label: "#COPYKERNELF#",progress: 0)
                 }
+                self.shellCommand("/bin/chmod",arg: ["+x","\(lazypath)/System/Library/Kernels/kernel"], label: "#COPYKERNELF#",progress: 0)
             }else {
                 self.viewDelegate.didReceiveProgress(1)
             }

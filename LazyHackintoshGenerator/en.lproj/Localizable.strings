@@ -13,7 +13,6 @@
 "#Input is void#" =  "Image didn't set!";
 "#KernelNameError#" =  "kernel name is not right(should be kernel )";
 "#ExtraNameError#" =  "Extra folder name is not right(should be Extra )";
-"#AskVersion#" =  "Please choose a version of the image.";
 "#Create CDR#" = "Generating CDR...";
 "#MOUNTORG#" =  "Mounting image...";
 "#MOUNTESD#" =  "Mounting InstallESD image...";
