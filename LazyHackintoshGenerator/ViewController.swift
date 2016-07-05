@@ -140,9 +140,11 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
 		exit(0)
 	}
 	func didReceiveThreadExitMessage(){
-		progress.stopAnimation(self)
-		filePath.stringValue = ""
-		exitButton.hidden = false
+        dispatch_async(dispatch_get_main_queue(),{
+		self.progress.stopAnimation(self)
+		self.filePath.stringValue = ""
+		self.exitButton.hidden = false
+        })
 	}
 }
 
