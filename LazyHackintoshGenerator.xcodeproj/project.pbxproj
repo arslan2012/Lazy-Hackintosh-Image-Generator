@@ -25,7 +25,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		834C96CA1D273F2D00E2BA50 /* gen.command */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = gen.command; sourceTree = "<group>"; };
 		F50411831C644987003311DA /* LazyHackintoshGenerator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LazyHackintoshGenerator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F50411861C644987003311DA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F50411881C644987003311DA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ViewController.swift; sourceTree = "<group>"; };
@@ -80,7 +79,6 @@
 		83FF7D3D1D27379900164716 /* Self-compiling */ = {
 			isa = PBXGroup;
 			children = (
-				834C96CA1D273F2D00E2BA50 /* gen.command */,
 			);
 			name = "Self-compiling";
 			sourceTree = "<group>";
