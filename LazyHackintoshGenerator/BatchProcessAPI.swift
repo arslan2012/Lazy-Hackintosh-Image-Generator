@@ -254,6 +254,9 @@ class BatchProcessAPI{
                 case "16A201w":
                     self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xe8\\x3d\\xdf\\xee\\xff|\\x90\\x90\\x90\\x90\\x90|g' \(lazypath)/System/Library/Kernels/kernel"], label: "#LAPICPATCH#",progress: 0)
                     break
+                case "16A239j":
+                    self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xe8\\x2d\\x58\\xee\\xff|\\x90\\x90\\x90\\x90\\x90|g' \(lazypath)/System/Library/Kernels/kernel"], label: "#LAPICPATCH#",progress: 0)
+                    break
                 default:
                     failedLapic = true
                     break
