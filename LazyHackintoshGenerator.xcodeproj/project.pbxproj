@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8305E2D91D2DD83E00C4BB28 /* LazyHackintoshGenerator.app.zip in Resources */ = {isa = PBXBuildFile; fileRef = 8305E2D81D2DD83E00C4BB28 /* LazyHackintoshGenerator.app.zip */; };
+		83FD59051D2DD611003F93F9 /* compile.command in Resources */ = {isa = PBXBuildFile; fileRef = 83FD59041D2DD611003F93F9 /* compile.command */; };
 		F50411871C644987003311DA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50411861C644987003311DA /* AppDelegate.swift */; };
 		F50411891C644987003311DA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50411881C644987003311DA /* ViewController.swift */; };
 		F504118E1C644987003311DA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F504118C1C644987003311DA /* Main.storyboard */; };
@@ -25,6 +27,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8305E2D81D2DD83E00C4BB28 /* LazyHackintoshGenerator.app.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = LazyHackintoshGenerator.app.zip; sourceTree = "<group>"; };
+		83FD59041D2DD611003F93F9 /* compile.command */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = compile.command; sourceTree = "<group>"; };
 		F50411831C644987003311DA /* LazyHackintoshGenerator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LazyHackintoshGenerator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F50411861C644987003311DA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F50411881C644987003311DA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ViewController.swift; sourceTree = "<group>"; };
@@ -60,6 +64,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8305E2D71D2DD82400C4BB28 /* Precompiled binary archive */ = {
+			isa = PBXGroup;
+			children = (
+				8305E2D81D2DD83E00C4BB28 /* LazyHackintoshGenerator.app.zip */,
+			);
+			name = "Precompiled binary archive";
+			sourceTree = "<group>";
+		};
 		834C96CC1D273FB200E2BA50 /* Introductions */ = {
 			isa = PBXGroup;
 			children = (
@@ -79,6 +91,7 @@
 		83FF7D3D1D27379900164716 /* Self-compiling */ = {
 			isa = PBXGroup;
 			children = (
+				83FD59041D2DD611003F93F9 /* compile.command */,
 			);
 			name = "Self-compiling";
 			sourceTree = "<group>";
@@ -94,6 +107,7 @@
 				F5D4A3371D25A1110013EB42 /* Supporting Files */,
 				F5E197CD1D168351006620F8 /* Executable files */,
 				83FF7D3D1D27379900164716 /* Self-compiling */,
+				8305E2D71D2DD82400C4BB28 /* Precompiled binary archive */,
 				F50411841C644987003311DA /* Products */,
 			);
 			sourceTree = "<group>";
@@ -220,6 +234,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F546B0451C660DDD00613AFE /* Localizable.strings in Resources */,
+				8305E2D91D2DD83E00C4BB28 /* LazyHackintoshGenerator.app.zip in Resources */,
+				83FD59051D2DD611003F93F9 /* compile.command in Resources */,
 				F53A2C701D09AE160037268D /* Assets.xcassets in Resources */,
 				F5E197CF1D168D0E006620F8 /* lzvn in Resources */,
 				F504118E1C644987003311DA /* Main.storyboard in Resources */,
