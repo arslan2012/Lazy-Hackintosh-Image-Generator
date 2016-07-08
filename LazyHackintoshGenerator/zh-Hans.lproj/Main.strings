@@ -14,11 +14,17 @@
 /* Class = "NSButtonCell"; title = "开始"; ObjectID = "78f-UZ-JFI"; */
 "78f-UZ-JFI.title" = "开始";
 
-/* Class = "NSButtonCell"; title = "Lapic Patch"; ObjectID = "9vX-Bi-vQi"; */
+/* Class = "NSButtonCell"; title = "内核Lapic补丁"; ObjectID = "9vX-Bi-vQi"; */
 "9vX-Bi-vQi.title" = "内核Lapic补丁";
 
 /* Class = "NSMenu"; title = "主菜单"; ObjectID = "AYu-sK-qS6"; */
 "AYu-sK-qS6.title" = "主菜单";
+
+/* Class = "NSWindow"; title = "Window"; ObjectID = "IQv-IB-iLA"; */
+"IQv-IB-iLA.title" = "Window";
+
+/* Class = "NSMenuItem"; title = "Check for Updates"; ObjectID = "PVa-qe-VTN"; */
+"PVa-qe-VTN.title" = "检测更新";
 
 /* Class = "NSButtonCell"; title = "自定义生成镜像大小"; ObjectID = "T6N-SL-jmh"; */
 "T6N-SL-jmh.title" = "自定义生成镜像大小";
@@ -26,10 +32,16 @@
 /* Class = "NSTextFieldCell"; title = "拖入Extra文件夹(可选)"; ObjectID = "dYT-MI-ERe"; */
 "dYT-MI-ERe.title" = "拖入Extra文件夹(可选)";
 
+/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "k82-n4-Qi8"; */
+"k82-n4-Qi8.title" = "Label";
+
 /* Class = "NSMenuItem"; title = "开启排错模式"; ObjectID = "m5L-xw-t0a"; */
 "m5L-xw-t0a.title" = "开启排错模式";
 
-/* Class = "NSButtonCell"; title = "XCPM补丁"; ObjectID = "pvR-jb-Lfe"; */
+/* Class = "NSTextFieldCell"; title = "GB"; ObjectID = "nus-BF-iqV"; */
+"nus-BF-iqV.title" = "GB";
+
+/* Class = "NSButtonCell"; title = "内核XCPM补丁"; ObjectID = "pvR-jb-Lfe"; */
 "pvR-jb-Lfe.title" = "内核XCPM补丁";
 
 /* Class = "NSButtonCell"; title = "MBR补丁"; ObjectID = "q5G-N8-8sb"; */

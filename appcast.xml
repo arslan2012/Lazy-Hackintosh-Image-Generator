@@ -6,9 +6,12 @@
         <description>added auto update feature</description>
         <language>en</language>
         <item>
-            <title>Version 2.0 (2 bugs fixed; 3 new features)</title>
+            <title>Version 2.0 (0 bugs fixed; 1 new features)</title>
             <pubDate>Fri, 08 July 2016 21:20:11 +0800</pubDate>
-            <enclosure url="https://raw.githubusercontent.com/arslan2012/Lazy-Hackintosh-Image-Generator/master/LazyHackintoshGenerator.app.zip" sparkle:version="9" sparkle:shortVersionString="2.0(9)" length="5523949" type="application/octet-stream" sparkle:dsaSignature="MC0CFQCiGLLgwJK1lTgYUZdtIkFBbjXImAIUOBftQyK0ftZXOxmM2vf/mGZuLhE=" />
+            <sparkle:releaseNotesLink>
+                https://raw.githubusercontent.com/arslan2012/Lazy-Hackintosh-Image-Generator/master/releasenotes.html
+            </sparkle:releaseNotesLink>
+            <enclosure url="https://raw.githubusercontent.com/arslan2012/Lazy-Hackintosh-Image-Generator/master/LazyHackintoshGenerator.app.zip" sparkle:version="14" sparkle:shortVersionString="2.0(14)" length="5547609" type="application/octet-stream" sparkle:dsaSignature="MC4CFQC8SWhXVcQh3dv0bx8vFxG8cZkAcwIVAOQcsjdRFuz9yXX6BJErVoJElT4r" />
             <sparkle:minimumSystemVersion>10.10</sparkle:minimumSystemVersion>
         </item>
 
