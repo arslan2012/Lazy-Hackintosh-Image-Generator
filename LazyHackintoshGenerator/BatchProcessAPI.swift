@@ -163,7 +163,11 @@ class BatchProcessAPI{
             ////////////////////////////patching processes////////////////////////progress:6%
             if MBRPatchState {
                 if SystemVersion.VersionBiggerThan("10.11.99") {
-                    self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\x0F\\x84\\x96\\x00\\x00\\x00\\x48|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\xE9\\x97\\x00\\x00\\x00\\x90\\x48|g' \(lazypath)/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller"], label: "#Patch osinstaller#",progress: 1)
+                    if SystemBuildVersion == "16A238m"{
+                        self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\x0F\\x84\\x91\\x00\\x00\\x00\\x48|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\x90\\xE9\\x91\\x00\\x00\\x00\\x48|g' \(lazypath)/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller"], label: "#Patch osinstaller#",progress: 1)
+                    }else{
+                        self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\x0F\\x84\\x96\\x00\\x00\\x00\\x48|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\xE9\\x97\\x00\\x00\\x00\\x90\\x48|g' \(lazypath)/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller"], label: "#Patch osinstaller#",progress: 1)
+                    }
                 }else {
                     self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\x74\\x5F\\x48\\x8B\\x85|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\xEB\\x5F\\x48\\x8B\\x85|g' \(lazypath)/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller"], label: "#Patch osinstaller#",progress: 1)
                 }
@@ -204,7 +208,7 @@ class BatchProcessAPI{
                 if !SystemVersion.VersionBiggerThan("10.11") {
                     self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xE8\\x25\\x00\\x00\\x00\\xEB\\x05\\xE8\\xCE\\x02\\x00\\x00|\\xE8\\x25\\x00\\x00\\x00\\x90\\x90\\xE8\\xCE\\x02\\x00\\x00|g' \(lazypath)/System/Library/Kernels/kernel"], label: "#COPYKERNELF#",progress: 0)
                 }else if SystemVersion.VersionBiggerThan("10.11.99"){
-                    if SystemBuildVersion == "16A239j"{
+                    if SystemBuildVersion == "16A239j" || SystemBuildVersion == "16A238m"{
                         self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xC3\\x48\\x85\\xDB\\x74\\x71\\x48\\x8B\\x03\\x48\\x89\\xDF\\xFF\\x50\\x28\\x48|\\xC3\\x48\\x85\\xDB\\xEB\\x12\\x48\\x8B\\x03\\x48\\x89\\xDF\\xFF\\x50\\x28\\x48|g' \(lazypath)/System/Library/Kernels/kernel"], label: "#COPYKERNELF#",progress: 0)
                         self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xE8\\x25\\x00\\x00\\x00\\xEB\\x05\\xE8\\x7E\\x05\\x00\\x00|\\xE8\\x25\\x00\\x00\\x00\\x90\\x90\\xE8\\x7E\\x05\\x00\\x00|g' \(lazypath)/System/Library/Kernels/kernel"], label: "#COPYKERNELF#",progress: 0)
                     }else {
@@ -256,11 +260,15 @@ class BatchProcessAPI{
                 case "15F34":
                     self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xe8\\xcd\\x46\\xf0\\xff|\\x90\\x90\\x90\\x90\\x90|g' \(lazypath)/System/Library/Kernels/kernel"], label: "#LAPICPATCH#",progress: 0)
                     break
+                ///////below is beta version patches
                 case "16A201w":
                     self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xe8\\x3d\\xdf\\xee\\xff|\\x90\\x90\\x90\\x90\\x90|g' \(lazypath)/System/Library/Kernels/kernel"], label: "#LAPICPATCH#",progress: 0)
                     break
                 case "16A239j":
                     self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xe8\\x2d\\x58\\xee\\xff|\\x90\\x90\\x90\\x90\\x90|g' \(lazypath)/System/Library/Kernels/kernel"], label: "#LAPICPATCH#",progress: 0)
+                    break
+                case "16A238m":
+                    self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xe8\\x2d\\x58\\xee\\xff|\\x90\\x90\\x90\\x90\\x9|g' \(lazypath)/System/Library/Kernels/kernel"], label: "#LAPICPATCH#",progress: 0)
                     break
                 default:
                     failedLapic = true
