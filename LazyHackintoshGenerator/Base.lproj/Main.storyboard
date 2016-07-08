@@ -20,6 +20,12 @@
                                                 <action selector="orderFrontStandardAboutPanel:" target="Ady-hI-5gd" id="Exp-CZ-Vem"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem title="Check for Updates" id="PVa-qe-VTN">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="checkForUpdates:" target="Ce2-X5-nb6" id="kPt-ZZ-yVF"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem title="Enable debug logging" id="m5L-xw-t0a">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
@@ -43,6 +49,7 @@
                 </application>
                 <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="LazyHackintoshGenerator" customModuleProvider="target"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <customObject id="Ce2-X5-nb6" customClass="SUUpdater"/>
             </objects>
             <point key="canvasLocation" x="75" y="0.0"/>
         </scene>

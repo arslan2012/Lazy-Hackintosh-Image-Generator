@@ -21,8 +21,25 @@
 		F5A0F0571D23F96600D1C791 /* icon-osx.png in Resources */ = {isa = PBXBuildFile; fileRef = F5A0F0561D23F96600D1C791 /* icon-osx.png */; };
 		F5C563E91CC49242001C00FF /* BatchProcessAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C563E81CC49242001C00FF /* BatchProcessAPI.swift */; };
 		F5D4A33B1D25A26D0013EB42 /* Credits.rtfd in Resources */ = {isa = PBXBuildFile; fileRef = F5D4A33A1D25A26D0013EB42 /* Credits.rtfd */; };
+		F5DC2D861D2FB6B800399552 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5DC2D851D2FB6B800399552 /* Sparkle.framework */; };
+		F5DC2D891D2FD2CE00399552 /* Sparkle.framework in Copy Sparkles Frameworks */ = {isa = PBXBuildFile; fileRef = F5DC2D851D2FB6B800399552 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F5DC2D8C1D2FD4F600399552 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = F5DC2D8B1D2FD4F600399552 /* dsa_pub.pem */; };
 		F5E197CF1D168D0E006620F8 /* lzvn in Resources */ = {isa = PBXBuildFile; fileRef = F5E197CE1D168374006620F8 /* lzvn */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F5DC2D881D2FD2AE00399552 /* Copy Sparkles Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				F5DC2D891D2FD2CE00399552 /* Sparkle.framework in Copy Sparkles Frameworks */,
+			);
+			name = "Copy Sparkles Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		8305E2D81D2DD83E00C4BB28 /* LazyHackintoshGenerator.app.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = LazyHackintoshGenerator.app.zip; sourceTree = "<group>"; };
@@ -38,17 +55,20 @@
 		F546B0481C660EB600613AFE /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		F546B04A1C6617E700613AFE /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		F56157E21CAA344700D1F581 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		F56C22281D2FD9EE00E8DE70 /* appcast.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = appcast.xml; sourceTree = "<group>"; };
 		F57F43051C64A1AA004C1EB5 /* LazyHackintoshGenerator-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LazyHackintoshGenerator-Bridging-Header.h"; sourceTree = "<group>"; };
 		F57F43061C64A1AA004C1EB5 /* STPrivilegedTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STPrivilegedTask.m; path = LazyHackintoshGenerator/STPrivilagedTask/STPrivilegedTask.m; sourceTree = "<group>"; };
 		F57F43081C64A1CE004C1EB5 /* STPrivilegedTask.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = STPrivilegedTask.h; path = LazyHackintoshGenerator/STPrivilagedTask/STPrivilegedTask.h; sourceTree = "<group>"; };
-		F5A0F04A1D23ED4700D1C791 /* image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = image.png; path = LazyHackintoshGenerator/image.png; sourceTree = "<group>"; };
-		F5A0F04C1D23F1B800D1C791 /* Chameleon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Chameleon.png; path = LazyHackintoshGenerator/Chameleon.png; sourceTree = "<group>"; };
-		F5A0F0541D23F90700D1C791 /* drive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = drive.png; path = LazyHackintoshGenerator/drive.png; sourceTree = "<group>"; };
-		F5A0F0561D23F96600D1C791 /* icon-osx.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-osx.png"; path = "LazyHackintoshGenerator/icon-osx.png"; sourceTree = "<group>"; };
+		F5A0F04A1D23ED4700D1C791 /* image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = image.png; path = LazyHackintoshGenerator/Resources/image.png; sourceTree = "<group>"; };
+		F5A0F04C1D23F1B800D1C791 /* Chameleon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Chameleon.png; path = LazyHackintoshGenerator/Resources/Chameleon.png; sourceTree = "<group>"; };
+		F5A0F0541D23F90700D1C791 /* drive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = drive.png; path = LazyHackintoshGenerator/Resources/drive.png; sourceTree = "<group>"; };
+		F5A0F0561D23F96600D1C791 /* icon-osx.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-osx.png"; path = "LazyHackintoshGenerator/Resources/icon-osx.png"; sourceTree = "<group>"; };
 		F5C563E81CC49242001C00FF /* BatchProcessAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatchProcessAPI.swift; sourceTree = "<group>"; };
 		F5C606411C66D8E30092EDA6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F5D4A33A1D25A26D0013EB42 /* Credits.rtfd */ = {isa = PBXFileReference; lastKnownFileType = wrapper.rtfd; name = Credits.rtfd; path = LazyHackintoshGenerator/Credits.rtfd; sourceTree = "<group>"; };
-		F5E197CE1D168374006620F8 /* lzvn */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = lzvn; path = LazyHackintoshGenerator/lzvn; sourceTree = "<group>"; };
+		F5DC2D851D2FB6B800399552 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = LazyHackintoshGenerator/Frameworks/Sparkle.framework; sourceTree = "<group>"; };
+		F5DC2D8B1D2FD4F600399552 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = dsa_pub.pem; path = LazyHackintoshGenerator/Resources/dsa_pub.pem; sourceTree = "<group>"; };
+		F5E197CE1D168374006620F8 /* lzvn */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = lzvn; path = LazyHackintoshGenerator/Resources/lzvn; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F5DC2D861D2FB6B800399552 /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,6 +94,7 @@
 		834C96CC1D273FB200E2BA50 /* Introductions */ = {
 			isa = PBXGroup;
 			children = (
+				F56C22281D2FD9EE00E8DE70 /* appcast.xml */,
 				F56157E21CAA344700D1F581 /* README.md */,
 			);
 			name = Introductions;
@@ -97,13 +119,12 @@
 		F504117A1C644987003311DA = {
 			isa = PBXGroup;
 			children = (
+				F5DC2D841D2FB69C00399552 /* Frameworks */,
 				834C96CC1D273FB200E2BA50 /* Introductions */,
 				F50411851C644987003311DA /* LazyHackintoshGenerator */,
 				F57F43041C64A173004C1EB5 /* STPrivilegedTask */,
 				83E647D81D2878A500C822D1 /* Property lists */,
-				F5A0F0491D23ED3800D1C791 /* Pictures */,
-				F5D4A3371D25A1110013EB42 /* Supporting Files */,
-				F5E197CD1D168351006620F8 /* Executable files */,
+				F5DC2D8A1D2FD4CD00399552 /* Resources */,
 				83FF7D3D1D27379900164716 /* Self-compiling */,
 				8305E2D71D2DD82400C4BB28 /* Precompiled binary archive */,
 				F50411841C644987003311DA /* Products */,
@@ -163,6 +184,25 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		F5DC2D841D2FB69C00399552 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F5DC2D851D2FB6B800399552 /* Sparkle.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F5DC2D8A1D2FD4CD00399552 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F5DC2D8B1D2FD4F600399552 /* dsa_pub.pem */,
+				F5A0F0491D23ED3800D1C791 /* Pictures */,
+				F5D4A3371D25A1110013EB42 /* Supporting Files */,
+				F5E197CD1D168351006620F8 /* Executable files */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		F5E197CD1D168351006620F8 /* Executable files */ = {
 			isa = PBXGroup;
 			children = (
@@ -180,6 +220,7 @@
 			buildPhases = (
 				F504117F1C644987003311DA /* Sources */,
 				F50411801C644987003311DA /* Frameworks */,
+				F5DC2D881D2FD2AE00399552 /* Copy Sparkles Frameworks */,
 				F50411811C644987003311DA /* Resources */,
 				F5AFF7341D150D4100FFDD73 /* Update Version Number */,
 			);
@@ -236,6 +277,7 @@
 				F5E197CF1D168D0E006620F8 /* lzvn in Resources */,
 				F504118E1C644987003311DA /* Main.storyboard in Resources */,
 				F5A0F04D1D23F1B800D1C791 /* Chameleon.png in Resources */,
+				F5DC2D8C1D2FD4F600399552 /* dsa_pub.pem in Resources */,
 				F5A0F0551D23F90700D1C791 /* drive.png in Resources */,
 				F5D4A33B1D25A26D0013EB42 /* Credits.rtfd in Resources */,
 				F5A0F04B1D23ED4700D1C791 /* image.png in Resources */,
@@ -389,10 +431,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LazyHackintoshGenerator/Frameworks",
+				);
 				INFOPLIST_FILE = LazyHackintoshGenerator/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.PCBeta.LazyHackintoshGenerator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "LazyHackintoshGenerator-Bridging-Header.h";
@@ -407,10 +454,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LazyHackintoshGenerator/Frameworks",
+				);
 				INFOPLIST_FILE = LazyHackintoshGenerator/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.PCBeta.LazyHackintoshGenerator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "LazyHackintoshGenerator-Bridging-Header.h";
