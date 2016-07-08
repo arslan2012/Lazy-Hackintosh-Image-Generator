@@ -7,9 +7,6 @@
         <language>en</language>
         <item>
             <title>Version 2.0 (2 bugs fixed; 3 new features)</title>
-            <sparkle:releaseNotesLink>
-                http://you.com/app/2.0.html
-            </sparkle:releaseNotesLink>
             <pubDate>Fri, 08 July 2016 21:20:11 +0800</pubDate>
             <enclosure url="https://raw.githubusercontent.com/arslan2012/Lazy-Hackintosh-Image-Generator/master/LazyHackintoshGenerator.app.zip" sparkle:version="10" sparkle:shortVersionString="2.0(10)" length="5523949" type="application/octet-stream" sparkle:dsaSignature="MC0CFQCiGLLgwJK1lTgYUZdtIkFBbjXImAIUOBftQyK0ftZXOxmM2vf/mGZuLhE=" />
             <sparkle:minimumSystemVersion>10.10</sparkle:minimumSystemVersion>
