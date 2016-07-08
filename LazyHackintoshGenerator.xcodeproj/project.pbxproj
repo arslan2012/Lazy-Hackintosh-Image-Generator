@@ -12,7 +12,6 @@
 		F504118E1C644987003311DA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F504118C1C644987003311DA /* Main.storyboard */; };
 		F50411961C644B0C003311DA /* FileDropZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50411951C644B0C003311DA /* FileDropZone.swift */; };
 		F53A2C701D09AE160037268D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F504118A1C644987003311DA /* Assets.xcassets */; };
-		F53D64191D2FEDBF0031AEFA /* releasenotes.html in Resources */ = {isa = PBXBuildFile; fileRef = F53D64181D2FEDBF0031AEFA /* releasenotes.html */; };
 		F546B0451C660DDD00613AFE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F546B0471C660DDD00613AFE /* Localizable.strings */; };
 		F546B0491C660EB600613AFE /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F546B0481C660EB600613AFE /* StringExtension.swift */; };
 		F57F43071C64A1AA004C1EB5 /* STPrivilegedTask.m in Sources */ = {isa = PBXBuildFile; fileRef = F57F43061C64A1AA004C1EB5 /* STPrivilegedTask.m */; };
@@ -280,7 +279,6 @@
 				F5E197CF1D168D0E006620F8 /* lzvn in Resources */,
 				F504118E1C644987003311DA /* Main.storyboard in Resources */,
 				F5A0F04D1D23F1B800D1C791 /* Chameleon.png in Resources */,
-				F53D64191D2FEDBF0031AEFA /* releasenotes.html in Resources */,
 				F5DC2D8C1D2FD4F600399552 /* dsa_pub.pem in Resources */,
 				F5A0F0551D23F90700D1C791 /* drive.png in Resources */,
 				F5D4A33B1D25A26D0013EB42 /* Credits.rtfd in Resources */,
