@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd $(dirname "$0")
+cd "$(dirname "$0")"
 hash xcodebuild 2>/dev/null || { echo >&2 "Please install Xcode command line tools"; exit 1; }
 
 function menu
