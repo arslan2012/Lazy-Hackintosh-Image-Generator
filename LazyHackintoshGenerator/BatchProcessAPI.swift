@@ -15,28 +15,41 @@ class BatchProcessAPI{
     init(viewDelegate: BatchProcessAPIProtocol) {
         self.viewDelegate = viewDelegate
     }
-    func shellCommand(path:String, arg: [String],label: String,progress: Double){
+    func shellCommand(path:String, arg: [String],label: String,progress: Double) -> Int32{
         self.viewDelegate.didReceiveProcessName(label)
         let task = NSTask()
         task.launchPath = path
         task.arguments = arg
-        let pipe = NSPipe()
-        task.standardOutput = pipe
+        let outpipe = NSPipe()
+        task.standardOutput = outpipe
+        let errpipe = NSPipe()
+        task.standardError = errpipe
         task.launch()
         task.waitUntilExit()
         self.viewDelegate.didReceiveProgress(progress)
         if self.viewDelegate.debugLog {
-            let data = pipe.fileHandleForReading.readDataToEndOfFile()
-            let output: String = String(data: data, encoding: NSUTF8StringEncoding)!
+            var output = ""
+            var error = ""
+            let outdata = outpipe.fileHandleForReading.readDataToEndOfFile()
+            if let string = String.fromCString(UnsafePointer(outdata.bytes)) {
+                output = string.stringByTrimmingCharactersInSet(NSCharacterSet.newlineCharacterSet())
+            }
+            
+            let errdata = errpipe.fileHandleForReading.readDataToEndOfFile()
+            if let string = String.fromCString(UnsafePointer(errdata.bytes)) {
+                error = string.stringByTrimmingCharactersInSet(NSCharacterSet.newlineCharacterSet())
+            }
             let date = NSDate()
             let calendar = NSCalendar.currentCalendar()
             let components = calendar.components([.Hour, .Minute, .Second], fromDate: date)
             do{
                 try "\(path) \(arg.joinWithSeparator(" ")),progress:\(progress)".appendLineToURL(NSURL(fileURLWithPath:"\(NSHomeDirectory())/Lazy log.txt"))
                 try output.appendLineToURL(NSURL(fileURLWithPath:"\(NSHomeDirectory())/Lazy log.txt"))
+                try error.appendLineToURL(NSURL(fileURLWithPath:"\(NSHomeDirectory())/Lazy log.txt"))
                 try "==========\(components.hour):\(components.minute):\(components.second)==========".appendLineToURL(NSURL(fileURLWithPath:"\(NSHomeDirectory())/Lazy log.txt"))
             }catch{}
         }
+        return task.terminationStatus
     }
     func privilegedShellCommand(path:String, arg: [String],label: String,progress: Double){
         self.viewDelegate.didReceiveProcessName(label)
@@ -238,6 +251,9 @@ class BatchProcessAPI{
     }
     
     func checkVersion () {//progress:0%
+        if self.viewDelegate.debugLog {
+            self.shellCommand("/bin/ls",arg: ["-l","\(lazypath)/System/Library/CoreServices/SystemVersion.plist"], label: "#Mount Lazy image#", progress: 0)
+        }
         let SystemVersionPlistPath = "\(lazypath)/System/Library/CoreServices/SystemVersion.plist"
         if let myDict = NSDictionary(contentsOfFile: SystemVersionPlistPath) {
             SystemVersion = myDict.valueForKey("ProductVersion") as! String
