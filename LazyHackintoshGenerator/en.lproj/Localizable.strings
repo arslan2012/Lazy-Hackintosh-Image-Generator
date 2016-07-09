@@ -1,6 +1,6 @@
 "#Title#" =  "Lazy Hackintosh Image Generator";
-"#Debug On#" = "Enable debug mode";
-"#Debug Off#" = "Disable debug mode";
+"#Debug On#" = "Enable debug logging";
+"#Debug Off#" = "Disable debug logging";
 "#CleanDir#" = "Cleaning and creating temporary directory...";
 "#Input is void#" =  "Image didn't set!";
 "#ExtraNameError#" =  "Extra folder name is not right(should be Extra )";

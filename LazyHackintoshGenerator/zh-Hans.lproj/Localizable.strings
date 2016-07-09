@@ -1,6 +1,6 @@
 "#Title#" =  "懒人版镜像制作器";
-"#Debug On#" = "开启排错模式";
-"#Debug Off#" = "关闭排错模式";
+"#Debug On#" = "开启调试日志";
+"#Debug Off#" = "关闭调试日志";
 "#CleanDir#" = "清理并新建临时文件夹...";
 "#Input is void#" =  "未设置镜像！";
 "#ExtraNameError#" =  "Extra文件夹名错误(应该为 Extra )";

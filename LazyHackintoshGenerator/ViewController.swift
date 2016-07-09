@@ -23,6 +23,7 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
 	override func viewDidLoad() {
         if self.api.shellCommand("/usr/bin/xcode-select", arg: ["-p"], label: "", progress: 0) != 0{
             MBRPatch.enabled=false
+            MBRPatch.state = NSOffState
         }else{
             CLT.hidden=true
         }
