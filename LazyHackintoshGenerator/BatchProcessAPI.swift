@@ -239,9 +239,12 @@ class BatchProcessAPI{
     
     func checkVersion () {//progress:0%
         let SystemVersionPlistPath = "\(lazypath)/System/Library/CoreServices/SystemVersion.plist"
-        let myDict = NSDictionary(contentsOfFile: SystemVersionPlistPath)
-        SystemVersion = myDict?.valueForKey("ProductVersion") as! String
-        SystemBuildVersion = myDict?.valueForKey("ProductBuildVersion") as! String
+        if let myDict = NSDictionary(contentsOfFile: SystemVersionPlistPath) {
+            SystemVersion = myDict.valueForKey("ProductVersion") as! String
+            SystemBuildVersion = myDict.valueForKey("ProductBuildVersion") as! String
+        }else {
+            self.viewDelegate.didReceiveErrorMessage("#Error in lazy image#")
+        }
         if SystemVersion == "" || SystemBuildVersion == "" {
             self.viewDelegate.didReceiveErrorMessage("#Error in lazy image#")
         }
