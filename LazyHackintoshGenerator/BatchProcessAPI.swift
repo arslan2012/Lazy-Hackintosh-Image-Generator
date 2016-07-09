@@ -146,11 +146,17 @@ class BatchProcessAPI{
                         }
                     }
                 }
+            }catch{}
+            self.shellCommand("/usr/bin/hdiutil",arg: ["attach","/tmp/com.pcbeta.lazy/Lazy Installer.dmg","-noverify","-nobrowse","-quiet","-mountpoint",self.lazypath], label: "#Mount Lazy image#", progress: 2)
+            do{
+                let enumerator = try fileManager.contentsOfDirectoryAtPath("\(self.lazypath)/System")
+                if enumerator.count < 2 {
+                    self.viewDelegate.didReceiveErrorMessage("#Error in lazy image#")
+                }
             }
             catch{
                 self.viewDelegate.didReceiveErrorMessage("#Error in lazy image#")
             }
-            self.shellCommand("/usr/bin/hdiutil",arg: ["attach","/tmp/com.pcbeta.lazy/Lazy Installer.dmg","-noverify","-nobrowse","-quiet","-mountpoint",self.lazypath], label: "#Mount Lazy image#", progress: 2)
             self.checkVersion()
             if self.SystemVersion.VersionBiggerThan("10.11.99"){
                 self.privilegedShellCommand("/usr/sbin/diskutil",arg: ["rename","OS X Base System","Sierra Custom Installer"], label: "#COPYBASE#",progress: 2)
@@ -259,10 +265,10 @@ class BatchProcessAPI{
             SystemVersion = myDict.valueForKey("ProductVersion") as! String
             SystemBuildVersion = myDict.valueForKey("ProductBuildVersion") as! String
         }else {
-            self.viewDelegate.didReceiveErrorMessage("#Error in lazy image#")
+            self.viewDelegate.didReceiveErrorMessage("#Error in sysVer#")
         }
         if SystemVersion == "" || SystemBuildVersion == "" {
-            self.viewDelegate.didReceiveErrorMessage("#Error in lazy image#")
+            self.viewDelegate.didReceiveErrorMessage("#Error in sysVer#")
         }
         if self.viewDelegate.debugLog {
             do{
@@ -344,6 +350,22 @@ class BatchProcessAPI{
     }
     
     func LAPIC_Patch() -> Bool {//progress:0%
+        let task = NSTask()
+        task.launchPath = "/bin/sh"
+        task.arguments = ["-c","otool -tVj \(self.lazypath)/System/Library/Kernels/kernel  | grep -A 6 \"Local APIC error, ESR\" | grep _panic | awk '{print $2;}' | sed 's/.\\{2\\}/\\\\x&/g'"]
+        let outpipe = NSPipe()
+        task.standardOutput = outpipe
+        task.launch()
+        task.waitUntilExit()
+        var output = ""
+        let outdata = outpipe.fileHandleForReading.readDataToEndOfFile()
+        if let string = String.fromCString(UnsafePointer(outdata.bytes)) {
+            output = string.stringByTrimmingCharactersInSet(NSCharacterSet.newlineCharacterSet())
+            if output.characters.count == 20 {
+                self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\(output)|\\x90\\x90\\x90\\x90\\x90|g' \(self.lazypath)/System/Library/Kernels/kernel"], label: "#LAPICPATCH#",progress: 0)
+                return true
+            }
+        }
         switch (self.SystemBuildVersion) {
         case "14A389":
             self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xe8\\xd4\\x54\\xf1\\xff|\\x90\\x90\\x90\\x90\\x90|g' \(self.lazypath)/System/Library/Kernels/kernel"], label: "#LAPICPATCH#",progress: 0)

@@ -1,17 +1,23 @@
+    //UI Messages
 "#Title#" =  "懒人版镜像制作器";
 "#Debug On#" = "开启调试日志";
 "#Debug Off#" = "关闭调试日志";
-"#CleanDir#" = "清理并新建临时文件夹...";
 "#Input is void#" =  "未设置镜像！";
-"#ExtraNameError#" =  "Extra文件夹名错误(应该为 Extra )";
+"#Custom Size#" = "自定义生成镜像大小";
+    //Warning Messages
+"#WRONGSIZE#" = "对不起，您输入的格式不对或者超过了最大限制。";
+"#Failed Lapic#" = "Lapic破解失败，未找到该系统的破解方法。";
+    //Eroor Messages
+"#Error in InstallESD image#" =  "对不起，似乎未找到ESD镜像挂载点。";
+"#Error in lazy image#" =  "对不起，镜像写入失败。";
+"#Error in sysVer#" = "系统版本获取失败，请检测镜像MD5或是重启电脑";
+    //Progress Messages
+"#CleanDir#" = "清理并新建临时文件夹...";
 "#MOUNTORG#" =  "挂载镜像...";
 "#MOUNTESD#" =  "挂载ESD镜像...";
-"#Error in InstallESD image#" =  "对不起，似乎未找到ESD镜像挂载点。";
 "#Create Lazy image#" =  "正在创建镜像，请稍候...";
 "#Mount Lazy image#" =  "挂载生成的镜像...";
 "#COPYBASE#" =  "拷贝BaseSystem文件...";
-"#Error in lazy image#" =  "对不起，镜像写入失败。";
-"#Error in base system image#" =  "对不起，似乎未找到Base System镜像挂载点。";
 "#Copy ESD#" =  "拷贝InstallESD文件";
 "#DELETEPACKAGE#" =  "删除Packages文件夹替身";
 "#COPYPACKAGE#" =  "复制Packages文件夹到 /System/Installation";
@@ -28,7 +34,4 @@
 "#FINISH#" = "已经完成";
 "#MV#" = "正在将文件移动到桌面上...";
 "#Create CDR#" = "生成CDR";
-"#WRONGSIZE#" = "对不起，您输入的格式不对或者超过了最大限制。";
-"#Custom Size#" = "自定义生成镜像大小";
 "#LAPICPATCH#" = "内核Lapic补丁";
-"#Failed Lapic#" = "Lapic破解失败，未找到该系统的破解方法。";
