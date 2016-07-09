@@ -6,6 +6,21 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		F53D58A71D30B618007EDD1B /* Update */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = F53D58AA1D30B618007EDD1B /* Build configuration list for PBXAggregateTarget "Update" */;
+			buildPhases = (
+				F53D58AB1D30B625007EDD1B /* ShellScript */,
+			);
+			dependencies = (
+				F53D58B11D30C24B007EDD1B /* PBXTargetDependency */,
+			);
+			name = Update;
+			productName = Update;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		F50411871C644987003311DA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50411861C644987003311DA /* AppDelegate.swift */; };
 		F50411891C644987003311DA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50411881C644987003311DA /* ViewController.swift */; };
@@ -27,6 +42,16 @@
 		F5E197CF1D168D0E006620F8 /* lzvn in Resources */ = {isa = PBXBuildFile; fileRef = F5E197CE1D168374006620F8 /* lzvn */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		F53D58B01D30C24B007EDD1B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F504117B1C644987003311DA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F50411821C644987003311DA;
+			remoteInfo = LazyHackintoshGenerator;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		F5DC2D881D2FD2AE00399552 /* Copy Sparkles Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -43,7 +68,6 @@
 
 /* Begin PBXFileReference section */
 		8305E2D81D2DD83E00C4BB28 /* LazyHackintoshGenerator.app.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = LazyHackintoshGenerator.app.zip; sourceTree = "<group>"; };
-		83FD59041D2DD611003F93F9 /* compile.command */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = compile.command; sourceTree = "<group>"; };
 		F50411831C644987003311DA /* LazyHackintoshGenerator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LazyHackintoshGenerator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F50411861C644987003311DA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F50411881C644987003311DA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ViewController.swift; sourceTree = "<group>"; };
@@ -110,14 +134,6 @@
 			name = "Property lists";
 			sourceTree = "<group>";
 		};
-		83FF7D3D1D27379900164716 /* Self-compiling */ = {
-			isa = PBXGroup;
-			children = (
-				83FD59041D2DD611003F93F9 /* compile.command */,
-			);
-			name = "Self-compiling";
-			sourceTree = "<group>";
-		};
 		F504117A1C644987003311DA = {
 			isa = PBXGroup;
 			children = (
@@ -127,7 +143,6 @@
 				F57F43041C64A173004C1EB5 /* STPrivilegedTask */,
 				83E647D81D2878A500C822D1 /* Property lists */,
 				F5DC2D8A1D2FD4CD00399552 /* Resources */,
-				83FF7D3D1D27379900164716 /* Self-compiling */,
 				8305E2D71D2DD82400C4BB28 /* Precompiled binary archive */,
 				F50411841C644987003311DA /* Products */,
 			);
@@ -248,6 +263,9 @@
 					F50411821C644987003311DA = {
 						CreatedOnToolsVersion = 7.2;
 					};
+					F53D58A71D30B618007EDD1B = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
 				};
 			};
 			buildConfigurationList = F504117E1C644987003311DA /* Build configuration list for PBXProject "LazyHackintoshGenerator" */;
@@ -265,6 +283,7 @@
 			projectRoot = "";
 			targets = (
 				F50411821C644987003311DA /* LazyHackintoshGenerator */,
+				F53D58A71D30B618007EDD1B /* Update */,
 			);
 		};
 /* End PBXProject section */
@@ -290,6 +309,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		F53D58AB1D30B625007EDD1B /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "set -o errexit\n\n[ $CONFIGURATION = Release ] || { echo Distribution target requires \"'Release'\" build style; false; }\n\nVERSION=$(defaults read \"$BUILT_PRODUCTS_DIR/$PROJECT_NAME.app/Contents/Info\" CFBundleVersion)\nSHORTVERSION=$(defaults read \"$BUILT_PRODUCTS_DIR/$PROJECT_NAME.app/Contents/Info\" CFBundleShortVersionString)\nDOWNLOAD_BASE_URL=\"https://raw.githubusercontent.com/arslan2012/Lazy-Hackintosh-Image-Generator/master/\"\nRELEASENOTES_URL=\"https://raw.githubusercontent.com/arslan2012/Lazy-Hackintosh-Image-Generator/master/releasenotes.html\"\n\nARCHIVE_FILENAME=\"$PROJECT_NAME.app.zip\"\nDOWNLOAD_URL=\"$DOWNLOAD_BASE_URL/$ARCHIVE_FILENAME\"\nKEYCHAIN=\"$HOME/dsa_priv.pem\"\n\ncd \"$BUILT_PRODUCTS_DIR\"\nrm -f \"$PROJECT_NAME\"*.zip\nditto -ck --keepParent \"$PROJECT_NAME.app\" \"$ARCHIVE_FILENAME\"\n\nSIZE=$(stat -f %z \"$ARCHIVE_FILENAME\")\nPUBDATE=$(LC_TIME=en_US date +\"%a, %d %b %G %T %z\")\nSIGNATURE=$(\nopenssl dgst -sha1 -binary < \"$ARCHIVE_FILENAME\" \\\n| openssl dgst -dss1 -sign \"$KEYCHAIN\" | openssl enc -base64\n)\n\n[ $SIGNATURE ] || { echo Unable to load signing private key with name \"'$KEYCHAIN'\" from keychain; false; }\nrm $SRCROOT/appcast.xml\ncat <<EOF >> $SRCROOT/appcast.xml\n<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<rss version=\"2.0\" xmlns:sparkle=\"http://www.andymatuschak.org/xml-namespaces/sparkle\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n<channel>\n<title>Changelog</title>\n<link>https://raw.githubusercontent.com/arslan2012/Lazy-Hackintosh-Image-Generator/master/appcast.xml</link>\n<description>added auto update feature</description>\n<language>en</language>\n<item>\n<title>Version $VERSION</title>\n<sparkle:releaseNotesLink>$RELEASENOTES_URL</sparkle:releaseNotesLink>\n<pubDate>$PUBDATE</pubDate>\n<enclosure\nurl=\"$DOWNLOAD_URL\"\nsparkle:version=\"$VERSION\"\nsparkle:shortVersionString=\"$SHORTVERSION\"\ntype=\"application/octet-stream\"\nlength=\"$SIZE\"\nsparkle:dsaSignature=\"$SIGNATURE\"\n/>\n</item>\n</channel>\n</rss>\nEOF\n\ncp \"$BUILT_PRODUCTS_DIR/$ARCHIVE_FILENAME\" $SRCROOT";
+		};
 		F5AFF7341D150D4100FFDD73 /* Update Version Number */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -321,6 +353,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F53D58B11D30C24B007EDD1B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F50411821C644987003311DA /* LazyHackintoshGenerator */;
+			targetProxy = F53D58B01D30C24B007EDD1B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		F504118C1C644987003311DA /* Main.storyboard */ = {
@@ -473,6 +513,20 @@
 			};
 			name = Release;
 		};
+		F53D58A81D30B618007EDD1B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F53D58A91D30B618007EDD1B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -493,6 +547,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		F53D58AA1D30B618007EDD1B /* Build configuration list for PBXAggregateTarget "Update" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F53D58A81D30B618007EDD1B /* Debug */,
+				F53D58A91D30B618007EDD1B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

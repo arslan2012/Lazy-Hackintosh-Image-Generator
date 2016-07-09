@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" xmlns:dc="http://purl.org/dc/elements/1.1/">
-    <channel>
-        <title>Changelog</title>
-        <link>https://raw.githubusercontent.com/arslan2012/Lazy-Hackintosh-Image-Generator/master/appcast.xml</link>
-        <description>added auto update feature</description>
-        <language>en</language>
-        <item>
-            <title>Version 2.0 (0 bugs fixed; 1 new features)</title>
-            <pubDate>Fri, 08 July 2016 21:20:11 +0800</pubDate>
-            <sparkle:releaseNotesLink>
-                https://raw.githubusercontent.com/arslan2012/Lazy-Hackintosh-Image-Generator/master/releasenotes.html
-            </sparkle:releaseNotesLink>
-            <enclosure url="https://raw.githubusercontent.com/arslan2012/Lazy-Hackintosh-Image-Generator/master/LazyHackintoshGenerator.app.zip" sparkle:version="14" sparkle:shortVersionString="2.0(14)" length="5547609" type="application/octet-stream" sparkle:dsaSignature="MC4CFQC8SWhXVcQh3dv0bx8vFxG8cZkAcwIVAOQcsjdRFuz9yXX6BJErVoJElT4r" />
-            <sparkle:minimumSystemVersion>10.10</sparkle:minimumSystemVersion>
-        </item>
-
-    </channel>
+<channel>
+<title>Changelog</title>
+<link>https://raw.githubusercontent.com/arslan2012/Lazy-Hackintosh-Image-Generator/master/appcast.xml</link>
+<description>added auto update feature</description>
+<language>en</language>
+<item>
+<title>Version 17</title>
+<sparkle:releaseNotesLink>https://raw.githubusercontent.com/arslan2012/Lazy-Hackintosh-Image-Generator/master/releasenotes.html</sparkle:releaseNotesLink>
+<pubDate>Sat, 09 Jul 2016 14:54:14 +0800</pubDate>
+<enclosure
+url="https://raw.githubusercontent.com/arslan2012/Lazy-Hackintosh-Image-Generator/master//LazyHackintoshGenerator.app.zip"
+sparkle:version="17"
+sparkle:shortVersionString="V2.0(17)"
+type="application/octet-stream"
+length="3054279"
+sparkle:dsaSignature="MC4CFQCOK8XF/KghL4tT2JEqDNVyyZO4AwIVANk8tuDN8FrHTLTMAiPu9QS0dLc6"
+/>
+</item>
+</channel>
 </rss>
