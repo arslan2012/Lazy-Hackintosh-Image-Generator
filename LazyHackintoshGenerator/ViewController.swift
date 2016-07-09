@@ -16,10 +16,16 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
 	@IBOutlet weak var SizeUnit: NSTextField!
 	@IBOutlet weak var exitButton: NSButton!
 	@IBOutlet weak var dropKernel: NSButton!
+	@IBOutlet weak var CLT: NSButton!
 	lazy var debugLog: Bool = false
 	lazy var api : BatchProcessAPI = BatchProcessAPI(viewDelegate: self)
 	
 	override func viewDidLoad() {
+        if self.api.shellCommand("/usr/bin/xcode-select", arg: ["-p"], label: "", progress: 0) != 0{
+            MBRPatch.enabled=false
+        }else{
+            CLT.hidden=true
+        }
 		super.viewDidLoad()
 		progress.hidden = true
 		progressLable.hidden = true
@@ -58,6 +64,7 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
 			let appDelegate = NSApplication.sharedApplication().delegate as! AppDelegate
 			debugLog = appDelegate.getDebugStatus()
 			start.hidden = true
+            CLT.hidden = true
 			progress.hidden = false
 			progressLable.hidden = false
 			progress.startAnimation(self)
@@ -119,6 +126,9 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
             SizeCustomize.attributedTitle = NSAttributedString(string: "#Custom Size#".localized(), attributes: [ NSForegroundColorAttributeName : NSColor.whiteColor()])
             SizeCustomize.state = NSOffState
 		}
+	}
+	@IBAction func CLTButtonPressed(sender: NSButton) {
+        self.api.shellCommand("/bin/sh", arg: ["-c","xcode-select --install"], label: "", progress: 0)
 	}
 	@IBAction func exitButtonPressed(sender: NSButton) {
 		exit(0)

@@ -23,11 +23,14 @@
 /* Class = "NSWindow"; title = "Window"; ObjectID = "IQv-IB-iLA"; */
 "IQv-IB-iLA.title" = "Window";
 
-/* Class = "NSMenuItem"; title = "Check for Updates"; ObjectID = "PVa-qe-VTN"; */
+/* Class = "NSMenuItem"; title = "检测更新"; ObjectID = "PVa-qe-VTN"; */
 "PVa-qe-VTN.title" = "检测更新";
 
 /* Class = "NSButtonCell"; title = "自定义生成镜像大小"; ObjectID = "T6N-SL-jmh"; */
 "T6N-SL-jmh.title" = "自定义生成镜像大小";
+
+/* Class = "NSButtonCell"; title = "Install Command Line Tools"; ObjectID = "blk-oQ-iCj"; */
+"blk-oQ-iCj.title" = "安装命令行工具";
 
 /* Class = "NSTextFieldCell"; title = "拖入Extra文件夹(可选)"; ObjectID = "dYT-MI-ERe"; */
 "dYT-MI-ERe.title" = "拖入Extra文件夹(可选)";

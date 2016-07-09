@@ -221,9 +221,20 @@ AwEVARgBHQAAAAAAAAIBAAAAAAAAACgAAAAAAAAAAAAAAAAAAAEfA
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                             </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bh6-s3-93I">
+                                <rect key="frame" x="156" y="13" width="206" height="32"/>
+                                <buttonCell key="cell" type="push" title="Install Command Line Tools" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="blk-oQ-iCj">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="CLTButtonPressed:" target="XfG-lQ-9wD" id="wIP-Xx-aWj"/>
+                                </connections>
+                            </button>
                         </subviews>
                     </view>
                     <connections>
+                        <outlet property="CLT" destination="Bh6-s3-93I" id="dxh-cP-OIh"/>
                         <outlet property="CustomSize" destination="7mX-Nv-YCf" id="G6x-cO-Gkn"/>
                         <outlet property="LapicPatch" destination="MdN-qM-nVN" id="8xe-Df-rNo"/>
                         <outlet property="MBRPatch" destination="wDg-Us-Bko" id="6l1-cr-hxW"/>

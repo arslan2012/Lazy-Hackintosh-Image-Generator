@@ -74,7 +74,7 @@
 		F504118A1C644987003311DA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F504118F1C644987003311DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = LazyHackintoshGenerator/Info.plist; sourceTree = "<group>"; };
 		F50411951C644B0C003311DA /* FileDropZone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileDropZone.swift; sourceTree = "<group>"; };
-		F53D64171D2FE3F60031AEFA /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		F51408A01D31170F00031502 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		F53D64181D2FEDBF0031AEFA /* releasenotes.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = releasenotes.html; sourceTree = "<group>"; };
 		F546B0461C660DDD00613AFE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F546B0481C660EB600613AFE /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
@@ -367,7 +367,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				F5C606411C66D8E30092EDA6 /* Base */,
-				F53D64171D2FE3F60031AEFA /* zh-Hans */,
+				F51408A01D31170F00031502 /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
