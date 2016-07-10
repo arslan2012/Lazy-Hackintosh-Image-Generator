@@ -35,10 +35,10 @@
 		F5A0F0551D23F90700D1C791 /* drive.png in Resources */ = {isa = PBXBuildFile; fileRef = F5A0F0541D23F90700D1C791 /* drive.png */; };
 		F5A0F0571D23F96600D1C791 /* icon-osx.png in Resources */ = {isa = PBXBuildFile; fileRef = F5A0F0561D23F96600D1C791 /* icon-osx.png */; };
 		F5C563E91CC49242001C00FF /* BatchProcessAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C563E81CC49242001C00FF /* BatchProcessAPI.swift */; };
-		F5D4A33B1D25A26D0013EB42 /* Credits.rtfd in Resources */ = {isa = PBXBuildFile; fileRef = F5D4A33A1D25A26D0013EB42 /* Credits.rtfd */; };
 		F5DC2D861D2FB6B800399552 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5DC2D851D2FB6B800399552 /* Sparkle.framework */; };
 		F5DC2D891D2FD2CE00399552 /* Sparkle.framework in Copy Sparkles Frameworks */ = {isa = PBXBuildFile; fileRef = F5DC2D851D2FB6B800399552 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F5DC2D8C1D2FD4F600399552 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = F5DC2D8B1D2FD4F600399552 /* dsa_pub.pem */; };
+		F5DDC8511D3181140068D755 /* Credits.rtfd in Resources */ = {isa = PBXBuildFile; fileRef = F5DDC8531D3181140068D755 /* Credits.rtfd */; };
 		F5E197CF1D168D0E006620F8 /* lzvn in Resources */ = {isa = PBXBuildFile; fileRef = F5E197CE1D168374006620F8 /* lzvn */; };
 /* End PBXBuildFile section */
 
@@ -90,9 +90,10 @@
 		F5A0F0561D23F96600D1C791 /* icon-osx.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-osx.png"; path = "LazyHackintoshGenerator/Resources/icon-osx.png"; sourceTree = "<group>"; };
 		F5C563E81CC49242001C00FF /* BatchProcessAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatchProcessAPI.swift; sourceTree = "<group>"; };
 		F5C606411C66D8E30092EDA6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		F5D4A33A1D25A26D0013EB42 /* Credits.rtfd */ = {isa = PBXFileReference; lastKnownFileType = wrapper.rtfd; name = Credits.rtfd; path = LazyHackintoshGenerator/Credits.rtfd; sourceTree = "<group>"; };
 		F5DC2D851D2FB6B800399552 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = LazyHackintoshGenerator/Frameworks/Sparkle.framework; sourceTree = "<group>"; };
 		F5DC2D8B1D2FD4F600399552 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = dsa_pub.pem; path = LazyHackintoshGenerator/Resources/dsa_pub.pem; sourceTree = "<group>"; };
+		F5DDC8521D3181140068D755 /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.rtfd; name = en; path = en.lproj/Credits.rtfd; sourceTree = "<group>"; };
+		F5DDC8541D31811A0068D755 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = wrapper.rtfd; name = "zh-Hans"; path = "zh-Hans.lproj/Credits.rtfd"; sourceTree = "<group>"; };
 		F5E197CE1D168374006620F8 /* lzvn */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = lzvn; path = LazyHackintoshGenerator/Resources/lzvn; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -196,7 +197,7 @@
 		F5D4A3371D25A1110013EB42 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				F5D4A33A1D25A26D0013EB42 /* Credits.rtfd */,
+				F5DDC8531D3181140068D755 /* Credits.rtfd */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -300,7 +301,7 @@
 				F5A0F04D1D23F1B800D1C791 /* Chameleon.png in Resources */,
 				F5DC2D8C1D2FD4F600399552 /* dsa_pub.pem in Resources */,
 				F5A0F0551D23F90700D1C791 /* drive.png in Resources */,
-				F5D4A33B1D25A26D0013EB42 /* Credits.rtfd in Resources */,
+				F5DDC8511D3181140068D755 /* Credits.rtfd in Resources */,
 				F5A0F04B1D23ED4700D1C791 /* image.png in Resources */,
 				F5A0F0571D23F96600D1C791 /* icon-osx.png in Resources */,
 			);
@@ -379,6 +380,16 @@
 				F546B04A1C6617E700613AFE /* zh-Hans */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		F5DDC8531D3181140068D755 /* Credits.rtfd */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F5DDC8521D3181140068D755 /* en */,
+				F5DDC8541D31811A0068D755 /* zh-Hans */,
+			);
+			name = Credits.rtfd;
+			path = LazyHackintoshGenerator;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

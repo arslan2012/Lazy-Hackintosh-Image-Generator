@@ -84,6 +84,8 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
 			if UsingCustomSize {
 				SizeVal = CustomSize.stringValue
 			}
+            let button = view.window?.standardWindowButton(NSWindowButton.CloseButton)
+            button?.enabled = false
 			let MBRPatchState = (MBRPatch.state == NSOnState) ? true : false
             let LapicPatchState = (LapicPatch.state == NSOnState) ? true : false
 			let XCPMPatchState = (XCPMPatch.state == NSOnState) ? true : false
@@ -155,6 +157,8 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
 		self.progress.stopAnimation(self)
 		self.filePath.stringValue = ""
 		self.exitButton.hidden = false
+        let button = self.view.window?.standardWindowButton(NSWindowButton.CloseButton)
+        button?.enabled = true
         })
 	}
 }
