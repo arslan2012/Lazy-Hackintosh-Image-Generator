@@ -321,16 +321,22 @@ class BatchProcessAPI{
         task.waitUntilExit()
         self.shellCommand("/bin/cp",arg: ["/tmp/com.pcbeta.lazy/kernel","\(self.lazypath)/System/Library/Kernels"], label: "#COPYKERNELF#", progress: 1)
         if !self.SystemVersion.VersionBiggerThan("10.11") {
+            /////// 10.10.x
             self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xE8\\x25\\x00\\x00\\x00\\xEB\\x05\\xE8\\xCE\\x02\\x00\\x00|\\xE8\\x25\\x00\\x00\\x00\\x90\\x90\\xE8\\xCE\\x02\\x00\\x00|g' \(self.lazypath)/System/Library/Kernels/kernel"], label: "#COPYKERNELF#",progress: 0)
         }else if self.SystemVersion.VersionBiggerThan("10.11.99"){
-            if self.SystemBuildVersion == "16A239j" || self.SystemBuildVersion == "16A238m"{
+            if self.SystemBuildVersion == "16A201w"{
+                /////// 10.12.DB1.116A201w
+                self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xC3\\x48\\x85\\xDB\\x74\\x71\\x48\\x8B\\x03\\x48\\x89\\xDF\\xFF\\x50\\x28\\x48|\\xC3\\x48\\x85\\xDB\\xEB\\x12\\x48\\x8B\\x03\\x48\\x89\\xDF\\xFF\\x50\\x28\\x48|g' \(self.lazypath)/System/Library/Kernels/kernel"], label: "#COPYKERNELF#",progress: 0)
+                self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xE8\\x25\\x00\\x00\\x00\\xEB\\x05\\xE8\\xCE\\x02\\x00\\x00|\\xE8\\x25\\x00\\x00\\x00\\x90\\x90\\xE8\\xCE\\x02\\x00\\x00|g' \(self.lazypath)/System/Library/Kernels/kernel"], label: "#COPYKERNELF#",progress: 0)
+            }else if self.SystemBuildVersion == "16A238m" || self.SystemBuildVersion == "16A239j"{
+                /////// 10.12.PB1.16A238m, 10.12.DB2.16A239j
                 self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xC3\\x48\\x85\\xDB\\x74\\x71\\x48\\x8B\\x03\\x48\\x89\\xDF\\xFF\\x50\\x28\\x48|\\xC3\\x48\\x85\\xDB\\xEB\\x12\\x48\\x8B\\x03\\x48\\x89\\xDF\\xFF\\x50\\x28\\x48|g' \(self.lazypath)/System/Library/Kernels/kernel"], label: "#COPYKERNELF#",progress: 0)
                 self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xE8\\x25\\x00\\x00\\x00\\xEB\\x05\\xE8\\x7E\\x05\\x00\\x00|\\xE8\\x25\\x00\\x00\\x00\\x90\\x90\\xE8\\x7E\\x05\\x00\\x00|g' \(self.lazypath)/System/Library/Kernels/kernel"], label: "#COPYKERNELF#",progress: 0)
-            }else {
-                self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xC3\\x48\\x85\\xDB\\x74\\x71\\x48\\x8B\\x03\\x48\\x89\\xDF\\xFF\\x50\\x28\\x48|\\xC3\\x48\\x85\\xDB\\xEB\\x12\\x48\\x8B\\x03\\x48\\x89\\xDF\\xFF\\x50\\x28\\x48|g' \(self.lazypath)/System/Library/Kernels/kernel"], label: "#COPYKERNELF#",progress: 0)
             }
         }else {
+            //////// 10.11.x
             self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xC3\\x48\\x85\\xDB\\x74\\x70\\x48\\x8B\\x03\\x48\\x89\\xDF\\xFF\\x50\\x28\\x48|\\xC3\\x48\\x85\\xDB\\xEB\\x12\\x48\\x8B\\x03\\x48\\x89\\xDF\\xFF\\x50\\x28\\x48|g' \(self.lazypath)/System/Library/Kernels/kernel"], label: "#COPYKERNELF#",progress: 0)
+            self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xE8\\x25\\x00\\x00\\x00\\xEB\\x05\\xE8\\xCE\\x02\\x00\\x00|\\xE8\\x25\\x00\\x00\\x00\\x90\\x90\\xE8\\xCE\\x02\\x00\\x00|g' \(self.lazypath)/System/Library/Kernels/kernel"], label: "#COPYKERNELF#",progress: 0)
         }
         self.shellCommand("/bin/chmod",arg: ["+x","\(self.lazypath)/System/Library/Kernels/kernel"], label: "#COPYKERNELF#",progress: 0)
     }
