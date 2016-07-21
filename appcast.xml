@@ -6,16 +6,16 @@
 <description>added auto update feature</description>
 <language>en</language>
 <item>
-<title>Version 31</title>
+<title>Version 32</title>
 <sparkle:releaseNotesLink>https://raw.githubusercontent.com/arslan2012/Lazy-Hackintosh-Image-Generator/master/releasenotes.html</sparkle:releaseNotesLink>
-<pubDate>Mon, 18 Jul 2016 21:53:06 +0800</pubDate>
+<pubDate>Thu, 21 Jul 2016 11:06:42 +0800</pubDate>
 <enclosure
 url="https://raw.githubusercontent.com/arslan2012/Lazy-Hackintosh-Image-Generator/master//LazyHackintoshGenerator.app.zip"
-sparkle:version="31"
+sparkle:version="32"
 sparkle:shortVersionString="V2.0"
 type="application/octet-stream"
-length="3093136"
-sparkle:dsaSignature="MC4CFQDXBcljFivY8N/GfLXbHsKwBMfRZwIVANuZJN2CS31OkZh0xWAD+0zP3jad"
+length="3093290"
+sparkle:dsaSignature="MCwCFC4rkM7e7GLbq27hr4I2qYp0dkiBAhRD1T7D0o7X3Fr553SeffJcCigQQQ=="
 />
 </item>
 </channel>
