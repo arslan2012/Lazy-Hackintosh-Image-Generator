@@ -409,18 +409,15 @@ class BatchProcessAPI{
         case "15F34":
             self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xe8\\xcd\\x46\\xf0\\xff|\\x90\\x90\\x90\\x90\\x90|g' \(self.lazypath)/System/Library/Kernels/kernel"], label: "#LAPICPATCH#",progress: 0)
             return true
+        case "15G31":
+            self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xe8\\x0d\\x46\\xf0\\xff|\\x90\\x90\\x90\\x90\\x90|g' \(self.lazypath)/System/Library/Kernels/kernel"], label: "#LAPICPATCH#",progress: 0)
+            return true
         ///////below is beta version patches
         case "16A201w":
             self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xe8\\x3d\\xdf\\xee\\xff|\\x90\\x90\\x90\\x90\\x90|g' \(self.lazypath)/System/Library/Kernels/kernel"], label: "#LAPICPATCH#",progress: 0)
             return true
-        case "16A239j":
-            self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xe8\\x2d\\x58\\xee\\xff|\\x90\\x90\\x90\\x90\\x90|g' \(self.lazypath)/System/Library/Kernels/kernel"], label: "#LAPICPATCH#",progress: 0)
-            return true
         case "16A238m":
             self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xe8\\x2d\\x58\\xee\\xff|\\x90\\x90\\x90\\x90\\x90|g' \(self.lazypath)/System/Library/Kernels/kernel"], label: "#LAPICPATCH#",progress: 0)
-            return true
-        case "16A254g":
-            self.shellCommand("/bin/sh",arg: ["-c","perl -pi -e 's|\\xe8\\x0d\\x46\\xf0\\xff|\\x90\\x90\\x90\\x90\\x90|g' \(self.lazypath)/System/Library/Kernels/kernel"], label: "#LAPICPATCH#",progress: 0)
             return true
         default:
             return false
