@@ -21,7 +21,7 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
 	lazy var api : BatchProcessAPI = BatchProcessAPI(viewDelegate: self)
 	
 	override func viewDidLoad() {
-        if self.api.shellCommand("/usr/bin/xcode-select", arg: ["-p"], label: "", progress: 0) != 0{
+        if shellCommand.sharedInstance.Command(self,"/usr/bin/xcode-select", ["-p"], "", 0) != 0{
             MBRPatch.enabled=false
             MBRPatch.state = NSOffState
         }else{
@@ -98,7 +98,7 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
 			CustomSize.enabled=false
 			dropKernel.enabled=false
             LapicPatch.enabled=false
-            api.startGenerating(filePath.stringValue,SizeVal: SizeVal,MBRPatchState: MBRPatchState,LapicPatchState:LapicPatchState,XCPMPatchState: XCPMPatchState,cdrState: cdrState,dropKernelState:dropKernelState,extraDroppedFilePath: extra.droppedFilePath)
+            api.startGenerating(filePath.stringValue,SizeVal,MBRPatchState,LapicPatchState,XCPMPatchState,cdrState,dropKernelState,extra.droppedFilePath)
 		}
 	}
 	@IBAction func XCPMClicked(sender: NSButton) {
@@ -131,7 +131,7 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
 		}
 	}
 	@IBAction func CLTButtonPressed(sender: NSButton) {
-        self.api.shellCommand("/bin/sh", arg: ["-c","xcode-select --install"], label: "", progress: 0)
+        shellCommand.sharedInstance.Command(self,"/bin/sh", ["-c","xcode-select --install"], "", 0)
 	}
 	@IBAction func exitButtonPressed(sender: NSButton) {
 		exit(0)

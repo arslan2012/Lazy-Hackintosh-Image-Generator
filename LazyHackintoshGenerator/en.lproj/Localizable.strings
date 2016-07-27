@@ -29,9 +29,10 @@
 "#XCPMPATCH#" =  "Patching XCPM";
 "#COPYEXTRA#" =  "Copying Extra folder";
 "#EJECTBASE#" =  "Unmounting BaseSystem";
-"#EJECTESD#" =  "Unmounting . . .";
-"#EJECTORG#" =  "Unmounting . .";
+"#EJECTESD#" =  "Unmounting . . ";
+"#EJECTORG#" =  "Unmounting . . .";
 "#EJECTLAZY#" =  "Unmounting .";
+"#Finishing#" = "process finished,removing temporary directory";
 "#FINISH#" = "Done!";
 "#MV#" = "Moving files to desktop";
 "#LAPICPATCH#" = "Patching Lapic";

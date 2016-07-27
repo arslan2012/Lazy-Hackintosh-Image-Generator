@@ -28,9 +28,10 @@
 "#XCPMPATCH#" =  "内核XCPM补丁";
 "#COPYEXTRA#" =  "复制Extra文件夹";
 "#EJECTBASE#" =  "卸载BaseSystem镜像";
-"#EJECTESD#" =  "卸载ESD镜像 . . .";
-"#EJECTORG#" =  "卸载镜像 . .";
+"#EJECTESD#" =  "卸载ESD镜像 . .";
+"#EJECTORG#" =  "卸载镜像 . . .";
 "#EJECTLAZY#" =  "卸载懒人版镜像 .";
+"#Finishing#" = "操作完成，正在删除临时文件夹";
 "#FINISH#" = "已经完成";
 "#MV#" = "正在将文件移动到桌面上...";
 "#Create CDR#" = "生成CDR";
