@@ -317,23 +317,12 @@ class BatchProcessAPI{
     }
     
     private func LAPIC_Patch() -> Bool {//progress:0%
-        let task = NSTask()
-        task.launchPath = "/bin/sh"
-        task.arguments = ["-c","otool -tVj \(self.lazypath)/System/Library/Kernels/kernel  | grep -A 6 \"Local APIC error, ESR\" | grep _panic | awk '{print $2;}' | sed 's/.\\{2\\}/\\\\x&/g'"]
-        let outpipe = NSPipe()
-        task.standardOutput = outpipe
-        task.launch()
-        task.waitUntilExit()
-        var output = ""
-        let outdata = outpipe.fileHandleForReading.readDataToEndOfFile()
-        if let string = String.fromCString(UnsafePointer(outdata.bytes)) {
-            output = string.stringByTrimmingCharactersInSet(NSCharacterSet.newlineCharacterSet())
-            if output.characters.count == 20 {
-                shell.Command(self.viewDelegate,"/bin/sh",["-c","perl -pi -e 's|\(output)|\\x90\\x90\\x90\\x90\\x90|g' \(self.lazypath)/System/Library/Kernels/kernel"], "#LAPICPATCH#",0)
-                return true
-            }
+        let output = shell.Command(self.viewDelegate,"/bin/sh",["-c","otool -tVj \(self.lazypath)/System/Library/Kernels/kernel  | grep -A 6 \"Local APIC error, ESR\" | grep _panic | awk '{print $2;}' | sed 's/.\\{2\\}/\\\\x&/g'"], "#LAPICPATCH#",0).output
+        if output.characters.count == 20 {
+            shell.Command(self.viewDelegate,"/bin/sh",["-c","perl -pi -e 's|\(output)|\\x90\\x90\\x90\\x90\\x90|g' \(self.lazypath)/System/Library/Kernels/kernel"], "#LAPICPATCH#",0)
+            return true
         }
-        var transients:[String:String]=[
+        let transients:[String:String]=[
             "14A389":"\\xe8\\xd4\\x54\\xf1\\xff",
             "14B25":"\\xe8\\xd4\\x54\\xf1\\xff",
             "14C109":"\\xe8\\x54\\xed\\xf0\\xff",
@@ -350,7 +339,7 @@ class BatchProcessAPI{
             ///////below is beta version patches
             "16A201w":"\\xe8\\x3d\\xdf\\xee\\xff",
             "16A238m":"\\xe8\\x2d\\x58\\xee\\xff"
-            ]
+        ]
         if let key = transients[self.SystemBuildVersion] {
             shell.Command(self.viewDelegate,"/bin/sh",["-c","perl -pi -e 's|\(key)|\\x90\\x90\\x90\\x90\\x90|g' \(self.lazypath)/System/Library/Kernels/kernel"], "#LAPICPATCH#",0)
             return true

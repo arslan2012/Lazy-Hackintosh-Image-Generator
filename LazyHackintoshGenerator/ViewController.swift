@@ -21,7 +21,7 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
 	lazy var api : BatchProcessAPI = BatchProcessAPI(viewDelegate: self)
 	
 	override func viewDidLoad() {
-        if shellCommand.sharedInstance.Command(self,"/usr/bin/xcode-select", ["-p"], "", 0) != 0{
+        if shellCommand.sharedInstance.Command(self,"/usr/bin/xcode-select", ["-p"], "", 0).status != 0{
             MBRPatch.enabled=false
             MBRPatch.state = NSOffState
         }else{
