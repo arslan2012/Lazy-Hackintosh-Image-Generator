@@ -110,7 +110,7 @@ AwEVARgBHQAAAAAAAAIBAAAAAAAAACgAAAAAAAAAAAAAAAAAAAEfA
                                     <font key="font" size="13" name=".PingFangSC-Regular"/>
                                 </buttonCell>
                             </button>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cq3-tM-ywW" customClass="FileDropZone" customModule="LazyHackintoshGenerator" customModuleProvider="target">
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cq3-tM-ywW" customClass="InstallerDrop" customModule="LazyHackintoshGenerator" customModuleProvider="target">
                                 <rect key="frame" x="20" y="170" width="180" height="92"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="RUM-f6-V2X"/>
                             </imageView>
@@ -200,7 +200,7 @@ AwEVARgBHQAAAAAAAAIBAAAAAAAAACgAAAAAAAAAAAAAAAAAAAEfA
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="600-wD-mII" customClass="OtherFileDrop" customModule="LazyHackintoshGenerator" customModuleProvider="target">
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="600-wD-mII" customClass="ExtraDrop" customModule="LazyHackintoshGenerator" customModuleProvider="target">
                                 <rect key="frame" x="299" y="170" width="138" height="95"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="oVv-hy-Ug5"/>
                             </imageView>
@@ -236,6 +236,7 @@ AwEVARgBHQAAAAAAAAIBAAAAAAAAACgAAAAAAAAAAAAAAAAAAAEfA
                     <connections>
                         <outlet property="CLT" destination="Bh6-s3-93I" id="dxh-cP-OIh"/>
                         <outlet property="CustomSize" destination="7mX-Nv-YCf" id="G6x-cO-Gkn"/>
+                        <outlet property="Installer" destination="Cq3-tM-ywW" id="Gua-Wl-nLx"/>
                         <outlet property="LapicPatch" destination="MdN-qM-nVN" id="8xe-Df-rNo"/>
                         <outlet property="MBRPatch" destination="wDg-Us-Bko" id="6l1-cr-hxW"/>
                         <outlet property="SizeCustomize" destination="fQS-po-7KX" id="r4o-cl-Rir"/>

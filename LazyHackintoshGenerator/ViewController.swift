@@ -1,6 +1,6 @@
 import Cocoa
 
-class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol {
+class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol,FileDropZoneProtocol {
 	@IBOutlet weak var filePath: NSTextField!
 	@IBOutlet weak var progress: NSProgressIndicator!
 	@IBOutlet weak var extraPath: NSTextField!
@@ -10,7 +10,8 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
 	@IBOutlet weak var LapicPatch: NSButton!
 	@IBOutlet weak var XCPMPatch: NSButton!
 	@IBOutlet weak var cdr: NSButton!
-	@IBOutlet weak var extra: OtherFileDrop!
+	@IBOutlet weak var Installer: FileDropZone!
+	@IBOutlet weak var extra: FileDropZone!
 	@IBOutlet weak var SizeCustomize: NSButton!
 	@IBOutlet weak var CustomSize: NSTextField!
 	@IBOutlet weak var SizeUnit: NSTextField!
@@ -28,6 +29,8 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
             CLT.hidden=true
         }
 		super.viewDidLoad()
+        extra.viewDelegate = self
+        Installer.viewDelegate = self
 		progress.hidden = true
 		progressLable.hidden = true
 		CustomSize.hidden = true
@@ -98,9 +101,10 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
 			CustomSize.enabled=false
 			dropKernel.enabled=false
             LapicPatch.enabled=false
-            api.startGenerating(filePath.stringValue,SizeVal,MBRPatchState,LapicPatchState,XCPMPatchState,cdrState,dropKernelState,extra.droppedFilePath)
+            api.startGenerating(filePath.stringValue,SizeVal,MBRPatchState,LapicPatchState,XCPMPatchState,cdrState,dropKernelState,extraPath.stringValue)
 		}
 	}
+
 	@IBAction func XCPMClicked(sender: NSButton) {
 		if XCPMPatch.state == NSOnState {
 				dropKernel.state = NSOnState
@@ -161,5 +165,11 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
         button?.enabled = true
         })
 	}
+    func didReceiveInstaller(filePath:String){
+        self.filePath.stringValue = filePath
+    }
+    func didReceiveExtra(filePath:String){
+        self.extraPath.stringValue = filePath
+    }
 }
 
