@@ -26,6 +26,7 @@
 		F50411891C644987003311DA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50411881C644987003311DA /* ViewController.swift */; };
 		F504118E1C644987003311DA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F504118C1C644987003311DA /* Main.storyboard */; };
 		F50411961C644B0C003311DA /* FileDropZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50411951C644B0C003311DA /* FileDropZone.swift */; };
+		F52BE5001D4E39E80053C2A0 /* releasenotes_cn.html in Resources */ = {isa = PBXBuildFile; fileRef = F52BE4FF1D4E39E80053C2A0 /* releasenotes_cn.html */; };
 		F53A2C701D09AE160037268D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F504118A1C644987003311DA /* Assets.xcassets */; };
 		F546B0451C660DDD00613AFE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F546B0471C660DDD00613AFE /* Localizable.strings */; };
 		F546B0491C660EB600613AFE /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F546B0481C660EB600613AFE /* StringExtension.swift */; };
@@ -76,6 +77,7 @@
 		F504118F1C644987003311DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = LazyHackintoshGenerator/Info.plist; sourceTree = "<group>"; };
 		F50411951C644B0C003311DA /* FileDropZone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileDropZone.swift; sourceTree = "<group>"; };
 		F51408A01D31170F00031502 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		F52BE4FF1D4E39E80053C2A0 /* releasenotes_cn.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = releasenotes_cn.html; sourceTree = "<group>"; };
 		F53D64181D2FEDBF0031AEFA /* releasenotes.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = releasenotes.html; sourceTree = "<group>"; };
 		F546B0461C660DDD00613AFE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F546B0481C660EB600613AFE /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 		834C96CC1D273FB200E2BA50 /* Introductions */ = {
 			isa = PBXGroup;
 			children = (
+				F52BE4FF1D4E39E80053C2A0 /* releasenotes_cn.html */,
 				F53D64181D2FEDBF0031AEFA /* releasenotes.html */,
 				F56C22281D2FD9EE00E8DE70 /* appcast.xml */,
 				F56157E21CAA344700D1F581 /* README.md */,
@@ -303,6 +306,7 @@
 				F504118E1C644987003311DA /* Main.storyboard in Resources */,
 				F5A0F04D1D23F1B800D1C791 /* Chameleon.png in Resources */,
 				F5DC2D8C1D2FD4F600399552 /* dsa_pub.pem in Resources */,
+				F52BE5001D4E39E80053C2A0 /* releasenotes_cn.html in Resources */,
 				F5A0F0551D23F90700D1C791 /* drive.png in Resources */,
 				F5DDC8511D3181140068D755 /* Credits.rtfd in Resources */,
 				F5A0F04B1D23ED4700D1C791 /* image.png in Resources */,
@@ -324,7 +328,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "set -o errexit\n\n[ $CONFIGURATION = Release ] || { echo Distribution target requires \"'Release'\" build style; false; }\n\nVERSION=$(defaults read \"$BUILT_PRODUCTS_DIR/$PROJECT_NAME.app/Contents/Info\" CFBundleVersion)\nSHORTVERSION=$(defaults read \"$BUILT_PRODUCTS_DIR/$PROJECT_NAME.app/Contents/Info\" CFBundleShortVersionString)\nDOWNLOAD_BASE_URL=\"https://raw.githubusercontent.com/arslan2012/Lazy-Hackintosh-Image-Generator/master/\"\nRELEASENOTES_URL=\"https://raw.githubusercontent.com/arslan2012/Lazy-Hackintosh-Image-Generator/master/releasenotes.html\"\n\nARCHIVE_FILENAME=\"$PROJECT_NAME.app.zip\"\nDOWNLOAD_URL=\"$DOWNLOAD_BASE_URL/$ARCHIVE_FILENAME\"\nKEYCHAIN=\"${HOME}/dsa_priv.pem\"\n\ncd \"$BUILT_PRODUCTS_DIR\"\nrm -f \"$PROJECT_NAME\"*.zip\nditto -ck --keepParent \"$PROJECT_NAME.app\" \"$ARCHIVE_FILENAME\"\n\nSIZE=$(stat -f %z \"$ARCHIVE_FILENAME\")\nPUBDATE=$(LC_TIME=en_US date +\"%a, %d %b %G %T %z\")\nSIGNATURE=$(\nopenssl dgst -sha1 -binary < \"$ARCHIVE_FILENAME\" \\\n| openssl dgst -dss1 -sign \"$KEYCHAIN\" | openssl enc -base64\n)\n\n[ $SIGNATURE ] || { echo Unable to load signing private key with name \"'$KEYCHAIN'\" from keychain; false; }\nrm $SRCROOT/appcast.xml\ncat <<EOF >> $SRCROOT/appcast.xml\n<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<rss version=\"2.0\" xmlns:sparkle=\"http://www.andymatuschak.org/xml-namespaces/sparkle\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n<channel>\n<title>Changelog</title>\n<link>https://raw.githubusercontent.com/arslan2012/Lazy-Hackintosh-Image-Generator/master/appcast.xml</link>\n<description>added auto update feature</description>\n<language>en</language>\n<item>\n<title>Version $VERSION</title>\n<sparkle:releaseNotesLink>$RELEASENOTES_URL</sparkle:releaseNotesLink>\n<pubDate>$PUBDATE</pubDate>\n<enclosure\nurl=\"$DOWNLOAD_URL\"\nsparkle:version=\"$VERSION\"\nsparkle:shortVersionString=\"$SHORTVERSION\"\ntype=\"application/octet-stream\"\nlength=\"$SIZE\"\nsparkle:dsaSignature=\"$SIGNATURE\"\n/>\n</item>\n</channel>\n</rss>\nEOF\n\nmv \"$BUILT_PRODUCTS_DIR/$ARCHIVE_FILENAME\" $SRCROOT";
+			shellScript = "set -o errexit\n\n[ $CONFIGURATION = Release ] || { echo Distribution target requires \"'Release'\" build style; false; }\n\nVERSION=$(defaults read \"$BUILT_PRODUCTS_DIR/$PROJECT_NAME.app/Contents/Info\" CFBundleVersion)\nSHORTVERSION=$(defaults read \"$BUILT_PRODUCTS_DIR/$PROJECT_NAME.app/Contents/Info\" CFBundleShortVersionString)\nDOWNLOAD_BASE_URL=\"https://raw.githubusercontent.com/arslan2012/Lazy-Hackintosh-Image-Generator/master/\"\nRELEASENOTES_URL=\"https://raw.githubusercontent.com/arslan2012/Lazy-Hackintosh-Image-Generator/master/releasenotes.html\"\nRELEASENOTES_URL_CN=\"https://raw.githubusercontent.com/arslan2012/Lazy-Hackintosh-Image-Generator/master/releasenotes_cn.html\"\n\nARCHIVE_FILENAME=\"$PROJECT_NAME.app.zip\"\nDOWNLOAD_URL=\"$DOWNLOAD_BASE_URL/$ARCHIVE_FILENAME\"\nKEYCHAIN=\"${HOME}/dsa_priv.pem\"\n\ncd \"$BUILT_PRODUCTS_DIR\"\nrm -f \"$PROJECT_NAME\"*.zip\nditto -ck --keepParent \"$PROJECT_NAME.app\" \"$ARCHIVE_FILENAME\"\n\nSIZE=$(stat -f %z \"$ARCHIVE_FILENAME\")\nPUBDATE=$(LC_TIME=en_US date +\"%a, %d %b %G %T %z\")\nSIGNATURE=$(\nopenssl dgst -sha1 -binary < \"$ARCHIVE_FILENAME\" \\\n| openssl dgst -dss1 -sign \"$KEYCHAIN\" | openssl enc -base64\n)\n\n[ $SIGNATURE ] || { echo Unable to load signing private key with name \"'$KEYCHAIN'\" from keychain; false; }\nrm $SRCROOT/appcast.xml\ncat <<EOF >> $SRCROOT/appcast.xml\n<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<rss version=\"2.0\" xmlns:sparkle=\"http://www.andymatuschak.org/xml-namespaces/sparkle\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n<channel>\n<title>Changelog</title>\n<link>https://raw.githubusercontent.com/arslan2012/Lazy-Hackintosh-Image-Generator/master/appcast.xml</link>\n<description>added auto update feature</description>\n<language>en</language>\n<item>\n<title>Version $VERSION</title>\n<sparkle:releaseNotesLink>$RELEASENOTES_URL</sparkle:releaseNotesLink>\n<sparkle:releaseNotesLink xml:lang=\"cn\">RELEASENOTES_URL_CN</sparkle:releaseNotesLink>\n<sparkle:releaseNotesLink xml:lang=\"hk\">RELEASENOTES_URL_CN</sparkle:releaseNotesLink>\n<sparkle:releaseNotesLink xml:lang=\"tw\">RELEASENOTES_URL_CN</sparkle:releaseNotesLink>\n<pubDate>$PUBDATE</pubDate>\n<enclosure\nurl=\"$DOWNLOAD_URL\"\nsparkle:version=\"$VERSION\"\nsparkle:shortVersionString=\"$SHORTVERSION\"\ntype=\"application/octet-stream\"\nlength=\"$SIZE\"\nsparkle:dsaSignature=\"$SIGNATURE\"\n/>\n</item>\n</channel>\n</rss>\nEOF\n\nmv \"$BUILT_PRODUCTS_DIR/$ARCHIVE_FILENAME\" $SRCROOT";
 		};
 		F5AFF7341D150D4100FFDD73 /* Update Version Number */ = {
 			isa = PBXShellScriptBuildPhase;
