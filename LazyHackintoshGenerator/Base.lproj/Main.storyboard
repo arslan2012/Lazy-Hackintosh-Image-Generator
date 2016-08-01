@@ -12,7 +12,7 @@
                         <items>
                             <menuItem title="Lazy Hackintosh Image Generator" id="1Xt-HY-uBw">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="Lazy Hackintosh Image Generator" systemMenu="apple" id="uQy-DD-JDr">
+                                <menu key="submenu" title="Lazy Hackintosh Image Generator" systemMenu="apple" autoenablesItems="NO" id="uQy-DD-JDr">
                                     <items>
                                         <menuItem title="About LazyHackintoshGenerator" id="5kV-Vb-QxS">
                                             <modifierMask key="keyEquivalentModifierMask"/>
@@ -47,7 +47,14 @@
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="LazyHackintoshGenerator" customModuleProvider="target"/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="LazyHackintoshGenerator" customModuleProvider="target">
+                    <connections>
+                        <outlet property="about" destination="5kV-Vb-QxS" id="cc8-YF-kgA"/>
+                        <outlet property="debugging" destination="m5L-xw-t0a" id="feu-9G-hvR"/>
+                        <outlet property="quit" destination="4sb-4s-VLi" id="wDE-uq-Uaz"/>
+                        <outlet property="update" destination="PVa-qe-VTN" id="HWr-74-c1g"/>
+                    </connections>
+                </customObject>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <customObject id="Ce2-X5-nb6" customClass="SUUpdater"/>
             </objects>

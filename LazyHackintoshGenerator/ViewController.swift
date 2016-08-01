@@ -19,7 +19,7 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
 	@IBOutlet weak var dropKernel: NSButton!
 	@IBOutlet weak var CLT: NSButton!
 	lazy var debugLog: Bool = false
-	lazy var api : BatchProcessAPI = BatchProcessAPI(viewDelegate: self)
+	lazy var api : BatchProcessAPI = BatchProcessAPI(viewDelegate: self,AppDelegate: NSApplication.sharedApplication().delegate as! MenuControlProtocol)
 	
 	override func viewDidLoad() {
         if shellCommand.sharedInstance.Command(self,"/usr/bin/xcode-select", ["-p"], "", 0).status != 0{
