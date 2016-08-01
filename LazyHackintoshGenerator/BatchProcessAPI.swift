@@ -363,7 +363,7 @@ class BatchProcessAPI{
             }
             var tmp1 = 0,tmp2 = 0,key = ""
             let file: NSData! = NSData(contentsOfURL: NSURL(fileURLWithPath: "\(self.lazypath)/System/Library/Kernels/kernel"))
-            for i in 0...file.length {
+            for i in 0...(file.length - offset) {
                 file.getBytes(&tmp1, range: NSMakeRange(i, 7))
                 file.getBytes(&tmp2, range: NSMakeRange(i+offset, 7))
                 if tmp1 == FindingBlock && tmp2 == FindingBlock {
