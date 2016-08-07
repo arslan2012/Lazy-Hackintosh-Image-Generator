@@ -80,8 +80,8 @@ class InstallerDrop: FileDropZone {
                             myFiledialog.worksWhenModal = true
                             myFiledialog.allowsMultipleSelection = false
                             myFiledialog.resolvesAliases = true
-                            myFiledialog.title = "Kexts selection"
-                            myFiledialog.message = "please select Installer Image or app"
+                            myFiledialog.title = "#Image Title#".localized()
+                            myFiledialog.message = "#Image Msg#".localized()
                             myFiledialog.allowedFileTypes = ["dmg","app"]
                             myFiledialog.runModal()
                             
@@ -143,8 +143,8 @@ class ExtraDrop : FileDropZone{
                             myFiledialog.canChooseDirectories = true
                             myFiledialog.canChooseFiles = false
                             myFiledialog.resolvesAliases = true
-                            myFiledialog.title = "Kexts selection"
-                            myFiledialog.message = "please select your extra folder"
+                            myFiledialog.title = "#Extra Title#".localized()
+                            myFiledialog.message = "#Extra Msg#".localized()
                             myFiledialog.allowedFileTypes = ["extra"]
                             myFiledialog.runModal()
                             

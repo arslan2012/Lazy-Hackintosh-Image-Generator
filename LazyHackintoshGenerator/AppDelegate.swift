@@ -8,7 +8,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, MenuControlProtocol {
 	@IBOutlet weak var quit: NSMenuItem!
 	@IBOutlet weak var update: NSMenuItem!
 	
-	lazy var debugStatus = false
 	func applicationDidFinishLaunching(aNotification: NSNotification) {
 		// Insert code here to initialize your application
 	}
@@ -20,15 +19,17 @@ class AppDelegate: NSObject, NSApplicationDelegate, MenuControlProtocol {
 	@IBAction func DebugMenuPressed(sender: NSMenuItem) {
 		if sender.title == "#Debug On#".localized(){
 			sender.title = "#Debug Off#".localized()
-			debugStatus = true
 		}else {
 			sender.title = "#Debug On#".localized()
-			debugStatus = false
 		}
 	}
 	
 	func getDebugStatus() ->Bool{
-		return debugStatus
+        if debugging.title == "#Debug On#".localized(){
+            return false
+        }else {
+            return true
+        }
 	}
     func ProcessStarted(){
         for item in [about,debugging,quit,update] {

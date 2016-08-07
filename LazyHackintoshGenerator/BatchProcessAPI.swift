@@ -12,7 +12,7 @@ protocol MenuControlProtocol {
 }
 
 class BatchProcessAPI{
-    let lazypath = "/tmp/com.pcbeta.lazy/LazyMount"
+    var lazypath = "/tmp/com.pcbeta.lazy/LazyMount"
     let orgpath = "/tmp/com.pcbeta.lazy/OriginMount"
     var esdpath="/tmp/com.pcbeta.lazy/ESDMount"
     var SystemVersion = ""
@@ -28,17 +28,26 @@ class BatchProcessAPI{
     
     //the main work flow
     
-    func startGenerating(filePath:String,_ SizeVal:String,_ MBRPatchState:Bool,_ LapicPatchState:Bool,_ XCPMPatchState:Bool,_ cdrState:Bool,_ dropKernelState:Bool,_ extraDroppedFilePath:String){
+    func startGenerating(filePath:String,_ SizeVal:String,_ MBRPatchState:Bool,_ LapicPatchState:Bool,_ XCPMPatchState:Bool,_ cdrState:Bool,_ dropKernelState:Bool,_ extraDroppedFilePath:String,_ Path:String,_ MountPath:String){
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0),{
             self.AppDelegate.ProcessStarted()
             ////////////////////////////cleaning processes////////////////////////progress:3%
+            if self.viewDelegate.debugLog {
+                do{
+                    try "=======Workflow Starting=======".appendLineToURL(NSURL(fileURLWithPath:"\(NSHomeDirectory())/Desktop/Lazy log.txt"))
+                }catch{}
+            }
             self.clean()
             ////////////////////////////mounting processes////////////////////////progress:4%
             self.mount(filePath)
             ////////////////////////////creating processes////////////////////////progress:24%
-            self.create(SizeVal)
+            self.create(SizeVal,MountPath)
             ////////////////////////////copying processes/////////////////////////progress:54%
-            self.copy()
+            if MountPath == "" {
+                self.copy()
+            }else{
+                self.copy(MountPath)
+            }
             ////////////////////////////patching processes////////////////////////progress:6%
             if MBRPatchState {
                 self.MBR_Patch()
@@ -66,11 +75,16 @@ class BatchProcessAPI{
             self.shell.Command(self.viewDelegate,"/bin/cp",["-R",extraDroppedFilePath,"\(self.lazypath)/"], "#COPYEXTRA#", 2)
             if self.viewDelegate.debugLog {
                 do{
-                    try "=======patching done=======".appendLineToURL(NSURL(fileURLWithPath:"\(NSHomeDirectory())/Lazy log.txt"))
+                    try "=======patching done=======".appendLineToURL(NSURL(fileURLWithPath:"\(NSHomeDirectory())/Desktop/Lazy log.txt"))
                 }catch{}
             }
             ////////////////////////////ejecting processes////////////////////////progress:9%
-            self.eject(cdrState)
+            if Path == "" {
+                self.eject(cdrState)
+            }else{
+                self.eject(cdrState,Path)
+            }
+            
             self.shell.Command(self.viewDelegate,"/bin/rm",["-rf","/tmp/com.pcbeta.lazy"], "#Finishing#", 0)
             if failedLapic {
                 self.viewDelegate.didReceiveProcessName("#Failed Lapic#")
@@ -97,7 +111,7 @@ class BatchProcessAPI{
         self.shell.Command(self.viewDelegate,"/bin/mkdir",["/tmp/com.pcbeta.lazy"], "#CleanDir#", 3)
         if self.viewDelegate.debugLog {
             do{
-                try "========cleaning done=======".appendLineToURL(NSURL(fileURLWithPath:"\(NSHomeDirectory())/Lazy log.txt"))
+                try "========cleaning done=======".appendLineToURL(NSURL(fileURLWithPath:"\(NSHomeDirectory())/Desktop/Lazy log.txt"))
             }catch{}
         }
     }
@@ -132,19 +146,24 @@ class BatchProcessAPI{
         }
         if self.viewDelegate.debugLog {
             do{
-                try "=======mounting done=======".appendLineToURL(NSURL(fileURLWithPath:"\(NSHomeDirectory())/Lazy log.txt"))
+                try "=======mounting done=======".appendLineToURL(NSURL(fileURLWithPath:"\(NSHomeDirectory())/Desktop/Lazy log.txt"))
             }catch{}
         }
     }
-    private func create(SizeVal:String){
-        self.shell.Command(self.viewDelegate,"/usr/bin/hdiutil",["create","-size","\(SizeVal)g","-layout","SPUD","-ov","-fs","HFS+J","-volname","OS X Lazy Installer","/tmp/com.pcbeta.lazy/Lazy Installer.dmg"], "#Create Lazy image#", 22)
-        self.shell.Command(self.viewDelegate,"/usr/bin/hdiutil",["attach","/tmp/com.pcbeta.lazy/Lazy Installer.dmg","-noverify","-nobrowse","-quiet","-mountpoint",self.lazypath], "#Mount Lazy image#", 2)
+    private func create(SizeVal:String,_ MountPath:String){
+        if MountPath == ""{
+            self.shell.Command(self.viewDelegate,"/usr/bin/hdiutil",["create","-size","\(SizeVal)g","-layout","SPUD","-ov","-fs","HFS+J","-volname","OS X Lazy Installer","/tmp/com.pcbeta.lazy/Lazy Installer.dmg"], "#Create Lazy image#", 22)
+            self.shell.Command(self.viewDelegate,"/usr/bin/hdiutil",["attach","/tmp/com.pcbeta.lazy/Lazy Installer.dmg","-noverify","-nobrowse","-quiet","-mountpoint",self.lazypath], "#Mount Lazy image#", 2)
+        }else{
+            self.lazypath = MountPath
+            self.viewDelegate.didReceiveProgress(24)
+        }
         if !NSURL(fileURLWithPath:self.lazypath).checkResourceIsReachableAndReturnError(nil){
             self.viewDelegate.didReceiveErrorMessage("#Error in lazy image#")
         }
         if self.viewDelegate.debugLog {
             do{
-                try "=======creating done=======".appendLineToURL(NSURL(fileURLWithPath:"\(NSHomeDirectory())/Lazy log.txt"))
+                try "=======creating done=======".appendLineToURL(NSURL(fileURLWithPath:"\(NSHomeDirectory())/Desktop/Lazy log.txt"))
             }catch{}
         }
     }
@@ -180,7 +199,6 @@ class BatchProcessAPI{
         }else{
             self.shell.privilegedCommand(self.viewDelegate,"/usr/sbin/diskutil",["rename","OS X Base System","OS X Custom Installer"], "#COPYBASE#",2)
         }
-        self.shell.privilegedCommand(self.viewDelegate,"/usr/sbin/diskutil",["rename","OS X Base System","OS X Lazy Installer"], "#COPYBASE#",2)
         self.shell.Command(self.viewDelegate,"/bin/cp",["\(self.esdpath)/BaseSystem.chunklist",self.lazypath], "#Copy ESD#", 2)
         self.shell.Command(self.viewDelegate,"/bin/cp",["\(self.esdpath)/BaseSystem.dmg",self.lazypath], "#Copy ESD#", 2)
         self.shell.Command(self.viewDelegate,"/bin/cp",["\(self.esdpath)/AppleDiagnostics.chunklist",self.lazypath], "#Copy ESD#", 2)
@@ -190,7 +208,60 @@ class BatchProcessAPI{
         self.shell.Command(self.viewDelegate,"/bin/mkdir",["\(self.lazypath)/System/Library/Kernels"], "#Create Kernels folder#", 1)
         if self.viewDelegate.debugLog {
             do{
-                try "========copying done=======".appendLineToURL(NSURL(fileURLWithPath:"\(NSHomeDirectory())/Lazy log.txt"))
+                try "========copying done=======".appendLineToURL(NSURL(fileURLWithPath:"\(NSHomeDirectory())/Desktop/Lazy log.txt"))
+            }catch{}
+        }
+    }
+    private func copy(MountPath:String){
+        self.shell.privilegedCommand(self.viewDelegate,"/usr/sbin/asr",["restore","--source","\(self.esdpath)/BaseSystem.dmg","--target",self.lazypath,"--erase","--format","HFS+","--noprompt","--noverify"], "#COPYBASE#",19)
+        var tmpname = ""
+        do{
+            let enumerator = try self.fileManager.contentsOfDirectoryAtPath("/Volumes")
+            for element in enumerator {
+                if element.hasPrefix("OS X Base System"){
+                    if NSURL(fileURLWithPath:"/Volumes/\(element)/System").checkResourceIsReachableAndReturnError(nil){
+                        tmpname = element
+                    }
+                }
+            }
+        }catch{
+        self.viewDelegate.didReceiveErrorMessage("#Error in lazy image#")
+        }
+        lazypath = "/Volumes/\(tmpname)"
+        self.checkVersion()
+        var changedName = ""
+        if self.SystemVersion.VersionBiggerThan("10.11.99"){
+            changedName = "Sierra Custom Installer"
+        }else if self.SystemVersion.VersionBiggerThan("10.10.99"){
+            changedName = "El Capitan Custom Installer"
+        }else if self.SystemVersion.VersionBiggerThan("10.9.99"){
+            changedName = "Yosemite Custom Installer"
+        }else{
+            changedName = "OS X Custom Installer"
+        }
+        self.shell.privilegedCommand(self.viewDelegate,"/usr/sbin/diskutil",["rename",tmpname,changedName], "#COPYBASE#",2)
+        do{
+            let enumerator = try self.fileManager.contentsOfDirectoryAtPath("/Volumes")
+            for element in enumerator {
+                if element.hasPrefix(changedName){
+                    if NSURL(fileURLWithPath:"/Volumes/\(element)/System").checkResourceIsReachableAndReturnError(nil){
+                        lazypath = "/Volumes/\(element)"
+                    }
+                }
+            }
+        }catch{
+            self.viewDelegate.didReceiveErrorMessage("#Error in lazy image#")
+        }
+        self.shell.Command(self.viewDelegate,"/bin/cp",["\(self.esdpath)/BaseSystem.chunklist",self.lazypath], "#Copy ESD#", 2)
+        self.shell.Command(self.viewDelegate,"/bin/cp",["\(self.esdpath)/BaseSystem.dmg",self.lazypath], "#Copy ESD#", 2)
+        self.shell.Command(self.viewDelegate,"/bin/cp",["\(self.esdpath)/AppleDiagnostics.chunklist",self.lazypath], "#Copy ESD#", 2)
+        self.shell.Command(self.viewDelegate,"/bin/cp",["\(self.esdpath)/AppleDiagnostics.dmg",self.lazypath], "#Copy ESD#", 2)
+        self.shell.Command(self.viewDelegate,"/bin/rm",["-rf","\(self.lazypath)/System/Installation/Packages"], "#DELETEPACKAGE#", 2)
+        self.shell.privilegedCommand(self.viewDelegate,"/bin/cp",["-R","\(self.esdpath)/Packages","\(self.lazypath)/System/Installation"], "#COPYPACKAGE#",22)
+        self.shell.Command(self.viewDelegate,"/bin/mkdir",["\(self.lazypath)/System/Library/Kernels"], "#Create Kernels folder#", 1)
+        if self.viewDelegate.debugLog {
+            do{
+                try "========copying done=======".appendLineToURL(NSURL(fileURLWithPath:"\(NSHomeDirectory())/Desktop/Lazy log.txt"))
             }catch{}
         }
     }
@@ -232,6 +303,23 @@ class BatchProcessAPI{
             }
         }
     }
+    private func eject(cdrState:Bool,_ Path:String){
+        self.shell.Command(self.viewDelegate,"/usr/bin/chflags",["nohidden",self.lazypath], "#EJECTESD#", 0)
+        if cdrState {
+            self.shell.Command(self.viewDelegate,"/usr/bin/hdiutil",["detach",self.orgpath,"-force"], "#EJECTORG#", 0)
+            self.shell.Command(self.viewDelegate,"/usr/bin/hdiutil",["detach",self.esdpath,"-force"], "#EJECTESD#", 1)
+            self.shell.Command(self.viewDelegate,"/usr/bin/hdiutil",["detach",self.lazypath,"-force"], "#EJECTLAZY#", 1)
+            
+            self.shell.Command(self.viewDelegate,"/usr/bin/hdiutil",["convert","/tmp/com.pcbeta.lazy/Lazy Installer.dmg","-ov","-format","UDTO","-o","/tmp/com.pcbeta.lazy/Lazy Installer.cdr"], "#Create CDR#", 7)
+            self.shell.Command(self.viewDelegate,"/bin/mv",["/tmp/com.pcbeta.lazy/Lazy Installer.dmg",Path], "#MV#", 0)
+            self.shell.Command(self.viewDelegate,"/bin/mv",["/tmp/com.pcbeta.lazy/Lazy Installer.cdr",Path.stringByReplacingOccurrencesOfString("dmg", withString: "cdr")], "#MV#", 0)
+        }else{
+            self.shell.Command(self.viewDelegate,"/usr/bin/hdiutil",["detach",self.orgpath,"-force"], "#EJECTORG#", 2)
+            self.shell.Command(self.viewDelegate,"/usr/bin/hdiutil",["detach",self.esdpath,"-force"], "#EJECTESD#", 2)
+            self.shell.Command(self.viewDelegate,"/usr/bin/hdiutil",["detach",self.lazypath,"-force"], "#EJECTLAZY#", 2)
+            self.shell.Command(self.viewDelegate,"/bin/mv",["/tmp/com.pcbeta.lazy/Lazy Installer.dmg",Path], "#MV#", 3)
+        }
+    }
     
     //functions below are sub processes
     
@@ -251,8 +339,8 @@ class BatchProcessAPI{
         }
         if self.viewDelegate.debugLog {
             do{
-                try "Detected System Version:\(SystemVersion) \(SystemBuildVersion)".appendLineToURL(NSURL(fileURLWithPath:"\(NSHomeDirectory())/Lazy log.txt"))
-                try "===========================".appendLineToURL(NSURL(fileURLWithPath:"\(NSHomeDirectory())/Lazy log.txt"))
+                try "Detected System Version:\(SystemVersion) \(SystemBuildVersion)".appendLineToURL(NSURL(fileURLWithPath:"\(NSHomeDirectory())/Desktop/Lazy log.txt"))
+                try "===========================".appendLineToURL(NSURL(fileURLWithPath:"\(NSHomeDirectory())/Desktop/Lazy log.txt"))
             }catch{}
         }
     }
@@ -260,12 +348,12 @@ class BatchProcessAPI{
     private func MBR_Patch() { //progress:2%
         if self.SystemVersion.VersionBiggerThan("10.11.99") {
             if self.SystemBuildVersion == "16A238m"{
-                shell.Command(self.viewDelegate,"/bin/sh",["-c","perl -pi -e 's|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\x0F\\x84\\x91\\x00\\x00\\x00\\x48|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\x90\\xE9\\x91\\x00\\x00\\x00\\x48|g' \(self.lazypath)/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller"], "#Patch osinstaller#",1)
+                shell.Command(self.viewDelegate,"/bin/sh",["-c","perl -pi -e 's|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\x0F\\x84\\x91\\x00\\x00\\x00\\x48|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\x90\\xE9\\x91\\x00\\x00\\x00\\x48|g' \(self.lazypath.stringByReplacingOccurrencesOfString(" ", withString: "\\ "))/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller"], "#Patch osinstaller#",1)
             }else{
-                shell.Command(self.viewDelegate,"/bin/sh",["-c","perl -pi -e 's|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\x0F\\x84\\x96\\x00\\x00\\x00\\x48|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\xE9\\x97\\x00\\x00\\x00\\x90\\x48|g' \(self.lazypath)/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller"], "#Patch osinstaller#",1)
+                shell.Command(self.viewDelegate,"/bin/sh",["-c","perl -pi -e 's|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\x0F\\x84\\x96\\x00\\x00\\x00\\x48|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\xE9\\x97\\x00\\x00\\x00\\x90\\x48|g' \(self.lazypath.stringByReplacingOccurrencesOfString(" ", withString: "\\ "))/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller"], "#Patch osinstaller#",1)
             }
         }else {
-            shell.Command(self.viewDelegate,"/bin/sh",["-c","perl -pi -e 's|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\x74\\x5F\\x48\\x8B\\x85|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\xEB\\x5F\\x48\\x8B\\x85|g' \(self.lazypath)/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller"], "#Patch osinstaller#",1)
+            shell.Command(self.viewDelegate,"/bin/sh",["-c","perl -pi -e 's|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\x74\\x5F\\x48\\x8B\\x85|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\xEB\\x5F\\x48\\x8B\\x85|g' \(self.lazypath.stringByReplacingOccurrencesOfString(" ", withString: "\\ "))/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller"], "#Patch osinstaller#",1)
         }
         shell.privilegedCommand(self.viewDelegate,"/usr/bin/codesign",["-f","-s","-","\(self.lazypath)/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller"], "#Patch osinstaller#",1)
         
@@ -326,62 +414,62 @@ class BatchProcessAPI{
     
     private func LAPIC_Patch() -> Bool {//progress:0%
         //////using rainbow chart method to speed up the patching process
-//        let transients:[String:String]=[
-//            "14A389":"\\xe8\\xd4\\x54\\xf1\\xff",
-//            "14B25":"\\xe8\\xd4\\x54\\xf1\\xff",
-//            "14C109":"\\xe8\\x54\\xed\\xf0\\xff",
-//            "14D131":"\\xe8\\x14\\xc8\\xf0\\xff",
-//            "14E46":"\\xe8\\x14\\xc8\\xf0\\xff",
-//            "14F27":"\\xe8\\x64\\xc6\\xf0\\xff",
-//            "15A284":"\\xe8\\xcd\\x6b\\xf0\\xff",
-//            "15B42":"\\xe8\\xfd\\x68\\xf0\\xff",
-//            "15C50":"\\xe8\\xed\\x53\\xf0\\xff",
-//            "15D21":"\\xe8\\xed\\x53\\xf0\\xff",
-//            "15E65":"\\xe8\\xbd\\x48\\xf0\\xff",
-//            "15F34":"\\xe8\\xcd\\x46\\xf0\\xff",
-//            "15G31":"\\xe8\\x0d\\x46\\xf0\\xff",
-//            ///////below is beta version patches
-//            "16A201w":"\\xe8\\x3d\\xdf\\xee\\xff",
-//            "16A238m":"\\xe8\\x2d\\x58\\xee\\xff"
-//        ]
-//        if let key = transients[self.SystemBuildVersion] {
-//            shell.Command(self.viewDelegate,"/bin/sh",["-c","perl -pi -e 's|\(key)|\\x90\\x90\\x90\\x90\\x90|g' \(self.lazypath)/System/Library/Kernels/kernel"], "#LAPICPATCH#",0)
-//            return true
-//        }else{
-            //if rainbow chart fails, using donovan6000 and sherlocks method of finding hex _panic value method
-            var FindingBlock = 0x0000001C250C8B65,offset = 0,patchoffset = 0
-            if !self.SystemVersion.VersionBiggerThan("10.11.1") {//if Yosemite
-                FindingBlock = 0x0000001C25048B65
-                offset = 33
-                patchoffset = 28
-            }else if self.SystemVersion.VersionBiggerThan("10.11.99") {//if Sierra
-                offset = 1409
-                patchoffset = 1398
-            }else{// if El Capitan
-                offset = 1411
-                patchoffset = 1400
-            }
-            var tmp1 = 0,tmp2 = 0,key = ""
-            let file: NSData! = NSData(contentsOfURL: NSURL(fileURLWithPath: "\(self.lazypath)/System/Library/Kernels/kernel"))
-            for i in 0...(file.length - offset) {
-                file.getBytes(&tmp1, range: NSMakeRange(i, 7))
-                file.getBytes(&tmp2, range: NSMakeRange(i+offset, 7))
-                if tmp1 == FindingBlock && tmp2 == FindingBlock {
-                    var tmp3 = 0
-                    for n in 0...4{
-                        file.getBytes(&tmp3, range: NSMakeRange(i+patchoffset+n, 1))
-                        key += "\\x"
-                        key += String(tmp3, radix: 16, uppercase: false)
-                    }
-                    break
+        //        let transients:[String:String]=[
+        //            "14A389":"\\xe8\\xd4\\x54\\xf1\\xff",
+        //            "14B25":"\\xe8\\xd4\\x54\\xf1\\xff",
+        //            "14C109":"\\xe8\\x54\\xed\\xf0\\xff",
+        //            "14D131":"\\xe8\\x14\\xc8\\xf0\\xff",
+        //            "14E46":"\\xe8\\x14\\xc8\\xf0\\xff",
+        //            "14F27":"\\xe8\\x64\\xc6\\xf0\\xff",
+        //            "15A284":"\\xe8\\xcd\\x6b\\xf0\\xff",
+        //            "15B42":"\\xe8\\xfd\\x68\\xf0\\xff",
+        //            "15C50":"\\xe8\\xed\\x53\\xf0\\xff",
+        //            "15D21":"\\xe8\\xed\\x53\\xf0\\xff",
+        //            "15E65":"\\xe8\\xbd\\x48\\xf0\\xff",
+        //            "15F34":"\\xe8\\xcd\\x46\\xf0\\xff",
+        //            "15G31":"\\xe8\\x0d\\x46\\xf0\\xff",
+        //            ///////below is beta version patches
+        //            "16A201w":"\\xe8\\x3d\\xdf\\xee\\xff",
+        //            "16A238m":"\\xe8\\x2d\\x58\\xee\\xff"
+        //        ]
+        //        if let key = transients[self.SystemBuildVersion] {
+        //            shell.Command(self.viewDelegate,"/bin/sh",["-c","perl -pi -e 's|\(key)|\\x90\\x90\\x90\\x90\\x90|g' \(self.lazypath)/System/Library/Kernels/kernel"], "#LAPICPATCH#",0)
+        //            return true
+        //        }else{
+        //if rainbow chart fails, using donovan6000 and sherlocks method of finding hex _panic value method
+        var FindingBlock = 0x0000001C250C8B65,offset = 0,patchoffset = 0
+        if !self.SystemVersion.VersionBiggerThan("10.11.1") {//if Yosemite
+            FindingBlock = 0x0000001C25048B65
+            offset = 33
+            patchoffset = 28
+        }else if self.SystemVersion.VersionBiggerThan("10.11.99") {//if Sierra
+            offset = 1409
+            patchoffset = 1398
+        }else{// if El Capitan
+            offset = 1411
+            patchoffset = 1400
+        }
+        var tmp1 = 0,tmp2 = 0,key = ""
+        let file: NSData! = NSData(contentsOfURL: NSURL(fileURLWithPath: "\(self.lazypath)/System/Library/Kernels/kernel"))
+        for i in 0...(file.length - offset) {
+            file.getBytes(&tmp1, range: NSMakeRange(i, 7))
+            file.getBytes(&tmp2, range: NSMakeRange(i+offset, 7))
+            if tmp1 == FindingBlock && tmp2 == FindingBlock {
+                var tmp3 = 0
+                for n in 0...4{
+                    file.getBytes(&tmp3, range: NSMakeRange(i+patchoffset+n, 1))
+                    key += "\\x"
+                    key += String(tmp3, radix: 16, uppercase: false)
                 }
-            }
-            if key == "" {
-                return false
-            }else {
-                shell.Command(self.viewDelegate,"/bin/sh",["-c","perl -pi -e 's|\(key)|\\x90\\x90\\x90\\x90\\x90|g' \(self.lazypath)/System/Library/Kernels/kernel"], "#LAPICPATCH#",0)
-                return true
+                break
             }
         }
+        if key == "" {
+            return false
+        }else {
+            shell.Command(self.viewDelegate,"/bin/sh",["-c","perl -pi -e 's|\(key)|\\x90\\x90\\x90\\x90\\x90|g' \(self.lazypath)/System/Library/Kernels/kernel"], "#LAPICPATCH#",0)
+            return true
+        }
+    }
     //}
 }

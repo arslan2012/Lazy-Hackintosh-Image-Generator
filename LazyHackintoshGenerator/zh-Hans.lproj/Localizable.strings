@@ -4,6 +4,12 @@
 "#Debug Off#" = "关闭调试日志";
 "#Input is void#" =  "未设置镜像！";
 "#Custom Size#" = "自定义生成镜像大小";
+"#Output Title#" = "输出选择";
+"#Output Msg#" = "请指定一个输出文件/卷宗";
+"#Image Title#" = "输入文件选择";
+"#Image Msg#" = "请选择安装包或者安装镜像";
+"#Extra Title#" = "EXtra文件夹选择";
+"#Extra Msg#" = "请选择您的extra文件夹";
     //Warning Messages
 "#WRONGSIZE#" = "对不起，您输入的格式不对或者超过了最大限制。";
 "#Failed Lapic#" = "Lapic破解失败，未找到该系统的破解方法。";

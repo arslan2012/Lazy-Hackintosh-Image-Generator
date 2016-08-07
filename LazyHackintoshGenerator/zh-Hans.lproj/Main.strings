@@ -29,7 +29,7 @@
 /* Class = "NSButtonCell"; title = "自定义生成镜像大小"; ObjectID = "T6N-SL-jmh"; */
 "T6N-SL-jmh.title" = "自定义生成镜像大小";
 
-/* Class = "NSButtonCell"; title = "Install Command Line Tools"; ObjectID = "blk-oQ-iCj"; */
+/* Class = "NSButtonCell"; title = "安装命令行工具"; ObjectID = "blk-oQ-iCj"; */
 "blk-oQ-iCj.title" = "安装命令行工具";
 
 /* Class = "NSTextFieldCell"; title = "拖入Extra文件夹(可选)"; ObjectID = "dYT-MI-ERe"; */
@@ -38,11 +38,17 @@
 /* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "k82-n4-Qi8"; */
 "k82-n4-Qi8.title" = "Label";
 
+/* Class = "NSButtonCell"; title = "Write to disk"; ObjectID = "kye-sc-dC2"; */
+"kye-sc-dC2.title" = "直接写入分区(耗时较长)";
+
 /* Class = "NSMenuItem"; title = "开启排错模式"; ObjectID = "m5L-xw-t0a"; */
 "m5L-xw-t0a.title" = "开启排错模式";
 
 /* Class = "NSTextFieldCell"; title = "GB"; ObjectID = "nus-BF-iqV"; */
 "nus-BF-iqV.title" = "GB";
+
+/* Class = "NSButtonCell"; title = "Custom Output File"; ObjectID = "oQ6-oL-hfO"; */
+"oQ6-oL-hfO.title" = "自定义输出文件";
 
 /* Class = "NSButtonCell"; title = "内核XCPM补丁"; ObjectID = "pvR-jb-Lfe"; */
 "pvR-jb-Lfe.title" = "内核XCPM补丁";

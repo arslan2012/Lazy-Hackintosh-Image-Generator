@@ -4,6 +4,12 @@
 "#Debug Off#" = "Disable debug logging";
 "#Input is void#" =  "Image didn't set!";
 "#Custom Size#" = "Custom Image Size";
+"#Output Title#" = "output selection";
+"#Output Msg#" = "please designate a output";
+"#Image Title#" = "input file selection";
+"#Image Msg#" = "please select Installer Image or app";
+"#Extra Title#" = "Extra folder selection";
+"#Extra Msg#" = "please select your extra folder";
 	//Warning Messages
 "#WRONGSIZE#" = "Sorry, your input size exceeds the maximum size limitation.";
 "#Failed Lapic#" = "Lapic patch failed, counldn't determine system version.";

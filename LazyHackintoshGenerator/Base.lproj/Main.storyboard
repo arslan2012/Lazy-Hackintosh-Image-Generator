@@ -83,11 +83,11 @@
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="LazyHackintoshGenerator" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <rect key="frame" x="0.0" y="0.0" width="506" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <progressIndicator wantsLayer="YES" fixedFrame="YES" maxValue="100" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="NQo-RU-twe">
-                                <rect key="frame" x="20" y="42" width="440" height="20"/>
+                                <rect key="frame" x="20" y="42" width="483" height="20"/>
                                 <animations>
                                     <caTransition key="subviews">
                                         <mutableData key="keyedArchiveRepresentation">
@@ -111,18 +111,18 @@ AwEVARgBHQAAAAAAAAIBAAAAAAAAACgAAAAAAAAAAAAAAAAAAAEfA
                                 </textFieldCell>
                             </textField>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wDg-Us-Bko">
-                                <rect key="frame" x="331" y="89" width="90" height="18"/>
+                                <rect key="frame" x="18" y="58" width="90" height="18"/>
                                 <buttonCell key="cell" type="check" title="MBR patch" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="q5G-N8-8sb">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" size="13" name=".PingFangSC-Regular"/>
                                 </buttonCell>
                             </button>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cq3-tM-ywW" customClass="InstallerDrop" customModule="LazyHackintoshGenerator" customModuleProvider="target">
-                                <rect key="frame" x="20" y="170" width="180" height="92"/>
+                                <rect key="frame" x="29" y="173" width="180" height="92"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="RUM-f6-V2X"/>
                             </imageView>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x2t-of-KJz">
-                                <rect key="frame" x="176" y="59" width="138" height="18"/>
+                                <rect key="frame" x="353" y="120" width="138" height="18"/>
                                 <buttonCell key="cell" type="check" title="kernel XCPM patch" bezelStyle="regularSquare" imagePosition="left" inset="2" id="pvR-jb-Lfe">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -162,7 +162,7 @@ AwEVARgBHQAAAAAAAAIBAAAAAAAAACgAAAAAAAAAAAAAAAAAAAEfA
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ujW-iU-6TA">
-                                <rect key="frame" x="387" y="13" width="68" height="32"/>
+                                <rect key="frame" x="427" y="13" width="68" height="32"/>
                                 <buttonCell key="cell" type="push" title="exit" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="4oe-lq-Fmn">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -172,7 +172,7 @@ AwEVARgBHQAAAAAAAAIBAAAAAAAAACgAAAAAAAAAAAAAAAAAAAEfA
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XWH-IZ-EgC">
-                                <rect key="frame" x="387" y="13" width="68" height="32"/>
+                                <rect key="frame" x="427" y="13" width="68" height="32"/>
                                 <buttonCell key="cell" type="push" title="start" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="78f-UZ-JFI">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" size="13" name=".PingFangSC-Regular"/>
@@ -182,7 +182,7 @@ AwEVARgBHQAAAAAAAAIBAAAAAAAAACgAAAAAAAAAAAAAAAAAAAEfA
                                 </connections>
                             </button>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wCZ-xc-JJt">
-                                <rect key="frame" x="18" y="59" width="128" height="18"/>
+                                <rect key="frame" x="18" y="120" width="128" height="18"/>
                                 <buttonCell key="cell" type="check" title="Drop kernel" bezelStyle="regularSquare" imagePosition="left" inset="2" id="ryD-dv-ejv">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -192,27 +192,19 @@ AwEVARgBHQAAAAAAAAIBAAAAAAAAACgAAAAAAAAAAAAAAAAAAAEfA
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VoB-1g-tUe">
-                                <rect key="frame" x="8" y="113" width="228" height="56"/>
+                                <rect key="frame" x="18" y="144" width="203" height="34"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="drag installer image or app here" id="qeC-H5-IUy">
                                     <font key="font" size="13" name=".PingFangSC-Regular"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="0.84999999999999998" colorSpace="calibratedRGB"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LQe-hg-4ci">
-                                <rect key="frame" x="265" y="113" width="217" height="56"/>
-                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="drag Extra folder here (optional)" id="dYT-MI-ERe">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" red="1" green="1" blue="1" alpha="0.84999999999999998" colorSpace="calibratedRGB"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="600-wD-mII" customClass="ExtraDrop" customModule="LazyHackintoshGenerator" customModuleProvider="target">
-                                <rect key="frame" x="299" y="170" width="138" height="95"/>
+                                <rect key="frame" x="335" y="173" width="136" height="92"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="oVv-hy-Ug5"/>
                             </imageView>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MdN-qM-nVN">
-                                <rect key="frame" x="331" y="59" width="134" height="18"/>
+                                <rect key="frame" x="176" y="120" width="134" height="18"/>
                                 <buttonCell key="cell" type="check" title="kernel Lapic patch" bezelStyle="regularSquare" imagePosition="left" inset="2" id="9vX-Bi-vQi">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -222,14 +214,14 @@ AwEVARgBHQAAAAAAAAIBAAAAAAAAACgAAAAAAAAAAAAAAAAAAAEfA
                                 </connections>
                             </button>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="caW-BX-KDk">
-                                <rect key="frame" x="176" y="89" width="135" height="18"/>
+                                <rect key="frame" x="353" y="89" width="135" height="18"/>
                                 <buttonCell key="cell" type="check" title="also generate CDR" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="znd-va-Rf7">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bh6-s3-93I">
-                                <rect key="frame" x="156" y="13" width="206" height="32"/>
+                                <rect key="frame" x="151" y="13" width="206" height="32"/>
                                 <buttonCell key="cell" type="push" title="Install Command Line Tools" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="blk-oQ-iCj">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -238,14 +230,44 @@ AwEVARgBHQAAAAAAAAIBAAAAAAAAACgAAAAAAAAAAAAAAAAAAAEfA
                                     <action selector="CLTButtonPressed:" target="XfG-lQ-9wD" id="wIP-Xx-aWj"/>
                                 </connections>
                             </button>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gji-4h-kKA">
+                                <rect key="frame" x="176" y="89" width="140" height="18"/>
+                                <buttonCell key="cell" type="check" title="Custom Output File" bezelStyle="regularSquare" imagePosition="left" inset="2" id="oQ6-oL-hfO">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="CustomOutputClicked:" target="XfG-lQ-9wD" id="Trk-bZ-vCQ"/>
+                                </connections>
+                            </button>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="juC-1J-Yh4">
+                                <rect key="frame" x="176" y="59" width="207" height="18"/>
+                                <buttonCell key="cell" type="check" title="Write to disk(takes some time)" bezelStyle="regularSquare" imagePosition="left" inset="2" id="kye-sc-dC2">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="WriteDiskClicked:" target="XfG-lQ-9wD" id="uQ2-Ek-KnE"/>
+                                </connections>
+                            </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LQe-hg-4ci">
+                                <rect key="frame" x="300" y="144" width="205" height="34"/>
+                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="drag Extra folder here (optional)" id="dYT-MI-ERe">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="0.84999999999999998" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                     </view>
                     <connections>
                         <outlet property="CLT" destination="Bh6-s3-93I" id="dxh-cP-OIh"/>
                         <outlet property="CustomSize" destination="7mX-Nv-YCf" id="G6x-cO-Gkn"/>
+                        <outlet property="Disk" destination="juC-1J-Yh4" id="qHf-Rb-Jfs"/>
                         <outlet property="Installer" destination="Cq3-tM-ywW" id="Gua-Wl-nLx"/>
                         <outlet property="LapicPatch" destination="MdN-qM-nVN" id="8xe-Df-rNo"/>
                         <outlet property="MBRPatch" destination="wDg-Us-Bko" id="6l1-cr-hxW"/>
+                        <outlet property="Output" destination="Gji-4h-kKA" id="Lau-ph-mTB"/>
                         <outlet property="SizeCustomize" destination="fQS-po-7KX" id="r4o-cl-Rir"/>
                         <outlet property="SizeUnit" destination="PFY-ia-UbP" id="Cy4-Lf-oQU"/>
                         <outlet property="XCPMPatch" destination="x2t-of-KJz" id="jwr-Sk-6qy"/>
@@ -263,7 +285,7 @@ AwEVARgBHQAAAAAAAAIBAAAAAAAAACgAAAAAAAAAAAAAAAAAAAEfA
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="655"/>
+            <point key="canvasLocation" x="88" y="655"/>
         </scene>
     </scenes>
 </document>
