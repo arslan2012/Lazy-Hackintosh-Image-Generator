@@ -28,7 +28,7 @@ class BatchProcessAPI{
     
     //the main work flow
     
-    func startGenerating(filePath:String,_ SizeVal:String,_ MBRPatchState:Bool,_ LapicPatchState:Bool,_ XCPMPatchState:Bool,_ cdrState:Bool,_ dropKernelState:Bool,_ extraDroppedFilePath:String,_ Path:String,_ MountPath:String){
+    func startGenerating(filePath:String,_ SizeVal:String,_ MBRPatchState:Bool,_ LapicPatchState:Bool,_ XCPMPatchState:Bool,_ cdrState:Bool,_ dropKernelState:Bool,_ extraDroppedFilePath:String,_ Path:String,_ MountPath:String,_ OSInstallerPath:String){
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0),{
             self.AppDelegate.ProcessStarted()
             ////////////////////////////cleaning processes////////////////////////progress:3%
@@ -55,6 +55,12 @@ class BatchProcessAPI{
                     self.OSInstall_mpkg_Patch()
                 }
             }else {
+                if OSInstallerPath != ""{
+                    self.shell.Command(self.viewDelegate,"/bin/cp",["-f",OSInstallerPath,"\(self.lazypath)/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller"], "#Patch osinstaller#",0)
+                    if !self.SystemBuildVersion.SysBuildVerBiggerThan("16A284a"){
+                        self.OSInstall_mpkg_Patch()
+                    }
+                }
                 self.viewDelegate.didReceiveProgress(2)
             }
             

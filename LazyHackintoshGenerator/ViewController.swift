@@ -20,7 +20,8 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
     @IBOutlet weak var CLT: NSButton!
     @IBOutlet weak var Output: NSButton!
     @IBOutlet weak var Disk: NSButton!
-    var debugLog: Bool = false, Path = "", MountPath = ""
+	@IBOutlet weak var OSInstaller: NSButton!
+    var debugLog: Bool = false, Path = "", MountPath = "",OSInstallerPath = ""
 
     lazy var api : BatchProcessAPI = BatchProcessAPI(viewDelegate: self,AppDelegate: NSApplication.sharedApplication().delegate as! MenuControlProtocol)
     
@@ -30,6 +31,7 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
             MBRPatch.state = NSOffState
         }else{
             CLT.hidden=true
+            OSInstaller.hidden=true
         }
         super.viewDidLoad()
         extra.viewDelegate = self
@@ -42,7 +44,7 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
         cdr.state = NSOffState
         exitButton.hidden = true
         
-        for button in [MBRPatch,LapicPatch,XCPMPatch,cdr,SizeCustomize,dropKernel,Output,Disk]{
+        for button in [MBRPatch,LapicPatch,XCPMPatch,cdr,SizeCustomize,dropKernel,Output,Disk,OSInstaller]{
             button.attributedTitle = NSAttributedString(string: button.title, attributes: [ NSForegroundColorAttributeName : NSColor.whiteColor()])
         }
     }
@@ -97,10 +99,10 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
             let XCPMPatchState = (XCPMPatch.state == NSOnState) ? true : false
             let cdrState = (cdr.state == NSOnState) ? true : false
             let dropKernelState = (dropKernel.state == NSOnState) ? true : false
-            for button in [MBRPatch,XCPMPatch,cdr,SizeCustomize,CustomSize,dropKernel,LapicPatch,Disk,Output]{
+            for button in [MBRPatch,XCPMPatch,cdr,SizeCustomize,CustomSize,dropKernel,LapicPatch,Disk,Output,OSInstaller,CLT]{
                 button.enabled = false
             }
-            api.startGenerating(filePath.stringValue,SizeVal,MBRPatchState,LapicPatchState,XCPMPatchState,cdrState,dropKernelState,extraPath.stringValue,Path,MountPath)
+            api.startGenerating(filePath.stringValue,SizeVal,MBRPatchState,LapicPatchState,XCPMPatchState,cdrState,dropKernelState,extraPath.stringValue,Path,MountPath,OSInstallerPath)
         }
     }
     
@@ -207,6 +209,37 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
             cdr.enabled = true
         }
     }
+	@IBAction func OSInstallerClicked(sender: NSButton) {
+        if sender.state == NSOnState {
+            dispatch_async(dispatch_get_main_queue(),
+                           {
+                            let myFiledialog = NSOpenPanel()
+                            
+                            myFiledialog.prompt = "Open"
+                            myFiledialog.worksWhenModal = true
+                            myFiledialog.title = "#OSInstaller Title#".localized()
+                            myFiledialog.message = "#OSInstaller Msg#".localized()
+                            myFiledialog.beginWithCompletionHandler{ (result: Int) -> Void in
+                                if result == NSFileHandlingPanelOKButton {
+                                    if let URL = myFiledialog.URL{
+                                        if let Path = URL.path{
+                                            if Path != "" && URL.lastPathComponent!.caseInsensitiveCompare("OSInstaller") == NSComparisonResult.OrderedSame{
+                                                self.OSInstallerPath = Path
+                                            }else{
+                                                sender.state = NSOffState
+                                            }
+                                        }
+                                    }
+                                }else{
+                                    sender.state = NSOffState
+                                }
+                            }
+                            
+            })
+        }else {
+            OSInstallerPath = ""
+        }
+	}
     @IBAction func CLTButtonPressed(sender: NSButton) {
         shellCommand.sharedInstance.Command(self,"/bin/sh", ["-c","xcode-select --install"], "", 0)
     }

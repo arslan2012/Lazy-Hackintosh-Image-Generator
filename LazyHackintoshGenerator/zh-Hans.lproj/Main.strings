@@ -17,6 +17,9 @@
 /* Class = "NSButtonCell"; title = "内核Lapic补丁"; ObjectID = "9vX-Bi-vQi"; */
 "9vX-Bi-vQi.title" = "内核Lapic补丁";
 
+/* Class = "NSButtonCell"; title = "Copy OSInstaller"; ObjectID = "ACT-AL-v8U"; */
+"ACT-AL-v8U.title" = "导入OSInstaller";
+
 /* Class = "NSMenu"; title = "主菜单"; ObjectID = "AYu-sK-qS6"; */
 "AYu-sK-qS6.title" = "主菜单";
 
@@ -38,7 +41,7 @@
 /* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "k82-n4-Qi8"; */
 "k82-n4-Qi8.title" = "Label";
 
-/* Class = "NSButtonCell"; title = "Write to disk"; ObjectID = "kye-sc-dC2"; */
+/* Class = "NSButtonCell"; title = "直接写入分区(耗时较长)"; ObjectID = "kye-sc-dC2"; */
 "kye-sc-dC2.title" = "直接写入分区(耗时较长)";
 
 /* Class = "NSMenuItem"; title = "开启排错模式"; ObjectID = "m5L-xw-t0a"; */
@@ -47,7 +50,7 @@
 /* Class = "NSTextFieldCell"; title = "GB"; ObjectID = "nus-BF-iqV"; */
 "nus-BF-iqV.title" = "GB";
 
-/* Class = "NSButtonCell"; title = "Custom Output File"; ObjectID = "oQ6-oL-hfO"; */
+/* Class = "NSButtonCell"; title = "自定义输出文件"; ObjectID = "oQ6-oL-hfO"; */
 "oQ6-oL-hfO.title" = "自定义输出文件";
 
 /* Class = "NSButtonCell"; title = "内核XCPM补丁"; ObjectID = "pvR-jb-Lfe"; */

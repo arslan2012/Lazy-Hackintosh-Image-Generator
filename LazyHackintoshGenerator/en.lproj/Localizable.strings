@@ -4,12 +4,18 @@
 "#Debug Off#" = "Disable debug logging";
 "#Input is void#" =  "Image didn't set!";
 "#Custom Size#" = "Custom Image Size";
+
 "#Output Title#" = "output selection";
 "#Output Msg#" = "please designate a output";
+
 "#Image Title#" = "input file selection";
-"#Image Msg#" = "please select Installer Image or app";
+"#Image Msg#" = "please select Installer Image or app, file extension must be dmg or app";
+
 "#Extra Title#" = "Extra folder selection";
-"#Extra Msg#" = "please select your extra folder";
+"#Extra Msg#" = "please select your extra folder, file name must be extra";
+
+"#OSInstaller Title#" = "OSInstaller selection";
+"#OSInstaller Msg#" = "please select your patched OSInstaller, file name must be OSInstaller";
 	//Warning Messages
 "#WRONGSIZE#" = "Sorry, your input size exceeds the maximum size limitation.";
 "#Failed Lapic#" = "Lapic patch failed, counldn't determine system version.";

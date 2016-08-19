@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10117"/>
     </dependencies>
@@ -162,23 +162,13 @@ AwEVARgBHQAAAAAAAAIBAAAAAAAAACgAAAAAAAAAAAAAAAAAAAEfA
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ujW-iU-6TA">
-                                <rect key="frame" x="427" y="13" width="68" height="32"/>
+                                <rect key="frame" x="427" y="4" width="68" height="32"/>
                                 <buttonCell key="cell" type="push" title="exit" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="4oe-lq-Fmn">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
                                     <action selector="exitButtonPressed:" target="XfG-lQ-9wD" id="zbg-iZ-HnB"/>
-                                </connections>
-                            </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XWH-IZ-EgC">
-                                <rect key="frame" x="427" y="13" width="68" height="32"/>
-                                <buttonCell key="cell" type="push" title="start" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="78f-UZ-JFI">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" size="13" name=".PingFangSC-Regular"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="StartProcessing:" target="XfG-lQ-9wD" id="Lsu-y1-Lc7"/>
                                 </connections>
                             </button>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wCZ-xc-JJt">
@@ -215,13 +205,13 @@ AwEVARgBHQAAAAAAAAIBAAAAAAAAACgAAAAAAAAAAAAAAAAAAAEfA
                             </button>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="caW-BX-KDk">
                                 <rect key="frame" x="353" y="89" width="135" height="18"/>
-                                <buttonCell key="cell" type="check" title="also generate CDR" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="znd-va-Rf7">
+                                <buttonCell key="cell" type="check" title="also generate CDR" bezelStyle="regularSquare" imagePosition="left" inset="2" id="znd-va-Rf7">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bh6-s3-93I">
-                                <rect key="frame" x="151" y="13" width="206" height="32"/>
+                                <rect key="frame" x="194" y="4" width="206" height="32"/>
                                 <buttonCell key="cell" type="push" title="Install Command Line Tools" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="blk-oQ-iCj">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -258,6 +248,26 @@ AwEVARgBHQAAAAAAAAIBAAAAAAAAACgAAAAAAAAAAAAAAAAAAAEfA
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Scn-S8-gzj">
+                                <rect key="frame" x="18" y="13" width="124" height="18"/>
+                                <buttonCell key="cell" type="check" title="Copy OSInstaller" bezelStyle="regularSquare" imagePosition="left" inset="2" id="ACT-AL-v8U">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="OSInstallerClicked:" target="XfG-lQ-9wD" id="Goq-1M-cbs"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XWH-IZ-EgC">
+                                <rect key="frame" x="427" y="4" width="68" height="32"/>
+                                <buttonCell key="cell" type="push" title="start" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="78f-UZ-JFI">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" size="13" name=".PingFangSC-Regular"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="StartProcessing:" target="XfG-lQ-9wD" id="Lsu-y1-Lc7"/>
+                                </connections>
+                            </button>
                         </subviews>
                     </view>
                     <connections>
@@ -267,6 +277,7 @@ AwEVARgBHQAAAAAAAAIBAAAAAAAAACgAAAAAAAAAAAAAAAAAAAEfA
                         <outlet property="Installer" destination="Cq3-tM-ywW" id="Gua-Wl-nLx"/>
                         <outlet property="LapicPatch" destination="MdN-qM-nVN" id="8xe-Df-rNo"/>
                         <outlet property="MBRPatch" destination="wDg-Us-Bko" id="6l1-cr-hxW"/>
+                        <outlet property="OSInstaller" destination="Scn-S8-gzj" id="KaL-IX-KZ9"/>
                         <outlet property="Output" destination="Gji-4h-kKA" id="Lau-ph-mTB"/>
                         <outlet property="SizeCustomize" destination="fQS-po-7KX" id="r4o-cl-Rir"/>
                         <outlet property="SizeUnit" destination="PFY-ia-UbP" id="Cy4-Lf-oQU"/>
