@@ -50,7 +50,10 @@ class BatchProcessAPI{
             }
             ////////////////////////////patching processes////////////////////////progress:6%
             if MBRPatchState {
-                self.MBR_Patch()
+                self.OSInstaller_Patch()
+                if !self.SystemBuildVersion.SysBuildVerBiggerThan("16A284a"){
+                    self.OSInstall_mpkg_Patch()
+                }
             }else {
                 self.viewDelegate.didReceiveProgress(2)
             }
@@ -190,11 +193,11 @@ class BatchProcessAPI{
             self.viewDelegate.didReceiveErrorMessage("#Error in lazy image#")
         }
         self.checkVersion()
-        if self.SystemVersion.VersionBiggerThan("10.11.99"){
+        if self.SystemVersion.SysVerBiggerThan("10.11.99"){
             self.shell.privilegedCommand(self.viewDelegate,"/usr/sbin/diskutil",["rename","OS X Base System","Sierra Custom Installer"], "#COPYBASE#",2)
-        }else if self.SystemVersion.VersionBiggerThan("10.10.99"){
+        }else if self.SystemVersion.SysVerBiggerThan("10.10.99"){
             self.shell.privilegedCommand(self.viewDelegate,"/usr/sbin/diskutil",["rename","OS X Base System","El Capitan Custom Installer"], "#COPYBASE#",2)
-        }else if self.SystemVersion.VersionBiggerThan("10.9.99"){
+        }else if self.SystemVersion.SysVerBiggerThan("10.9.99"){
             self.shell.privilegedCommand(self.viewDelegate,"/usr/sbin/diskutil",["rename","OS X Base System","Yosemite Custom Installer"], "#COPYBASE#",2)
         }else{
             self.shell.privilegedCommand(self.viewDelegate,"/usr/sbin/diskutil",["rename","OS X Base System","OS X Custom Installer"], "#COPYBASE#",2)
@@ -225,16 +228,16 @@ class BatchProcessAPI{
                 }
             }
         }catch{
-        self.viewDelegate.didReceiveErrorMessage("#Error in lazy image#")
+            self.viewDelegate.didReceiveErrorMessage("#Error in lazy image#")
         }
         lazypath = "/Volumes/\(tmpname)"
         self.checkVersion()
         var changedName = ""
-        if self.SystemVersion.VersionBiggerThan("10.11.99"){
+        if self.SystemVersion.SysVerBiggerThan("10.11.99"){
             changedName = "Sierra Custom Installer"
-        }else if self.SystemVersion.VersionBiggerThan("10.10.99"){
+        }else if self.SystemVersion.SysVerBiggerThan("10.10.99"){
             changedName = "El Capitan Custom Installer"
-        }else if self.SystemVersion.VersionBiggerThan("10.9.99"){
+        }else if self.SystemVersion.SysVerBiggerThan("10.9.99"){
             changedName = "Yosemite Custom Installer"
         }else{
             changedName = "OS X Custom Installer"
@@ -274,13 +277,13 @@ class BatchProcessAPI{
             
             self.shell.Command(self.viewDelegate,"/usr/bin/hdiutil",["convert","/tmp/com.pcbeta.lazy/Lazy Installer.dmg","-ov","-format","UDTO","-o","/tmp/com.pcbeta.lazy/Lazy Installer.cdr"], "#Create CDR#", 7)
             
-            if self.SystemVersion.VersionBiggerThan("10.11.99"){
+            if self.SystemVersion.SysVerBiggerThan("10.11.99"){
                 self.shell.Command(self.viewDelegate,"/bin/mv",["/tmp/com.pcbeta.lazy/Lazy Installer.dmg","\(NSHomeDirectory())/Desktop/Sierra Custom Installer.dmg"], "#MV#", 0)
                 self.shell.Command(self.viewDelegate,"/bin/mv",["/tmp/com.pcbeta.lazy/Lazy Installer.cdr","\(NSHomeDirectory())/Desktop/Sierra Custom Installer.cdr"], "#MV#", 0)
-            }else if self.SystemVersion.VersionBiggerThan("10.10.99") {
+            }else if self.SystemVersion.SysVerBiggerThan("10.10.99") {
                 self.shell.Command(self.viewDelegate,"/bin/mv",["/tmp/com.pcbeta.lazy/Lazy Installer.dmg","\(NSHomeDirectory())/Desktop/El Capitan Custom Installer.dmg"], "#MV#", 0)
                 self.shell.Command(self.viewDelegate,"/bin/mv",["/tmp/com.pcbeta.lazy/Lazy Installer.cdr","\(NSHomeDirectory())/Desktop/El Capitan Custom Installer.cdr"], "#MV#", 0)
-            }else if self.SystemVersion.VersionBiggerThan("10.9.99") {
+            }else if self.SystemVersion.SysVerBiggerThan("10.9.99") {
                 self.shell.Command(self.viewDelegate,"/bin/mv",["/tmp/com.pcbeta.lazy/Lazy Installer.dmg","\(NSHomeDirectory())/Desktop/Yosemite Custom Installer.dmg"], "#MV#", 0)
                 self.shell.Command(self.viewDelegate,"/bin/mv",["/tmp/com.pcbeta.lazy/Lazy Installer.cdr","\(NSHomeDirectory())/Desktop/Yosemite Custom Installer.cdr"], "#MV#", 0)
             }else {
@@ -292,11 +295,11 @@ class BatchProcessAPI{
             self.shell.Command(self.viewDelegate,"/usr/bin/hdiutil",["detach",self.esdpath,"-force"], "#EJECTESD#", 2)
             self.shell.Command(self.viewDelegate,"/usr/bin/hdiutil",["detach",self.lazypath,"-force"], "#EJECTLAZY#", 2)
             
-            if self.SystemVersion.VersionBiggerThan("10.11.99"){
+            if self.SystemVersion.SysVerBiggerThan("10.11.99"){
                 self.shell.Command(self.viewDelegate,"/bin/mv",["/tmp/com.pcbeta.lazy/Lazy Installer.dmg","\(NSHomeDirectory())/Desktop/Sierra Custom Installer.dmg"], "#MV#", 3)
-            }else if self.SystemVersion.VersionBiggerThan("10.10.99"){
+            }else if self.SystemVersion.SysVerBiggerThan("10.10.99"){
                 self.shell.Command(self.viewDelegate,"/bin/mv",["/tmp/com.pcbeta.lazy/Lazy Installer.dmg","\(NSHomeDirectory())/Desktop/El Capitan Custom Installer.dmg"], "#MV#", 3)
-            }else if self.SystemVersion.VersionBiggerThan("10.9.99"){
+            }else if self.SystemVersion.SysVerBiggerThan("10.9.99"){
                 self.shell.Command(self.viewDelegate,"/bin/mv",["/tmp/com.pcbeta.lazy/Lazy Installer.dmg","\(NSHomeDirectory())/Desktop/Yosemite Custom Installer.dmg"], "#MV#", 3)
             }else{
                 self.shell.Command(self.viewDelegate,"/bin/mv",["/tmp/com.pcbeta.lazy/Lazy Installer.dmg","\(NSHomeDirectory())/Desktop/"], "#MV#", 3)
@@ -345,8 +348,8 @@ class BatchProcessAPI{
         }
     }
     
-    private func MBR_Patch() { //progress:2%
-        if self.SystemVersion.VersionBiggerThan("10.11.99") {
+    private func OSInstaller_Patch(){//progress:2%
+        if self.SystemVersion.SysVerBiggerThan("10.11.99") {
             if self.SystemBuildVersion == "16A238m"{
                 shell.Command(self.viewDelegate,"/bin/sh",["-c","perl -pi -e 's|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\x0F\\x84\\x91\\x00\\x00\\x00\\x48|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\x90\\xE9\\x91\\x00\\x00\\x00\\x48|g' \(self.lazypath.stringByReplacingOccurrencesOfString(" ", withString: "\\ "))/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller"], "#Patch osinstaller#",1)
             }else{
@@ -356,10 +359,12 @@ class BatchProcessAPI{
             shell.Command(self.viewDelegate,"/bin/sh",["-c","perl -pi -e 's|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\x74\\x5F\\x48\\x8B\\x85|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\xEB\\x5F\\x48\\x8B\\x85|g' \(self.lazypath.stringByReplacingOccurrencesOfString(" ", withString: "\\ "))/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller"], "#Patch osinstaller#",1)
         }
         shell.privilegedCommand(self.viewDelegate,"/usr/bin/codesign",["-f","-s","-","\(self.lazypath)/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller"], "#Patch osinstaller#",1)
-        
+    }
+    
+    private func OSInstall_mpkg_Patch(){//progress:0%
         shell.Command(self.viewDelegate,"/bin/mkdir",["/tmp/com.pcbeta.lazy/osinstallmpkg"], "#Patch osinstall.mpkg#", 0)
         shell.Command(self.viewDelegate,"/usr/bin/xar",["-x","-f","\(self.lazypath)/System/Installation/Packages/OSInstall.mpkg","-C","/tmp/com.pcbeta.lazy/osinstallmpkg"], "#Patch osinstall.mpkg#", 0)
-        if !self.SystemVersion.VersionBiggerThan("10.11.99") {
+        if !self.SystemVersion.SysVerBiggerThan("10.11.99") {
             shell.Command(self.viewDelegate,"/usr/bin/sed",["-i","\'\'","--","s/1024/512/g","/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution"], "#Patch osinstall.mpkg#", 0)
             shell.Command(self.viewDelegate,"/usr/bin/sed",["-i","\'\'","--","s/var minRam = 2048/var minRam = 1024/g","/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution"], "#Patch osinstall.mpkg#", 0)
             shell.Command(self.viewDelegate,"/usr/bin/sed",["-i","\'\'","--","s/osVersion=......... osBuildVersion=.......//g","/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution"], "#Patch osinstall.mpkg#", 0)
@@ -377,10 +382,10 @@ class BatchProcessAPI{
     private func Drop_Kernel() {//progress:1%
         shell.Command(self.viewDelegate,NSBundle.mainBundle().pathForResource("lzvn", ofType: nil)!,["-d","\(self.lazypath)/System/Library/PrelinkedKernels/prelinkedkernel","kernel"],"/tmp/com.pcbeta.lazy/", "#COPYKERNELF#", 0)
         shell.Command(self.viewDelegate,"/bin/cp",["/tmp/com.pcbeta.lazy/kernel","\(self.lazypath)/System/Library/Kernels"], "#COPYKERNELF#", 1)
-        if !self.SystemVersion.VersionBiggerThan("10.11") {
+        if !self.SystemVersion.SysVerBiggerThan("10.11") {
             /////// 10.10.x
             shell.Command(self.viewDelegate,"/bin/sh",["-c","perl -pi -e 's|\\xE8\\x25\\x00\\x00\\x00\\xEB\\x05\\xE8\\xCE\\x02\\x00\\x00|\\xE8\\x25\\x00\\x00\\x00\\x90\\x90\\xE8\\xCE\\x02\\x00\\x00|g' \(self.lazypath)/System/Library/Kernels/kernel"], "#COPYKERNELF#",0)
-        }else if self.SystemVersion.VersionBiggerThan("10.11.99"){
+        }else if self.SystemVersion.SysVerBiggerThan("10.11.99"){
             if self.SystemBuildVersion == "16A201w"{
                 /////// 10.12.DB1.116A201w
                 shell.Command(self.viewDelegate,"/bin/sh",["-c","perl -pi -e 's|\\xC3\\x48\\x85\\xDB\\x74\\x71\\x48\\x8B\\x03\\x48\\x89\\xDF\\xFF\\x50\\x28\\x48|\\xC3\\x48\\x85\\xDB\\xEB\\x12\\x48\\x8B\\x03\\x48\\x89\\xDF\\xFF\\x50\\x28\\x48|g' \(self.lazypath)/System/Library/Kernels/kernel"], "#COPYKERNELF#",0)
@@ -399,13 +404,13 @@ class BatchProcessAPI{
     }
     
     private func XCPM_Patch() {//progress:1%
-        if !self.SystemVersion.VersionBiggerThan("10.11.99") {
+        if !self.SystemVersion.SysVerBiggerThan("10.11.99") {
             shell.Command(self.viewDelegate,"/bin/sh",["-c","perl -pi -e 's|\\xe2\\x00\\x00\\x00\\x02\\x00\\x00\\x00|\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00|g' \(self.lazypath)/System/Library/Kernels/kernel"], "#XCPMPATCH#",0)
         }
         shell.Command(self.viewDelegate,"/bin/sh",["-c","perl -pi -e 's|\\xe2\\x00\\x00\\x00\\x4c\\x00\\x00\\x00|\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00|g' \(self.lazypath)/System/Library/Kernels/kernel"], "#XCPMPATCH#",0)
-        if !self.SystemVersion.VersionBiggerThan("10.11.1") {
+        if !self.SystemVersion.SysVerBiggerThan("10.11.1") {
             shell.Command(self.viewDelegate,"/bin/sh",["-c","perl -pi -e 's|\\xe2\\x00\\x00\\x00\\x90\\x01\\x00\\x00|\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00|g' \(self.lazypath)/System/Library/Kernels/kernel"], "#XCPMPATCH#",1)
-        }else if self.SystemVersion.VersionBiggerThan("10.11.99") {
+        }else if self.SystemVersion.SysVerBiggerThan("10.11.99") {
             shell.Command(self.viewDelegate,"/bin/sh",["-c","perl -pi -e 's|\\xe2\\x00\\x00\\x00\\x90\\x33\\x00\\x00|\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00|g' \(self.lazypath)/System/Library/Kernels/kernel"], "#XCPMPATCH#",1)
         }else{
             shell.Command(self.viewDelegate,"/bin/sh",["-c","perl -pi -e 's|\\xe2\\x00\\x00\\x00\\x90\\x13\\x00\\x00|\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00|g' \(self.lazypath)/System/Library/Kernels/kernel"], "#XCPMPATCH#",1)
@@ -438,11 +443,11 @@ class BatchProcessAPI{
         //        }else{
         //if rainbow chart fails, using donovan6000 and sherlocks method of finding hex _panic value method
         var FindingBlock = 0x0000001C250C8B65,offset = 0,patchoffset = 0
-        if !self.SystemVersion.VersionBiggerThan("10.11.1") {//if Yosemite
+        if !self.SystemVersion.SysVerBiggerThan("10.11.1") {//if Yosemite
             FindingBlock = 0x0000001C25048B65
             offset = 33
             patchoffset = 28
-        }else if self.SystemVersion.VersionBiggerThan("10.11.99") {//if Sierra
+        }else if self.SystemVersion.SysVerBiggerThan("10.11.99") {//if Sierra
             offset = 1409
             patchoffset = 1398
         }else{// if El Capitan
