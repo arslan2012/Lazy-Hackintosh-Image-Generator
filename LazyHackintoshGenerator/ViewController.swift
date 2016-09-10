@@ -94,11 +94,11 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
             }
             let button = view.window?.standardWindowButton(NSWindowButton.CloseButton)
             button?.enabled = false
-            let MBRPatchState = (MBRPatch.state == NSOnState) ? true : false
-            let LapicPatchState = (LapicPatch.state == NSOnState) ? true : false
-            let XCPMPatchState = (XCPMPatch.state == NSOnState) ? true : false
-            let cdrState = (cdr.state == NSOnState) ? true : false
-            let dropKernelState = (dropKernel.state == NSOnState) ? true : false
+            let MBRPatchState = (MBRPatch.state == NSOnState)
+            let LapicPatchState = (LapicPatch.state == NSOnState)
+            let XCPMPatchState = (XCPMPatch.state == NSOnState)
+            let cdrState = (cdr.state == NSOnState)
+            let dropKernelState = (dropKernel.state == NSOnState)
             for button in [MBRPatch,XCPMPatch,cdr,SizeCustomize,CustomSize,dropKernel,LapicPatch,Disk,Output,OSInstaller,CLT]{
                 button.enabled = false
             }
