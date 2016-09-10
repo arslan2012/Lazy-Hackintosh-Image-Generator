@@ -26,11 +26,21 @@ class BatchProcessAPI{
         self.AppDelegate = AppDelegate
     }
     
-    //the main work flow
+    @objc func maintainPrivilege() {
+        var isCancelled = false;
+        while (!isCancelled) {
+            self.shell.privilegedCommand(self.viewDelegate,"/bin/sh",["-c", "echo>/dev/null"])
+            sleep(30)
+            isCancelled = NSThread.currentThread().cancelled;
+        }
+    }
     
+    //the main work flow
     func startGenerating(filePath:String,_ SizeVal:String,_ MBRPatchState:Bool,_ LapicPatchState:Bool,_ XCPMPatchState:Bool,_ cdrState:Bool,_ dropKernelState:Bool,_ extraDroppedFilePath:String,_ Path:String,_ MountPath:String,_ OSInstallerPath:String){
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0),{
             self.AppDelegate.ProcessStarted()
+            let myThread = NSThread(target: self, selector: #selector(BatchProcessAPI.maintainPrivilege), object: nil)
+            myThread.start()
             ////////////////////////////cleaning processes////////////////////////progress:3%
             if self.viewDelegate.debugLog {
                 do{
@@ -42,6 +52,7 @@ class BatchProcessAPI{
             self.mount(filePath)
             ////////////////////////////creating processes////////////////////////progress:24%
             self.create(SizeVal,MountPath)
+            myThread.cancel()
             ////////////////////////////copying processes/////////////////////////progress:54%
             if MountPath == "" {
                 self.copy()
@@ -49,6 +60,8 @@ class BatchProcessAPI{
                 self.copy(MountPath)
             }
             ////////////////////////////patching processes////////////////////////progress:6%
+            let myThread2 = NSThread(target: self, selector: #selector(BatchProcessAPI.maintainPrivilege), object: nil)
+            myThread2.start()
             if MBRPatchState {
                 self.OSInstaller_Patch()
                 if !self.SystemBuildVersion.SysBuildVerBiggerThan("16A284a"){
@@ -102,6 +115,7 @@ class BatchProcessAPI{
             }
             self.viewDelegate.didReceiveThreadExitMessage()
             self.AppDelegate.ProcessEnded()
+            myThread2.cancel()
         })
     }
     
@@ -208,6 +222,8 @@ class BatchProcessAPI{
         }else{
             self.shell.privilegedCommand(self.viewDelegate,"/usr/sbin/diskutil",["rename","OS X Base System","OS X Custom Installer"], "#COPYBASE#",2)
         }
+        let myThread = NSThread(target: self, selector: #selector(BatchProcessAPI.maintainPrivilege), object: nil)
+        myThread.start()
         self.shell.Command(self.viewDelegate,"/bin/cp",["\(self.esdpath)/BaseSystem.chunklist",self.lazypath], "#Copy ESD#", 2)
         self.shell.Command(self.viewDelegate,"/bin/cp",["\(self.esdpath)/BaseSystem.dmg",self.lazypath], "#Copy ESD#", 2)
         self.shell.Command(self.viewDelegate,"/bin/cp",["\(self.esdpath)/AppleDiagnostics.chunklist",self.lazypath], "#Copy ESD#", 2)
@@ -220,6 +236,7 @@ class BatchProcessAPI{
                 try "========copying done=======".appendLineToURL(NSURL(fileURLWithPath:"\(NSHomeDirectory())/Desktop/Lazy log.txt"))
             }catch{}
         }
+        myThread.cancel()
     }
     private func copy(MountPath:String){
         self.shell.privilegedCommand(self.viewDelegate,"/usr/sbin/asr",["restore","--source","\(self.esdpath)/BaseSystem.dmg","--target",self.lazypath,"--erase","--format","HFS+","--noprompt","--noverify"], "#COPYBASE#",19)
@@ -261,6 +278,8 @@ class BatchProcessAPI{
         }catch{
             self.viewDelegate.didReceiveErrorMessage("#Error in lazy image#")
         }
+        let myThread = NSThread(target: self, selector: #selector(BatchProcessAPI.maintainPrivilege), object: nil)
+        myThread.start()
         self.shell.Command(self.viewDelegate,"/bin/cp",["\(self.esdpath)/BaseSystem.chunklist",self.lazypath], "#Copy ESD#", 2)
         self.shell.Command(self.viewDelegate,"/bin/cp",["\(self.esdpath)/BaseSystem.dmg",self.lazypath], "#Copy ESD#", 2)
         self.shell.Command(self.viewDelegate,"/bin/cp",["\(self.esdpath)/AppleDiagnostics.chunklist",self.lazypath], "#Copy ESD#", 2)
@@ -273,6 +292,7 @@ class BatchProcessAPI{
                 try "========copying done=======".appendLineToURL(NSURL(fileURLWithPath:"\(NSHomeDirectory())/Desktop/Lazy log.txt"))
             }catch{}
         }
+        myThread.cancel()
     }
     private func eject(cdrState:Bool){
         self.shell.Command(self.viewDelegate,"/usr/bin/chflags",["nohidden",self.lazypath], "#EJECTESD#", 0)
