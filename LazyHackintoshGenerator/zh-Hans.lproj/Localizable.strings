@@ -30,6 +30,7 @@
 "#Create Lazy image#" =  "正在创建镜像，请稍候...";
 "#Mount Lazy image#" =  "挂载生成的镜像...";
 "#COPYBASE#" =  "拷贝BaseSystem文件...";
+"#Wait Asr#" = "等待asr命令执行完毕";
 "#Copy ESD#" =  "拷贝InstallESD文件";
 "#DELETEPACKAGE#" =  "删除Packages文件夹替身";
 "#COPYPACKAGE#" =  "复制Packages文件夹到 /System/Installation";

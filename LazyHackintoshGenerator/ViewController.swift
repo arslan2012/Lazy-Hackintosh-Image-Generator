@@ -88,21 +88,23 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
                     UsingCustomSize = true
                 }
             }
-            var SizeVal = "7.15"
-            if UsingCustomSize {
-                SizeVal = CustomSize.stringValue
-            }
             let button = view.window?.standardWindowButton(NSWindowButton.CloseButton)
             button?.enabled = false
-            let MBRPatchState = (MBRPatch.state == NSOnState) ? true : false
-            let LapicPatchState = (LapicPatch.state == NSOnState) ? true : false
-            let XCPMPatchState = (XCPMPatch.state == NSOnState) ? true : false
-            let cdrState = (cdr.state == NSOnState) ? true : false
-            let dropKernelState = (dropKernel.state == NSOnState) ? true : false
             for button in [MBRPatch,XCPMPatch,cdr,SizeCustomize,CustomSize,dropKernel,LapicPatch,Disk,Output,OSInstaller,CLT]{
                 button.enabled = false
             }
-            api.startGenerating(filePath.stringValue,SizeVal,MBRPatchState,LapicPatchState,XCPMPatchState,cdrState,dropKernelState,extraPath.stringValue,Path,MountPath,OSInstallerPath)
+            api.startGenerating(
+                filePath.stringValue,
+                SizeVal: UsingCustomSize ? CustomSize.stringValue : "7.15",
+                MBRPatchState: MBRPatch.state == NSOnState,
+                LapicPatchState: LapicPatch.state == NSOnState,
+                XCPMPatchState: XCPMPatch.state == NSOnState,
+                cdrState: cdr.state == NSOnState,
+                dropKernelState: dropKernel.state == NSOnState,
+                extraDroppedFilePath: extraPath.stringValue,
+                Path: Path,
+                MountPath: MountPath,
+                OSInstallerPath: OSInstallerPath)
         }
     }
     

@@ -102,4 +102,21 @@ class shellCommand {
             }catch{}
         }
     }
+    
+    func privilegedCommand(delegate:BatchProcessAPIProtocol,_ path:String,_  arg: [String]){
+        let task = STPrivilegedTask()
+        task.setLaunchPath(path)
+        task.setArguments(arg)
+        task.launch()
+        task.waitUntilExit()
+        if delegate.debugLog {
+            let date = NSDate()
+            let calendar = NSCalendar.currentCalendar()
+            let components = calendar.components([.Hour, .Minute, .Second], fromDate: date)
+            do{
+                try "==========\(components.hour):\(components.minute):\(components.second)==========".appendLineToURL(NSURL(fileURLWithPath:"\(NSHomeDirectory())/Desktop/Lazy log.txt"))
+                try "sudo \(path) \(arg.joinWithSeparator(" "))".appendLineToURL(NSURL(fileURLWithPath:"\(NSHomeDirectory())/Desktop/Lazy log.txt"))
+            }catch{}
+        }
+    }
 }

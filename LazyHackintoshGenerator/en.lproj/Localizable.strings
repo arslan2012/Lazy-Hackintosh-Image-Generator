@@ -31,6 +31,7 @@
 "#Create Lazy image#" =  "Creating image... Please wait.";
 "#Mount Lazy image#" =  "Mounting created image...";
 "#COPYBASE#" =  "Copying BaseSystem file...";
+"#Wait Asr#" = "Waiting for asr command to finish";
 "#Copy ESD#" =  "Copying InstallESD file...";
 "#DELETEPACKAGE#" =  "Deleting Package folder's alias...";
 "#COPYPACKAGE#" =  "Copying Packages folder to /System/Installation... It will take a long time.";

@@ -25,12 +25,31 @@ class BatchProcessAPI{
         self.viewDelegate = viewDelegate
         self.AppDelegate = AppDelegate
     }
+//    @objc func maintainPrivilege(timer:NSTimer) {
+//            let date = NSDate()
+//            let calendar = NSCalendar.currentCalendar()
+//            let components = calendar.components([.Hour, .Minute, .Second], fromDate: date)
+//            print("\(components.hour):\(components.minute):\(components.second)")
+//            self.shell.privilegedCommand(self.viewDelegate,"/bin/sh",["-c", "echo>/dev/null"])
+//    }
     
     //the main work flow
-    
-    func startGenerating(filePath:String,_ SizeVal:String,_ MBRPatchState:Bool,_ LapicPatchState:Bool,_ XCPMPatchState:Bool,_ cdrState:Bool,_ dropKernelState:Bool,_ extraDroppedFilePath:String,_ Path:String,_ MountPath:String,_ OSInstallerPath:String){
+    func startGenerating(
+        filePath:String,
+        SizeVal:String,
+        MBRPatchState:Bool,
+        LapicPatchState:Bool,
+        XCPMPatchState:Bool,
+        cdrState:Bool,
+        dropKernelState:Bool,
+        extraDroppedFilePath:String,
+        Path:String,
+        MountPath:String,
+        OSInstallerPath:String
+        ){
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0),{
             self.AppDelegate.ProcessStarted()
+            //_ = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: #selector(BatchProcessAPI.maintainPrivilege), userInfo: nil, repeats: true)
             ////////////////////////////cleaning processes////////////////////////progress:3%
             if self.viewDelegate.debugLog {
                 do{
@@ -63,7 +82,6 @@ class BatchProcessAPI{
                 }
                 self.viewDelegate.didReceiveProgress(2)
             }
-            
             if dropKernelState {
                 self.Drop_Kernel()
             }else {
@@ -111,9 +129,7 @@ class BatchProcessAPI{
         do{
             let enumerator = try self.fileManager.contentsOfDirectoryAtPath("/tmp/com.pcbeta.lazy")
             for element in enumerator {
-                if NSURL(fileURLWithPath:"/tmp/com.pcbeta.lazy/\(element)").checkResourceIsReachableAndReturnError(nil){
-                    self.shell.Command(self.viewDelegate,"/usr/bin/hdiutil",["detach","/tmp/com.pcbeta.lazy/\(element)","-force"], "#CleanDir#", 0)
-                }
+                self.shell.Command(self.viewDelegate,"/usr/bin/hdiutil",["detach","/tmp/com.pcbeta.lazy/\(element)","-force"], "#CleanDir#", 0)
             }
         }catch{}
         self.shell.Command(self.viewDelegate,"/bin/rm",["-rf","/tmp/com.pcbeta.lazy"], "#CleanDir#", 0)
@@ -178,25 +194,29 @@ class BatchProcessAPI{
     }
     private func copy(){
         self.shell.privilegedCommand(self.viewDelegate,"/usr/sbin/asr",["restore","--source","\(self.esdpath)/BaseSystem.dmg","--target",self.lazypath,"--erase","--format","HFS+","--noprompt","--noverify"], "#COPYBASE#",17)
-        do{
-            let enumerator = try self.fileManager.contentsOfDirectoryAtPath("/Volumes")
-            for element in enumerator {
-                if element.hasPrefix("OS X Base System"){
-                    if NSURL(fileURLWithPath:"/Volumes/\(element)").checkResourceIsReachableAndReturnError(nil){
-                        self.shell.Command(self.viewDelegate,"/usr/bin/hdiutil",["detach","/Volumes/\(element)","-force"], "", 0)
+        var asrCompletedMounting = false;
+        while(!asrCompletedMounting){
+            do{
+                let enumerator = try self.fileManager.contentsOfDirectoryAtPath("/Volumes")
+                for element in enumerator {
+                    if element.hasPrefix("OS X Base System"){
+                        if NSURL(fileURLWithPath:"/Volumes/\(element)").checkResourceIsReachableAndReturnError(nil){
+                            self.shell.Command(self.viewDelegate,"/usr/bin/hdiutil",["detach","/Volumes/\(element)","-force"], "#Wait Asr#", 0)
+                        }
                     }
                 }
+            }catch{}
+            self.shell.Command(self.viewDelegate,"/usr/bin/hdiutil",["attach","/tmp/com.pcbeta.lazy/Lazy Installer.dmg","-noverify","-nobrowse","-quiet","-mountpoint",self.lazypath], "#Wait Asr#", 0)
+            do{
+                let enumerator = try self.fileManager.contentsOfDirectoryAtPath("\(self.lazypath)")
+                if enumerator.count > 2 {
+                    self.viewDelegate.didReceiveProgress(2)
+                    asrCompletedMounting = true
+                }
             }
-        }catch{}
-        self.shell.Command(self.viewDelegate,"/usr/bin/hdiutil",["attach","/tmp/com.pcbeta.lazy/Lazy Installer.dmg","-noverify","-nobrowse","-quiet","-mountpoint",self.lazypath], "#Mount Lazy image#", 2)
-        do{
-            let enumerator = try self.fileManager.contentsOfDirectoryAtPath("\(self.lazypath)/System")
-            if enumerator.count < 2 {
+            catch{
                 self.viewDelegate.didReceiveErrorMessage("#Error in lazy image#")
             }
-        }
-        catch{
-            self.viewDelegate.didReceiveErrorMessage("#Error in lazy image#")
         }
         self.checkVersion()
         if self.SystemVersion.SysVerBiggerThan("10.11.99"){
