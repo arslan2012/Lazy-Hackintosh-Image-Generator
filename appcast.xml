@@ -6,19 +6,19 @@
 <description>added auto update feature</description>
 <language>en</language>
 <item>
-<title>Version 48</title>
+<title>Version 49</title>
 <sparkle:releaseNotesLink>https://raw.githubusercontent.com/arslan2012/Lazy-Hackintosh-Image-Generator/master/releasenotes.html</sparkle:releaseNotesLink>
 <sparkle:releaseNotesLink xml:lang="cn">https://raw.githubusercontent.com/arslan2012/Lazy-Hackintosh-Image-Generator/master/releasenotes_cn.html</sparkle:releaseNotesLink>
 <sparkle:releaseNotesLink xml:lang="hk">https://raw.githubusercontent.com/arslan2012/Lazy-Hackintosh-Image-Generator/master/releasenotes_cn.html</sparkle:releaseNotesLink>
 <sparkle:releaseNotesLink xml:lang="tw">https://raw.githubusercontent.com/arslan2012/Lazy-Hackintosh-Image-Generator/master/releasenotes_cn.html</sparkle:releaseNotesLink>
-<pubDate>Mon, 12 Sep 2016 21:14:04 +0800</pubDate>
+<pubDate>Fri, 16 Sep 2016 21:55:37 +0800</pubDate>
 <enclosure
 url="https://raw.githubusercontent.com/arslan2012/Lazy-Hackintosh-Image-Generator/master//LazyHackintoshGenerator.app.zip"
-sparkle:version="48"
+sparkle:version="49"
 sparkle:shortVersionString="V2.0"
 type="application/octet-stream"
-length="3130084"
-sparkle:dsaSignature="MCwCFGlm2CkSwsbuBPweYWKGkipSjKlRAhQxdh5mnnBbQL+ev3Ues1evxBPReQ=="
+length="3784083"
+sparkle:dsaSignature="MCwCFBMK4lfArewRUv30wZFXAWREaELJAhQJGkoBBXPgTWk6YLYOgvF44wSJFQ=="
 />
 </item>
 </channel>

@@ -23,6 +23,7 @@
 "#Error in InstallESD image#" =  "ERROR: Couldn't find the mount point of Install ESD.";
 "#Error in lazy image#" =  "ERROR: Couldn't write to the output image.";
 "#Error in sysVer#" = "System Version obtain failed,you may have a corrupted image";
+"#Asr Timeout#" = "asr process timed out, please check your cpu and memory usage";
 	//Progress Messages
 "#CleanDir#" = "Cleaning and creating temporary directory...";
 "#Create CDR#" = "Generating CDR...";

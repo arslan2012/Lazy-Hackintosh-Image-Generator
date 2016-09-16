@@ -1,4 +1,33 @@
 import Cocoa
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+    switch (lhs, rhs) {
+    case let (l?, r?):
+        return l < r
+    case (nil, _?):
+        return true
+    default:
+        return false
+    }
+}
+
+fileprivate func <= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+    switch (lhs, rhs) {
+    case let (l?, r?):
+        return l <= r
+    default:
+        return !(rhs < lhs)
+    }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+    switch (lhs, rhs) {
+    case let (l?, r?):
+        return l > r
+    default:
+        return rhs < lhs
+    }
+}
+
 
 class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol,FileDropZoneProtocol {
     @IBOutlet weak var filePath: NSTextField!
@@ -20,32 +49,32 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
     @IBOutlet weak var CLT: NSButton!
     @IBOutlet weak var Output: NSButton!
     @IBOutlet weak var Disk: NSButton!
-	@IBOutlet weak var OSInstaller: NSButton!
+    @IBOutlet weak var OSInstaller: NSButton!
     var debugLog: Bool = false, Path = "", MountPath = "",OSInstallerPath = ""
-
-    lazy var api : BatchProcessAPI = BatchProcessAPI(viewDelegate: self,AppDelegate: NSApplication.sharedApplication().delegate as! MenuControlProtocol)
+    
+    lazy var api : BatchProcessAPI = BatchProcessAPI(viewDelegate: self,AppDelegate: NSApplication.shared().delegate as! MenuControlProtocol)
     
     override func viewDidLoad() {
         if shellCommand.sharedInstance.Command(self,"/usr/bin/xcode-select", ["-p"], "", 0) != 0{
-            MBRPatch.enabled=false
+            MBRPatch.isEnabled=false
             MBRPatch.state = NSOffState
         }else{
-            CLT.hidden=true
-            OSInstaller.hidden=true
+            CLT.isHidden=true
+            OSInstaller.isHidden=true
         }
         super.viewDidLoad()
         extra.viewDelegate = self
         Installer.viewDelegate = self
-        progress.hidden = true
-        progressLable.hidden = true
-        CustomSize.hidden = true
-        SizeUnit.hidden = true
+        progress.isHidden = true
+        progressLable.isHidden = true
+        CustomSize.isHidden = true
+        SizeUnit.isHidden = true
         XCPMPatch.state = NSOffState
         cdr.state = NSOffState
-        exitButton.hidden = true
+        exitButton.isHidden = true
         
         for button in [MBRPatch,LapicPatch,XCPMPatch,cdr,SizeCustomize,dropKernel,Output,Disk,OSInstaller]{
-            button.attributedTitle = NSAttributedString(string: button.title, attributes: [ NSForegroundColorAttributeName : NSColor.whiteColor()])
+            button?.attributedTitle = NSAttributedString(string: (button?.title)!, attributes: [ NSForegroundColorAttributeName : NSColor.white])
         }
     }
     override func viewDidAppear() {
@@ -53,29 +82,23 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
         self.view.window?.delegate = self
         self.view.window!.title = "#Title#".localized()
         self.view.wantsLayer = true
-        self.view.layer?.backgroundColor = CGColorCreateGenericRGB(83/255, 87/255, 96/255, 1);
+        self.view.layer?.backgroundColor = CGColor(red: 83/255, green: 87/255, blue: 96/255, alpha: 1);
     }
-    
-    override var representedObject: AnyObject? {
-        didSet {
-            // Update the view, if already loaded.
-        }
-    }
-    func windowShouldClose(sender: AnyObject) -> Bool {
+    func windowShouldClose(_ sender: Any) -> Bool {
         exit(0)
     }
-    @IBAction func StartProcessing(sender: NSButton) {
-        if !NSURL(fileURLWithPath:filePath.stringValue).checkResourceIsReachableAndReturnError(nil){
+    @IBAction func StartProcessing(_ sender: NSButton) {
+        if !(URL(fileURLWithPath:filePath.stringValue) as NSURL).checkResourceIsReachableAndReturnError(nil){
             let a = NSAlert()
             a.messageText = "#Input is void#".localized()
             a.runModal()
         }else {
-            let appDelegate = NSApplication.sharedApplication().delegate as! AppDelegate
+            let appDelegate = NSApplication.shared().delegate as! AppDelegate
             debugLog = appDelegate.getDebugStatus()
-            start.hidden = true
-            CLT.hidden = true
-            progress.hidden = false
-            progressLable.hidden = false
+            start.isHidden = true
+            CLT.isHidden = true
+            progress.isHidden = false
+            progressLable.isHidden = false
             progress.startAnimation(self)
             var UsingCustomSize = false
             if SizeCustomize.state == NSOnState {
@@ -88,10 +111,10 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
                     UsingCustomSize = true
                 }
             }
-            let button = view.window?.standardWindowButton(NSWindowButton.CloseButton)
-            button?.enabled = false
-            for button in [MBRPatch,XCPMPatch,cdr,SizeCustomize,CustomSize,dropKernel,LapicPatch,Disk,Output,OSInstaller,CLT]{
-                button.enabled = false
+            let button = view.window?.standardWindowButton(NSWindowButton.closeButton)
+            button?.isEnabled = false
+            for button in [MBRPatch,XCPMPatch,cdr,SizeCustomize,dropKernel,LapicPatch,Disk,Output,OSInstaller,CLT] as [NSButton]{
+                button.isEnabled = false
             }
             api.startGenerating(
                 filePath.stringValue,
@@ -108,177 +131,171 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
         }
     }
     
-    @IBAction func XCPMClicked(sender: NSButton) {
+    @IBAction func XCPMClicked(_ sender: NSButton) {
         if XCPMPatch.state == NSOnState {
             dropKernel.state = NSOnState
         }
     }
-    @IBAction func LapicClicked(sender: NSButton) {
+    @IBAction func LapicClicked(_ sender: NSButton) {
         if LapicPatch.state == NSOnState {
             dropKernel.state = NSOnState
         }
     }
-    @IBAction func dropKernelClicked(sender: NSButton) {
+    @IBAction func dropKernelClicked(_ sender: NSButton) {
         if dropKernel.state == NSOffState {
             XCPMPatch.state = NSOffState
             LapicPatch.state = NSOffState
         }
     }
-    @IBAction func SizeClicked(sender: NSButton) {
+    @IBAction func SizeClicked(_ sender: NSButton) {
         if SizeCustomize.state == NSOnState {
-            CustomSize.hidden = false
-            SizeUnit.hidden = false
+            CustomSize.isHidden = false
+            SizeUnit.isHidden = false
             SizeCustomize.title = ""
             SizeCustomize.state = NSOnState
         }else {
-            CustomSize.hidden = true
-            SizeUnit.hidden = true
-            SizeCustomize.attributedTitle = NSAttributedString(string: "#Custom Size#".localized(), attributes: [ NSForegroundColorAttributeName : NSColor.whiteColor()])
+            CustomSize.isHidden = true
+            SizeUnit.isHidden = true
+            SizeCustomize.attributedTitle = NSAttributedString(string: "#Custom Size#".localized(), attributes: [ NSForegroundColorAttributeName : NSColor.white])
             SizeCustomize.state = NSOffState
         }
     }
-    @IBAction func CustomOutputClicked(sender: NSButton) {
+    @IBAction func CustomOutputClicked(_ sender: NSButton) {
         if sender.state == NSOnState {
-            dispatch_async(dispatch_get_main_queue(),
-                           {
-                            let myFiledialog = NSSavePanel()
-                            
-                            myFiledialog.prompt = "Open"
-                            myFiledialog.worksWhenModal = true
-                            myFiledialog.title = "#Output Title#".localized()
-                            myFiledialog.message = "#Output Msg#".localized()
-                            myFiledialog.allowedFileTypes = ["dmg"]
-                            myFiledialog.beginWithCompletionHandler{ (result: Int) -> Void in
-                                if result == NSFileHandlingPanelOKButton {
-                                    if let URL = myFiledialog.URL{
-                                        if let Path = URL.path{
-                                            if Path != ""{
-                                                self.Path = Path
-                                                self.Disk.enabled = false
-                                            }else{
-                                                sender.state = NSOffState
-                                            }
-                                        }
-                                    }
-                                }else{
-                                    sender.state = NSOffState
-                                }
+            DispatchQueue.main.async{
+                let myFiledialog = NSSavePanel()
+                
+                myFiledialog.prompt = "Open"
+                myFiledialog.worksWhenModal = true
+                myFiledialog.title = "#Output Title#".localized()
+                myFiledialog.message = "#Output Msg#".localized()
+                myFiledialog.allowedFileTypes = ["dmg"]
+                myFiledialog.begin{ (result: Int) -> Void in
+                    if result == NSFileHandlingPanelOKButton {
+                        if let URL = myFiledialog.url{
+                            let Path = URL.path
+                            if Path != ""{
+                                self.Path = Path
+                                self.Disk.isEnabled = false
+                            }else{
+                                sender.state = NSOffState
                             }
-                            
-            })
+                        }
+                    }else{
+                        sender.state = NSOffState
+                    }
+                }
+                
+            }
         }else{
             self.Path = ""
-            self.Disk.enabled = true
+            self.Disk.isEnabled = true
         }
     }
-    @IBAction func WriteDiskClicked(sender: NSButton) {
+    @IBAction func WriteDiskClicked(_ sender: NSButton) {
         if sender.state == NSOnState {
-            dispatch_async(dispatch_get_main_queue(),
-                           {
-                            let myFiledialog = NSOpenPanel()
-                            
-                            myFiledialog.prompt = "Open"
-                            myFiledialog.worksWhenModal = true
-                            myFiledialog.canChooseDirectories = true
-                            myFiledialog.title = "#Output Title#".localized()
-                            myFiledialog.message = "#Output Msg#".localized()
-                            myFiledialog.allowedFileTypes = [kUTTypeVolume as String]
-                            myFiledialog.directoryURL = NSURL(fileURLWithPath: "/Volumes/")
-                            myFiledialog.beginWithCompletionHandler{ (result: Int) -> Void in
-                                if result == NSFileHandlingPanelOKButton {
-                                    if let URL = myFiledialog.URL{
-                                        if let Path = URL.path{
-                                            if Path != "" && Path.hasPrefix("/Volumes"){
-                                                self.MountPath = Path
-                                                self.SizeCustomize.enabled = false
-                                                self.Output.enabled = false
-                                                self.cdr.enabled = false
-                                            }else{
-                                                sender.state = NSOffState
-                                            }
-                                        }
-                                    }
-                                }else{
-                                    sender.state = NSOffState
-                                }
+            DispatchQueue.main.async{
+                let myFiledialog = NSOpenPanel()
+                
+                myFiledialog.prompt = "Open"
+                myFiledialog.worksWhenModal = true
+                myFiledialog.canChooseDirectories = true
+                myFiledialog.title = "#Output Title#".localized()
+                myFiledialog.message = "#Output Msg#".localized()
+                myFiledialog.allowedFileTypes = [kUTTypeVolume as String]
+                myFiledialog.directoryURL = URL(fileURLWithPath: "/Volumes/")
+                myFiledialog.begin{ (result: Int) -> Void in
+                    if result == NSFileHandlingPanelOKButton {
+                        if let URL = myFiledialog.url{
+                            let Path = URL.path
+                            if Path != "" && Path.hasPrefix("/Volumes"){
+                                self.MountPath = Path
+                                self.SizeCustomize.isEnabled = false
+                                self.Output.isEnabled = false
+                                self.cdr.isEnabled = false
+                            }else{
+                                sender.state = NSOffState
                             }
-                            
-            })
+                        }
+                    }else{
+                        sender.state = NSOffState
+                    }
+                }
+                
+            }
         }else {
             MountPath = ""
-            SizeCustomize.enabled = true
-            Output.enabled = true
-            cdr.enabled = true
+            SizeCustomize.isEnabled = true
+            Output.isEnabled = true
+            cdr.isEnabled = true
         }
     }
-	@IBAction func OSInstallerClicked(sender: NSButton) {
+    @IBAction func OSInstallerClicked(_ sender: NSButton) {
         if sender.state == NSOnState {
-            dispatch_async(dispatch_get_main_queue(),
-                           {
-                            let myFiledialog = NSOpenPanel()
-                            
-                            myFiledialog.prompt = "Open"
-                            myFiledialog.worksWhenModal = true
-                            myFiledialog.title = "#OSInstaller Title#".localized()
-                            myFiledialog.message = "#OSInstaller Msg#".localized()
-                            myFiledialog.beginWithCompletionHandler{ (result: Int) -> Void in
-                                if result == NSFileHandlingPanelOKButton {
-                                    if let URL = myFiledialog.URL{
-                                        if let Path = URL.path{
-                                            if Path != "" && URL.lastPathComponent!.caseInsensitiveCompare("OSInstaller") == NSComparisonResult.OrderedSame{
-                                                self.OSInstallerPath = Path
-                                            }else{
-                                                sender.state = NSOffState
-                                            }
-                                        }
-                                    }
-                                }else{
-                                    sender.state = NSOffState
-                                }
+            DispatchQueue.main.async{
+                let myFiledialog = NSOpenPanel()
+                
+                myFiledialog.prompt = "Open"
+                myFiledialog.worksWhenModal = true
+                myFiledialog.title = "#OSInstaller Title#".localized()
+                myFiledialog.message = "#OSInstaller Msg#".localized()
+                myFiledialog.begin{ (result: Int) -> Void in
+                    if result == NSFileHandlingPanelOKButton {
+                        if let URL = myFiledialog.url{
+                            let Path = URL.path
+                            if Path != "" && URL.lastPathComponent.caseInsensitiveCompare("OSInstaller") == ComparisonResult.orderedSame{
+                                self.OSInstallerPath = Path
+                            }else{
+                                sender.state = NSOffState
                             }
-                            
-            })
+                        }
+                    }else{
+                        sender.state = NSOffState
+                    }
+                }
+                
+            }
         }else {
             OSInstallerPath = ""
         }
-	}
-    @IBAction func CLTButtonPressed(sender: NSButton) {
+    }
+    @IBAction func CLTButtonPressed(_ sender: NSButton) {
         shellCommand.sharedInstance.Command(self,"/bin/sh", ["-c","xcode-select --install"], "", 0)
     }
-    @IBAction func exitButtonPressed(sender: NSButton) {
+    @IBAction func exitButtonPressed(_ sender: NSButton) {
         exit(0)
     }
-    func didReceiveProcessName(results: String){
-        dispatch_async(dispatch_get_main_queue(),{
+    func didReceiveProcessName(_ results: String){
+        DispatchQueue.main.async{
             self.progressLable.stringValue = results.localized()
-        })
+        }
     }
-    func didReceiveProgress(results: Double){
-        dispatch_async(dispatch_get_main_queue(),{
-            self.progress.incrementBy(results)
-        })
+    func didReceiveProgress(_ results: Double){
+        DispatchQueue.main.async{
+            self.progress.increment(by: results)
+        }
     }
-    func didReceiveErrorMessage(results: String){
-        dispatch_async(dispatch_get_main_queue(),{
+    func didReceiveErrorMessage(_ results: String){
+        DispatchQueue.main.async{
             let a = NSAlert()
             a.messageText = results.localized()
             a.runModal()
             exit(0)
-        })
+        }
     }
     func didReceiveThreadExitMessage(){
-        dispatch_async(dispatch_get_main_queue(),{
+        DispatchQueue.main.async{
             self.progress.stopAnimation(self)
             self.filePath.stringValue = ""
-            self.exitButton.hidden = false
-            let button = self.view.window?.standardWindowButton(NSWindowButton.CloseButton)
-            button?.enabled = true
-        })
+            self.exitButton.isHidden = false
+            let button = self.view.window?.standardWindowButton(NSWindowButton.closeButton)
+            button?.isEnabled = true
+        }
     }
-    func didReceiveInstaller(filePath:String){
+    func didReceiveInstaller(_ filePath:String){
         self.filePath.stringValue = filePath
     }
-    func didReceiveExtra(filePath:String){
+    func didReceiveExtra(_ filePath:String){
         self.extraPath.stringValue = filePath
     }
 }

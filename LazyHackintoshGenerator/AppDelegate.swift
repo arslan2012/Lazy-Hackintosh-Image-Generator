@@ -8,15 +8,15 @@ class AppDelegate: NSObject, NSApplicationDelegate, MenuControlProtocol {
 	@IBOutlet weak var quit: NSMenuItem!
 	@IBOutlet weak var update: NSMenuItem!
 	
-	func applicationDidFinishLaunching(aNotification: NSNotification) {
+	func applicationDidFinishLaunching(_ aNotification: Notification) {
 		// Insert code here to initialize your application
 	}
 	
-	func applicationWillTerminate(aNotification: NSNotification) {
+	func applicationWillTerminate(_ aNotification: Notification) {
 		// Insert code here to tear down your application
 	}
 	
-	@IBAction func DebugMenuPressed(sender: NSMenuItem) {
+	@IBAction func DebugMenuPressed(_ sender: NSMenuItem) {
 		if sender.title == "#Debug On#".localized(){
 			sender.title = "#Debug Off#".localized()
 		}else {
@@ -33,12 +33,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, MenuControlProtocol {
 	}
     func ProcessStarted(){
         for item in [about,debugging,quit,update] {
-        item.enabled = false
+        item?.isEnabled = false
         }
     }
     func ProcessEnded(){
         for item in [about,debugging,quit,update] {
-            item.enabled = true
+            item?.isEnabled = true
         }
     }
 }

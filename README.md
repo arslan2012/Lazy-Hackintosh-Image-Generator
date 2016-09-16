@@ -16,9 +16,5 @@ Just drag the Install app, or Install app image, or Install ESD image onto the t
 ##Shut up and gimmi the app
 Just download the [LazyHackintoshGenerator.app.zip](https://raw.githubusercontent.com/arslan2012/Lazy-Hackintosh-Image-Generator/master/LazyHackintoshGenerator.app.zip). It will keep updating to the latest version.
 
-# Support needed
-As you can see, since I used Swift to code this, app authorization is really a pain in the ass. Sometimes you need to type in your password twice to make this work.
-
-I'm using STprivilagedTask to do the authrization for me, if you know how to fix the issue, I would be very appriciated.(I don't have Apple Developer ID)
-
-And if you have any issue to report or ideas, feel free to open up an issue and tell me about it.
+# You're a dev?
+my code is a mess, feel free to report an [issue](https://github.com/arslan2012/Lazy-Hackintosh-Image-Generator/issues/new), or open up a [pull request](https://github.com/arslan2012/Lazy-Hackintosh-Image-Generator/compare).

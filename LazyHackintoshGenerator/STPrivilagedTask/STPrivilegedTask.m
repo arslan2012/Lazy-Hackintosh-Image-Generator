@@ -5,6 +5,7 @@
 
 /* New error code denoting that AuthorizationExecuteWithPrivileges no longer exists */
 OSStatus const errAuthorizationFnNoLongerExists = -700000001;
+static AuthorizationRef authorizationRef;
 
 @implementation STPrivilegedTask
 
@@ -148,7 +149,6 @@ OSStatus const errAuthorizationFnNoLongerExists = -700000001;
 {
     OSStatus err = noErr;
     const char *toolPath = [launchPath fileSystemRepresentation];
-    static AuthorizationRef authorizationRef;
     AuthorizationItem myItems = {kAuthorizationRightExecute, strlen(toolPath), &toolPath, 0};
     AuthorizationRights myRights = {1, &myItems};
     AuthorizationFlags flags = kAuthorizationFlagDefaults | kAuthorizationFlagInteractionAllowed | kAuthorizationFlagPreAuthorize | kAuthorizationFlagExtendRights;
@@ -261,7 +261,17 @@ OSStatus const errAuthorizationFnNoLongerExists = -700000001;
     waitpid([self processIdentifier], &terminationStatus, 0);
     isRunning = NO;
 }
-
++ (void)extendAuthorizationRef
+{
+    const char *toolPath = "";
+    AuthorizationItem myItems = {kAuthorizationRightExecute, strlen(toolPath), &toolPath, 0};
+    AuthorizationRights myRights = {1, &myItems};
+    AuthorizationFlags flags = kAuthorizationFlagDefaults | kAuthorizationFlagInteractionAllowed | kAuthorizationFlagPreAuthorize | kAuthorizationFlagExtendRights;
+    if (!authorizationRef) {
+        AuthorizationCreate(NULL, kAuthorizationEmptyEnvironment, kAuthorizationFlagDefaults, &authorizationRef);
+    }
+    AuthorizationCopyRights(authorizationRef, &myRights, kAuthorizationEmptyEnvironment, flags, NULL);
+}
 #pragma mark -
 
 // check if privileged task is still running

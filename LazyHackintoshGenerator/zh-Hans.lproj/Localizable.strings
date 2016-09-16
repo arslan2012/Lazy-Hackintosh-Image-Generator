@@ -23,6 +23,7 @@
 "#Error in InstallESD image#" =  "对不起，似乎未找到ESD镜像挂载点。";
 "#Error in lazy image#" =  "对不起，镜像写入失败。";
 "#Error in sysVer#" = "系统版本获取失败，请检测镜像MD5或是重启电脑";
+"#Asr Timeout#" = "asr进程超时，请检查您的CPU和内存使用率是否过高";
     //Progress Messages
 "#CleanDir#" = "清理并新建临时文件夹...";
 "#MOUNTORG#" =  "挂载镜像...";
