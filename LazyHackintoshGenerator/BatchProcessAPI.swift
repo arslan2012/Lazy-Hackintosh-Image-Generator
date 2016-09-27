@@ -49,7 +49,20 @@ class BatchProcessAPI{
             ////////////////////////////cleaning processes////////////////////////progress:3%
             if self.viewDelegate.debugLog {
                 do{
-                    try "=======Workflow Starting=======".appendLineToURL(URL(fileURLWithPath:"\(NSHomeDirectory())/Desktop/Lazy log.txt"))
+                    let options = [
+                    filePath,
+                    SizeVal,
+                    MBRPatchState ? "true" : "false",
+                    LapicPatchState ? "true" : "false",
+                    XCPMPatchState ? "true" : "false",
+                    cdrState ? "true" : "false",
+                    dropKernelState ? "true" : "false",
+                    extraDroppedFilePath,
+                    Path,
+                    MountPath,
+                    OSInstallerPath] as [String]
+                    try "=======Workflow Starting======".appendLineToURL(URL(fileURLWithPath:"\(NSHomeDirectory())/Desktop/Lazy log.txt"))
+                    try options.joined(separator: ",").appendLineToURL(URL(fileURLWithPath:"\(NSHomeDirectory())/Desktop/Lazy log.txt"))
                 }catch{}
             }
             self.clean()
@@ -98,7 +111,7 @@ class BatchProcessAPI{
             self.shell.Command(self.viewDelegate,"/bin/cp",["-R",extraDroppedFilePath,"\(self.lazypath)/"], "#COPYEXTRA#", 2)
             if self.viewDelegate.debugLog {
                 do{
-                    try "=======patching done=======".appendLineToURL(URL(fileURLWithPath:"\(NSHomeDirectory())/Desktop/Lazy log.txt"))
+                    try "=======patching done========".appendLineToURL(URL(fileURLWithPath:"\(NSHomeDirectory())/Desktop/Lazy log.txt"))
                 }catch{}
             }
             ////////////////////////////ejecting processes////////////////////////progress:9%
@@ -132,7 +145,7 @@ class BatchProcessAPI{
         self.shell.Command(self.viewDelegate,"/bin/mkdir",["/tmp/com.pcbeta.lazy"], "#CleanDir#", 3)
         if self.viewDelegate.debugLog {
             do{
-                try "========cleaning done=======".appendLineToURL(URL(fileURLWithPath:"\(NSHomeDirectory())/Desktop/Lazy log.txt"))
+                try "========cleaning done========".appendLineToURL(URL(fileURLWithPath:"\(NSHomeDirectory())/Desktop/Lazy log.txt"))
             }catch{}
         }
     }
@@ -167,7 +180,7 @@ class BatchProcessAPI{
         }
         if self.viewDelegate.debugLog {
             do{
-                try "=======mounting done=======".appendLineToURL(URL(fileURLWithPath:"\(NSHomeDirectory())/Desktop/Lazy log.txt"))
+                try "=======mounting done========".appendLineToURL(URL(fileURLWithPath:"\(NSHomeDirectory())/Desktop/Lazy log.txt"))
             }catch{}
         }
     }
@@ -184,7 +197,7 @@ class BatchProcessAPI{
         }
         if self.viewDelegate.debugLog {
             do{
-                try "=======creating done=======".appendLineToURL(URL(fileURLWithPath:"\(NSHomeDirectory())/Desktop/Lazy log.txt"))
+                try "=======creating done========".appendLineToURL(URL(fileURLWithPath:"\(NSHomeDirectory())/Desktop/Lazy log.txt"))
             }catch{}
         }
     }
@@ -192,7 +205,7 @@ class BatchProcessAPI{
         self.shell.privilegedCommand(self.viewDelegate,"/usr/sbin/asr",["restore","--source","\(self.esdpath)/BaseSystem.dmg","--target",self.lazypath,"--erase","--format","HFS+","--noprompt","--noverify"], "#COPYBASE#",17)
         var asrCompletedMounting = false;
         while(!asrCompletedMounting){
-            _ = Timer.scheduledTimer(timeInterval: 200, target: self, selector: #selector(BatchProcessAPI.asrTimeout), userInfo: nil, repeats: false)
+            let asrTime = Timer.scheduledTimer(timeInterval: 200, target: self, selector: #selector(BatchProcessAPI.asrTimeout), userInfo: nil, repeats: false)
             do{
                 let enumerator = try self.fileManager.contentsOfDirectory(atPath: "/Volumes")
                 for element in enumerator {
@@ -208,6 +221,7 @@ class BatchProcessAPI{
                 let enumerator = try self.fileManager.contentsOfDirectory(atPath: "\(self.lazypath)")
                 if enumerator.count > 2 {
                     self.viewDelegate.didReceiveProgress(2)
+                    asrTime.invalidate()
                     asrCompletedMounting = true
                 }
             }
@@ -234,7 +248,7 @@ class BatchProcessAPI{
         self.shell.Command(self.viewDelegate,"/bin/mkdir",["\(self.lazypath)/System/Library/Kernels"], "#Create Kernels folder#", 1)
         if self.viewDelegate.debugLog {
             do{
-                try "========copying done=======".appendLineToURL(URL(fileURLWithPath:"\(NSHomeDirectory())/Desktop/Lazy log.txt"))
+                try "========copying done========".appendLineToURL(URL(fileURLWithPath:"\(NSHomeDirectory())/Desktop/Lazy log.txt"))
             }catch{}
         }
     }
@@ -287,7 +301,7 @@ class BatchProcessAPI{
         self.shell.Command(self.viewDelegate,"/bin/mkdir",["\(self.lazypath)/System/Library/Kernels"], "#Create Kernels folder#", 1)
         if self.viewDelegate.debugLog {
             do{
-                try "========copying done=======".appendLineToURL(URL(fileURLWithPath:"\(NSHomeDirectory())/Desktop/Lazy log.txt"))
+                try "========copying done========".appendLineToURL(URL(fileURLWithPath:"\(NSHomeDirectory())/Desktop/Lazy log.txt"))
             }catch{}
         }
     }
@@ -350,9 +364,6 @@ class BatchProcessAPI{
     //functions below are sub processes
     
     fileprivate func checkVersion() {//progress:0%
-        if self.viewDelegate.debugLog {
-            shell.Command(self.viewDelegate,"/bin/ls",["-l","\(lazypath)/System/Library/CoreServices/SystemVersion.plist"], "#Mount Lazy image#", 0)
-        }
         let SystemVersionPlistPath = "\(lazypath)/System/Library/CoreServices/SystemVersion.plist"
         if let myDict = NSDictionary(contentsOfFile: SystemVersionPlistPath) {
             SystemVersion = myDict.value(forKey: "ProductVersion") as! String
@@ -376,7 +387,7 @@ class BatchProcessAPI{
             if self.SystemBuildVersion == "16A238m"{
                 shell.Command(self.viewDelegate,"/bin/sh",["-c","perl -pi -e 's|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\x0F\\x84\\x91\\x00\\x00\\x00\\x48|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\x90\\xE9\\x91\\x00\\x00\\x00\\x48|g' \(self.lazypath.replacingOccurrences(of: " ", with: "\\ "))/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller"], "#Patch osinstaller#",1)
             }else{
-                shell.Command(self.viewDelegate,"/bin/sh",["-c","perl -pi -e 's|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\x0F\\x84\\x96\\x00\\x00\\x00\\x48|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\xE9\\x97\\x00\\x00\\x00\\x90\\x48|g' \(self.lazypath.replacingOccurrences(of: " ", with: "\\ "))/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller"], "#Patch osinstaller#",1)
+                shell.Command(self.viewDelegate,"/bin/sh",["-c","perl -pi -e 's|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\x0F\\x84\\x96\\x00\\x00\\x00\\x48|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\x90\\xE9\\x91\\x00\\x00\\x00\\x48|g' \(self.lazypath.replacingOccurrences(of: " ", with: "\\ "))/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller"], "#Patch osinstaller#",1)
             }
         }else {
             shell.Command(self.viewDelegate,"/bin/sh",["-c","perl -pi -e 's|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\x74\\x5F\\x48\\x8B\\x85|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\xEB\\x5F\\x48\\x8B\\x85|g' \(self.lazypath.replacingOccurrences(of: " ", with: "\\ "))/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller"], "#Patch osinstaller#",1)
