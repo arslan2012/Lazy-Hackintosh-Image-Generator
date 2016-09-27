@@ -204,8 +204,8 @@ class BatchProcessAPI{
     fileprivate func copy(){
         self.shell.privilegedCommand(self.viewDelegate,"/usr/sbin/asr",["restore","--source","\(self.esdpath)/BaseSystem.dmg","--target",self.lazypath,"--erase","--format","HFS+","--noprompt","--noverify"], "#COPYBASE#",17)
         var asrCompletedMounting = false;
+        let asrTime = Timer.scheduledTimer(timeInterval: 200, target: self, selector: #selector(BatchProcessAPI.asrTimeout), userInfo: nil, repeats: false)
         while(!asrCompletedMounting){
-            let asrTime = Timer.scheduledTimer(timeInterval: 200, target: self, selector: #selector(BatchProcessAPI.asrTimeout), userInfo: nil, repeats: false)
             do{
                 let enumerator = try self.fileManager.contentsOfDirectory(atPath: "/Volumes")
                 for element in enumerator {
