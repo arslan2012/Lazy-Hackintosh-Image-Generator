@@ -50,17 +50,17 @@ class BatchProcessAPI{
             if self.viewDelegate.debugLog {
                 do{
                     let options = [
-                    filePath,
-                    SizeVal,
-                    MBRPatchState ? "true" : "false",
-                    LapicPatchState ? "true" : "false",
-                    XCPMPatchState ? "true" : "false",
-                    cdrState ? "true" : "false",
-                    dropKernelState ? "true" : "false",
-                    extraDroppedFilePath,
-                    Path,
-                    MountPath,
-                    OSInstallerPath] as [String]
+                        filePath,
+                        SizeVal,
+                        MBRPatchState ? "true" : "false",
+                        LapicPatchState ? "true" : "false",
+                        XCPMPatchState ? "true" : "false",
+                        cdrState ? "true" : "false",
+                        dropKernelState ? "true" : "false",
+                        extraDroppedFilePath,
+                        Path,
+                        MountPath,
+                        OSInstallerPath] as [String]
                     try "=======Workflow Starting======".appendLineToURL(URL(fileURLWithPath:"\(NSHomeDirectory())/Desktop/Lazy log.txt"))
                     try options.joined(separator: ",").appendLineToURL(URL(fileURLWithPath:"\(NSHomeDirectory())/Desktop/Lazy log.txt"))
                 }catch{}
@@ -384,12 +384,12 @@ class BatchProcessAPI{
     
     fileprivate func OSInstaller_Patch(){//progress:2%
         if self.SystemVersion.SysVerBiggerThan("10.11.99") {
-            if self.SystemBuildVersion == "16A238m"{
+            if self.SystemBuildVersion == "16A238m"{// 10.12 PB1+ MBR
                 shell.Command(self.viewDelegate,"/bin/sh",["-c","perl -pi -e 's|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\x0F\\x84\\x91\\x00\\x00\\x00\\x48|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\x90\\xE9\\x91\\x00\\x00\\x00\\x48|g' \(self.lazypath.replacingOccurrences(of: " ", with: "\\ "))/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller"], "#Patch osinstaller#",1)
-            }else{
-                shell.Command(self.viewDelegate,"/bin/sh",["-c","perl -pi -e 's|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\x0F\\x84\\x96\\x00\\x00\\x00\\x48|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\x90\\xE9\\x91\\x00\\x00\\x00\\x48|g' \(self.lazypath.replacingOccurrences(of: " ", with: "\\ "))/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller"], "#Patch osinstaller#",1)
+            }else{// 10.12 DB1 only MBR
+                shell.Command(self.viewDelegate,"/bin/sh",["-c","perl -pi -e 's|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\x0F\\x84\\x96\\x00\\x00\\x00\\x48|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\x90\\xE9\\x96\\x00\\x00\\x00\\x48|g' \(self.lazypath.replacingOccurrences(of: " ", with: "\\ "))/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller"], "#Patch osinstaller#",1)
             }
-        }else {
+        }else {// 10.10.x and 10.11.x MBR
             shell.Command(self.viewDelegate,"/bin/sh",["-c","perl -pi -e 's|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\x74\\x5F\\x48\\x8B\\x85|\\x48\\x8B\\x78\\x28\\x48\\x85\\xFF\\xEB\\x5F\\x48\\x8B\\x85|g' \(self.lazypath.replacingOccurrences(of: " ", with: "\\ "))/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller"], "#Patch osinstaller#",1)
         }
         shell.privilegedCommand(self.viewDelegate,"/usr/bin/codesign",["-f","-s","-","\(self.lazypath)/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller"], "#Patch osinstaller#",1)
@@ -398,13 +398,13 @@ class BatchProcessAPI{
     fileprivate func OSInstall_mpkg_Patch(){//progress:0%
         shell.Command(self.viewDelegate,"/bin/mkdir",["/tmp/com.pcbeta.lazy/osinstallmpkg"], "#Patch osinstall.mpkg#", 0)
         shell.Command(self.viewDelegate,"/usr/bin/xar",["-x","-f","\(self.lazypath)/System/Installation/Packages/OSInstall.mpkg","-C","/tmp/com.pcbeta.lazy/osinstallmpkg"], "#Patch osinstall.mpkg#", 0)
-        if !self.SystemVersion.SysVerBiggerThan("10.11.99") {
+        if !self.SystemVersion.SysVerBiggerThan("10.11.99") {// 10.10.x and 10.11.x
             shell.Command(self.viewDelegate,"/usr/bin/sed",["-i","\'\'","--","s/1024/512/g","/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution"], "#Patch osinstall.mpkg#", 0)
             shell.Command(self.viewDelegate,"/usr/bin/sed",["-i","\'\'","--","s/var minRam = 2048/var minRam = 1024/g","/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution"], "#Patch osinstall.mpkg#", 0)
             shell.Command(self.viewDelegate,"/usr/bin/sed",["-i","\'\'","--","s/osVersion=......... osBuildVersion=.......//g","/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution"], "#Patch osinstall.mpkg#", 0)
             shell.Command(self.viewDelegate,"/usr/bin/sed",["-i","\'\'","--","/\\<installation-check script=\"installCheckScript()\"\\/>/d","/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution"], "#Patch osinstall.mpkg#", 0)
             shell.Command(self.viewDelegate,"/usr/bin/sed",["-i","\'\'","--","/\\<volume-check script=\"volCheckScript()\"\\/>/d","/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution"], "#Patch osinstall.mpkg#", 0)
-        }else {
+        }else {// 10.12+ and deprecated since DB5/PB4
             shell.Command(self.viewDelegate,"/usr/bin/sed",["-i","\'\'","--","/\\<installation-check script=\"InstallationCheck()\"\\/>/d","/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution"], "#Patch osinstall.mpkg#", 0)
             shell.Command(self.viewDelegate,"/usr/bin/sed",["-i","\'\'","--","/\\<volume-check script=\"VolumeCheck()\"\\/>/d","/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution"], "#Patch osinstall.mpkg#", 0)
         }
