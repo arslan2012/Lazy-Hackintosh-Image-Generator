@@ -67,3 +67,8 @@ extension Data {
         }
     }
 }
+func Logger(_ log:String){
+    do{
+        try log.appendLineToURL(URL(fileURLWithPath:"\(NSHomeDirectory())/Desktop/Lazy log.txt"))
+    }catch{}
+}

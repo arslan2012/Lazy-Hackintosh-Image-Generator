@@ -1,33 +1,4 @@
 import Cocoa
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-    switch (lhs, rhs) {
-    case let (l?, r?):
-        return l < r
-    case (nil, _?):
-        return true
-    default:
-        return false
-    }
-}
-
-fileprivate func <= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-    switch (lhs, rhs) {
-    case let (l?, r?):
-        return l <= r
-    default:
-        return !(rhs < lhs)
-    }
-}
-
-fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-    switch (lhs, rhs) {
-    case let (l?, r?):
-        return l > r
-    default:
-        return rhs < lhs
-    }
-}
-
 
 class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol,FileDropZoneProtocol {
     @IBOutlet weak var filePath: NSTextField!
@@ -50,12 +21,12 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
     @IBOutlet weak var Output: NSButton!
     @IBOutlet weak var Disk: NSButton!
     @IBOutlet weak var OSInstaller: NSButton!
-    var debugLog: Bool = false, Path = "", MountPath = "",OSInstallerPath = ""
+    var buttons:[NSButton] = [],debugLog = false, Path = "", MountPath = "",OSInstallerPath = ""
     
     lazy var api : BatchProcessAPI = BatchProcessAPI(viewDelegate: self,AppDelegate: NSApplication.shared().delegate as! MenuControlProtocol)
     
     override func viewDidLoad() {
-        if shellCommand.sharedInstance.Command(self,"/usr/bin/xcode-select", ["-p"], "", 0) != 0{
+        if Command(self,"/usr/bin/xcode-select", ["-p"], "", 0) != 0{
             MBRPatch.isEnabled=false
             MBRPatch.state = NSOffState
         }else{
@@ -72,9 +43,9 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
         XCPMPatch.state = NSOffState
         cdr.state = NSOffState
         exitButton.isHidden = true
-        
-        for button in [MBRPatch,LapicPatch,XCPMPatch,cdr,SizeCustomize,dropKernel,Output,Disk,OSInstaller]{
-            button?.attributedTitle = NSAttributedString(string: (button?.title)!, attributes: [ NSForegroundColorAttributeName : NSColor.white])
+        buttons = [MBRPatch,LapicPatch,XCPMPatch,cdr,SizeCustomize,dropKernel,Output,Disk,OSInstaller,CLT]
+        for button in buttons{
+            button.attributedTitle = NSAttributedString(string: (button.title), attributes: [ NSForegroundColorAttributeName : NSColor.white])
         }
     }
     override func viewDidAppear() {
@@ -101,8 +72,8 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
             progressLable.isHidden = false
             progress.startAnimation(self)
             var UsingCustomSize = false
-            if SizeCustomize.state == NSOnState {
-                if Double(CustomSize.stringValue) <= 0 || Double(CustomSize.stringValue) > 100 {
+            if SizeCustomize.state == NSOnState && Double(CustomSize.stringValue) != nil {
+                if Double(CustomSize.stringValue)! <= 0 || Double(CustomSize.stringValue)! > 100 {
                     let a = NSAlert()
                     a.messageText = "#WRONGSIZE#".localized()
                     a.runModal()
@@ -113,11 +84,11 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
             }
             let button = view.window?.standardWindowButton(NSWindowButton.closeButton)
             button?.isEnabled = false
-            for button in [MBRPatch,XCPMPatch,cdr,SizeCustomize,dropKernel,LapicPatch,Disk,Output,OSInstaller,CLT] as [NSButton]{
+            for button in buttons{
                 button.isEnabled = false
             }
             api.startGenerating(
-                filePath.stringValue,
+                filePath: filePath.stringValue,
                 SizeVal: UsingCustomSize ? CustomSize.stringValue : "7.15",
                 MBRPatchState: MBRPatch.state == NSOnState,
                 LapicPatchState: LapicPatch.state == NSOnState,
@@ -260,7 +231,7 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
         }
     }
     @IBAction func CLTButtonPressed(_ sender: NSButton) {
-        shellCommand.sharedInstance.Command(self,"/bin/sh", ["-c","xcode-select --install"], "", 0)
+        Command(self,"/bin/sh", ["-c","xcode-select --install"], "", 0)
     }
     @IBAction func exitButtonPressed(_ sender: NSButton) {
         exit(0)
