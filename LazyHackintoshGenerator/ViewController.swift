@@ -23,10 +23,11 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
     @IBOutlet weak var OSInstaller: NSButton!
     var buttons:[NSButton] = [],debugLog = false, Path = "", MountPath = "",OSInstallerPath = ""
     
-    lazy var api : BatchProcessAPI = BatchProcessAPI(viewDelegate: self,AppDelegate: NSApplication.shared().delegate as! MenuControlProtocol)
+    lazy var api : BatchProcessAPI = BatchProcessAPI(AppDelegate: NSApplication.shared().delegate as! MenuControlProtocol)
     
     override func viewDidLoad() {
-        if Command(self,"/usr/bin/xcode-select", ["-p"], "", 0) != 0{
+        delegate = self
+        if Command("/usr/bin/xcode-select", ["-p"], "", 0) != 0{
             MBRPatch.isEnabled=false
             MBRPatch.state = NSOffState
         }else{
@@ -231,7 +232,7 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
         }
     }
     @IBAction func CLTButtonPressed(_ sender: NSButton) {
-        Command(self,"/bin/sh", ["-c","xcode-select --install"], "", 0)
+        Command("/bin/sh", ["-c","xcode-select --install"], "", 0)
     }
     @IBAction func exitButtonPressed(_ sender: NSButton) {
         exit(0)

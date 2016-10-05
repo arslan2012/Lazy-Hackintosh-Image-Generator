@@ -22,6 +22,10 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		1B315EC81DA4F60B0060F141 /* LAPIC_patch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B315EC71DA4F60B0060F141 /* LAPIC_patch.swift */; };
+		1B315ECA1DA4FA570060F141 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B315EC91DA4FA570060F141 /* Global.swift */; };
+		1B315ECC1DA4FBC40060F141 /* XCPM_patch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B315ECB1DA4FBC40060F141 /* XCPM_patch.swift */; };
+		1B315ECE1DA4FD050060F141 /* MBR_patch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B315ECD1DA4FD050060F141 /* MBR_patch.swift */; };
 		F50411871C644987003311DA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50411861C644987003311DA /* AppDelegate.swift */; };
 		F50411891C644987003311DA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50411881C644987003311DA /* ViewController.swift */; };
 		F504118E1C644987003311DA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F504118C1C644987003311DA /* Main.storyboard */; };
@@ -69,6 +73,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1B315EC71DA4F60B0060F141 /* LAPIC_patch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LAPIC_patch.swift; sourceTree = "<group>"; };
+		1B315EC91DA4FA570060F141 /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
+		1B315ECB1DA4FBC40060F141 /* XCPM_patch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCPM_patch.swift; sourceTree = "<group>"; };
+		1B315ECD1DA4FD050060F141 /* MBR_patch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MBR_patch.swift; sourceTree = "<group>"; };
 		8305E2D81D2DD83E00C4BB28 /* LazyHackintoshGenerator.app.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = LazyHackintoshGenerator.app.zip; sourceTree = "<group>"; };
 		F50411831C644987003311DA /* LazyHackintoshGenerator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LazyHackintoshGenerator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F50411861C644987003311DA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -171,6 +179,10 @@
 				F546B0481C660EB600613AFE /* StringExtension.swift */,
 				F50411881C644987003311DA /* ViewController.swift */,
 				F5C563E81CC49242001C00FF /* BatchProcessAPI.swift */,
+				1B315ECD1DA4FD050060F141 /* MBR_patch.swift */,
+				1B315ECB1DA4FBC40060F141 /* XCPM_patch.swift */,
+				1B315EC91DA4FA570060F141 /* Global.swift */,
+				1B315EC71DA4F60B0060F141 /* LAPIC_patch.swift */,
 				F50411951C644B0C003311DA /* FileDropZone.swift */,
 				F504118C1C644987003311DA /* Main.storyboard */,
 				F504118A1C644987003311DA /* Assets.xcassets */,
@@ -354,11 +366,15 @@
 			files = (
 				F50411891C644987003311DA /* ViewController.swift in Sources */,
 				F50411871C644987003311DA /* AppDelegate.swift in Sources */,
+				1B315ECE1DA4FD050060F141 /* MBR_patch.swift in Sources */,
 				F546B0491C660EB600613AFE /* StringExtension.swift in Sources */,
 				F55A4DDC1D487C18003C0B40 /* shellCommand.swift in Sources */,
+				1B315EC81DA4F60B0060F141 /* LAPIC_patch.swift in Sources */,
 				F57F43071C64A1AA004C1EB5 /* STPrivilegedTask.m in Sources */,
 				F50411961C644B0C003311DA /* FileDropZone.swift in Sources */,
 				F5C563E91CC49242001C00FF /* BatchProcessAPI.swift in Sources */,
+				1B315ECC1DA4FBC40060F141 /* XCPM_patch.swift in Sources */,
+				1B315ECA1DA4FA570060F141 /* Global.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

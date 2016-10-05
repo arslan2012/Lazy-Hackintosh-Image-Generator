@@ -9,8 +9,8 @@
 import Foundation
 
 @discardableResult
-func Command(_ delegate:BatchProcessAPIProtocol,_ path:String,_ arg: [String],_ label: String,_ progress: Double,_ currentDirectoryPath:String = "") -> Int32{
-    delegate.didReceiveProcessName(label)
+func Command(_ path:String,_ arg: [String],_ label: String,_ progress: Double,_ currentDirectoryPath:String = "") -> Int32{
+    delegate!.didReceiveProcessName(label)
     let task = Process()
     task.launchPath = path
     task.arguments = arg
@@ -19,9 +19,9 @@ func Command(_ delegate:BatchProcessAPIProtocol,_ path:String,_ arg: [String],_ 
     }
     task.launch()
     task.waitUntilExit()
-    delegate.didReceiveProgress(progress)
+    delegate!.didReceiveProgress(progress)
     
-    if delegate.debugLog {
+    if delegate!.debugLog {
         let outpipe = Pipe()
         task.standardOutput = outpipe
         let errpipe = Pipe()
@@ -42,15 +42,15 @@ func Command(_ delegate:BatchProcessAPIProtocol,_ path:String,_ arg: [String],_ 
 }
 
 @discardableResult
-func privilegedCommand(_ delegate:BatchProcessAPIProtocol,_ path:String,_  arg: [String],_ label: String = "",_ progress: Double = 0){
-    delegate.didReceiveProcessName(label)
+func privilegedCommand(_ path:String,_  arg: [String],_ label: String = "",_ progress: Double = 0){
+    delegate!.didReceiveProcessName(label)
     let task = STPrivilegedTask()
     task.setLaunchPath(path)
     task.setArguments(arg)
     task.launch()
     task.waitUntilExit()
-    delegate.didReceiveProgress(progress)
-    if delegate.debugLog {
+    delegate!.didReceiveProgress(progress)
+    if delegate!.debugLog {
         let date = Date()
         let calendar = Calendar.current
         let components = (calendar as NSCalendar).components([.hour, .minute, .second], from: date)
