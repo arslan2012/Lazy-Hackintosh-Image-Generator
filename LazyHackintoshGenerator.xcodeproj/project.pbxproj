@@ -77,6 +77,7 @@
 		1B315EC91DA4FA570060F141 /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		1B315ECB1DA4FBC40060F141 /* XCPM_patch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCPM_patch.swift; sourceTree = "<group>"; };
 		1B315ECD1DA4FD050060F141 /* MBR_patch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MBR_patch.swift; sourceTree = "<group>"; };
+		1BA9334A1DC81B03007CB003 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		8305E2D81D2DD83E00C4BB28 /* LazyHackintoshGenerator.app.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = LazyHackintoshGenerator.app.zip; sourceTree = "<group>"; };
 		F50411831C644987003311DA /* LazyHackintoshGenerator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LazyHackintoshGenerator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F50411861C644987003311DA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -136,6 +137,7 @@
 				F53D64181D2FEDBF0031AEFA /* releasenotes.html */,
 				F56C22281D2FD9EE00E8DE70 /* appcast.xml */,
 				F56157E21CAA344700D1F581 /* README.md */,
+				1BA9334A1DC81B03007CB003 /* LICENSE.txt */,
 			);
 			name = Introductions;
 			sourceTree = "<group>";
