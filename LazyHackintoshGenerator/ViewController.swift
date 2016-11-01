@@ -1,9 +1,9 @@
 import Cocoa
 
 class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol,FileDropZoneProtocol {
-    @IBOutlet weak var filePath: NSTextField!
+    @IBOutlet weak var fileNameField: NSTextField!
     @IBOutlet weak var progress: NSProgressIndicator!
-    @IBOutlet weak var extraPath: NSTextField!
+    @IBOutlet weak var extraFolderNameField: NSTextField!
     @IBOutlet weak var progressLable: NSTextField!
     @IBOutlet weak var start: NSButton!
     @IBOutlet weak var MBRPatch: NSButton!
@@ -21,7 +21,7 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
     @IBOutlet weak var Output: NSButton!
     @IBOutlet weak var Disk: NSButton!
     @IBOutlet weak var OSInstaller: NSButton!
-    var buttons:[NSButton] = [],debugLog = false, Path = "", MountPath = "",OSInstallerPath = ""
+    var buttons:[NSButton] = [],debugLog = false, Path = "", MountPath = "",OSInstallerPath = "",InstallerPath = "",extraFolderPath = ""
     
     lazy var api : BatchProcessAPI = BatchProcessAPI(AppDelegate: NSApplication.shared().delegate as! MenuControlProtocol)
     
@@ -60,7 +60,7 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
         exit(0)
     }
     @IBAction func StartProcessing(_ sender: NSButton) {
-        if !(URL(fileURLWithPath:filePath.stringValue) as NSURL).checkResourceIsReachableAndReturnError(nil){
+        if !(URL(fileURLWithPath:InstallerPath) as NSURL).checkResourceIsReachableAndReturnError(nil){
             let a = NSAlert()
             a.messageText = "#Input is void#".localized()
             a.runModal()
@@ -89,14 +89,14 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
                 button.isEnabled = false
             }
             api.startGenerating(
-                filePath: filePath.stringValue,
+                filePath: InstallerPath,
                 SizeVal: UsingCustomSize ? CustomSize.stringValue : "7.15",
                 MBRPatchState: MBRPatch.state == NSOnState,
                 LapicPatchState: LapicPatch.state == NSOnState,
                 XCPMPatchState: XCPMPatch.state == NSOnState,
                 cdrState: cdr.state == NSOnState,
                 dropKernelState: dropKernel.state == NSOnState,
-                extraDroppedFilePath: extraPath.stringValue,
+                extraDroppedFilePath: extraFolderPath,
                 Path: Path,
                 MountPath: MountPath,
                 OSInstallerPath: OSInstallerPath)
@@ -258,17 +258,19 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
     func didReceiveThreadExitMessage(){
         DispatchQueue.main.async{
             self.progress.stopAnimation(self)
-            self.filePath.stringValue = ""
+            self.fileNameField.stringValue = ""
             self.exitButton.isHidden = false
             let button = self.view.window?.standardWindowButton(NSWindowButton.closeButton)
             button?.isEnabled = true
         }
     }
     func didReceiveInstaller(_ filePath:String){
-        self.filePath.stringValue = filePath
+        self.InstallerPath =  filePath
+        self.fileNameField.stringValue = NSURL(fileURLWithPath: filePath).lastPathComponent!
     }
     func didReceiveExtra(_ filePath:String){
-        self.extraPath.stringValue = filePath
+        self.extraFolderPath = filePath
+        self.extraFolderNameField.stringValue = NSURL(fileURLWithPath: filePath).lastPathComponent!
     }
 }
 
