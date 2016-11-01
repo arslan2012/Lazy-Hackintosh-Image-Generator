@@ -8,6 +8,12 @@ class FileDropZone: NSImageView {
     var icn:NSImage? {
         return nil
     }
+    var fileTypes:[String] {
+        return []
+    }
+    var isDirectories:Bool {
+        return false
+    }
     var droppedFilePath = ""
     var fileTypeIsOk = false
     required init?(coder: NSCoder) {
@@ -50,14 +56,36 @@ class FileDropZone: NSImageView {
     }
     
     func checkExtension(_ drag: NSDraggingInfo) -> Bool {
-        preconditionFailure("This method must be overridden")
+        if let board = drag.draggingPasteboard().propertyList(forType: "NSFilenamesPboardType") as? NSArray,
+            let path = board[0] as? String {
+            let url = URL(fileURLWithPath: path)
+            if self.isDirectories {
+                let suffix = url.lastPathComponent
+                var isDirectory: ObjCBool = ObjCBool(false)
+                FileManager.default.fileExists(atPath: path, isDirectory: &isDirectory)
+                for ext in self.fileTypes {
+                    if isDirectory.boolValue && suffix.caseInsensitiveCompare(ext) == ComparisonResult.orderedSame{
+                        return true
+                    }
+                }
+            }else {
+                let suffix = url.pathExtension
+                for ext in self.fileTypes {
+                    if ext.lowercased() == suffix {
+                        return true
+                    }
+                }
+            }
+        }
+        return false
     }
 }
 class InstallerDrop: FileDropZone {
-    
-    let fileTypes = ["dmg","app"]
     override var icn:NSImage? {
         return NSImage(named:"image")!
+    }
+    override var fileTypes:[String] {
+        return ["dmg","app"]
     }
     
     override func draggingEnded(_ sender: NSDraggingInfo?) {
@@ -96,26 +124,16 @@ class InstallerDrop: FileDropZone {
             })
         }
     }
-    
-    override func checkExtension(_ drag: NSDraggingInfo) -> Bool {
-        if let board = drag.draggingPasteboard().propertyList(forType: "NSFilenamesPboardType") as? NSArray,
-            let path = board[0] as? String {
-            let url = URL(fileURLWithPath: path)
-            let suffix = url.pathExtension
-            for ext in self.fileTypes {
-                if ext.lowercased() == suffix {
-                    return true
-                }
-            }
-            
-        }
-        return false
-    }
-    
 }
 class ExtraDrop : FileDropZone{
     override var icn:NSImage? {
         return NSImage(named:"drive")!
+    }
+    override var fileTypes:[String] {
+        return ["extra"]
+    }
+    override var isDirectories:Bool {
+        return true
     }
     
     override func draggingEnded(_ sender: NSDraggingInfo?) {
@@ -148,7 +166,7 @@ class ExtraDrop : FileDropZone{
                     let Path = URL.path
                     if Path != "" && URL.lastPathComponent.caseInsensitiveCompare("extra") == ComparisonResult.orderedSame{
                         self.viewDelegate!.didReceiveExtra(Path)
-                        let icn = NSImage(named:"icon-osx")
+                        let icn = NSImage(named:"Chameleon")
                         icn?.size = NSMakeSize(CGFloat(100), CGFloat(100))
                         self.image = icn
                     }
@@ -157,19 +175,5 @@ class ExtraDrop : FileDropZone{
                 
             })
         }
-    }
-    
-    override func checkExtension(_ drag: NSDraggingInfo) -> Bool {
-        if let board = drag.draggingPasteboard().propertyList(forType: "NSFilenamesPboardType") as? NSArray,
-            let path = board[0] as? String {
-            let url = URL(fileURLWithPath: path)
-            let suffix = url.lastPathComponent
-            var isDirectory: ObjCBool = ObjCBool(false)
-            FileManager.default.fileExists(atPath: path, isDirectory: &isDirectory)
-            if isDirectory.boolValue && suffix.caseInsensitiveCompare("extra") == ComparisonResult.orderedSame{
-                return true
-            }
-        }
-        return false
     }
 }
