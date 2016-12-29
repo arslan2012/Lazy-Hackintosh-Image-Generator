@@ -5,6 +5,7 @@ protocol FileDropZoneProtocol: class {
 }
 class FileDropZone: NSImageView {
     weak var viewDelegate: FileDropZoneProtocol?
+    let icnSize = NSMakeSize(CGFloat(100), CGFloat(100))
     var icn:NSImage? {
         return nil
     }
@@ -19,7 +20,7 @@ class FileDropZone: NSImageView {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         register(forDraggedTypes: [NSFilenamesPboardType, NSURLPboardType, NSPasteboardTypeTIFF])
-        icn!.size = NSMakeSize(CGFloat(100), CGFloat(100))
+        icn!.size = self.icnSize
         self.image = icn
     }
     
@@ -92,7 +93,7 @@ class InstallerDrop: FileDropZone {
         if self.fileTypeIsOk && self.droppedFilePath != ""{
             viewDelegate!.didReceiveInstaller(self.droppedFilePath)
             let icn = NSImage(named:"icon-osx")
-            icn?.size = NSMakeSize(CGFloat(100), CGFloat(100))
+            icn?.size = self.icnSize
             self.image = icn
         }
     }
@@ -117,7 +118,7 @@ class InstallerDrop: FileDropZone {
                     if Path != ""{
                         self.viewDelegate!.didReceiveInstaller(Path)
                         let icn = NSImage(named:"icon-osx")
-                        icn?.size = NSMakeSize(CGFloat(100), CGFloat(100))
+                        icn?.size = self.icnSize
                         self.image = icn
                     }
                 }
@@ -140,7 +141,7 @@ class ExtraDrop : FileDropZone{
         if self.droppedFilePath != "" && self.fileTypeIsOk{
             viewDelegate!.didReceiveExtra(self.droppedFilePath)
             let icn = NSImage(named:"Chameleon")
-            icn?.size = NSMakeSize(CGFloat(100), CGFloat(100))
+            icn?.size = self.icnSize
             self.image = icn
         }
     }
@@ -167,7 +168,7 @@ class ExtraDrop : FileDropZone{
                     if Path != "" && URL.lastPathComponent.caseInsensitiveCompare("extra") == ComparisonResult.orderedSame{
                         self.viewDelegate!.didReceiveExtra(Path)
                         let icn = NSImage(named:"Chameleon")
-                        icn?.size = NSMakeSize(CGFloat(100), CGFloat(100))
+                        icn?.size = self.icnSize
                         self.image = icn
                     }
                     

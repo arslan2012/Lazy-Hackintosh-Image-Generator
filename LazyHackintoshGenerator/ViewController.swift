@@ -23,7 +23,7 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
     @IBOutlet weak var OSInstaller: NSButton!
     var buttons:[NSButton] = [],debugLog = false, Path = "", MountPath = "",OSInstallerPath = "",InstallerPath = "",extraFolderPath = ""
     
-    lazy var api : BatchProcessAPI = BatchProcessAPI(AppDelegate: NSApplication.shared().delegate as! MenuControlProtocol)
+    lazy var api : BatchProcessAPI = BatchProcessAPI()
     
     override func viewDidLoad() {
         delegate = self

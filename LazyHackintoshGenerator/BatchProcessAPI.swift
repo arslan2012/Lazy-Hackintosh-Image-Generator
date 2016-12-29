@@ -6,13 +6,9 @@ class BatchProcessAPI{
     var esdpath="/tmp/com.pcbeta.lazy/ESDMount"
     var SystemVersion = ""
     var SystemBuildVersion = ""
-    var viewDelegate: BatchProcessAPIProtocol
-    var AppDelegate: MenuControlProtocol
+    var viewDelegate: BatchProcessAPIProtocol = delegate!
+    var AppDelegate: MenuControlProtocol = NSApplication.shared().delegate as! MenuControlProtocol
     let fileManager = FileManager.default
-    init(AppDelegate: MenuControlProtocol) {
-        self.viewDelegate = delegate!
-        self.AppDelegate = AppDelegate
-    }
     
     //the main work flow
     func startGenerating(
@@ -207,7 +203,7 @@ class BatchProcessAPI{
                 self.viewDelegate.didReceiveErrorMessage("#Error in lazy image#")
             }
         }
-        self.checkVersion()
+        (self.SystemVersion,self.SystemBuildVersion) = GetSystemVersionFromPlist("\(lazypath)/System/Library/CoreServices/SystemVersion.plist")
         if self.SystemVersion.SysVerBiggerThan("10.11.99"){
             privilegedCommand("/usr/sbin/diskutil",["rename","OS X Base System","Sierra Custom Installer"], "#COPYBASE#",2)
         }else if self.SystemVersion.SysVerBiggerThan("10.10.99"){
@@ -244,7 +240,7 @@ class BatchProcessAPI{
             self.viewDelegate.didReceiveErrorMessage("#Error in lazy image#")
         }
         lazypath = "/Volumes/\(tmpname)"
-        self.checkVersion()
+        (self.SystemVersion,self.SystemBuildVersion) = GetSystemVersionFromPlist("\(lazypath)/System/Library/CoreServices/SystemVersion.plist")
         var changedName = ""
         if self.SystemVersion.SysVerBiggerThan("10.11.99"){
             changedName = "Sierra Custom Installer"
@@ -327,23 +323,6 @@ class BatchProcessAPI{
     }
     
     //functions below are sub processes
-    
-    private func checkVersion() {//progress:0%
-        let SystemVersionPlistPath = "\(lazypath)/System/Library/CoreServices/SystemVersion.plist"
-        if let myDict = NSDictionary(contentsOfFile: SystemVersionPlistPath) {
-            SystemVersion = myDict.value(forKey: "ProductVersion") as! String
-            SystemBuildVersion = myDict.value(forKey: "ProductBuildVersion") as! String
-        }else {
-            self.viewDelegate.didReceiveErrorMessage("#Error in sysVer#")
-        }
-        if SystemVersion == "" || SystemBuildVersion == "" {
-            self.viewDelegate.didReceiveErrorMessage("#Error in sysVer#")
-        }
-        if self.viewDelegate.debugLog {
-            Logger("Detected System Version:\(SystemVersion) \(SystemBuildVersion)")
-            Logger("===========================")
-        }
-    }
     
     private func Drop_Kernel() {//progress:1%
         Command(Bundle.main.path(forResource: "lzvn", ofType: nil)!,["-d","\(self.lazypath)/System/Library/PrelinkedKernels/prelinkedkernel","kernel"], "#COPYKERNELF#", 0, "/tmp/com.pcbeta.lazy/")
