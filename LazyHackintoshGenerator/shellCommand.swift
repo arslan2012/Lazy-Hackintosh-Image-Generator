@@ -17,15 +17,15 @@ func Command(_ path:String,_ arg: [String],_ label: String,_ progress: Double,_ 
     if currentDirectoryPath != ""{
         task.currentDirectoryPath = currentDirectoryPath
     }
+    let outpipe = Pipe()
+    task.standardOutput = outpipe
+    let errpipe = Pipe()
+    task.standardError = errpipe
     task.launch()
     task.waitUntilExit()
     delegate!.didReceiveProgress(progress)
     
     if delegate!.debugLog {
-        let outpipe = Pipe()
-        task.standardOutput = outpipe
-        let errpipe = Pipe()
-        task.standardError = errpipe
         let outdata = outpipe.fileHandleForReading.readDataToEndOfFile()
         let output = String(data: outdata, encoding: String.Encoding.utf8)!
         let errdata = errpipe.fileHandleForReading.readDataToEndOfFile()

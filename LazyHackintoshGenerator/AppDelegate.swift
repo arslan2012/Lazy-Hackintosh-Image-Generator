@@ -25,6 +25,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, MenuControlProtocol {
 	}
 	
 	func getDebugStatus() ->Bool{
+        print(debugging.title)
         if debugging.title == "#Debug On#".localized(){
             return false
         }else {

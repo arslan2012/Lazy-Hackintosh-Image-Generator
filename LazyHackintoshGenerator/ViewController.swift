@@ -67,6 +67,7 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
         }else {
             let appDelegate = NSApplication.shared().delegate as! AppDelegate
             debugLog = appDelegate.getDebugStatus()
+            print(debugLog)
             start.isHidden = true
             CLT.isHidden = true
             progress.isHidden = false

@@ -44,8 +44,8 @@
 /* Class = "NSButtonCell"; title = "直接写入分区(耗时较长)"; ObjectID = "kye-sc-dC2"; */
 "kye-sc-dC2.title" = "直接写入分区(耗时较长)";
 
-/* Class = "NSMenuItem"; title = "开启排错模式"; ObjectID = "m5L-xw-t0a"; */
-"m5L-xw-t0a.title" = "开启排错模式";
+/* Class = "NSMenuItem"; title = "开启调试日志"; ObjectID = "m5L-xw-t0a"; */
+"m5L-xw-t0a.title" = "开启调试日志";
 
 /* Class = "NSTextFieldCell"; title = "GB"; ObjectID = "nus-BF-iqV"; */
 "nus-BF-iqV.title" = "GB";
