@@ -1,77 +1,77 @@
-2.0.61
-released Nov 1, 2016
+### 2.0.61
+###### released Nov 1, 2016
 修复日志模式开关反了的Bug
 修复日志模式导致崩溃的Bug
 
-2.0.57
-released Nov 1, 2016
+### 2.0.57
+###### released Nov 1, 2016
 修复Bug
 
-2.0.52
-released Sep 30, 2016
+### 2.0.52
+###### released Sep 30, 2016
 修复Bug
 
-2.0.50
-released Sep 27, 2016
+### 2.0.50
+###### released Sep 27, 2016
 修复了在成功完成升级之后仍提示asr超时的Bug
 
-2.0.49
-released Sep 16, 2016
+### 2.0.49
+###### released Sep 16, 2016
 软件代码升级为Swift3.0
 修复了需要多次输入密码的缺陷(仍在测试中)
 
-2.0.48
-released Sep 12, 2016
+### 2.0.48
+###### released Sep 12, 2016
 修复了软件在1012上破解OSInstall.mpkg的Bug
 修复了软件不等待asr命令推出便进行下一步的Bug(该Bug会在速度较慢的电脑上引起 "对不起，镜像写入失败"的错误)
 
-2.0.46
-released Aug 20, 2016
+### 2.0.46
+###### released Aug 20, 2016
 修改了MBR破解函数，使其不会在版本大于16A284a的镜像上破解OSInstall.mpkg
 为未安装CLT的电脑上增加了 添加自定义OSInstaller 的功能
 
-2.0.44(Beta)
-released Aug 7, 2016
+### 2.0.44(Beta)
+###### released Aug 7, 2016
 增加直接写入磁盘功能
 增加指定输出文件功能
 
-2.0.43
-released Aug 2, 2016
+### 2.0.43
+###### released Aug 2, 2016
 Bug 修复
 
-2.0.41
-released Aug 1, 2016
+### 2.0.41
+###### released Aug 1, 2016
 代码改进。
 LAPIC改用自动搜索地址，删除了彩虹表,删除了otool
 
-2.0.38
-released July 30, 2016
+### 2.0.38
+###### released July 30, 2016
 新增功能，可以双击图标选择文件
 
-2.0.34
-released July 27, 2016
+### 2.0.34
+###### released July 27, 2016
 代码改进。
 若未遇到"对不起，镜像写入失败。"错误则无需升级该版本。
 
-2.0.33
-released July 21, 2016
+### 2.0.33
+###### released July 21, 2016
 删除了对Sierra PB2，DB2，DB3的内置Lapic补丁语句
 添加了对10.11.6的内置Lapic补丁语句
 
-2.0.32
+### 2.0.32
 添加了对Sierra DB3的内置Lapic补丁语句
 修复了对Sierra PB1的内置Lapic补丁语句
 
-2.0.28
-released July 9, 2016
+### 2.0.28
+###### released July 9, 2016
 程序默认会先调用otool进行Lapic补丁，失败则会使用内置Lapic补丁语句
 
-2.0.26
+### 2.0.26
 添加了对机器是否安装命令行工具的检测，若无，则无法使用自动MBR补丁功能
 
-2.0.25
+### 2.0.25
 检测不到系统版本崩溃的问题，修改成了提出错误提示
 
-2.0.14
-released July 8, 2016
+### 2.0.14
+###### released July 8, 2016
 添加自动更新功能

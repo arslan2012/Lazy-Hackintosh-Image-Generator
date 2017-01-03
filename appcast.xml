@@ -2,23 +2,23 @@
 <rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" xmlns:dc="http://purl.org/dc/elements/1.1/">
 <channel>
 <title>Changelog</title>
-<link>https://raw.githubusercontent.com/arslan2012/Lazy-Hackintosh-Image-Generator/master/appcast.xml</link>
+<link>https://hackintosh-generator-update.herokuapp.com/api/specs</link>
 <description>added auto update feature</description>
 <language>en</language>
 <item>
-<title>Version 61</title>
-<sparkle:releaseNotesLink>https://raw.githubusercontent.com/arslan2012/Lazy-Hackintosh-Image-Generator/master/releasenotes.html</sparkle:releaseNotesLink>
-<sparkle:releaseNotesLink xml:lang="cn">https://raw.githubusercontent.com/arslan2012/Lazy-Hackintosh-Image-Generator/master/releasenotes_cn.html</sparkle:releaseNotesLink>
-<sparkle:releaseNotesLink xml:lang="hk">https://raw.githubusercontent.com/arslan2012/Lazy-Hackintosh-Image-Generator/master/releasenotes_cn.html</sparkle:releaseNotesLink>
-<sparkle:releaseNotesLink xml:lang="tw">https://raw.githubusercontent.com/arslan2012/Lazy-Hackintosh-Image-Generator/master/releasenotes_cn.html</sparkle:releaseNotesLink>
-<pubDate>Fri, 30 Dec 2016 18:39:19 +0800</pubDate>
+<title>Version 64</title>
+<sparkle:releaseNotesLink>https://hackintosh-generator-update.herokuapp.com/release/en</sparkle:releaseNotesLink>
+<sparkle:releaseNotesLink xml:lang="cn">https://hackintosh-generator-update.herokuapp.com/release/en</sparkle:releaseNotesLink>
+<sparkle:releaseNotesLink xml:lang="hk">https://hackintosh-generator-update.herokuapp.com/release/en</sparkle:releaseNotesLink>
+<sparkle:releaseNotesLink xml:lang="tw">https://hackintosh-generator-update.herokuapp.com/release/en</sparkle:releaseNotesLink>
+<pubDate>Tue, 03 Jan 2017 21:19:17 +0800</pubDate>
 <enclosure
 url="https://raw.githubusercontent.com/arslan2012/Lazy-Hackintosh-Image-Generator/master//LazyHackintoshGenerator.app.zip"
-sparkle:version="61"
+sparkle:version="64"
 sparkle:shortVersionString="V2.0"
 type="application/octet-stream"
-length="3769443"
-sparkle:dsaSignature="MCwCFDjpaZT9Bm5uz2QLotjZJ+HtjUqxAhRmbwyPPbX3AaRANOKYreFZDI2SIQ=="
+length="3736815"
+sparkle:dsaSignature="MCwCFEuuvRPdBOID+iKUX6zBeKhp8LzFAhRw+qpwfdLsScfJ5khHOFD3SY3njA=="
 />
 </item>
 </channel>
