@@ -8,9 +8,9 @@
 <item>
 <title>Version 64</title>
 <sparkle:releaseNotesLink>https://hackintosh-generator-update.herokuapp.com/release/en</sparkle:releaseNotesLink>
-<sparkle:releaseNotesLink xml:lang="cn">https://hackintosh-generator-update.herokuapp.com/release/en</sparkle:releaseNotesLink>
-<sparkle:releaseNotesLink xml:lang="hk">https://hackintosh-generator-update.herokuapp.com/release/en</sparkle:releaseNotesLink>
-<sparkle:releaseNotesLink xml:lang="tw">https://hackintosh-generator-update.herokuapp.com/release/en</sparkle:releaseNotesLink>
+<sparkle:releaseNotesLink xml:lang="cn">https://hackintosh-generator-update.herokuapp.com/release/cn</sparkle:releaseNotesLink>
+<sparkle:releaseNotesLink xml:lang="hk">https://hackintosh-generator-update.herokuapp.com/release/cn</sparkle:releaseNotesLink>
+<sparkle:releaseNotesLink xml:lang="tw">https://hackintosh-generator-update.herokuapp.com/release/cn</sparkle:releaseNotesLink>
 <pubDate>Tue, 03 Jan 2017 21:19:17 +0800</pubDate>
 <enclosure
 url="https://raw.githubusercontent.com/arslan2012/Lazy-Hackintosh-Image-Generator/master//LazyHackintoshGenerator.app.zip"
