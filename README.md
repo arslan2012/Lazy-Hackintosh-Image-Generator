@@ -5,6 +5,7 @@ This automatical app makes Hackintosh installer from original Macintosh Installe
 ##Why do I need this?
 * If you are on a computer that does not support UEFI.
 * If you have hardwares on you computer that causes original installation image kernel panic.
+* If you are having trouble continuing installation after restart.
 * If you are just too lazy to read the tutorial and install the original.
 
 you'll need this app to alter the original installation image.
