@@ -1,3 +1,7 @@
+### 2.0.68
+###### released March 30, 2017
+Updated kernel patching commands
+
 ### 2.0.66
 ###### released March 29, 2017
 Fixed bug that lvzn cannot be executed
