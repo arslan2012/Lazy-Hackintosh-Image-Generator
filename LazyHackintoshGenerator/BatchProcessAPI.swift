@@ -329,21 +329,21 @@ class BatchProcessAPI{
         Command("/bin/cp",["/tmp/com.pcbeta.lazy/kernel","\(self.lazypath)/System/Library/Kernels"], "#COPYKERNELF#", 1)
         if !self.SystemVersion.SysVerBiggerThan("10.11") {
             /////// 10.10.x
-            Command("/bin/sh",["-c","perl -pi -e 's|\\xE8\\x25\\x00\\x00\\x00\\xEB\\x05\\xE8\\xCE\\x02\\x00\\x00|\\xE8\\x25\\x00\\x00\\x00\\x90\\x90\\xE8\\xCE\\x02\\x00\\x00|g' \(self.lazypath)/System/Library/Kernels/kernel"], "#COPYKERNELF#",0)
+            Command("/bin/sh",["-c","perl -pi -e 's|\\xE8\\x25\\x00\\x00\\x00\\xEB\\x05\\xE8|\\xE8\\x25\\x00\\x00\\x00\\x90\\x90\\xE8|g' \(self.lazypath)/System/Library/Kernels/kernel"], "#COPYKERNELF#",0)
         }else if self.SystemVersion.SysVerBiggerThan("10.11.99"){
             if self.SystemBuildVersion == "16A201w"{
                 /////// 10.12.DB1.116A201w
                 Command("/bin/sh",["-c","perl -pi -e 's|\\xC3\\x48\\x85\\xDB\\x74\\x71\\x48\\x8B\\x03\\x48\\x89\\xDF\\xFF\\x50\\x28\\x48|\\xC3\\x48\\x85\\xDB\\xEB\\x12\\x48\\x8B\\x03\\x48\\x89\\xDF\\xFF\\x50\\x28\\x48|g' \(self.lazypath)/System/Library/Kernels/kernel"], "#COPYKERNELF#",0)
-                Command("/bin/sh",["-c","perl -pi -e 's|\\xE8\\x25\\x00\\x00\\x00\\xEB\\x05\\xE8\\xCE\\x02\\x00\\x00|\\xE8\\x25\\x00\\x00\\x00\\x90\\x90\\xE8\\xCE\\x02\\x00\\x00|g' \(self.lazypath)/System/Library/Kernels/kernel"], "#COPYKERNELF#",0)
+                Command("/bin/sh",["-c","perl -pi -e 's|\\xE8\\x25\\x00\\x00\\x00\\xEB\\x05\\xE8|\\xE8\\x25\\x00\\x00\\x00\\x90\\x90\\xE8|g' \(self.lazypath)/System/Library/Kernels/kernel"], "#COPYKERNELF#",0)
             }else if self.SystemBuildVersion == "16A238m" || self.SystemBuildVersion == "16A239j"{
                 /////// 10.12.PB1.16A238m, 10.12.DB2.16A239j
                 Command("/bin/sh",["-c","perl -pi -e 's|\\xC3\\x48\\x85\\xDB\\x74\\x71\\x48\\x8B\\x03\\x48\\x89\\xDF\\xFF\\x50\\x28\\x48|\\xC3\\x48\\x85\\xDB\\xEB\\x12\\x48\\x8B\\x03\\x48\\x89\\xDF\\xFF\\x50\\x28\\x48|g' \(self.lazypath)/System/Library/Kernels/kernel"], "#COPYKERNELF#",0)
-                Command("/bin/sh",["-c","perl -pi -e 's|\\xE8\\x25\\x00\\x00\\x00\\xEB\\x05\\xE8\\x7E\\x05\\x00\\x00|\\xE8\\x25\\x00\\x00\\x00\\x90\\x90\\xE8\\x7E\\x05\\x00\\x00|g' \(self.lazypath)/System/Library/Kernels/kernel"], "#COPYKERNELF#",0)
+                Command("/bin/sh",["-c","perl -pi -e 's|\\xE8\\x25\\x00\\x00\\x00\\xEB\\x05\\xE8|\\xE8\\x25\\x00\\x00\\x00\\x90\\x90\\xE8|g' \(self.lazypath)/System/Library/Kernels/kernel"], "#COPYKERNELF#",0)
             }
         }else {
             //////// 10.11.x
             Command("/bin/sh",["-c","perl -pi -e 's|\\xC3\\x48\\x85\\xDB\\x74\\x70\\x48\\x8B\\x03\\x48\\x89\\xDF\\xFF\\x50\\x28\\x48|\\xC3\\x48\\x85\\xDB\\xEB\\x12\\x48\\x8B\\x03\\x48\\x89\\xDF\\xFF\\x50\\x28\\x48|g' \(self.lazypath)/System/Library/Kernels/kernel"], "#COPYKERNELF#",0)
-            Command("/bin/sh",["-c","perl -pi -e 's|\\xE8\\x25\\x00\\x00\\x00\\xEB\\x05\\xE8\\xCE\\x02\\x00\\x00|\\xE8\\x25\\x00\\x00\\x00\\x90\\x90\\xE8\\xCE\\x02\\x00\\x00|g' \(self.lazypath)/System/Library/Kernels/kernel"], "#COPYKERNELF#",0)
+            Command("/bin/sh",["-c","perl -pi -e 's|\\xE8\\x25\\x00\\x00\\x00\\xEB\\x05\\xE8|\\xE8\\x25\\x00\\x00\\x00\\x90\\x90\\xE8|g' \(self.lazypath)/System/Library/Kernels/kernel"], "#COPYKERNELF#",0)
         }
         Command("/bin/chmod",["+x","\(self.lazypath)/System/Library/Kernels/kernel"], "#COPYKERNELF#",0)
     }
