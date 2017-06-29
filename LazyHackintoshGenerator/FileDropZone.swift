@@ -1,18 +1,21 @@
 import Cocoa
+
 protocol FileDropZoneProtocol: class {
-    func didReceiveInstaller(_ filePath:String)
-    func didReceiveExtra(_ filePath:String)
+    func didReceiveInstaller(_ filePath: String)
+
+    func didReceiveExtra(_ filePath: String)
 }
+
 class FileDropZone: NSImageView {
     weak var viewDelegate: FileDropZoneProtocol?
     let icnSize = NSMakeSize(CGFloat(100), CGFloat(100))
-    var icn:NSImage? {
+    var icn: NSImage? {
         return nil
     }
-    var fileTypes:[String] {
+    var fileTypes: [String] {
         return []
     }
-    var isDirectories:Bool {
+    var isDirectories: Bool {
         return false
     }
     var droppedFilePath = ""
@@ -23,11 +26,11 @@ class FileDropZone: NSImageView {
         icn!.size = self.icnSize
         self.image = icn
     }
-    
+
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
     }
-    
+
     override func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
         if checkExtension(sender) == true {
             self.fileTypeIsOk = true
@@ -37,7 +40,7 @@ class FileDropZone: NSImageView {
             return NSDragOperation()
         }
     }
-    
+
     override func draggingUpdated(_ sender: NSDraggingInfo) -> NSDragOperation {
         if self.fileTypeIsOk {
             return .copy
@@ -45,7 +48,7 @@ class FileDropZone: NSImageView {
             return NSDragOperation()
         }
     }
-    
+
     override func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
         if let board = sender.draggingPasteboard().propertyList(forType: "NSFilenamesPboardType") as? NSArray {
             if let imagePath = board[0] as? String {
@@ -55,21 +58,21 @@ class FileDropZone: NSImageView {
         }
         return false
     }
-    
+
     func checkExtension(_ drag: NSDraggingInfo) -> Bool {
         if let board = drag.draggingPasteboard().propertyList(forType: "NSFilenamesPboardType") as? NSArray,
-            let path = board[0] as? String {
+           let path = board[0] as? String {
             let url = URL(fileURLWithPath: path)
             if self.isDirectories {
                 let suffix = url.lastPathComponent
                 var isDirectory: ObjCBool = ObjCBool(false)
                 FileManager.default.fileExists(atPath: path, isDirectory: &isDirectory)
                 for ext in self.fileTypes {
-                    if isDirectory.boolValue && suffix.caseInsensitiveCompare(ext) == ComparisonResult.orderedSame{
+                    if isDirectory.boolValue && suffix.caseInsensitiveCompare(ext) == ComparisonResult.orderedSame {
                         return true
                     }
                 }
-            }else {
+            } else {
                 let suffix = url.pathExtension
                 for ext in self.fileTypes {
                     if ext.lowercased() == suffix {
@@ -81,43 +84,44 @@ class FileDropZone: NSImageView {
         return false
     }
 }
+
 class InstallerDrop: FileDropZone {
-    override var icn:NSImage? {
-        return NSImage(named:"image")!
+    override var icn: NSImage? {
+        return NSImage(named: "image")!
     }
-    override var fileTypes:[String] {
-        return ["dmg","app"]
+    override var fileTypes: [String] {
+        return ["dmg", "app"]
     }
-    
+
     override func draggingEnded(_ sender: NSDraggingInfo?) {
-        if self.fileTypeIsOk && self.droppedFilePath != ""{
+        if self.fileTypeIsOk && self.droppedFilePath != "" {
             viewDelegate!.didReceiveInstaller(self.droppedFilePath)
-            let icn = NSImage(named:"icon-osx")
+            let icn = NSImage(named: "icon-osx")
             icn?.size = self.icnSize
             self.image = icn
         }
     }
-    
-    override func mouseDown(with theEvent : NSEvent) {
+
+    override func mouseDown(with theEvent: NSEvent) {
         let clickCount = theEvent.clickCount
         if clickCount > 1 {
             DispatchQueue.main.async(execute: {
                 let myFiledialog = NSOpenPanel()
-                
+
                 myFiledialog.prompt = "Open"
                 myFiledialog.worksWhenModal = true
                 myFiledialog.allowsMultipleSelection = false
                 myFiledialog.resolvesAliases = true
                 myFiledialog.title = "#Image Title#".localized()
                 myFiledialog.message = "#Image Msg#".localized()
-                myFiledialog.allowedFileTypes = ["dmg","app"]
+                myFiledialog.allowedFileTypes = ["dmg", "app"]
                 myFiledialog.runModal()
-                
-                if let URL = myFiledialog.url{
+
+                if let URL = myFiledialog.url {
                     let Path = URL.path
-                    if Path != ""{
+                    if Path != "" {
                         self.viewDelegate!.didReceiveInstaller(Path)
-                        let icn = NSImage(named:"icon-osx")
+                        let icn = NSImage(named: "icon-osx")
                         icn?.size = self.icnSize
                         self.image = icn
                     }
@@ -126,32 +130,33 @@ class InstallerDrop: FileDropZone {
         }
     }
 }
-class ExtraDrop : FileDropZone{
-    override var icn:NSImage? {
-        return NSImage(named:"drive")!
+
+class ExtraDrop: FileDropZone {
+    override var icn: NSImage? {
+        return NSImage(named: "drive")!
     }
-    override var fileTypes:[String] {
+    override var fileTypes: [String] {
         return ["extra"]
     }
-    override var isDirectories:Bool {
+    override var isDirectories: Bool {
         return true
     }
-    
+
     override func draggingEnded(_ sender: NSDraggingInfo?) {
-        if self.droppedFilePath != "" && self.fileTypeIsOk{
+        if self.droppedFilePath != "" && self.fileTypeIsOk {
             viewDelegate!.didReceiveExtra(self.droppedFilePath)
-            let icn = NSImage(named:"Chameleon")
+            let icn = NSImage(named: "Chameleon")
             icn?.size = self.icnSize
             self.image = icn
         }
     }
-    
-    override func mouseDown(with theEvent : NSEvent) {
+
+    override func mouseDown(with theEvent: NSEvent) {
         let clickCount = theEvent.clickCount
         if clickCount > 1 {
             DispatchQueue.main.async(execute: {
                 let myFiledialog = NSOpenPanel()
-                
+
                 myFiledialog.prompt = "Open"
                 myFiledialog.worksWhenModal = true
                 myFiledialog.allowsMultipleSelection = true
@@ -162,18 +167,18 @@ class ExtraDrop : FileDropZone{
                 myFiledialog.message = "#Extra Msg#".localized()
                 myFiledialog.allowedFileTypes = ["extra"]
                 myFiledialog.runModal()
-                
-                if let URL = myFiledialog.url{
+
+                if let URL = myFiledialog.url {
                     let Path = URL.path
-                    if Path != "" && URL.lastPathComponent.caseInsensitiveCompare("extra") == ComparisonResult.orderedSame{
+                    if Path != "" && URL.lastPathComponent.caseInsensitiveCompare("extra") == ComparisonResult.orderedSame {
                         self.viewDelegate!.didReceiveExtra(Path)
-                        let icn = NSImage(named:"Chameleon")
+                        let icn = NSImage(named: "Chameleon")
                         icn?.size = self.icnSize
                         self.image = icn
                     }
-                    
+
                 }
-                
+
             })
         }
     }

@@ -19,9 +19,8 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
     @IBOutlet weak var dropKernel: NSButton!
     @IBOutlet weak var CLT: NSButton!
     @IBOutlet weak var Output: NSButton!
-    @IBOutlet weak var Disk: NSButton!
     @IBOutlet weak var OSInstaller: NSButton!
-    var buttons:[NSButton] = [],debugLog = false, Path = "", MountPath = "",OSInstallerPath = "",InstallerPath = "",extraFolderPath = ""
+    var buttons:[NSButton] = [],debugLog = false, Path = "",OSInstallerPath = "",InstallerPath = "",extraFolderPath = ""
     
     lazy var api : BatchProcessAPI = BatchProcessAPI()
     
@@ -44,7 +43,7 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
         XCPMPatch.state = NSOffState
         cdr.state = NSOffState
         exitButton.isHidden = true
-        buttons = [MBRPatch,LapicPatch,XCPMPatch,cdr,SizeCustomize,dropKernel,Output,Disk,OSInstaller,CLT]
+        buttons = [MBRPatch,LapicPatch,XCPMPatch,cdr,SizeCustomize,dropKernel,Output,OSInstaller,CLT]
         for button in buttons{
             button.attributedTitle = NSAttributedString(string: (button.title), attributes: [ NSForegroundColorAttributeName : NSColor.white])
         }
@@ -98,7 +97,6 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
                 dropKernelState: dropKernel.state == NSOnState,
                 extraDroppedFilePath: extraFolderPath,
                 Path: Path,
-                MountPath: MountPath,
                 OSInstallerPath: OSInstallerPath)
         }
     }
@@ -148,7 +146,6 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
                             let Path = URL.path
                             if Path != ""{
                                 self.Path = Path
-                                self.Disk.isEnabled = false
                             }else{
                                 sender.state = NSOffState
                             }
@@ -161,45 +158,6 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
             }
         }else{
             self.Path = ""
-            self.Disk.isEnabled = true
-        }
-    }
-    @IBAction func WriteDiskClicked(_ sender: NSButton) {
-        if sender.state == NSOnState {
-            DispatchQueue.main.async{
-                let myFiledialog = NSOpenPanel()
-                
-                myFiledialog.prompt = "Open"
-                myFiledialog.worksWhenModal = true
-                myFiledialog.canChooseDirectories = true
-                myFiledialog.title = "#Output Title#".localized()
-                myFiledialog.message = "#Output Msg#".localized()
-                myFiledialog.allowedFileTypes = [kUTTypeVolume as String]
-                myFiledialog.directoryURL = URL(fileURLWithPath: "/Volumes/")
-                myFiledialog.begin{ (result: Int) -> Void in
-                    if result == NSFileHandlingPanelOKButton {
-                        if let URL = myFiledialog.url{
-                            let Path = URL.path
-                            if Path != "" && Path.hasPrefix("/Volumes"){
-                                self.MountPath = Path
-                                self.SizeCustomize.isEnabled = false
-                                self.Output.isEnabled = false
-                                self.cdr.isEnabled = false
-                            }else{
-                                sender.state = NSOffState
-                            }
-                        }
-                    }else{
-                        sender.state = NSOffState
-                    }
-                }
-                
-            }
-        }else {
-            MountPath = ""
-            SizeCustomize.isEnabled = true
-            Output.isEnabled = true
-            cdr.isEnabled = true
         }
     }
     @IBAction func OSInstallerClicked(_ sender: NSButton) {

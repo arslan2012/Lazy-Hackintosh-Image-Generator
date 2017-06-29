@@ -41,7 +41,7 @@ func Command(_ path:String,_ arg: [String],_ label: String,_ progress: Double,_ 
     return task.terminationStatus
 }
 
-@discardableResult
+
 func privilegedCommand(_ path:String,_  arg: [String],_ label: String = "",_ progress: Double = 0){
     delegate!.didReceiveProcessName(label)
     let task = STPrivilegedTask()

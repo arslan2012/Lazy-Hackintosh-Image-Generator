@@ -19,9 +19,3 @@ Just download the [LazyHackintoshGenerator.app.zip](https://raw.githubuserconten
 
 ## You're a dev?
 my code is a mess, feel free to report an [issue](https://github.com/arslan2012/Lazy-Hackintosh-Image-Generator/issues/new), or open up a [pull request](https://github.com/arslan2012/Lazy-Hackintosh-Image-Generator/compare).
-
-# Warning! Development on hold.
-## Warning this app doesn't support High Sierra......yet
-I just guraduated from college, I'm trying to rent a place to live, move and so many other thing I need to do.
-So the app's development is on hold for roughly a month, and the app doesn't support High Sierra yet, It will say something about OSInstaller.pkg is corrupt. so dont use this app to make High Sierra image I guess.
-I will try and attend to the issues as soon as I settle down, Cheers.

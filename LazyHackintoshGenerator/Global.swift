@@ -9,15 +9,20 @@
 import Foundation
 
 protocol BatchProcessAPIProtocol {
-    var debugLog:Bool{get set}
+    var debugLog: Bool { get set }
     func didReceiveProcessName(_ results: String)
+
     func didReceiveProgress(_ results: Double)
+
     func didReceiveErrorMessage(_ results: String)
+
     func didReceiveThreadExitMessage()
 }
+
 protocol MenuControlProtocol {
     func ProcessStarted()
+
     func ProcessEnded()
 }
 
-var delegate:BatchProcessAPIProtocol? = nil
+var delegate: BatchProcessAPIProtocol? = nil
