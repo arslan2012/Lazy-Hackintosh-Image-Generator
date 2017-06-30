@@ -27,6 +27,11 @@
 		1B315ECC1DA4FBC40060F141 /* XCPM_patch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B315ECB1DA4FBC40060F141 /* XCPM_patch.swift */; };
 		1B315ECE1DA4FD050060F141 /* MBR_patch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B315ECD1DA4FD050060F141 /* MBR_patch.swift */; };
 		1B6E89FE1DC993C300B4E1CB /* GetSystemVersionFromPlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6E89FD1DC993C300B4E1CB /* GetSystemVersionFromPlist.swift */; };
+		AC0272547231C9A591E5C816 /* Copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC027473DDD671D270931D1A /* Copy.swift */; };
+		AC027CB3F9219313E0F68172 /* Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC02772B82D10E0959F49749 /* Create.swift */; };
+		AC027D7B38925B6FDC179345 /* Eject.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0279D085D141E85D9DF7DA /* Eject.swift */; };
+		AC027F31A469A10A40262B4C /* Drop_Kernel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0277E58DF04B8445D399BA /* Drop_Kernel.swift */; };
+		AC027F6E32B470335C85F5B2 /* MountDisks.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC027BE830D8515D6D6FA0F4 /* MountDisks.swift */; };
 		F50411871C644987003311DA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50411861C644987003311DA /* AppDelegate.swift */; };
 		F50411891C644987003311DA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50411881C644987003311DA /* ViewController.swift */; };
 		F504118E1C644987003311DA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F504118C1C644987003311DA /* Main.storyboard */; };
@@ -81,6 +86,11 @@
 		1B6E89FD1DC993C300B4E1CB /* GetSystemVersionFromPlist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetSystemVersionFromPlist.swift; sourceTree = "<group>"; };
 		1BA9334A1DC81B03007CB003 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		8305E2D81D2DD83E00C4BB28 /* LazyHackintoshGenerator.app.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = LazyHackintoshGenerator.app.zip; sourceTree = "<group>"; };
+		AC027473DDD671D270931D1A /* Copy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Copy.swift; sourceTree = "<group>"; };
+		AC02772B82D10E0959F49749 /* Create.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Create.swift; sourceTree = "<group>"; };
+		AC0277E58DF04B8445D399BA /* Drop_Kernel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Drop_Kernel.swift; sourceTree = "<group>"; };
+		AC0279D085D141E85D9DF7DA /* Eject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Eject.swift; sourceTree = "<group>"; };
+		AC027BE830D8515D6D6FA0F4 /* MountDisks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MountDisks.swift; sourceTree = "<group>"; };
 		F50411831C644987003311DA /* LazyHackintoshGenerator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LazyHackintoshGenerator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F50411861C644987003311DA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F50411881C644987003311DA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ViewController.swift; sourceTree = "<group>"; };
@@ -192,6 +202,11 @@
 				F504118C1C644987003311DA /* Main.storyboard */,
 				F504118A1C644987003311DA /* Assets.xcassets */,
 				F546B0471C660DDD00613AFE /* Localizable.strings */,
+				AC027BE830D8515D6D6FA0F4 /* MountDisks.swift */,
+				AC027473DDD671D270931D1A /* Copy.swift */,
+				AC02772B82D10E0959F49749 /* Create.swift */,
+				AC0279D085D141E85D9DF7DA /* Eject.swift */,
+				AC0277E58DF04B8445D399BA /* Drop_Kernel.swift */,
 			);
 			path = LazyHackintoshGenerator;
 			sourceTree = "<group>";
@@ -381,6 +396,11 @@
 				1B6E89FE1DC993C300B4E1CB /* GetSystemVersionFromPlist.swift in Sources */,
 				1B315ECC1DA4FBC40060F141 /* XCPM_patch.swift in Sources */,
 				1B315ECA1DA4FA570060F141 /* Global.swift in Sources */,
+				AC027F6E32B470335C85F5B2 /* MountDisks.swift in Sources */,
+				AC0272547231C9A591E5C816 /* Copy.swift in Sources */,
+				AC027CB3F9219313E0F68172 /* Create.swift in Sources */,
+				AC027D7B38925B6FDC179345 /* Eject.swift in Sources */,
+				AC027F31A469A10A40262B4C /* Drop_Kernel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -26,3 +26,10 @@ protocol MenuControlProtocol {
 }
 
 var delegate: BatchProcessAPIProtocol? = nil
+let lazyImageMountPath = "/tmp/com.pcbeta.lazy/lazyMount"
+let originalFileMountPath = "/tmp/com.pcbeta.lazy/originMount"
+let baseSystemMountPath = "/tmp/com.pcbeta.lazy/baseMount"
+var InstallESDMountPath = "/tmp/com.pcbeta.lazy/ESDMount"
+var baseSystemFilePath = ""
+var SystemVersion = ""
+var SystemBuildVersion = ""

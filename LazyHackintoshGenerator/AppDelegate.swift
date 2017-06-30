@@ -9,7 +9,15 @@ class AppDelegate: NSObject, NSApplicationDelegate, MenuControlProtocol {
     @IBOutlet weak var update: NSMenuItem!
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        // Insert code here to initialize your application
+        do {
+            let enumerator = try FileManager.default.contentsOfDirectory(atPath: "/tmp/com.pcbeta.lazy")
+            for element in enumerator {
+                Command("/usr/bin/hdiutil", ["detach", "/tmp/com.pcbeta.lazy/\(element)", "-force"], "#CleanDir#", 0)
+            }
+        } catch {
+        }
+        Command("/bin/rm", ["-rf", "/tmp/com.pcbeta.lazy"], "#CleanDir#", 0)
+        Command("/bin/mkdir", ["/tmp/com.pcbeta.lazy"], "#CleanDir#", 0)
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -39,6 +47,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, MenuControlProtocol {
     }
 
     func ProcessEnded() {
+        InstallESDMountPath = "/tmp/com.pcbeta.lazy/ESDMount"
+        baseSystemFilePath = ""
+        SystemVersion = ""
+        SystemBuildVersion = ""
         for item in [about, debugging, quit, update] {
             item?.isEnabled = true
         }
