@@ -10,14 +10,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, MenuControlProtocol {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         do {
-            let enumerator = try FileManager.default.contentsOfDirectory(atPath: "/tmp/com.pcbeta.lazy")
+            let enumerator = try FileManager.default.contentsOfDirectory(atPath: "/tmp/tech.arslan2012.lazy")
             for element in enumerator {
-                Command("/usr/bin/hdiutil", ["detach", "/tmp/com.pcbeta.lazy/\(element)", "-force"], "#CleanDir#", 0)
+                Command("/usr/bin/hdiutil", ["detach", "/tmp/tech.arslan2012.lazy/\(element)", "-force"], "#CleanDir#", 0)
             }
         } catch {
         }
-        Command("/bin/rm", ["-rf", "/tmp/com.pcbeta.lazy"], "#CleanDir#", 0)
-        Command("/bin/mkdir", ["/tmp/com.pcbeta.lazy"], "#CleanDir#", 0)
+        Command("/bin/rm", ["-rf", "/tmp/tech.arslan2012.lazy"], "#CleanDir#", 0)
+        Command("/bin/mkdir", ["/tmp/tech.arslan2012.lazy"], "#CleanDir#", 0)
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -47,7 +47,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, MenuControlProtocol {
     }
 
     func ProcessEnded() {
-        InstallESDMountPath = "/tmp/com.pcbeta.lazy/ESDMount"
+        InstallESDMountPath = "/tmp/tech.arslan2012.lazy/ESDMount"
         baseSystemFilePath = ""
         SystemVersion = ""
         SystemBuildVersion = ""

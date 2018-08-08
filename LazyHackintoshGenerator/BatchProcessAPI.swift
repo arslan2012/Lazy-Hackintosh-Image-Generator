@@ -83,7 +83,7 @@ class BatchProcessAPI {
                 Eject(cdrState, Path)
             }
 
-            Command("/bin/rm", ["-rf", "/tmp/com.pcbeta.lazy"], "#Finishing#", 0)
+            Command("/bin/rm", ["-rf", "/tmp/tech.arslan2012.lazy"], "#Finishing#", 0)
             if failedLapic {
                 delegate!.didReceiveProcessName("#Failed Lapic#")
             } else {

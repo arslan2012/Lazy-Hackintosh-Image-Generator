@@ -22,19 +22,19 @@ func OSInstaller_Patch(_ SystemVersion: String, _ SystemBuildVersion: String, _ 
 }
 
 func OSInstall_mpkg_Patch(_ SystemVersion: String, _ OSInstallPath: String) {//progress:0%
-    Command("/bin/mkdir", ["/tmp/com.pcbeta.lazy/osinstallmpkg"], "#Patch osinstall.mpkg#", 0)
-    Command("/usr/bin/xar", ["-x", "-f", OSInstallPath, "-C", "/tmp/com.pcbeta.lazy/osinstallmpkg"], "#Patch osinstall.mpkg#", 0)
+    Command("/bin/mkdir", ["/tmp/tech.arslan2012.lazy/osinstallmpkg"], "#Patch osinstall.mpkg#", 0)
+    Command("/usr/bin/xar", ["-x", "-f", OSInstallPath, "-C", "/tmp/tech.arslan2012.lazy/osinstallmpkg"], "#Patch osinstall.mpkg#", 0)
     if !SystemVersion.SysVerBiggerThan("10.11.99") {// 10.10.x and 10.11.x
-        Command("/usr/bin/sed", ["-i", "\'\'", "--", "s/1024/512/g", "/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution"], "#Patch osinstall.mpkg#", 0)
-        Command("/usr/bin/sed", ["-i", "\'\'", "--", "s/var minRam = 2048/var minRam = 1024/g", "/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution"], "#Patch osinstall.mpkg#", 0)
-        Command("/usr/bin/sed", ["-i", "\'\'", "--", "s/osVersion=......... osBuildVersion=.......//g", "/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution"], "#Patch osinstall.mpkg#", 0)
-        Command("/usr/bin/sed", ["-i", "\'\'", "--", "/\\<installation-check script=\"installCheckScript()\"\\/>/d", "/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution"], "#Patch osinstall.mpkg#", 0)
-        Command("/usr/bin/sed", ["-i", "\'\'", "--", "/\\<volume-check script=\"volCheckScript()\"\\/>/d", "/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution"], "#Patch osinstall.mpkg#", 0)
+        Command("/usr/bin/sed", ["-i", "\'\'", "--", "s/1024/512/g", "/tmp/tech.arslan2012.lazy/osinstallmpkg/Distribution"], "#Patch osinstall.mpkg#", 0)
+        Command("/usr/bin/sed", ["-i", "\'\'", "--", "s/var minRam = 2048/var minRam = 1024/g", "/tmp/tech.arslan2012.lazy/osinstallmpkg/Distribution"], "#Patch osinstall.mpkg#", 0)
+        Command("/usr/bin/sed", ["-i", "\'\'", "--", "s/osVersion=......... osBuildVersion=.......//g", "/tmp/tech.arslan2012.lazy/osinstallmpkg/Distribution"], "#Patch osinstall.mpkg#", 0)
+        Command("/usr/bin/sed", ["-i", "\'\'", "--", "/\\<installation-check script=\"installCheckScript()\"\\/>/d", "/tmp/tech.arslan2012.lazy/osinstallmpkg/Distribution"], "#Patch osinstall.mpkg#", 0)
+        Command("/usr/bin/sed", ["-i", "\'\'", "--", "/\\<volume-check script=\"volCheckScript()\"\\/>/d", "/tmp/tech.arslan2012.lazy/osinstallmpkg/Distribution"], "#Patch osinstall.mpkg#", 0)
     } else {// 10.12+ and deprecated since DB5/PB4
-        Command("/usr/bin/sed", ["-i", "\'\'", "--", "/\\<installation-check script=\"InstallationCheck()\"\\/>/d", "/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution"], "#Patch osinstall.mpkg#", 0)
-        Command("/usr/bin/sed", ["-i", "\'\'", "--", "/\\<volume-check script=\"VolumeCheck()\"\\/>/d", "/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution"], "#Patch osinstall.mpkg#", 0)
+        Command("/usr/bin/sed", ["-i", "\'\'", "--", "/\\<installation-check script=\"InstallationCheck()\"\\/>/d", "/tmp/tech.arslan2012.lazy/osinstallmpkg/Distribution"], "#Patch osinstall.mpkg#", 0)
+        Command("/usr/bin/sed", ["-i", "\'\'", "--", "/\\<volume-check script=\"VolumeCheck()\"\\/>/d", "/tmp/tech.arslan2012.lazy/osinstallmpkg/Distribution"], "#Patch osinstall.mpkg#", 0)
     }
     Command("/bin/rm", [OSInstallPath], "#Patch osinstall.mpkg#", 0)
-    Command("/bin/rm", ["/tmp/com.pcbeta.lazy/osinstallmpkg/Distribution\'\'"], "#Patch osinstall.mpkg#", 0)
-    Command("/usr/bin/xar", ["-cf", OSInstallPath, "."], "#Patch osinstall.mpkg#", 0, "/tmp/com.pcbeta.lazy/osinstallmpkg")
+    Command("/bin/rm", ["/tmp/tech.arslan2012.lazy/osinstallmpkg/Distribution\'\'"], "#Patch osinstall.mpkg#", 0)
+    Command("/usr/bin/xar", ["-cf", OSInstallPath, "."], "#Patch osinstall.mpkg#", 0, "/tmp/tech.arslan2012.lazy/osinstallmpkg")
 }

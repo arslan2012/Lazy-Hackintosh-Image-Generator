@@ -15,7 +15,7 @@
 	<key>CFBundleExecutable</key>
 	<string>LazyHackintoshGenerator</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.PCBeta.LazyHackintoshGenerator</string>
+	<string>tech.arslan2012.LazyHackintoshGenerator</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -31,7 +31,7 @@
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.utilities</string>
 	<key>NSHumanReadableCopyright</key>
-	<string>Copyright © 2015-2017 PCBeta. All rights reserved.</string>
+	<string>Copyright © 2015-2018 Arslan Tech. All rights reserved.</string>
 	<key>NSMainStoryboardFile</key>
 	<string>Main</string>
 	<key>NSPrincipalClass</key>

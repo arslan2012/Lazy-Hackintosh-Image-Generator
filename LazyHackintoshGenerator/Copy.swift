@@ -21,7 +21,7 @@ func Copy() {
             }
         } catch {
         }
-        Command("/usr/bin/hdiutil", ["attach", "/tmp/com.pcbeta.lazy/Lazy Installer.dmg", "-noverify", "-nobrowse", "-quiet", "-mountpoint", lazyImageMountPath], "#Wait Asr#", 0)
+        Command("/usr/bin/hdiutil", ["attach", "/tmp/tech.arslan2012.lazy/Lazy Installer.dmg", "-noverify", "-nobrowse", "-quiet", "-mountpoint", lazyImageMountPath], "#Wait Asr#", 0)
         do {
             let enumerator = try FileManager.default.contentsOfDirectory(atPath: "\(lazyImageMountPath)")
             if enumerator.count > 2 {
