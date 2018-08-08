@@ -1,5 +1,5 @@
 # Lazy Hackintosh Image Generator
-[![Swift 3.0](https://img.shields.io/badge/Swift-3.0-orange.svg?style=flat)](https://swift.org)
+[![Swift 4.1](https://img.shields.io/badge/Swift-4.1-orange.svg?style=flat)](https://swift.org)
 ## What is this?
 This automatical app makes Hackintosh installer from original Macintosh Installer app/disk image.
 ## Why do I need this?

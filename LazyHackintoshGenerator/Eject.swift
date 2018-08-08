@@ -6,6 +6,20 @@
 import Foundation
 
 func Eject(_ cdrState: Bool, _ Path: String = "\(NSHomeDirectory())/Desktop/") {
+    var name = Path;
+    if (Path == "\(NSHomeDirectory())/Desktop/") {
+        if SystemVersion.SysVerBiggerThan("10.13.99") {
+            name += "Mojave Custom Installer.dmg"
+        } else if SystemVersion.SysVerBiggerThan("10.12.99") {
+            name += "High Sierra Custom Installer.dmg"
+        } else if SystemVersion.SysVerBiggerThan("10.11.99") {
+            name += "Sierra Custom Installer.dmg"
+        } else if SystemVersion.SysVerBiggerThan("10.10.99") {
+            name += "El Capitan Custom Installer.dmg"
+        } else if SystemVersion.SysVerBiggerThan("10.9.99") {
+            name += "Yosemite Custom Installer.dmg"
+        }
+    }
     Command("/usr/bin/chflags", ["nohidden", lazyImageMountPath], "#EJECTESD#", 0)
     if cdrState {
         Command("/usr/bin/hdiutil", ["detach", originalFileMountPath, "-force"], "#EJECTORG#", 0)
@@ -13,41 +27,12 @@ func Eject(_ cdrState: Bool, _ Path: String = "\(NSHomeDirectory())/Desktop/") {
         Command("/usr/bin/hdiutil", ["detach", lazyImageMountPath, "-force"], "#EJECTLAZY#", 1)
 
         Command("/usr/bin/hdiutil", ["convert", "/tmp/tech.arslan2012.lazy/Lazy Installer.dmg", "-ov", "-format", "UDTO", "-o", "/tmp/tech.arslan2012.lazy/Lazy Installer.cdr"], "#Create CDR#", 7)
-        if (Path == "\(NSHomeDirectory())/Desktop/") {
-            if SystemVersion.SysVerBiggerThan("10.11.99") {
-                Command("/bin/mv", ["/tmp/tech.arslan2012.lazy/Lazy Installer.dmg", "\(Path)Sierra Custom Installer.dmg"], "#MV#", 0)
-                Command("/bin/mv", ["/tmp/tech.arslan2012.lazy/Lazy Installer.cdr", "\(Path)Sierra Custom Installer.cdr"], "#MV#", 0)
-            } else if SystemVersion.SysVerBiggerThan("10.10.99") {
-                Command("/bin/mv", ["/tmp/tech.arslan2012.lazy/Lazy Installer.dmg", "\(Path)El Capitan Custom Installer.dmg"], "#MV#", 0)
-                Command("/bin/mv", ["/tmp/tech.arslan2012.lazy/Lazy Installer.cdr", "\(Path)El Capitan Custom Installer.cdr"], "#MV#", 0)
-            } else if SystemVersion.SysVerBiggerThan("10.9.99") {
-                Command("/bin/mv", ["/tmp/tech.arslan2012.lazy/Lazy Installer.dmg", "\(Path)Yosemite Custom Installer.dmg"], "#MV#", 0)
-                Command("/bin/mv", ["/tmp/tech.arslan2012.lazy/Lazy Installer.cdr", "\(Path)Yosemite Custom Installer.cdr"], "#MV#", 0)
-            } else {
-                Command("/bin/mv", ["/tmp/tech.arslan2012.lazy/Lazy Installer.dmg", Path], "#MV#", 0)
-                Command("/bin/mv", ["/tmp/tech.arslan2012.lazy/Lazy Installer.cdr", Path], "#MV#", 0)
-            }
-        } else {
-            Command("/bin/mv", ["/tmp/tech.arslan2012.lazy/Lazy Installer.dmg", Path], "#MV#", 0)
-            Command("/bin/mv", ["/tmp/tech.arslan2012.lazy/Lazy Installer.cdr", Path.replacingOccurrences(of: "dmg", with: "cdr")], "#MV#", 0)
-        }
+        Command("/bin/mv", ["/tmp/tech.arslan2012.lazy/Lazy Installer.dmg", name], "#MV#", 0)
+        Command("/bin/mv", ["/tmp/tech.arslan2012.lazy/Lazy Installer.cdr", name.replacingOccurrences(of: "dmg", with: "cdr")], "#MV#", 0)
     } else {
         Command("/usr/bin/hdiutil", ["detach", originalFileMountPath, "-force"], "#EJECTORG#", 2)
         Command("/usr/bin/hdiutil", ["detach", InstallESDMountPath, "-force"], "#EJECTESD#", 2)
         Command("/usr/bin/hdiutil", ["detach", lazyImageMountPath, "-force"], "#EJECTLAZY#", 2)
-        if (Path == "\(NSHomeDirectory())/Desktop/") {
-            if SystemVersion.SysVerBiggerThan("10.11.99") {
-                Command("/bin/mv", ["/tmp/tech.arslan2012.lazy/Lazy Installer.dmg", "\(Path)Sierra Custom Installer.dmg"], "#MV#", 3)
-            } else if SystemVersion.SysVerBiggerThan("10.10.99") {
-                Command("/bin/mv", ["/tmp/tech.arslan2012.lazy/Lazy Installer.dmg", "\(Path)El Capitan Custom Installer.dmg"], "#MV#", 3)
-            } else if SystemVersion.SysVerBiggerThan("10.9.99") {
-                Command("/bin/mv", ["/tmp/tech.arslan2012.lazy/Lazy Installer.dmg", "\(Path)Yosemite Custom Installer.dmg"], "#MV#", 3)
-            } else {
-                Command("/bin/mv", ["/tmp/tech.arslan2012.lazy/Lazy Installer.dmg", Path], "#MV#", 3)
-            }
-        } else {
-            Command("/bin/mv", ["/tmp/tech.arslan2012.lazy/Lazy Installer.dmg", Path], "#MV#", 3)
-        }
-
+        Command("/bin/mv", ["/tmp/tech.arslan2012.lazy/Lazy Installer.dmg", name], "#MV#", 3)
     }
 }
