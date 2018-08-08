@@ -28,7 +28,7 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
         delegate = self
         if Command("/usr/bin/xcode-select", ["-p"], "", 0) != 0{
             MBRPatch.isEnabled=false
-            MBRPatch.state = NSOffState
+            MBRPatch.state = NSControl.StateValue.off
         }else{
             CLT.isHidden=true
             OSInstaller.isHidden=true
@@ -40,12 +40,12 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
         progressLable.isHidden = true
         CustomSize.isHidden = true
         SizeUnit.isHidden = true
-        XCPMPatch.state = NSOffState
-        cdr.state = NSOffState
+        XCPMPatch.state = NSControl.StateValue.off
+        cdr.state = NSControl.StateValue.off
         exitButton.isHidden = true
         buttons = [MBRPatch,LapicPatch,XCPMPatch,cdr,SizeCustomize,dropKernel,Output,OSInstaller,CLT]
         for button in buttons{
-            button.attributedTitle = NSAttributedString(string: (button.title), attributes: [ NSForegroundColorAttributeName : NSColor.white])
+            button.attributedTitle = NSAttributedString(string: (button.title), attributes: [ NSAttributedStringKey.foregroundColor : NSColor.white])
         }
     }
     override func viewDidAppear() {
@@ -55,7 +55,7 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
         self.view.wantsLayer = true
         self.view.layer?.backgroundColor = CGColor(red: 83/255, green: 87/255, blue: 96/255, alpha: 1);
     }
-    func windowShouldClose(_ sender: Any) -> Bool {
+    func windowShouldClose(_ sender: NSWindow) -> Bool {
         exit(0)
     }
     @IBAction func StartProcessing(_ sender: NSButton) {
@@ -64,7 +64,7 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
             a.messageText = "#Input is void#".localized()
             a.runModal()
         }else {
-            let appDelegate = NSApplication.shared().delegate as! AppDelegate
+            let appDelegate = NSApplication.shared.delegate as! AppDelegate
             debugLog = appDelegate.getDebugStatus()
             start.isHidden = true
             CLT.isHidden = true
@@ -72,7 +72,7 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
             progressLable.isHidden = false
             progress.startAnimation(self)
             var UsingCustomSize = false
-            if SizeCustomize.state == NSOnState && Double(CustomSize.stringValue) != nil {
+            if SizeCustomize.state == NSControl.StateValue.on && Double(CustomSize.stringValue) != nil {
                 if Double(CustomSize.stringValue)! <= 0 || Double(CustomSize.stringValue)! > 100 {
                     let a = NSAlert()
                     a.messageText = "#WRONGSIZE#".localized()
@@ -82,18 +82,18 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
                     UsingCustomSize = true
                 }
             }
-            let button = view.window?.standardWindowButton(NSWindowButton.closeButton)
+            let button = view.window?.standardWindowButton(NSWindow.ButtonType.closeButton)
             button?.isEnabled = false
             for button in buttons{
                 button.isEnabled = false
             }
             api.startGenerating(
                 SizeVal: UsingCustomSize ? CustomSize.stringValue : "7.15",
-                MBRPatchState: MBRPatch.state == NSOnState,
-                LapicPatchState: LapicPatch.state == NSOnState,
-                XCPMPatchState: XCPMPatch.state == NSOnState,
-                cdrState: cdr.state == NSOnState,
-                dropKernelState: dropKernel.state == NSOnState,
+                MBRPatchState: MBRPatch.state == NSControl.StateValue.on,
+                LapicPatchState: LapicPatch.state == NSControl.StateValue.on,
+                XCPMPatchState: XCPMPatch.state == NSControl.StateValue.on,
+                cdrState: cdr.state == NSControl.StateValue.on,
+                dropKernelState: dropKernel.state == NSControl.StateValue.on,
                 extraDroppedFilePath: extraFolderPath,
                 Path: Path,
                 OSInstallerPath: OSInstallerPath)
@@ -101,36 +101,36 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
     }
     
     @IBAction func XCPMClicked(_ sender: NSButton) {
-        if XCPMPatch.state == NSOnState {
-            dropKernel.state = NSOnState
+        if XCPMPatch.state == NSControl.StateValue.on {
+            dropKernel.state = NSControl.StateValue.on
         }
     }
     @IBAction func LapicClicked(_ sender: NSButton) {
-        if LapicPatch.state == NSOnState {
-            dropKernel.state = NSOnState
+        if LapicPatch.state == NSControl.StateValue.on {
+            dropKernel.state = NSControl.StateValue.on
         }
     }
     @IBAction func dropKernelClicked(_ sender: NSButton) {
-        if dropKernel.state == NSOffState {
-            XCPMPatch.state = NSOffState
-            LapicPatch.state = NSOffState
+        if dropKernel.state == NSControl.StateValue.off {
+            XCPMPatch.state = NSControl.StateValue.off
+            LapicPatch.state = NSControl.StateValue.off
         }
     }
     @IBAction func SizeClicked(_ sender: NSButton) {
-        if SizeCustomize.state == NSOnState {
+        if SizeCustomize.state == NSControl.StateValue.on {
             CustomSize.isHidden = false
             SizeUnit.isHidden = false
             SizeCustomize.title = ""
-            SizeCustomize.state = NSOnState
+            SizeCustomize.state = NSControl.StateValue.on
         }else {
             CustomSize.isHidden = true
             SizeUnit.isHidden = true
-            SizeCustomize.attributedTitle = NSAttributedString(string: "#Custom Size#".localized(), attributes: [ NSForegroundColorAttributeName : NSColor.white])
-            SizeCustomize.state = NSOffState
+            SizeCustomize.attributedTitle = NSAttributedString(string: "#Custom Size#".localized(), attributes: [ NSAttributedStringKey.foregroundColor : NSColor.white])
+            SizeCustomize.state = NSControl.StateValue.off
         }
     }
     @IBAction func CustomOutputClicked(_ sender: NSButton) {
-        if sender.state == NSOnState {
+        if sender.state == NSControl.StateValue.on {
             DispatchQueue.main.async{
                 let myFiledialog = NSSavePanel()
                 
@@ -139,18 +139,18 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
                 myFiledialog.title = "#Output Title#".localized()
                 myFiledialog.message = "#Output Msg#".localized()
                 myFiledialog.allowedFileTypes = ["dmg"]
-                myFiledialog.begin{ (result: Int) -> Void in
-                    if result == NSFileHandlingPanelOKButton {
+                myFiledialog.begin{ (result) -> Void in
+                    if result.rawValue == NSFileHandlingPanelOKButton {
                         if let URL = myFiledialog.url{
                             let Path = URL.path
                             if Path != ""{
                                 self.Path = Path
                             }else{
-                                sender.state = NSOffState
+                                sender.state = NSControl.StateValue.off
                             }
                         }
                     }else{
-                        sender.state = NSOffState
+                        sender.state = NSControl.StateValue.off
                     }
                 }
                 
@@ -160,7 +160,7 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
         }
     }
     @IBAction func OSInstallerClicked(_ sender: NSButton) {
-        if sender.state == NSOnState {
+        if sender.state == NSControl.StateValue.on {
             DispatchQueue.main.async{
                 let myFiledialog = NSOpenPanel()
                 
@@ -168,18 +168,18 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
                 myFiledialog.worksWhenModal = true
                 myFiledialog.title = "#OSInstaller Title#".localized()
                 myFiledialog.message = "#OSInstaller Msg#".localized()
-                myFiledialog.begin{ (result: Int) -> Void in
-                    if result == NSFileHandlingPanelOKButton {
+                myFiledialog.begin{ (result) -> Void in
+                    if result.rawValue == NSFileHandlingPanelOKButton {
                         if let URL = myFiledialog.url{
                             let Path = URL.path
                             if Path != "" && URL.lastPathComponent.caseInsensitiveCompare("OSInstaller") == ComparisonResult.orderedSame{
                                 self.OSInstallerPath = Path
                             }else{
-                                sender.state = NSOffState
+                                sender.state = NSControl.StateValue.off
                             }
                         }
                     }else{
-                        sender.state = NSOffState
+                        sender.state = NSControl.StateValue.off
                     }
                 }
                 
@@ -217,7 +217,7 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
             self.progress.stopAnimation(self)
             self.fileNameField.stringValue = ""
             self.exitButton.isHidden = false
-            let button = self.view.window?.standardWindowButton(NSWindowButton.closeButton)
+            let button = self.view.window?.standardWindowButton(NSWindow.ButtonType.closeButton)
             button?.isEnabled = true
         }
     }

@@ -301,7 +301,7 @@
 				TargetAttributes = {
 					F50411821C644987003311DA = {
 						CreatedOnToolsVersion = 7.2;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0940;
 					};
 					F53D58A71D30B618007EDD1B = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -554,7 +554,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "LazyHackintoshGenerator-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 				VALID_ARCHS = x86_64;
 			};
 			name = Debug;
@@ -578,7 +579,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "LazyHackintoshGenerator-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 				VALID_ARCHS = x86_64;
 			};
 			name = Release;

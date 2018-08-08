@@ -19,7 +19,7 @@ extension String {
 
     func SysBuildVerBiggerThan(_ compare: String) -> Bool {
         var thisVer: [Int] = [], compareVer: [Int] = []
-        let thisVerChars = Array(characters), compareVerChars = Array(compare.characters)
+        let thisVerChars = Array(self), compareVerChars = Array(compare)
 
         var previousIndex = 0
         for (index, char) in thisVerChars.enumerated() {

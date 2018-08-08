@@ -1,7 +1,7 @@
 import Foundation
 
 class BatchProcessAPI {
-    var AppDelegate: MenuControlProtocol = NSApplication.shared().delegate as! MenuControlProtocol
+    var AppDelegate: MenuControlProtocol = NSApplication.shared.delegate as! MenuControlProtocol
 
     //the main work flow
     func startGenerating(

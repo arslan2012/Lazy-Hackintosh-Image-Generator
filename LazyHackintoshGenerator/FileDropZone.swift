@@ -22,7 +22,7 @@ class FileDropZone: NSImageView {
     var fileTypeIsOk = false
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        register(forDraggedTypes: [NSFilenamesPboardType, NSURLPboardType, NSPasteboardTypeTIFF])
+        registerForDraggedTypes([NSPasteboard.PasteboardType(kUTTypeFileURL as String), NSPasteboard.PasteboardType(kUTTypeItem as String)])
         icn!.size = self.icnSize
         self.image = icn
     }
@@ -50,7 +50,7 @@ class FileDropZone: NSImageView {
     }
 
     override func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
-        if let board = sender.draggingPasteboard().propertyList(forType: "NSFilenamesPboardType") as? NSArray {
+        if let board = sender.draggingPasteboard().propertyList(forType: NSPasteboard.PasteboardType(rawValue: "NSFilenamesPboardType")) as? NSArray {
             if let imagePath = board[0] as? String {
                 self.droppedFilePath = imagePath
                 return true
@@ -60,7 +60,7 @@ class FileDropZone: NSImageView {
     }
 
     func checkExtension(_ drag: NSDraggingInfo) -> Bool {
-        if let board = drag.draggingPasteboard().propertyList(forType: "NSFilenamesPboardType") as? NSArray,
+        if let board = drag.draggingPasteboard().propertyList(forType: NSPasteboard.PasteboardType(rawValue: "NSFilenamesPboardType")) as? NSArray,
            let path = board[0] as? String {
             let url = URL(fileURLWithPath: path)
             if self.isDirectories {
@@ -87,16 +87,16 @@ class FileDropZone: NSImageView {
 
 class InstallerDrop: FileDropZone {
     override var icn: NSImage? {
-        return NSImage(named: "image")!
+        return NSImage(named: NSImage.Name(rawValue: "image"))!
     }
     override var fileTypes: [String] {
         return ["dmg", "app"]
     }
 
-    override func draggingEnded(_ sender: NSDraggingInfo?) {
+    override func draggingEnded(_ sender: NSDraggingInfo) {
         if self.fileTypeIsOk && self.droppedFilePath != "" {
             viewDelegate!.didReceiveInstaller(self.droppedFilePath)
-            let icn = NSImage(named: "icon-osx")
+            let icn = NSImage(named: NSImage.Name(rawValue: "icon-osx"))
             icn?.size = self.icnSize
             self.image = icn
         }
@@ -121,7 +121,7 @@ class InstallerDrop: FileDropZone {
                     let Path = URL.path
                     if Path != "" {
                         self.viewDelegate!.didReceiveInstaller(Path)
-                        let icn = NSImage(named: "icon-osx")
+                        let icn = NSImage(named: NSImage.Name(rawValue: "icon-osx"))
                         icn?.size = self.icnSize
                         self.image = icn
                     }
@@ -133,7 +133,7 @@ class InstallerDrop: FileDropZone {
 
 class ExtraDrop: FileDropZone {
     override var icn: NSImage? {
-        return NSImage(named: "drive")!
+        return NSImage(named: NSImage.Name(rawValue: "drive"))!
     }
     override var fileTypes: [String] {
         return ["extra"]
@@ -142,10 +142,10 @@ class ExtraDrop: FileDropZone {
         return true
     }
 
-    override func draggingEnded(_ sender: NSDraggingInfo?) {
+    override func draggingEnded(_ sender: NSDraggingInfo) {
         if self.droppedFilePath != "" && self.fileTypeIsOk {
             viewDelegate!.didReceiveExtra(self.droppedFilePath)
-            let icn = NSImage(named: "Chameleon")
+            let icn = NSImage(named: NSImage.Name(rawValue: "Chameleon"))
             icn?.size = self.icnSize
             self.image = icn
         }
@@ -172,7 +172,7 @@ class ExtraDrop: FileDropZone {
                     let Path = URL.path
                     if Path != "" && URL.lastPathComponent.caseInsensitiveCompare("extra") == ComparisonResult.orderedSame {
                         self.viewDelegate!.didReceiveExtra(Path)
-                        let icn = NSImage(named: "Chameleon")
+                        let icn = NSImage(named: NSImage.Name(rawValue: "Chameleon"))
                         icn?.size = self.icnSize
                         self.image = icn
                     }
