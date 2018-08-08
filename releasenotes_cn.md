@@ -1,7 +1,7 @@
 ### 2.0.75
-###### released August 8, 2018
+###### 发布于 August 8, 2018
 使用 [@crazybirdy](https://www.insanelymac.com/forum/files/file/944-mojave-mbr-hfs-firmware-check-patch/) 的补丁增加了对 mojave 的支持
-###公告
+### 公告
 应为我弄丢了我的密钥,老版本无法自动更新至75
 
 老版本用户请去 [Github](https://github.com/arslan2012/Lazy-Hackintosh-Image-Generator) 或者使用 PMHeart 大大的[脚本](http://bbs.pcbeta.com/viewthread-1694153-1-1.html)手动下载

@@ -1,7 +1,7 @@
 ### 2.0.75
 ###### released August 8, 2018
 thanks to [@crazybirdy](https://www.insanelymac.com/forum/files/file/944-mojave-mbr-hfs-firmware-check-patch/) we now have mojave support
-###Important
+### Important
 because I lost my private key, older version of the could not update to 75
 
 older version users need to download manually from [Github](https://github.com/arslan2012/Lazy-Hackintosh-Image-Generator) or [InsanelyMac](https://www.insanelymac.com/forum/files/file/567-hackintosh-custom-installer-generator/)
