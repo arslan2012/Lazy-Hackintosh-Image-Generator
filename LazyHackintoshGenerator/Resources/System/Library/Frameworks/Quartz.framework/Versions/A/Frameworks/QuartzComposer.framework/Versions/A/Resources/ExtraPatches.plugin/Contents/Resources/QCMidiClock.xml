@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>nodeAttributes</key>
+	<dict>
+		<key>categories</key>
+		<array>
+			<string>Network/MIDI</string>
+		</array>
+		<key>description</key>
+		<string>This patch observes the MIDI timing clock from one or more MIDI sources.
+
+The "Start Signal", "Stop Signal" and "Continue Signal" boolean outputs are temporarily set to True when the corresponding MIDI signals are received.
+If the MIDI timing clock is running, the number of 4/4 measures and beats since it started are available on the related outputs of this patch.</string>
+		<key>name</key>
+		<string>MIDI Clock Receiver</string>
+	</dict>
+	<key>outputAttributes</key>
+	<dict>
+		<key>outputBeats</key>
+		<dict>
+			<key>description</key>
+			<string>The MIDI clock time in beats.</string>
+			<key>name</key>
+			<string>Beats</string>
+		</dict>
+		<key>outputContinueSignal</key>
+		<dict>
+			<key>description</key>
+			<string>The MIDI clock continue signal.</string>
+			<key>name</key>
+			<string>Continue Signal</string>
+		</dict>
+		<key>outputMeasures</key>
+		<dict>
+			<key>description</key>
+			<string>The MIDI clock time in measures.</string>
+			<key>name</key>
+			<string>Measures</string>
+		</dict>
+		<key>outputStartSignal</key>
+		<dict>
+			<key>description</key>
+			<string>The MIDI clock start signal.</string>
+			<key>name</key>
+			<string>Start Signal</string>
+		</dict>
+		<key>outputStopSignal</key>
+		<dict>
+			<key>description</key>
+			<string>The MIDI clock stop signal.</string>
+			<key>name</key>
+			<string>Stop Signal</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

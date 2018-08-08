@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>IKSFEffectDescriptionCIIdentifierKey</key>
+		<string>CIBumpDistortion</string>
+		<key>IKSFEffectDescriptionCINameKey</key>
+		<string>Bump</string>
+		<key>IKSFEffectDescriptionDisplayNameKey</key>
+		<string>Dent</string>
+		<key>IKSFEffectDescriptionParametersKey</key>
+		<array>
+			<dict>
+				<key>IKSFEffectDescriptionParameterDefaultValueKey</key>
+				<integer>70</integer>
+				<key>IKSFEffectDescriptionParameterNameKey</key>
+				<string>inputRadius</string>
+			</dict>
+			<dict>
+				<key>IKSFEffectDescriptionParameterDefaultValueKey</key>
+				<real>-0.89999997615814209</real>
+				<key>IKSFEffectDescriptionParameterNameKey</key>
+				<string>inputScale</string>
+			</dict>
+		</array>
+        <key>IKSFEffectDefaultYPosition</key>
+        <real>0.60</real>
+        <key>IKSFEffectHasInputCenter</key>
+        <true/>
+	</dict>
+	<dict>
+		<key>IKSFEffectDescriptionCIIdentifierKey</key>
+		<string>CIBumpDistortion</string>
+		<key>IKSFEffectDescriptionCINameKey</key>
+		<string>Bump</string>
+		<key>IKSFEffectDescriptionDisplayNameKey</key>
+		<string>Australopithecus</string>
+		<key>IKSFEffectDescriptionParametersKey</key>
+		<array>
+			<dict>
+				<key>IKSFEffectDescriptionParameterDefaultValueKey</key>
+				<integer>50</integer>
+				<key>IKSFEffectDescriptionParameterNameKey</key>
+				<string>inputRadius</string>
+			</dict>
+			<dict>
+				<key>IKSFEffectDescriptionParameterDefaultValueKey</key>
+				<real>-0.8</real>
+				<key>IKSFEffectDescriptionParameterNameKey</key>
+				<string>inputScale</string>
+			</dict>
+		</array>
+        <key>IKSFEffectDefaultYPosition</key>
+        <real>0.40</real>
+        <key>IKSFEffectHasInputCenter</key>
+        <true/>
+    </dict>
+	
+	<dict>
+		<key>IKSFEffectDescriptionCIIdentifierKey</key>
+		<string>CIBumpDistortion</string>
+		<key>IKSFEffectDescriptionCINameKey</key>
+		<string>Bump</string>
+		<key>IKSFEffectDescriptionDisplayNameKey</key>
+		<string>Bulge</string>
+		<key>IKSFEffectDescriptionParametersKey</key>
+		<array>
+			<dict>
+				<key>IKSFEffectDescriptionParameterDefaultValueKey</key>
+				<integer>80</integer>
+				<key>IKSFEffectDescriptionParameterNameKey</key>
+				<string>inputRadius</string>
+			</dict>
+			<dict>
+				<key>IKSFEffectDescriptionParameterDefaultValueKey</key>
+				<real>0.6</real>
+				<key>IKSFEffectDescriptionParameterNameKey</key>
+				<string>inputScale</string>
+			</dict>
+		</array>
+        <key>IKSFEffectDefaultYPosition</key>
+        <real>0.75</real>
+        <key>IKSFEffectHasInputCenter</key>
+        <true/>
+	</dict>
+	
+	<dict>
+		<key>IKSFEffectDescriptionCIIdentifierKey</key>
+		<string>CIAffineTransform</string>
+		<key>IKSFEffectDescriptionCINameKey</key>
+		<string>Affine Transform</string>
+		<key>IKSFEffectDescriptionDisplayNameKey</key>
+		<string>Affine Transform</string>
+		<key>IKSFEffectDescriptionParametersKey</key>
+		<array/>
+	</dict>
+
+	<dict>
+		<key>IKSFEffectDescriptionCIIdentifierKey</key>
+		<string>CICMYKHalftone</string>
+		<key>IKSFEffectDescriptionCINameKey</key>
+		<string>Halftone</string>
+		<key>IKSFEffectDescriptionDisplayNameKey</key>
+		<string>Halftone</string>
+	</dict>
+
+	<dict>
+		<key>IKSFEffectDescriptionCIIdentifierKey</key>
+		<string>CIPointillize</string>
+		<key>IKSFEffectDescriptionCINameKey</key>
+		<string>Pointillize</string>
+		<key>IKSFEffectDescriptionDisplayNameKey</key>
+		<string>Pointillize</string>
+		<key>IKSFEffectDescriptionParametersKey</key>
+		<array>
+			<dict>
+				<key>IKSFEffectDescriptionParameterDefaultValueKey</key>
+				<integer>3</integer>
+				<key>IKSFEffectDescriptionParameterNameKey</key>
+				<string>inputRadius</string>
+			</dict>
+		</array>
+	</dict>
+
+	<dict>
+		<key>IKSFEffectDescriptionCIIdentifierKey</key>
+		<string>CICMYKHalftone</string>
+		<key>IKSFEffectDescriptionCINameKey</key>
+		<string>Halftone</string>
+		<key>IKSFEffectDescriptionDisplayNameKey</key>
+		<string>Halftone</string>
+	</dict>
+
+	<dict>
+		<key>IKSFEffectDescriptionCIIdentifierKey</key>
+		<string>CITwirlDistortion</string>
+		<key>IKSFEffectDescriptionCINameKey</key>
+		<string>Distortion</string>
+		<key>IKSFEffectDescriptionDisplayNameKey</key>
+		<string>Twirl</string>
+		<key>IKSFEffectDescriptionParametersKey</key>
+		<array>
+			<dict>
+				<key>IKSFEffectDescriptionParameterDefaultValueKey</key>
+				<integer>80</integer>
+				<key>IKSFEffectDescriptionParameterNameKey</key>
+				<string>inputRadius</string>
+			</dict>
+			<dict>
+				<key>IKSFEffectDescriptionParameterDefaultValueKey</key>
+				<real>1.75</real>
+				<key>IKSFEffectDescriptionParameterNameKey</key>
+				<string>inputAngle</string>
+			</dict>
+		</array>
+        <key>IKSFEffectHasInputCenter</key>
+        <true/>
+	</dict>
+
+	<dict>
+		<key>IKSFEffectDescriptionCIIdentifierKey</key>
+		<string>CIVortexDistortion</string>
+		<key>IKSFEffectDescriptionCINameKey</key>
+		<string>Distortion</string>
+		<key>IKSFEffectDescriptionDisplayNameKey</key>
+		<string>Vortex</string>
+		<key>IKSFEffectDescriptionParametersKey</key>
+		<array>
+			<dict>
+				<key>IKSFEffectDescriptionParameterDefaultValueKey</key>
+				<integer>80</integer>
+				<key>IKSFEffectDescriptionParameterNameKey</key>
+				<string>inputRadius</string>
+			</dict>
+			<dict>
+				<key>IKSFEffectDescriptionParameterDefaultValueKey</key>
+				<real>2.0</real>
+				<key>IKSFEffectDescriptionParameterNameKey</key>
+				<string>inputAngle</string>
+			</dict>
+		</array>
+        <key>IKSFEffectHasInputCenter</key>
+        <true/>
+	</dict>
+
+
+	<dict>
+		<key>IKSFEffectDescriptionCIIdentifierKey</key>
+		<string>CICrystallize</string>
+		<key>IKSFEffectDescriptionCINameKey</key>
+		<string>Crystallize</string>
+		<key>IKSFEffectDescriptionDisplayNameKey</key>
+		<string>Crystallize</string>
+		<key>IKSFEffectDescriptionParametersKey</key>
+		<array>
+			<dict>
+				<key>IKSFEffectDescriptionParameterDefaultValueKey</key>
+				<integer>5</integer>
+				<key>IKSFEffectDescriptionParameterNameKey</key>
+				<string>inputRadius</string>
+			</dict>
+		</array>
+	</dict>
+
+
+	<dict>
+		<key>IKSFEffectDescriptionCIIdentifierKey</key>
+		<string>CIBloom</string>
+		<key>IKSFEffectDescriptionCINameKey</key>
+		<string>Bloom</string>
+		<key>IKSFEffectDescriptionDisplayNameKey</key>
+		<string>Bloom</string>
+	</dict>
+
+
+	<dict>
+		<key>IKSFEffectDescriptionCIIdentifierKey</key>
+		<string>CIGloom</string>
+		<key>IKSFEffectDescriptionCINameKey</key>
+		<string>Gloom</string>
+		<key>IKSFEffectDescriptionDisplayNameKey</key>
+		<string>Gloom</string>
+	</dict>
+
+
+	<dict>
+		<key>IKSFEffectDescriptionCIIdentifierKey</key>
+		<string>CIColorControls</string>
+		<key>IKSFEffectDescriptionCINameKey</key>
+		<string>Black and White</string>
+		<key>IKSFEffectDescriptionDisplayNameKey</key>
+		<string>Black and White</string>
+		<key>IKSFEffectDescriptionParametersKey</key>
+		<array>
+			<dict>
+				<key>IKSFEffectDescriptionParameterDefaultValueKey</key>
+				<integer>0</integer>
+				<key>IKSFEffectDescriptionParameterNameKey</key>
+				<string>inputSaturation</string>
+			</dict>
+		</array>
+	</dict>
+
+
+	<dict>
+		<key>IKSFEffectDescriptionCIIdentifierKey</key>
+		<string>CISepiaTone</string>
+		<key>IKSFEffectDescriptionCINameKey</key>
+		<string>Sepia</string>
+		<key>IKSFEffectDescriptionDisplayNameKey</key>
+		<string>Sepia</string>
+		<key>IKSFEffectDescriptionParametersKey</key>
+		<array>
+			<dict>
+				<key>IKSFEffectDescriptionParameterDefaultValueKey</key>
+				<integer>1</integer>
+				<key>IKSFEffectDescriptionParameterNameKey</key>
+				<string>inputIntensity</string>
+			</dict>
+		</array>
+	</dict>
+
+
+
+	<dict>
+		<key>IKSFEffectDescriptionCIIdentifierKey</key>
+		<string>CIExposureAdjust</string>
+		<key>IKSFEffectDescriptionCINameKey</key>
+		<string>Boost Color</string>
+		<key>IKSFEffectDescriptionDisplayNameKey</key>
+		<string>Boost Color</string>
+		<key>IKSFEffectDescriptionParametersKey</key>
+		<array>
+			<dict>
+				<key>IKSFEffectDescriptionParameterDefaultValueKey</key>
+				<real>0.5</real>
+				<key>IKSFEffectDescriptionParameterNameKey</key>
+				<string>inputEV</string>
+			</dict>
+		</array>
+	</dict>
+
+	
+</array>
+</plist>

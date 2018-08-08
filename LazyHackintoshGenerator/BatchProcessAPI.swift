@@ -41,19 +41,23 @@ class BatchProcessAPI {
             ////////////////////////////copying processes/////////////////////////progress:57%
             Copy()
             ////////////////////////////patching processes////////////////////////progress:6%
-            if MBRPatchState {
-                OSInstaller_Patch(SystemVersion, SystemBuildVersion, "\(lazyImageMountPath.replacingOccurrences(of: " ", with: "\\ "))/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller")
-                if !SystemBuildVersion.SysBuildVerBiggerThan("16A284a") {
-                    OSInstall_mpkg_Patch(SystemVersion, "\(lazyImageMountPath)/System/Installation/Packages/OSInstall.mpkg")
-                }
+            if(SystemVersion.SysVerBiggerThan("10.12.99")) {
+                HighSierraMojaveCopyFile()
             } else {
-                if OSInstallerPath != "" {
-                    Command("/bin/cp", ["-f", OSInstallerPath, "\(lazyImageMountPath)/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller"], "#Patch osinstaller#", 0)
+                if MBRPatchState {
+                    OSInstaller_Patch(SystemVersion, SystemBuildVersion, "\(lazyImageMountPath.replacingOccurrences(of: " ", with: "\\ "))/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller")
                     if !SystemBuildVersion.SysBuildVerBiggerThan("16A284a") {
                         OSInstall_mpkg_Patch(SystemVersion, "\(lazyImageMountPath)/System/Installation/Packages/OSInstall.mpkg")
                     }
+                } else {
+                    if OSInstallerPath != "" {
+                        Command("/bin/cp", ["-f", OSInstallerPath, "\(lazyImageMountPath)/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller"], "#Patch osinstaller#", 0)
+                        if !SystemBuildVersion.SysBuildVerBiggerThan("16A284a") {
+                            OSInstall_mpkg_Patch(SystemVersion, "\(lazyImageMountPath)/System/Installation/Packages/OSInstall.mpkg")
+                        }
+                    }
+                    delegate!.didReceiveProgress(2)
                 }
-                delegate!.didReceiveProgress(2)
             }
             if dropKernelState {
                 Drop_Kernel()

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>inputAttributes</key>
+	<dict>
+		<key>inputDecreasingScale</key>
+		<dict>
+			<key>description</key>
+			<string>Scaling factor to apply to the peak and spectrum bands variation when negative.</string>
+			<key>name</key>
+			<string>Decreasing Scale</string>
+		</dict>
+		<key>inputInscreasingScale</key>
+		<dict>
+			<key>description</key>
+			<string>Scaling factor to apply to the peak and spectrum bands variation when positive.</string>
+			<key>name</key>
+			<string>Increasing Scale</string>
+		</dict>
+	</dict>
+	<key>nodeAttributes</key>
+	<dict>
+		<key>aliasNames</key>
+		<array>
+			<string>Mic</string>
+			<string>Sound</string>
+		</array>
+		<key>categories</key>
+		<array>
+			<string>Source/Device</string>
+		</array>
+		<key>description</key>
+		<string>This patch analyzes the audio data coming from a given source of an audio input device and computes its frequency spectrum along with its peak value.</string>
+		<key>examples</key>
+		<array>
+			<string>Audio Input.qtz</string>
+		</array>
+		<key>name</key>
+		<string>Audio Input</string>
+	</dict>
+	<key>outputAttributes</key>
+	<dict>
+		<key>outputPeak</key>
+		<dict>
+			<key>description</key>
+			<string>The audio volume peak.</string>
+			<key>name</key>
+			<string>Volume Peak</string>
+		</dict>
+		<key>outputSpectrum</key>
+		<dict>
+			<key>description</key>
+			<string>The audio spectrum.</string>
+			<key>name</key>
+			<string>Spectrum</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

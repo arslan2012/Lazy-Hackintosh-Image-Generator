@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>_loopDurationAttributes</key>
+	<dict>
+		<key>description</key>
+		<string>The selection duration (set to 0 for entire movie).</string>
+		<key>name</key>
+		<string>Selection Duration</string>
+	</dict>
+	<key>_loopStartAttributes</key>
+	<dict>
+		<key>description</key>
+		<string>The selection start time.</string>
+		<key>name</key>
+		<string>Selection Start</string>
+	</dict>
+	<key>_loopingAttributes</key>
+	<dict>
+		<key>description</key>
+		<string>Controls whether the movie should loop or not.</string>
+		<key>name</key>
+		<string>Looping</string>
+	</dict>
+	<key>_rateAttributes</key>
+	<dict>
+		<key>description</key>
+		<string>The rate of the movie (set to 1 for normal playback speed, 0 for pause).</string>
+		<key>name</key>
+		<string>Rate</string>
+	</dict>
+	<key>_resetSignalAttributes</key>
+	<dict>
+		<key>description</key>
+		<string>Restart the movie.</string>
+		<key>name</key>
+		<string>Reset Signal</string>
+	</dict>
+	<key>inputAttributes</key>
+	<dict>
+		<key>inputPath</key>
+		<dict>
+			<key>description</key>
+			<string>The URL or file path to the QuickTime movie to play.</string>
+			<key>name</key>
+			<string>Movie Location</string>
+		</dict>
+	</dict>
+	<key>nodeAttributes</key>
+	<dict>
+		<key>aliasNames</key>
+		<array>
+			<string>QuickTime</string>
+			<string>Movie Loader</string>
+		</array>
+		<key>categories</key>
+		<array>
+			<string>Source</string>
+		</array>
+		<key>description</key>
+		<string>This patch creates an image from a QuickTime movie at a specified URL or file path.
+
+The movie path is considered absolute if starting with '/', relative to the current user directory if starting with '~', or otherwise relative to the location of the Quartz composition file if available.
+
+The QuickTime movie plays according to the time Quartz Composer passes to the patch. By default this time is the same as the one passed to the parent macro patch, which is likely the global composition time. The movie play time can be set manually by setting the timebase of the patch to "External" (this is done through the patch's contextual menu) and passing a time value to the "Time" input.
+
+Note that the movie will loop if its play time is greater than its duration.</string>
+		<key>name</key>
+		<string>Movie Importer</string>
+	</dict>
+	<key>outputAttributes</key>
+	<dict>
+		<key>outputDuration</key>
+		<dict>
+			<key>description</key>
+			<string>The movie total time.</string>
+			<key>name</key>
+			<string>Movie Duration</string>
+		</dict>
+		<key>outputImage</key>
+		<dict>
+			<key>description</key>
+			<string>The resulting image.</string>
+			<key>name</key>
+			<string>Image</string>
+		</dict>
+		<key>outputPosition</key>
+		<dict>
+			<key>description</key>
+			<string>The current playhead position in the movie.</string>
+			<key>name</key>
+			<string>Movie Position</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>default</key>
+	<dict>
+		<key>default</key>
+		<dict>
+			<key>extractor_speed</key>
+			<real>20000000</real>
+			<key>migration_time</key>
+			<integer>300</integer>
+			<key>deletion_speed</key>
+			<integer>82</integer>
+		</dict>
+		<key>ssd</key>
+		<dict>
+			<key>extractor_speed</key>
+			<integer>30000000</integer>
+			<key>migration_time</key>
+			<integer>240</integer>
+			<key>deletion_speed</key>
+			<integer>92</integer>
+		</dict>
+	</dict>
+</dict>
+</plist>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>_inputAutoAdjust</key>
+	<dict>
+		<key>description</key>
+		<string>Block the automatic adjustment of exposure and focus when possible.</string>
+		<key>name</key>
+		<string>Block Auto Adjust</string>
+	</dict>
+	<key>inputAttributes</key>
+	<dict>
+		<key>inputCapture</key>
+		<dict>
+			<key>description</key>
+			<string>Enables video capture.</string>
+			<key>name</key>
+			<string>Capture</string>
+		</dict>
+	</dict>
+	<key>nodeAttributes</key>
+	<dict>
+		<key>aliasNames</key>
+		<array>
+			<string>iSight</string>
+			<string>Sequence Grabber</string>
+			<string>Camera</string>
+		</array>
+		<key>categories</key>
+		<array>
+			<string>Source/Device</string>
+		</array>
+		<key>description</key>
+		<string>This patch captures the video data coming from a given video input device and returns it as an image.
+
+The captured images will have the size of the video input device's native resolution.
+
+Note that depending on the circumstances, you might not be able to have more than one instance of this patch per video input device.</string>
+		<key>examples</key>
+		<array>
+			<string>Video Feedback.qtz</string>
+		</array>
+		<key>name</key>
+		<string>Video Input</string>
+	</dict>
+	<key>outputAttributes</key>
+	<dict>
+		<key>outputImage</key>
+		<dict>
+			<key>description</key>
+			<string>The resulting image.</string>
+			<key>name</key>
+			<string>Image</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

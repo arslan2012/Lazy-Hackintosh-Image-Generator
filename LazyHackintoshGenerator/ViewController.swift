@@ -87,6 +87,9 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
             for button in buttons{
                 button.isEnabled = false
             }
+            ////////////////////////////mounting processes////////////////////////
+            MountDisks(self.InstallerPath)
+            /////////////////////////////////////////////////////////////////////
             api.startGenerating(
                 SizeVal: UsingCustomSize ? CustomSize.stringValue : "7.15",
                 MBRPatchState: MBRPatch.state == NSControl.StateValue.on,
@@ -223,9 +226,6 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
     }
     func didReceiveInstaller(_ filePath:String){
         self.InstallerPath =  filePath
-        ////////////////////////////mounting processes////////////////////////
-        MountDisks(filePath)
-        /////////////////////////////////////////////////////////////////////
         self.fileNameField.stringValue = NSURL(fileURLWithPath: filePath).lastPathComponent!
     }
     func didReceiveExtra(_ filePath:String){

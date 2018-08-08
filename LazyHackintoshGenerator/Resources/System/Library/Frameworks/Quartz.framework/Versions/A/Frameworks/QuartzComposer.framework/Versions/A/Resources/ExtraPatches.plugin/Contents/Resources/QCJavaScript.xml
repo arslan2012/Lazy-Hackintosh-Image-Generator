@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>_ioAttributes</key>
+	<dict>
+		<key>inputDescription</key>
+		<string>A value.</string>
+		<key>inputName</key>
+		<string>Input #%i</string>
+		<key>outputDescription</key>
+		<string>A value.</string>
+		<key>outputName</key>
+		<string>Output #%i</string>
+	</dict>
+	<key>_sourceKeywords</key>
+	<array>
+		<dict>
+			<key>color</key>
+			<string>R=0.54 G=0.07 B=0.08</string>
+			<key>list</key>
+			<string>inputs outputs __image __string __number __structure __boolean __index __virtual</string>
+		</dict>
+		<dict>
+			<key>color</key>
+			<string>R=0.00 G=0.21 B=0.80</string>
+			<key>list</key>
+			<string>
+				this undefined null
+				true false Infinity
+			</string>
+		</dict>
+		<dict>
+			<key>color</key>
+			<string>R=0.14 G=0.43 B=0.15</string>
+			<key>list</key>
+			<string>
+				function switch do for while in if else return break continue case default with try catch finally throw
+			</string>
+		</dict>
+		<dict>
+			<key>color</key>
+			<string>R=0.46 G=0.06 B=0.31</string>
+			<key>list</key>
+			<string>
+				Log
+			</string>
+		</dict>
+		<dict>
+			<key>color</key>
+			<string>R=0.33 G=0.26 B=0.72</string>
+			<key>list</key>
+			<string>
+				var new typeof parseInt parseFloat constructor prototype
+				Array concat join length pop push reverse shift slice sort toSource unshift
+				Boolean
+				Date getFullYear getYear getMonth getDate getDay getHours getMinutes getSeconds getMilliseconds getTime getTimezoneOffset getUTCFullYear getUTCMonth getUTCDate getUTCDay getUTCHours getUTCMinutes getUTCSeconds getUTCMilliseconds setFullYear setYear setMonth setDate setHours setMinutes setSeconds setMilliseconds setTime setUTCFullYear setUTCMonth setUTCDate setUTCHours setUTCMinutes setUTCSeconds setUTCMilliseconds toGMTString toLocaleString toLocaleDateString toLocaleTimeString toUTCString parse UTC
+				Function Arguments caller length apply call
+				Math abs acos asin atan atan2 ceil cos exp floor log max min pow random round sin sqrt tan LN2 LN10 LOG2E LOG10E PI SQRT1_2 SQRT2
+				Number toExponential toFixed toPrecision MAX_VALUE MIN_VALUE NEGATIVE_INFINITY POSITIVE_INFINITY NaN
+				Object hasOwnProperty isPrototypeOf propertyIsEnumerable toLocalString toString valueOf
+				String length charAt charChodeAt concat fromCharCode indexOf lastIndexOf match replace search slice split substr substring toLowerCase to UpperCase
+				RegExp global ignoreCase lastIndex multiline source exec test
+			</string>
+		</dict>
+	</array>
+	<key>_sourceTemplates</key>
+	<dict>
+		<key>script</key>
+		<string>/*
+A simple script that takes two input values, sums them and returns the result.
+
+Special keywords for defining input and output key types:
+__boolean, __index, __number, __string, __image, __structure, __virtual
+
+Note that the function input arguments are read-only.
+*/
+
+function (__number outputNumber) main (__number inputNumber[2])
+{
+	var result = new Object();
+	result.outputNumber = inputNumber[0] + inputNumber[1];
+	return result;
+}
+</string>
+	</dict>
+	<key>nodeAttributes</key>
+	<dict>
+		<key>categories</key>
+		<array>
+			<string>Program</string>
+		</array>
+		<key>description</key>
+		<string>This patch executes a JavaScript with an arbitrary number of input / output parameters.
+
+The "main" function of the patch is executed, taking as input the input ports and returning an objects whose properties correspond to the output ports
+
+Note that only the core JavaScript classes are supported: Boolean, Number, String, Math, Object, Array, Date and RegExp.
+
+The script always gets executed first for error check with all input ports set to null (null for structures and images, 0 for numbers, empty string for strings). Check the _testMode global boolean to detect that initial pass.</string>
+		<key>name</key>
+		<string>JavaScript</string>
+	</dict>
+</dict>
+</plist>

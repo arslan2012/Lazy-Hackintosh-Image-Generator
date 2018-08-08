@@ -1,0 +1,15 @@
+;;;;;; Sandbox profile for PDFKit PDFFileRefsValidator
+;;;;;;
+;;;;;; Copyright (c) 2011 Apple Inc.  All Rights reserved.
+;;;;;;
+;;;;;; WARNING: The sandbox rules in this file currently constitute
+;;;;;; Apple System Private Interface and are subject to change at any time and
+;;;;;; without notice. The contents of this file are also auto-generated and
+;;;;;; not user editable; it may be overwritten at any time.
+
+(version 1)
+(deny default)
+(import "system.sb")
+
+(allow file-read*)
+(allow file-issue-extension (extension-class "com.apple.app-sandbox.read"))

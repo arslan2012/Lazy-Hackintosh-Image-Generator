@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>camera</key>
+	<dict>
+		<key>applications_that_use_temp_folder_for_import</key>
+		<array>
+			<string>com.apple.mail</string>
+			<string>com.apple.iPhoto</string>
+			<string>com.apple.Aperture</string>
+		</array>
+		<key>download_folder_when_importing_to_applications</key>
+		<string>~/Pictures</string>
+		<key>force_alldownloads_to_temp</key>
+		<false/>
+	</dict>
+	<key>scanner</key>
+	<dict>
+		<key>applications_that_use_temp_folder_for_import</key>
+		<array>
+			<string>com.apple.mail</string>
+			<string>com.apple.iPhoto</string>
+			<string>com.apple.Aperture</string>
+		</array>
+		<key>download_folder_when_importing_to_applications</key>
+		<string>~/Pictures</string>
+		<key>force_alldownloads_to_temp</key>
+		<false/>
+	</dict>
+</dict>
+</plist>

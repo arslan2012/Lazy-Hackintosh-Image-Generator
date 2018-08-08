@@ -1,0 +1,169 @@
+bplist00ÿ	'*1c__sourceTemplatesY_wrapNameY_wrapMenu^nodeAttributes[_filterMenu_outputAttributes__sourceKeywords[_filterName”
+]main_preambleZsourceCode_main_documentation_ƒ/*
+Main function of the filter that return an image.
+Example of the "main" function associated to the first kernel in the kernel window and current parameters has been generated below:
+*/
+        _#/*
+A Core Image kernel routine that computes a multiply effect.
+The code looks up the source pixel in the sampler and then multiplies it by the value passed to the routine.
+*/
+
+kernel vec4 coreImageKernel(sampler image, __color color)
+{
+	return sample(image, samplerCoord(image)) * color;
+}
+_`/*
+            
+FUNCTION TO IMPLEMENT
+
+function [return_type] main([arg_type_0] arg_0, [arg_type_1] arg_1, ...)
+
+where:
+
+[arg_type_x] can be:  __image, __vec2, __vec3, __vec4, __color, __number, __index
+[return_type] must be: __image
+
+DYNAMIC VARIABLES
+
+1 - Vec (vector)
+	Creation: "new Vec(number_0, number_1, ...)", take 2 to 4 numerical arguments, or "new Vec(vec)" (does a copy)
+	Properties: x = r = 0, y = g = 1, z = b = 2 = width, w = a = 3 = height
+   
+2 - Shape (wrapper over CIFilterShape)
+	Creation: "new Shape(number_0, number_1, number_2, number_3)" or "new Shape(shape)" (does a copy)
+	Properties (all functions return a new Shape)
+	- function intersect(shape)
+	- function union(shape)
+	- function inset(number_x, number_y)
+	- function translate(number_0, number_1)
+	- function scale(number_0, number_1)
+	- function rotate(number_angle)   
+
+3 - AffineTransform (wrapper over NSAffineTransform)
+	Creation: "new AffineTransform()" or "new AffineTransform(transform)" (does a copy)
+	Properties returning a new transform:
+	- function scale(scaleXY) or scale(scaleX, scaleY)
+	- function translate(tX, tY)
+	- function invert()
+	- function rotateByDegrees(angle)
+	- function rotateByRadians(angle)
+	- function appendTransform(transform)
+	- function prependTransform(transform)
+	- function setTransformStruct(object) - object has properties m11, m12, ... of NSAffineTransformStruct
+	Properties returning a vector of size 2:
+	- function transformPoint(vector_size_2)
+	- function transformSize(vector_size_2)
+	Property returning an JavaScript object:
+	- property transformStruct - an object with properties m11, m12, ... of NSAffineTransformStruct
+	Settable property:
+	- property transformStruct - takes an object with properties m11, m12, ... of NSAffineTransformStruct
+
+4 - Image
+	Creation: Not allowed.
+	Properties: extent (a Vec of dimension 4), definition (a Shape)
+	
+5 - Kernel
+	Creation: Not allowed. The kernels defined in the kernel window 
+	are automatically set in the JavaScript context as variables in the kernel name.
+	Properties: 
+	- function apply(DOD, ROI_userInfo, arg_1, arg_2, ...)
+		* DOD: A Vec of dimension 4, a Shape or "null" for infinite image
+		* ROI_userInfo: An object that will be passed to the ROI function
+		* arg_x: Arguments given to the kernel
+	- ROIHandler
+		* To set the ROI function
+		* The ROI function, when called, will receive 3 arguments:
+		  samplerIndex (an int), dstRect (a Vec of dim 4), and info (passed to the apply function)  
+		Example:
+			function myROIFunction(samplerIndex, dstRect, info) { 
+				return dstRect; 
+			}
+			myKernel.ROIHandler = myROIFunction;
+
+6 - ImageAccumulator (wrapper over CIImageAccumulator)
+	Creation: "new ImageAccumulator(extent, format)". Extent is a Vec of dimension 4, format is "ARGB8", "RGBA16" or "RGBAf".
+	Property returning a Vec of dimension 4:
+	- property extent
+	Poperty returning a string:
+	- property format
+	Property returning an image:
+	- property image
+	Settable property:
+	- function setImage(image)
+	- function setImage(image, replacingRect)
+
+STATIC VARIABLES
+
+Filter
+	Properties: 
+		All Core Image filter under a real (e.g. CISepiaTone) or simplied name (e.g. sepiaTone)
+		Returns a function to apply that filter.
+		The arguments are taken in the order defined at:
+		http://developer.apple.com/documentation/GraphicsImaging/Reference/CoreImageFilterReference
+	Example:
+		var sepiaImage = Filter.sepiaTone(image, 1.0);
+
+*/
+
+]%@ (Wrapping)¢[TransparentUClamp’%&ZcategoriesZaliasNamesXexamples[descriptionTname°WProgram°VKernel¶ !"#$_CoreImage-Star Shine.qtz_'CoreImage-Nearest Neighbor Sampling.qtz_CoreImage-HSL Kernel.qtz_CoreImage-Halftone Teapot.qtz_CoreImage-Line.qtz_CoreImage-Wavelet Transform.qtz_QThis patch implements an image processing filter written using a subset of OpenGL Shading Language and the Core Image extensions (refer to the OpenGL and Core Image documentations for a description of the language).
+
+In default mode, users define a unique image kernel, and the inputs of this patch are automatically created according to the prototype of the kernel function: "float", "vec2", "vec3" and "vec4" parameters are turned into number inputs, "__color" parameters into color inputs and "sampler" parameters into image inputs. Be aware that changing the name of a kernel function parameter will break the connections to the related input.
+
+This patch always has a single output image, which represents the result produced by the kernel.
+
+In that mode, by default the Domain Of Definition of the resulting image is defined as the union of the input images used by the kernel. If there are no input images or that behavior has been disabled in the patch's settings, the resulting image will have infinite dimensions. Because Quartz Composer doesn't know how to render such images, you will need to convert it to finite dimensions before rendering it - typically using the Image Crop patch.
+
+Note that this patch might not produce any image if any of its image inputs is undefined.
+
+If the "Edit Filter Function" setting is active, users can use more than one kernel and define the filter function that calls them using JavaScript. They can also define precisely the DOD of the produced image. In this mode, the inputs of the patch are automatically created from the prototype of the JavaScript "main" function._Core Image Filter¢()VLinearWNearest—+,[outputImage“-./0[descriptionTname_The resulting image.UImage“234NZsourceCodeTmain•5:?DI“6789UcolorTlist_R=0.54 G=0.07 B=0.08_kernel __color sampler“;<=>UcolorTlist_R=0.00 G=0.21 B=0.80_`
+					void bool int float
+					vec2 vec3 vec4
+					bvec2 bvec3 bvec4
+					ivec2 ivec3 ivec4
+				“@ABCUcolorTlist_R=0.14 G=0.43 B=0.15_m
+					attribute const uniform varying
+					do for while if else return
+					in out inout
+					true false
+				“EFGHUcolorTlist_R=0.46 G=0.06 B=0.31_ƒ
+					compare
+					cos_ cossin cossin_ sin_ sincos sincos_ tan_
+					destCoord
+					premultiply unpremultiply
+					sample samplerCoord samplerExtent samplerOrigin samplerSize samplerTransform
+				“JKLMUcolorTlist_R=0.33 G=0.26 B=0.72_s
+					radians degrees
+					sin cos tan asin acos atan
+					pow exp log exp2 log2 sqrt inversesqrt
+					abs sign
+					floor cell fract mod
+					min
+					max
+					clamp
+					mix
+					step smoothstep
+					length distance
+					dot cross
+					normalize
+					faceforward
+					reflect
+					lessThan lessThanEqual greaterThan greaterThanEqual equal notEqual
+					any all not
+				§OTY^“PQRSUcolorTlist_R=0.54 G=0.07 B=0.08_F__image __color __boolean __vec1 __vec2 __vec3 __vec4 __number __index“UVWXUcolorTlist_R=0.00 G=0.21 B=0.80_7
+					this undefined null
+					true false Infinity
+				“Z[\]UcolorTlist_R=0.14 G=0.43 B=0.15_r
+					function switch do for while in if else return break continue case default with try catch finally throw
+				“_`abUcolorTlist_R=0.33 G=0.26 B=0.72_
+					main
+					var new typeof parseInt parseFloat constructor prototype
+					Array concat join length pop push reverse shift slice sort toSource unshift
+					Boolean
+					Date getFullYear getYear getMonth getDate getDay getHours getMinutes getSeconds getMilliseconds getTime getTimezoneOffset getUTCFullYear getUTCMonth getUTCDate getUTCDay getUTCHours getUTCMinutes getUTCSeconds getUTCMilliseconds setFullYear setYear setMonth setDate setHours setMinutes setSeconds setMilliseconds setTime setUTCFullYear setUTCMonth setUTCDate setUTCHours setUTCMinutes setUTCSeconds setUTCMilliseconds toGMTString toLocaleString toLocaleDateString toLocaleTimeString toUTCString parse UTC
+					Function Arguments caller length apply call
+					Math abs acos asin atan atan2 ceil cos exp floor log max min pow random round sin sqrt tan LN2 LN10 LOG2E LOG10E PI SQRT1_2 SQRT2
+					Number toExponential toFixed toPrecision MAX_VALUE MIN_VALUE NEGATIVE_INFINITY POSITIVE_INFINITY NaN
+					Object hasOwnProperty isPrototypeOf propertyIsEnumerable toLocalString toString valueOf
+					String length charAt charChodeAt concat fromCharCode indexOf lastIndexOf match replace search slice split substr substring toLowerCase to UpperCase
+					RegExp global ignoreCase lastIndex multiline source exec test
+				^%@ (Filtering)   , 6 @ O [ n Ä å ì ° ¨ ¡àØ!$06ALW`lqs{}Ñã¶–Î Bó´ÆµΩ¿Ã—›‚˘ˇ%*AZ_ejÅ‰ÈÔÙ{ÄÜã¢intyê3|Åáå£›‚ËÌy~Ñâ†"®             d              "∑

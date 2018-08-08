@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>_noteAttributes</key>
+	<dict>
+		<key>outputDescription</key>
+		<string>Status for MIDI key #%i.</string>
+		<key>outputName</key>
+		<string>Key %c%i%c</string>
+	</dict>
+	<key>nodeAttributes</key>
+	<dict>
+		<key>categories</key>
+		<array>
+			<string>Network/MIDI</string>
+		</array>
+		<key>description</key>
+		<string>This patch observes arbitrary keyboard octaves on given MIDI channels from one or more MIDI sources.
+
+When a key is pressed, the corresponding patch output is set to the normalized velocity value in the [0,1] range. When the key is released, the output goes back to 0 (velocity is ignored).
+
+Note that when the composition starts rendering, all keyboard keys are assumed to be up.</string>
+		<key>name</key>
+		<string>MIDI Notes Receiver</string>
+	</dict>
+</dict>
+</plist>

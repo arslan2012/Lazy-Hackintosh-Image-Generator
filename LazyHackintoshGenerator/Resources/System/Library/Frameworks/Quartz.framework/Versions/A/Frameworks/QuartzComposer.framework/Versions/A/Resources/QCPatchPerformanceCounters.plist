@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<string>Host Time (s)</string>
+	<string>Frame ID (count)</string>
+	<string>Frame Time (s)</string>
+	<string>Execution Duration (µs)</string>
+	<string>Rendering Duration (µs)</string>
+	<string>Patches (count)</string>
+	<string>Active Patches (count)</string>
+	<string>Traversed Patches (count)</string>
+	<string>Executed Patches (count)</string>
+</array>
+</plist>

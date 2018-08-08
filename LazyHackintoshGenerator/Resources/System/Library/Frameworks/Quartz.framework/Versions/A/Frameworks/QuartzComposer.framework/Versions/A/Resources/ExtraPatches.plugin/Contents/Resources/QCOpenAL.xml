@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>inputAttributes</key>
+	<dict>
+		<key>inputPath</key>
+		<dict>
+			<key>description</key>
+			<string>The path of the sound file.</string>
+			<key>name</key>
+			<string>Sound Location</string>
+		</dict>
+		<key>inputPitch</key>
+		<dict>
+			<key>description</key>
+			<string>Pitch of the sound.</string>
+			<key>name</key>
+			<string>Pitch</string>
+		</dict>
+		<key>inputVolume</key>
+		<dict>
+			<key>description</key>
+			<string>Volume of the sound.</string>
+			<key>name</key>
+			<string>Volume</string>
+		</dict>
+		<key>inputX</key>
+		<dict>
+			<key>description</key>
+			<string>Position on the X-axis.</string>
+			<key>name</key>
+			<string>X Position</string>
+		</dict>
+		<key>inputY</key>
+		<dict>
+			<key>description</key>
+			<string>Position on the Y-axis.</string>
+			<key>name</key>
+			<string>Y Position</string>
+		</dict>
+		<key>inputZ</key>
+		<dict>
+			<key>description</key>
+			<string>Position on the Z-axis.</string>
+			<key>name</key>
+			<string>Z Position</string>
+		</dict>
+	</dict>
+	<key>nodeAttributes</key>
+	<dict>
+		<key>aliasNames</key>
+		<array>
+			<string>OpenAL</string>
+			<string>Sound</string>
+		</array>
+		<key>categories</key>
+		<array>
+			<string>Environment</string>
+		</array>
+		<key>description</key>
+		<string>Play spatialized sound using OpenAL. These sounds can be looped, positioned in space, volume adjusted and pitch shifted. Audio files must be formatted as 16 bit little endian .wav files.</string>
+		<key>examples</key>
+		<array>
+			<string>Drum Kit.qtz</string>
+		</array>
+		<key>name</key>
+		<string>3D Sound Player</string>
+	</dict>
+</dict>
+</plist>

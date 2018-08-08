@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>inputAttributes</key>
+	<dict>
+		<key>inputFillColor</key>
+		<dict>
+			<key>description</key>
+			<string>Color to draw the fill</string>
+			<key>name</key>
+			<string>Fill Color</string>
+		</dict>
+		<key>inputHeight</key>
+		<dict>
+			<key>description</key>
+			<string>Height of output image</string>
+			<key>name</key>
+			<string>Image Height</string>
+		</dict>
+		<key>inputLineWidth</key>
+		<dict>
+			<key>description</key>
+			<string>Thickness of stroke</string>
+			<key>name</key>
+			<string>Line Width</string>
+		</dict>
+		<key>inputPoints</key>
+		<dict>
+			<key>description</key>
+			<string>Array of points. Each point is an array of numbers representing points</string>
+			<key>name</key>
+			<string>Point Structure</string>
+		</dict>
+		<key>inputStrokeColor</key>
+		<dict>
+			<key>description</key>
+			<string>Color to draw the outline</string>
+			<key>name</key>
+			<string>Stroke Color</string>
+		</dict>
+		<key>inputWidth</key>
+		<dict>
+			<key>description</key>
+			<string>Width of output image</string>
+			<key>name</key>
+			<string>Image Width</string>
+		</dict>
+	</dict>
+	<key>nodeAttributes</key>
+	<dict>
+		<key>aliasNames</key>
+		<array>
+			<string>Line</string>
+			<string>Shape</string>
+			<string>Triangle</string>
+			<string>Circle</string>
+			<string>Structure</string>
+		</array>
+		<key>categories</key>
+		<array>
+			<string>Utility/Structure</string>
+			<string>Renderer</string>
+			<string>Consumer</string>
+		</array>
+		<key>description</key>
+		<string>Draws a path from a structure of points</string>
+		<key>name</key>
+		<string>2D Path</string>
+	</dict>
+	<key>outputAttributes</key>
+	<dict>
+		<key>outputImage</key>
+		<dict>
+			<key>description</key>
+			<string>The rendered path</string>
+			<key>name</key>
+			<string>Image</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

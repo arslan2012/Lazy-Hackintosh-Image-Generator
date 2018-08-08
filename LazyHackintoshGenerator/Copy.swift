@@ -33,7 +33,11 @@ func Copy() {
             delegate!.didReceiveErrorMessage("#Error in lazy image#")
         }
     }
-    if SystemVersion.SysVerBiggerThan("10.11.99") {
+    if SystemVersion.SysVerBiggerThan("10.13.99") {
+        privilegedCommand("/usr/sbin/diskutil", ["rename", "OS X Base System", "Mojave Custom Installer"], "#COPYBASE#", 2)
+    } else if SystemVersion.SysVerBiggerThan("10.12.99") {
+        privilegedCommand("/usr/sbin/diskutil", ["rename", "OS X Base System", "High Sierra Custom Installer"], "#COPYBASE#", 2)
+    } else if SystemVersion.SysVerBiggerThan("10.11.99") {
         privilegedCommand("/usr/sbin/diskutil", ["rename", "OS X Base System", "Sierra Custom Installer"], "#COPYBASE#", 2)
     } else if SystemVersion.SysVerBiggerThan("10.10.99") {
         privilegedCommand("/usr/sbin/diskutil", ["rename", "OS X Base System", "El Capitan Custom Installer"], "#COPYBASE#", 2)

@@ -1,0 +1,179 @@
+#!/bin/bash
+
+#
+# This script is refer to Pavo's work as follow.                                  by crazybirdy. 20180807
+#
+# found patch code of com.apple.telemetry.plugin is credit to Pavo.
+# https://www.insanelymac.com/forum/topic/334596-pre-release-macos-mojave/?do=findComment&comment=2624931
+# https://www.insanelymac.com/forum/topic/334898-pre-release-macos-mojave/?do=findComment&comment=2624961
+#
+# found UserEventPlugins is credit to ASentientBot at post#1683.
+# https://forums.macrumors.com/threads/macos-10-14-mojave-on-unsupported-macs-thread.2121473/page-68#post-26222082
+#
+# found com.apple.telemetry.plugin is credit to jackluke at post#1761.
+# https://forums.macrumors.com/threads/macos-10-14-mojave-on-unsupported-macs-thread.2121473/page-71#post-26222642
+#
+
+printf '\033[8;35;120t'
+clear
+
+function telemetrypatch() {
+	echo
+	echo "Patch Mojave telemetry for Core2 Duo CPU with only SSE4.1, without SSE4.2, like as CPU E8400."
+	echo
+	echo "Available target volumes:"
+	echo
+	cd /Volumes
+	AllVolumes=(*)
+	indexA=0
+	index=0
+	for volume in "${AllVolumes[@]}"
+	do
+		targetforVolume="/Volumes/$volume"
+		if [ -f "$targetforVolume/System/Library/CoreServices/SystemVersion.plist" ]; then
+			ProductBuildVersion=`cat "$targetforVolume/System/Library/CoreServices/SystemVersion.plist" | grep -A 1 "ProductBuildVersion" | grep string | sed 's/<string>//' | sed 's/<\/string>//' | awk '{print $1;}' `
+			ProductVersion=`cat "$targetforVolume/System/Library/CoreServices/SystemVersion.plist" | grep -A 1 "ProductVersion" | grep string | sed 's/<string>//' | sed 's/<\/string>//' | awk '{print $1;}' `
+			SelectVersion=`echo $ProductVersion | sed 's/.\{5\}/& /g' | awk '{print $1;}' `
+			if [ $SelectVersion == 10.14 ]; then
+				if [ -f "$targetforVolume/System/Library/UserEventPlugins/com.apple.telemetry.plugin/Contents/MacOS/com.apple.telemetry" ]; then
+					AtlistVolume[$indexA]="$targetforVolume"
+					OSVersion[$indexA]="$ProductVersion"
+					OSBuildVersion[$indexA]="$ProductBuildVersion"					
+					echo "[ $indexA ] ${AtlistVolume[$indexA]} ......... $ProductVersion $ProductBuildVersion"
+					let indexA++
+				fi
+			fi
+		fi
+		let index++
+	done
+
+	echo 
+	read -p "Select the com.apple.telemetry partition : " VolumeNumber
+
+	targetVolume="${AtlistVolume[$VolumeNumber]}"
+
+		echo "                                         [ $VolumeNumber ] $targetVolume ......... ${OSVersion[$VolumeNumber]} ${OSBuildVersion[$VolumeNumber]}"
+		echo
+
+		read -p "The selected target volume is right? (y/n) " targetyesno
+		case "$targetyesno" in
+			y|Y)
+				echo
+			;;
+			*)
+				echo
+				echo "Error!!!"
+				echo
+				echo "The selected target volume is not right."
+				echo
+				exit 0
+			;;
+		esac
+
+	### 
+	### 參考資料
+	### https://www.insanelymac.com/forum/topic/334596-pre-release-macos-mojave/?do=findComment&comment=2625312
+	### https://forums.macrumors.com/threads/macos-10-14-mojave-on-unsupported-macs-thread.2121473/page-84#post-26229516
+	### https://www.insanelymac.com/forum/topic/334596-pre-release-macos-mojave/?do=findComment&comment=2625327
+	### http://dosdude1.com/mojave/
+	### https://forums.macrumors.com/threads/macos-10-14-mojave-on-unsupported-macs-thread.2121473/page-85#post-26230707
+	### https://forums.macrumors.com/threads/macos-10-14-mojave-on-unsupported-macs-thread.2121473/page-68#post-26222082
+	### https://www.insanelymac.com/forum/topic/334596-pre-release-macos-mojave/?do=findComment&comment=2624833
+	### https://www.insanelymac.com/forum/topic/334596-pre-release-macos-mojave/?do=findComment&comment=2624866
+	### 
+	### https://www.insanelymac.com/forum/topic/334596-pre-release-macos-mojave/?do=findComment&comment=2624931
+	### The only difference I see in the binary HS: C806000085 Mojave: 2807000085
+	###
+	### Find
+	### 2807000085
+	### Replace
+	### C806000085
+	###
+
+		echo "Patch Mojave telemetry for Core2 Duo CPU with only SSE4.1, without SSE4.2, like as CPU E8400."
+		echo
+		echo "${targetVolume}/System/Library/UserEventPlugins/com.apple.telemetry.plugin/Contents/MacOS/com.apple.telemetry"
+		echo
+
+		telemetrypluginbin="${targetVolume}/System/Library/UserEventPlugins/com.apple.telemetry.plugin/Contents/MacOS/com.apple.telemetry"
+
+		cp "${telemetrypluginbin}" "${telemetrypluginbin}-org"
+
+	### 10.14 db1 18A293u ~ db5 18A347e
+	###
+	### Find
+	### 28 07 00 00 85 
+	### Replace
+	### C8 06 00 00 85
+	###
+		#perl -pi -e "s|\x28\x07\x00\x00\x85|\xC8\x06\x00\x00\x85|g" "${telemetrypluginbin}"
+
+	### 10.14 db6 18A353d ~
+	###
+	### Find
+	### D8 06 00 00 85 
+	### Replace
+	### C8 06 00 00 85
+	###
+		#perl -pi -e "s|\xD8\x06\x00\x00\x85|\xC8\x06\x00\x00\x85|g" "${telemetrypluginbin}"
+
+    ### common method ###
+	### Find
+	### 10 00 00 00 D8 06 00 00 85 00 00 00 
+	### Replace
+	### 10 00 00 00 C8 06 00 00 85 00 00 00 
+	###
+		code1=`od -An -tx1 -v "${telemetrypluginbin}" | awk NR==2 | awk '{print $1;}' `
+		code2=`od -An -tx1 -v "${telemetrypluginbin}" | awk NR==2 | awk '{print $2;}' `
+		code3=`od -An -tx1 -v "${telemetrypluginbin}" | awk NR==2 | awk '{print $3;}' `
+		code4=`od -An -tx1 -v "${telemetrypluginbin}" | awk NR==2 | awk '{print $4;}' `
+		code5=`od -An -tx1 -v "${telemetrypluginbin}" | awk NR==2 | awk '{print $5;}' `
+		code6=`od -An -tx1 -v "${telemetrypluginbin}" | awk NR==2 | awk '{print $6;}' `
+		code7=`od -An -tx1 -v "${telemetrypluginbin}" | awk NR==2 | awk '{print $7;}' `
+		code8=`od -An -tx1 -v "${telemetrypluginbin}" | awk NR==2 | awk '{print $8;}' `
+		code9=`od -An -tx1 -v "${telemetrypluginbin}" | awk NR==2 | awk '{print $9;}' `
+		code10=`od -An -tx1 -v "${telemetrypluginbin}" | awk NR==2 | awk '{print $10;}' `
+		code11=`od -An -tx1 -v "${telemetrypluginbin}" | awk NR==2 | awk '{print $11;}' `
+		code12=`od -An -tx1 -v "${telemetrypluginbin}" | awk NR==2 | awk '{print $12;}' `
+
+		echo "Find"
+		echo "$code1 $code2 $code3 $code4 $code5 $code6 $code7 $code8 $code9 $code10 $code11 $code12"
+		echo "Replace"
+		echo "10 00 00 00 c8 06 00 00 85 00 00 00"
+		#echo
+		#echo "perl -pi -e 's|\x$code1\x$code2\x$code3\x$code4\x$code5\x$code6\x$code7\x$code8\x$code9\x$code10\x$code11\x$code12|\x10\x00\x00\x00\xC8\x06\x00\x00\x85\x00\x00\x00|g' "${telemetrypluginbin}" "
+
+		perl -pi -e "s|\x$code1\x$code2\x$code3\x$code4\x$code5\x$code6\x$code7\x$code8\x$code9\x$code10\x$code11\x$code12|\x10\x00\x00\x00\xC8\x06\x00\x00\x85\x00\x00\x00|g" "${telemetrypluginbin}"
+
+    ### common method ###
+    
+		echo
+		echo "Patching diff:"
+		echo
+		diff <(od -An -tx1 -v "${telemetrypluginbin}-org") <(od -An -tx1 -v "${telemetrypluginbin}")
+		echo
+		echo "Auto patch is done."
+		echo
+
+		rm -f "${telemetrypluginbin}-org"
+
+		if [ ! -f "${targetVolume}/usr/bin/mojave2core" ]; then
+			cp -fv "$0" "${targetVolume}/usr/bin/mojave2core"
+			echo
+			echo
+		fi
+}
+
+username=`whoami`
+echo
+echo "User = $username"
+
+if [ "$username" == root ]; then
+	telemetrypatch
+elif [ ! "$username" == root ]; then
+	echo 
+	echo "This script must be run as root!"
+	sudo "$0"
+fi
+
+exit 0

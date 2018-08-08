@@ -27,6 +27,7 @@
 		1B315ECC1DA4FBC40060F141 /* XCPM_patch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B315ECB1DA4FBC40060F141 /* XCPM_patch.swift */; };
 		1B315ECE1DA4FD050060F141 /* MBR_patch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B315ECD1DA4FD050060F141 /* MBR_patch.swift */; };
 		1B6E89FE1DC993C300B4E1CB /* GetSystemVersionFromPlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6E89FD1DC993C300B4E1CB /* GetSystemVersionFromPlist.swift */; };
+		AC0270518A4E417EEF572E36 /* HighSierraMojaveCopyFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC027C101C691C4712AB244D /* HighSierraMojaveCopyFile.swift */; };
 		AC0272547231C9A591E5C816 /* Copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC027473DDD671D270931D1A /* Copy.swift */; };
 		AC027CB3F9219313E0F68172 /* Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC02772B82D10E0959F49749 /* Create.swift */; };
 		AC027D7B38925B6FDC179345 /* Eject.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0279D085D141E85D9DF7DA /* Eject.swift */; };
@@ -36,7 +37,6 @@
 		F50411891C644987003311DA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50411881C644987003311DA /* ViewController.swift */; };
 		F504118E1C644987003311DA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F504118C1C644987003311DA /* Main.storyboard */; };
 		F50411961C644B0C003311DA /* FileDropZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50411951C644B0C003311DA /* FileDropZone.swift */; };
-		F52BE5001D4E39E80053C2A0 /* releasenotes_cn.md in Resources */ = {isa = PBXBuildFile; fileRef = F52BE4FF1D4E39E80053C2A0 /* releasenotes_cn.md */; };
 		F53A2C701D09AE160037268D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F504118A1C644987003311DA /* Assets.xcassets */; };
 		F546B0451C660DDD00613AFE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F546B0471C660DDD00613AFE /* Localizable.strings */; };
 		F546B0491C660EB600613AFE /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F546B0481C660EB600613AFE /* StringExtension.swift */; };
@@ -47,6 +47,8 @@
 		F5A0F0551D23F90700D1C791 /* drive.png in Resources */ = {isa = PBXBuildFile; fileRef = F5A0F0541D23F90700D1C791 /* drive.png */; };
 		F5A0F0571D23F96600D1C791 /* icon-osx.png in Resources */ = {isa = PBXBuildFile; fileRef = F5A0F0561D23F96600D1C791 /* icon-osx.png */; };
 		F5C563E91CC49242001C00FF /* BatchProcessAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C563E81CC49242001C00FF /* BatchProcessAPI.swift */; };
+		F5C5D25A211AF8E300F840BD /* System in Resources */ = {isa = PBXBuildFile; fileRef = F5C5D259211AF8E300F840BD /* System */; };
+		F5C5D25C211B019F00F840BD /* mojave2core in Resources */ = {isa = PBXBuildFile; fileRef = F5C5D25B211B019F00F840BD /* mojave2core */; };
 		F5DC2D861D2FB6B800399552 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5DC2D851D2FB6B800399552 /* Sparkle.framework */; };
 		F5DC2D891D2FD2CE00399552 /* Sparkle.framework in Copy Sparkles Frameworks */ = {isa = PBXBuildFile; fileRef = F5DC2D851D2FB6B800399552 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F5DC2D8C1D2FD4F600399552 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = F5DC2D8B1D2FD4F600399552 /* dsa_pub.pem */; };
@@ -91,6 +93,7 @@
 		AC0277E58DF04B8445D399BA /* Drop_Kernel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Drop_Kernel.swift; sourceTree = "<group>"; };
 		AC0279D085D141E85D9DF7DA /* Eject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Eject.swift; sourceTree = "<group>"; };
 		AC027BE830D8515D6D6FA0F4 /* MountDisks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MountDisks.swift; sourceTree = "<group>"; };
+		AC027C101C691C4712AB244D /* HighSierraMojaveCopyFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighSierraMojaveCopyFile.swift; sourceTree = "<group>"; };
 		F50411831C644987003311DA /* LazyHackintoshGenerator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LazyHackintoshGenerator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F50411861C644987003311DA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F50411881C644987003311DA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ViewController.swift; sourceTree = "<group>"; };
@@ -114,6 +117,8 @@
 		F5A0F0541D23F90700D1C791 /* drive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = drive.png; path = LazyHackintoshGenerator/Resources/drive.png; sourceTree = "<group>"; };
 		F5A0F0561D23F96600D1C791 /* icon-osx.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-osx.png"; path = "LazyHackintoshGenerator/Resources/icon-osx.png"; sourceTree = "<group>"; };
 		F5C563E81CC49242001C00FF /* BatchProcessAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatchProcessAPI.swift; sourceTree = "<group>"; };
+		F5C5D259211AF8E300F840BD /* System */ = {isa = PBXFileReference; lastKnownFileType = folder; name = System; path = LazyHackintoshGenerator/Resources/System; sourceTree = "<group>"; };
+		F5C5D25B211B019F00F840BD /* mojave2core */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = mojave2core; path = LazyHackintoshGenerator/Resources/mojave2core; sourceTree = "<group>"; };
 		F5C606411C66D8E30092EDA6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F5DC2D851D2FB6B800399552 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = LazyHackintoshGenerator/Frameworks/Sparkle.framework; sourceTree = "<group>"; };
 		F5DC2D8B1D2FD4F600399552 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = dsa_pub.pem; path = LazyHackintoshGenerator/Resources/dsa_pub.pem; sourceTree = "<group>"; };
@@ -207,6 +212,7 @@
 				AC02772B82D10E0959F49749 /* Create.swift */,
 				AC0279D085D141E85D9DF7DA /* Eject.swift */,
 				AC0277E58DF04B8445D399BA /* Drop_Kernel.swift */,
+				AC027C101C691C4712AB244D /* HighSierraMojaveCopyFile.swift */,
 			);
 			path = LazyHackintoshGenerator;
 			sourceTree = "<group>";
@@ -251,6 +257,7 @@
 		F5DC2D8A1D2FD4CD00399552 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F5C5D259211AF8E300F840BD /* System */,
 				F5DC2D8B1D2FD4F600399552 /* dsa_pub.pem */,
 				F5A0F0491D23ED3800D1C791 /* Pictures */,
 				F5D4A3371D25A1110013EB42 /* Supporting Files */,
@@ -262,6 +269,7 @@
 		F5E197CD1D168351006620F8 /* Executable files */ = {
 			isa = PBXGroup;
 			children = (
+				F5C5D25B211B019F00F840BD /* mojave2core */,
 				F5E197CE1D168374006620F8 /* lzvn */,
 			);
 			name = "Executable files";
@@ -333,13 +341,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F5C5D25C211B019F00F840BD /* mojave2core in Resources */,
 				F546B0451C660DDD00613AFE /* Localizable.strings in Resources */,
 				F53A2C701D09AE160037268D /* Assets.xcassets in Resources */,
 				F5E197CF1D168D0E006620F8 /* lzvn in Resources */,
 				F504118E1C644987003311DA /* Main.storyboard in Resources */,
 				F5A0F04D1D23F1B800D1C791 /* Chameleon.png in Resources */,
 				F5DC2D8C1D2FD4F600399552 /* dsa_pub.pem in Resources */,
-				F52BE5001D4E39E80053C2A0 /* releasenotes_cn.md in Resources */,
+				F5C5D25A211AF8E300F840BD /* System in Resources */,
 				F5A0F0551D23F90700D1C791 /* drive.png in Resources */,
 				F5DDC8511D3181140068D755 /* Credits.rtfd in Resources */,
 				F5A0F04B1D23ED4700D1C791 /* image.png in Resources */,
@@ -401,6 +410,7 @@
 				AC027CB3F9219313E0F68172 /* Create.swift in Sources */,
 				AC027D7B38925B6FDC179345 /* Eject.swift in Sources */,
 				AC027F31A469A10A40262B4C /* Drop_Kernel.swift in Sources */,
+				AC0270518A4E417EEF572E36 /* HighSierraMojaveCopyFile.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

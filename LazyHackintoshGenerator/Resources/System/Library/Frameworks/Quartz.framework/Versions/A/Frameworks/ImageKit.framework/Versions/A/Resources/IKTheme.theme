@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iktheme>
+
+<!-- Primary colors -->
+	<color name="windowBackgroundColor" white="232" />
+	<color name="blackColor" white="0" />
+	<color name="whiteColor" white="255" />
+	<color name="active1Color" white="26" />
+	<color name="active2Color" white="77" />
+	<color name="inactiveColor" white="128" />
+	<color name="background1Color" white="232" />
+	<color name="background2Color" white="222" />
+	<color name="stroke1Color" white="85" />
+	<color name="stroke2Color" white="153" />
+	<color name="stroke3Color" white="179" />
+	<color name="stroke4Color" white="204" />
+	<color name="stroke5Color" white="230" />
+	<color name="stroke6Color" white="235" />
+	<color name="stroke7Color" white="245" />
+	<color name="parameterTextColor" white="110" />
+	<color name="whiteShadow1Color" white="255" alpha="0.75" />
+	<color name="whiteShadow2Color" white="255" alpha="0.5" />
+	<color name="blackShadow1Color" white="0" alpha="0.4" />
+	<color name="blackShadow2Color" white="128" alpha="0.5" />
+	<color name="glassSeparatorColor" white="190" alpha="1.0" />
+
+<!-- Primary gradients -->
+    <gradient name="active1Gradient">
+        <color white="219" />
+        <color white="187" />
+    </gradient>
+    
+    <gradient name="active2Gradient">
+        <color white="230" />
+        <color white="242" />
+    </gradient>
+    
+    <gradient name="selectedActiveGradient">
+        <color white="75" location="0.0674" />
+        <color white="124" location="0.8427" />
+    </gradient>
+    
+    <gradient name="glassGradient">
+        <color white="254" location="0.0" />
+        <color white="240" location="0.5" />
+        <color white="225" location="0.5" />
+        <color white="225" location="1.0" />
+    </gradient>
+    <gradient name="selectedGlassGradient">
+        <color white="166" location="0.0" />
+        <color white="158" location="0.5" />
+        <color white="150" location="0.5" />
+        <color white="150" location="1.0" />
+    </gradient>
+    
+    <gradient name="scopeBar1Gradient">
+        <color white="240" location="0.0" />
+        <color white="221" location="0.5" />
+        <color white="208" location="1.0" />
+    </gradient>
+
+    <gradient name="scopeBar2Gradient">
+        <color white="194" location="0.0" />
+        <color white="235" location="0.1166" />
+        <color white="221" location="0.5" />
+        <color white="208" location="1.0" />
+    </gradient>
+    
+    <gradient name="inactiveGradient">
+        <color white="246" />
+        <color white="217" />
+    </gradient>
+    
+    <gradient name="iconGradient">
+        <color red="40" green="68" blue="110" location="0.21" />
+        <color red="29" green="49" blue="79" location="0.97" />
+    </gradient>
+
+    <gradient name="selectedIconGradient">
+        <color red="255" green="255" blue="255" />
+        <color red="212" green="229" blue="255" />
+    </gradient>
+
+    
+<!-- Specific colors, gradients, fonts -->
+    <gradient name="tabBackgroundGradient">
+		<color white="217" location="0.0" />
+		<color white="246" location="1.0" />
+    </gradient>
+    <gradient name="selectedTabBackgroundGradient">
+		<color white="255" location="0.0" alpha="0.6" />
+		<color white="217" location="0.5" alpha="0.6" />
+		<color white="255" location="1.0" alpha="0.6" />
+    </gradient>
+    <gradient name="pressedTabBackgroundGradient">
+		<color white="217" location="0.0" alpha="0.6" />
+		<color white="168" location="0.5" alpha="0.6" />
+		<color white="217" location="1.0" alpha="0.6" />
+    </gradient>
+    <gradient name="selectedTabBorderOuterGradient">
+		<color white="224" location="0.0" alpha="0.8" />
+		<color white="128" location="0.5" alpha="0.8" />
+		<color white="224" location="1.0" alpha="0.8" />
+    </gradient>
+    <gradient name="selectedTabBorderInnerGradient">
+		<color white="255" location="0.0" alpha="0.6" />
+		<color white="209" location="0.5" alpha="0.6" />
+		<color white="255" location="1.0" alpha="0.6" />
+    </gradient>
+    
+    <color name="horizontalGrooved1" red="250" green="250" blue="250" />
+    <color name="horizontalGrooved2" red="204" green="204" blue="204" />
+    <gradient name="horizontalSeparatorTaperedGradient">
+		<color white="140"  alpha="0.00"  location="0.00" />
+		<color white="140"  alpha="1.00"  location="0.35" />
+		<color white="140"  alpha="1.00"  location="0.65" />
+		<color white="140"  alpha="0.00"  location="1.00" />
+    </gradient>
+
+<!-- Gradient used to draw the chevron between path components. Used in conjunction with pathSeparatorHighlightGradient. -->
+    <gradient name="pathSeparatorGradient">
+        <color white="80" alpha="0.00" location="0.00"/>
+        <color white="80" alpha="0.90" location="0.45"/>
+        <color white="80" alpha="0.90" location="0.55"/>
+        <color white="80" alpha="0.00" location="1.00"/>
+        </gradient>
+    <!-- Gradient used to draw the highlight chevron between path components. Used in conjunction with pathSeparatorGradient. -->
+    <gradient name="pathSeparatorHighlightGradient">
+        <color white="255" alpha="0.00" location="0.00"/>
+        <color white="255" alpha="0.90" location="0.45"/>
+        <color white="255" alpha="0.90" location="0.55"/>
+        <color white="255" alpha="0.00" location="1.00"/>
+    </gradient>
+    <!-- Gradient used to draw the line between buttons. Used in conjunction with pathSeparatorHighlightGradient. -->
+    <gradient name="buttonSeparatorGradient">
+        <color white="125" alpha="0.00" location="0.00"/>
+        <color white="125" alpha="0.90" location="0.45"/>
+        <color white="125" alpha="0.90" location="0.55"/>
+        <color white="125" alpha="0.00" location="1.00"/>
+    </gradient>
+    <!-- Gradient used to draw the highlight line between buttons. Used in conjunction with pathSeparatorGradient. -->
+    <gradient name="buttonSeparatorHighlightGradient">
+        <color white="255" alpha="0.00" location="0.00"/>
+        <color white="255" alpha="0.63" location="0.45"/>
+        <color white="255" alpha="0.63" location="0.55"/>
+        <color white="255" alpha="0.00" location="1.00"/>
+    </gradient>
+    
+</iktheme>

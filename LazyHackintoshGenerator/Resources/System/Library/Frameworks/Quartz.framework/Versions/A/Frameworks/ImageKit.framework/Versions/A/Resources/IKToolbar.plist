@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>panel</key>
+	<array>
+		<dict>
+			<key>action</key>
+			<string>crop:</string>
+			<key>frame</key>
+			<string>{{0., 2.}{29., 26.}}</string>
+			<key>image</key>
+			<string>IK-crop</string>
+		</dict>
+		<dict>
+			<key>action</key>
+			<string>rotate90cw:</string>
+			<key>frame</key>
+			<string>{{30., 2.}{29., 26.}}</string>
+			<key>image</key>
+			<string>IK-rotate90cw</string>
+		</dict>
+		<dict>
+			<key>action</key>
+			<string>rotate90ccw:</string>
+			<key>frame</key>
+			<string>{{60., 1.}{24., 29.}}</string>
+			<key>image</key>
+			<string>IK-rotate90ccw</string>
+		</dict>
+		<dict>
+			<key>action</key>
+			<string>zoomout:</string>
+			<key>frame</key>
+			<string>{{90., 2.}{24., 29.}}</string>
+			<key>image</key>
+			<string>IK-zoomout</string>
+		</dict>
+		<dict>
+			<key>action</key>
+			<string>zoomin:</string>
+			<key>frame</key>
+			<string>{{120., 2.}{24., 29.}}</string>
+			<key>image</key>
+			<string>IK-zoomin</string>
+		</dict>
+	</array>
+	<key>embedded</key>
+	<array>
+		<dict>
+			<key>action</key>
+			<string>crop:</string>
+			<key>frame</key>
+			<string>{{0., 0.}{29., 26.}}</string>
+			<key>image</key>
+			<string>IK-crop</string>
+		</dict>
+		<dict>
+			<key>action</key>
+			<string>rotate90cw:</string>
+			<key>frame</key>
+			<string>{{35., 0.}{29., 26.}}</string>
+			<key>image</key>
+			<string>IK-rotate90cw</string>
+		</dict>
+		<dict>
+			<key>action</key>
+			<string>rotate90ccw:</string>
+			<key>frame</key>
+			<string>{{70., -1.}{24., 29.}}</string>
+			<key>image</key>
+			<string>IK-rotate90ccw</string>
+		</dict>
+		<dict>
+			<key>action</key>
+			<string>effects:</string>
+			<key>frame</key>
+			<string>{{105., 0.}{24., 29.}}</string>
+			<key>image</key>
+			<string>IK-magic-enhance</string>
+		</dict>
+	</array>
+</dict>
+</plist>

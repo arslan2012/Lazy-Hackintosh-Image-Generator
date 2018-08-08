@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>_controllerAttributes</key>
+	<dict>
+		<key>outputDescription</key>
+		<string>Value for MIDI controller #%i.</string>
+		<key>outputName</key>
+		<string>Controller #%i</string>
+	</dict>
+	<key>nodeAttributes</key>
+	<dict>
+		<key>categories</key>
+		<array>
+			<string>Network/MIDI</string>
+		</array>
+		<key>description</key>
+		<string>This patch observes arbitrary MIDI controllers on given MIDI channels from one or more MIDI sources.
+
+The values of the controllers are normalized in the [0,1] range.
+
+Note that when the composition starts rendering, the initial values of MIDI controllers are assumed to be 0.</string>
+		<key>name</key>
+		<string>MIDI Controllers Receiver</string>
+	</dict>
+	<key>outputAttributes</key>
+	<dict>
+		<key>outputPitchWheel</key>
+		<dict>
+			<key>description</key>
+			<string>Value for pitch wheel.</string>
+			<key>name</key>
+			<string>Pitch Wheel</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

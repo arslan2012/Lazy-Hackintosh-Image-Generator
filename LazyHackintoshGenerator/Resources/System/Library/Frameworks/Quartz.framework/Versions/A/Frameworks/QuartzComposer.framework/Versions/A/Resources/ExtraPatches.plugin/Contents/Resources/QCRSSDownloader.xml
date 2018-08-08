@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>inputAttributes</key>
+	<dict>
+		<key>inputSignal</key>
+		<dict>
+			<key>description</key>
+			<string>The update signal.</string>
+			<key>name</key>
+			<string>Update Signal</string>
+		</dict>
+		<key>inputURL</key>
+		<dict>
+			<key>description</key>
+			<string>The URL of the RSS feed.</string>
+			<key>name</key>
+			<string>URL</string>
+		</dict>
+	</dict>
+	<key>nodeAttributes</key>
+	<dict>
+		<key>aliasNames</key>
+		<array>
+			<string>Parse</string>
+			<string>News Feed</string>
+			<string>RSS Downloader</string>
+		</array>
+		<key>categories</key>
+		<array>
+			<string>Source</string>
+		</array>
+		<key>description</key>
+		<string>This patch downloads and parses an RSS feed, then returns information about the feed and its list of articles.
+
+The URL to the feed is specified through the "URL" string input. When the feed has been downloaded and parsed, the "Done Signal" output is temporarily set to True, the feed's information (title, link, date...) is available on the "Information" output as a structure, and the list of articles is available as a structure on the "Article List" output. Each member of this structure is a structure itself describing a single article (title, contents, date...).
+
+Note that dates for the feed and the articles are indicated in "system time" units - use the Date Formatter patch to convert them to formatted strings.</string>
+		<key>name</key>
+		<string>RSS Importer</string>
+	</dict>
+	<key>outputAttributes</key>
+	<dict>
+		<key>outputArticles</key>
+		<dict>
+			<key>description</key>
+			<string>The list of articles in the RSS feed.</string>
+			<key>name</key>
+			<string>Article List</string>
+		</dict>
+		<key>outputInfo</key>
+		<dict>
+			<key>description</key>
+			<string>The information about the RSS feed.</string>
+			<key>name</key>
+			<string>Information</string>
+		</dict>
+		<key>outputProgress</key>
+		<dict>
+			<key>description</key>
+			<string>The download progress in the [0,1] range if available.</string>
+			<key>name</key>
+			<string>Download Progress</string>
+		</dict>
+		<key>outputSignal</key>
+		<dict>
+			<key>description</key>
+			<string>The feed-ready signal.</string>
+			<key>name</key>
+			<string>Done Signal</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

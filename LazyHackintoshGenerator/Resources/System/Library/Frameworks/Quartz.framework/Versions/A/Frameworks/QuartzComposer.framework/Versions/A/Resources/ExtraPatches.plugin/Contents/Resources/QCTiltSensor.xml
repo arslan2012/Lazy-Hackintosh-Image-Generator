@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>nodeAttributes</key>
+	<dict>
+		<key>categories</key>
+		<array>
+			<string>- Private</string>
+		</array>
+		<key>description</key>
+		<string>Provides the output values of the embedded accelerometer if available.</string>
+		<key>name</key>
+		<string>Accelerometer</string>
+	</dict>
+	<key>outputAttributes</key>
+	<dict>
+		<key>outputX</key>
+		<dict>
+			<key>description</key>
+			<string>The acceleration on the X axis</string>
+			<key>name</key>
+			<string>X</string>
+		</dict>
+		<key>outputY</key>
+		<dict>
+			<key>description</key>
+			<string>The acceleration on the Y axis.</string>
+			<key>name</key>
+			<string>Y</string>
+		</dict>
+		<key>outputZ</key>
+		<dict>
+			<key>description</key>
+			<string>The acceleration on the Z axis.</string>
+			<key>name</key>
+			<string>Z</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

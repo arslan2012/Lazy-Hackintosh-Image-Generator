@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>PerformanceCounters</key>
+	<array>
+		<string>Host Time (s)</string>
+		<string>Allocated Pixel Buffers (count)</string>
+		<string>Allocated Pixel Buffers (Mb)</string>
+		<string>Used Allocated Pixel Buffers (count)</string>
+		<string>Unused Allocated Pixel Buffers Average Age (s)</string>
+		<string>Allocated Texture Buffers (count)</string>
+		<string>Allocated Texture Buffers (Mb)</string>
+		<string>Used Allocated Texture Buffers (count)</string>
+		<string>Unused Allocated Texture Buffers Average Age (s)</string>
+		<string>Cached Textures (count)</string>
+		<string>Cached Textures (Mb)</string>
+		<string>Cached Textures Average Age (s)</string>
+		<string>Cached Provider Buffers (count)</string>
+		<string>Cached Provider Buffers (Mb)</string>
+		<string>Cached Provider Buffers Average Age (s)</string>
+		<string>Cached Converted Buffers (count)</string>
+		<string>Cached Converted Buffers (Mb)</string>
+		<string>Cached Converted Buffers Average Age (s)</string>
+		<string>Cached Image Representations (count)</string>
+		<string>Cached Conversion Sequences (count)</string>
+		<string>Cached Images (count)</string>
+		<string>Total RAM used by Caches (Mb)</string>
+		<string>Total VRAM used by Caches (Mb)</string>
+		<string>Maximum RAM used by Caches (Mb)</string>
+		<string>Maximum VRAM used by Caches (Mb)</string>
+	</array>
+	<key>AgeStatistics</key>
+	<array>
+		<string>Pixel Buffer Pool</string>
+		<string>Texture Buffer Pool</string>
+		<string>Texture Pool</string>
+		<string>Provider Image Cache</string>
+		<string>Conversion Cache</string>
+	</array>
+</dict>
+</plist>
