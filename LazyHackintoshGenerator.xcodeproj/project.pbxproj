@@ -22,9 +22,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		1B315EC81DA4F60B0060F141 /* LAPIC_patch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B315EC71DA4F60B0060F141 /* LAPIC_patch.swift */; };
 		1B315ECA1DA4FA570060F141 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B315EC91DA4FA570060F141 /* Global.swift */; };
-		1B315ECC1DA4FBC40060F141 /* XCPM_patch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B315ECB1DA4FBC40060F141 /* XCPM_patch.swift */; };
 		1B315ECE1DA4FD050060F141 /* MBR_patch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B315ECD1DA4FD050060F141 /* MBR_patch.swift */; };
 		1B6E89FE1DC993C300B4E1CB /* GetSystemVersionFromPlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6E89FD1DC993C300B4E1CB /* GetSystemVersionFromPlist.swift */; };
 		AC0270518A4E417EEF572E36 /* HighSierraMojaveCopyFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC027C101C691C4712AB244D /* HighSierraMojaveCopyFile.swift */; };
@@ -81,9 +79,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1B315EC71DA4F60B0060F141 /* LAPIC_patch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LAPIC_patch.swift; sourceTree = "<group>"; };
 		1B315EC91DA4FA570060F141 /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
-		1B315ECB1DA4FBC40060F141 /* XCPM_patch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCPM_patch.swift; sourceTree = "<group>"; };
 		1B315ECD1DA4FD050060F141 /* MBR_patch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MBR_patch.swift; sourceTree = "<group>"; };
 		1B6E89FD1DC993C300B4E1CB /* GetSystemVersionFromPlist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetSystemVersionFromPlist.swift; sourceTree = "<group>"; };
 		1BA9334A1DC81B03007CB003 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
@@ -199,9 +195,7 @@
 				F50411881C644987003311DA /* ViewController.swift */,
 				F5C563E81CC49242001C00FF /* BatchProcessAPI.swift */,
 				1B315ECD1DA4FD050060F141 /* MBR_patch.swift */,
-				1B315ECB1DA4FBC40060F141 /* XCPM_patch.swift */,
 				1B315EC91DA4FA570060F141 /* Global.swift */,
-				1B315EC71DA4F60B0060F141 /* LAPIC_patch.swift */,
 				F50411951C644B0C003311DA /* FileDropZone.swift */,
 				1B6E89FD1DC993C300B4E1CB /* GetSystemVersionFromPlist.swift */,
 				F504118C1C644987003311DA /* Main.storyboard */,
@@ -398,12 +392,10 @@
 				1B315ECE1DA4FD050060F141 /* MBR_patch.swift in Sources */,
 				F546B0491C660EB600613AFE /* StringExtension.swift in Sources */,
 				F55A4DDC1D487C18003C0B40 /* shellCommand.swift in Sources */,
-				1B315EC81DA4F60B0060F141 /* LAPIC_patch.swift in Sources */,
 				F57F43071C64A1AA004C1EB5 /* STPrivilegedTask.m in Sources */,
 				F50411961C644B0C003311DA /* FileDropZone.swift in Sources */,
 				F5C563E91CC49242001C00FF /* BatchProcessAPI.swift in Sources */,
 				1B6E89FE1DC993C300B4E1CB /* GetSystemVersionFromPlist.swift in Sources */,
-				1B315ECC1DA4FBC40060F141 /* XCPM_patch.swift in Sources */,
 				1B315ECA1DA4FA570060F141 /* Global.swift in Sources */,
 				AC027F6E32B470335C85F5B2 /* MountDisks.swift in Sources */,
 				AC0272547231C9A591E5C816 /* Copy.swift in Sources */,
@@ -562,8 +554,9 @@
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = tech.arslan2012.LazyHackintoshGenerator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OBJC_BRIDGING_HEADER = "LazyHackintoshGenerator-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 				VALID_ARCHS = x86_64;

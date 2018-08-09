@@ -5,9 +5,9 @@
 
 import Foundation
 
-func Drop_Kernel() {//progress:1%
+func Drop_Kernel() {//progress:2%
     Command(Bundle.main.path(forResource: "lzvn", ofType: nil)!, ["-d", "\(lazyImageMountPath)/System/Library/PrelinkedKernels/prelinkedkernel", "kernel"], "#COPYKERNELF#", 0, "/tmp/tech.arslan2012.lazy/")
-    Command("/bin/cp", ["/tmp/tech.arslan2012.lazy/kernel", "\(lazyImageMountPath)/System/Library/Kernels"], "#COPYKERNELF#", 1)
+    Command("/bin/cp", ["/tmp/tech.arslan2012.lazy/kernel", "\(lazyImageMountPath)/System/Library/Kernels"], "#COPYKERNELF#", 2)
     if !SystemVersion.SysVerBiggerThan("10.11") {
         /////// 10.10.x
         Command("/bin/sh", ["-c", "perl -pi -e 's|\\xE8\\x25\\x00\\x00\\x00\\xEB\\x05\\xE8|\\xE8\\x25\\x00\\x00\\x00\\x90\\x90\\xE8|g' \(lazyImageMountPath)/System/Library/Kernels/kernel"], "#COPYKERNELF#", 0)

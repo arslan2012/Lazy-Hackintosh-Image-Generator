@@ -6,8 +6,6 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
     @IBOutlet weak var extraFolderNameField: NSTextField!
     @IBOutlet weak var progressLable: NSTextField!
     @IBOutlet weak var start: NSButton!
-    @IBOutlet weak var LapicPatch: NSButton!
-    @IBOutlet weak var XCPMPatch: NSButton!
     @IBOutlet weak var cdr: NSButton!
     @IBOutlet weak var Installer: FileDropZone!
     @IBOutlet weak var extra: FileDropZone!
@@ -36,10 +34,9 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
         progressLable.isHidden = true
         CustomSize.isHidden = true
         SizeUnit.isHidden = true
-        XCPMPatch.state = NSControl.StateValue.off
         cdr.state = NSControl.StateValue.off
         exitButton.isHidden = true
-        buttons = [LapicPatch,XCPMPatch,cdr,SizeCustomize,dropKernel,Output,OSInstaller,CLT]
+        buttons = [cdr,SizeCustomize,dropKernel,Output,OSInstaller,CLT]
         for button in buttons{
             button.attributedTitle = NSAttributedString(string: (button.title), attributes: [ NSAttributedStringKey.foregroundColor : NSColor.white])
         }
@@ -55,7 +52,7 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
         exit(0)
     }
     @IBAction func StartProcessing(_ sender: NSButton) {
-        if !(URL(fileURLWithPath:InstallerPath) as NSURL).checkResourceIsReachableAndReturnError(nil){
+        if InstallerPath == "" || !(URL(fileURLWithPath:InstallerPath) as NSURL).checkResourceIsReachableAndReturnError(nil){
             let a = NSAlert()
             a.messageText = "#Input is void#".localized()
             a.runModal()
@@ -68,8 +65,8 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
             progressLable.isHidden = false
             progress.startAnimation(self)
             var UsingCustomSize = false
-            if SizeCustomize.state == NSControl.StateValue.on && Double(CustomSize.stringValue) != nil {
-                if Double(CustomSize.stringValue)! <= 0 || Double(CustomSize.stringValue)! > 100 {
+            if SizeCustomize.state == NSControl.StateValue.on {
+                if CustomSize.doubleValue <= 0 || CustomSize.doubleValue > 100 {
                     let a = NSAlert()
                     a.messageText = "#WRONGSIZE#".localized()
                     a.runModal()
@@ -88,8 +85,6 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
             /////////////////////////////////////////////////////////////////////
             api.startGenerating(
                 SizeVal: UsingCustomSize ? CustomSize.stringValue : "7.15",
-                LapicPatchState: LapicPatch.state == NSControl.StateValue.on,
-                XCPMPatchState: XCPMPatch.state == NSControl.StateValue.on,
                 cdrState: cdr.state == NSControl.StateValue.on,
                 dropKernelState: dropKernel.state == NSControl.StateValue.on,
                 extraDroppedFilePath: extraFolderPath,
@@ -97,23 +92,7 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
                 OSInstallerPath: OSInstallerPath)
         }
     }
-    
-    @IBAction func XCPMClicked(_ sender: NSButton) {
-        if XCPMPatch.state == NSControl.StateValue.on {
-            dropKernel.state = NSControl.StateValue.on
-        }
-    }
-    @IBAction func LapicClicked(_ sender: NSButton) {
-        if LapicPatch.state == NSControl.StateValue.on {
-            dropKernel.state = NSControl.StateValue.on
-        }
-    }
-    @IBAction func dropKernelClicked(_ sender: NSButton) {
-        if dropKernel.state == NSControl.StateValue.off {
-            XCPMPatch.state = NSControl.StateValue.off
-            LapicPatch.state = NSControl.StateValue.off
-        }
-    }
+
     @IBAction func SizeClicked(_ sender: NSButton) {
         if SizeCustomize.state == NSControl.StateValue.on {
             CustomSize.isHidden = false

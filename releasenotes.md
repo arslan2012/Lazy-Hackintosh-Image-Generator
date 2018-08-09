@@ -1,3 +1,7 @@
+### 2.0.79
+###### released August 9, 2018
+removed XCPM and LAPIC patch ability since chameleon has it already
+
 ### 2.0.77
 ###### released August 9, 2018
 MBR patch is now mandatory

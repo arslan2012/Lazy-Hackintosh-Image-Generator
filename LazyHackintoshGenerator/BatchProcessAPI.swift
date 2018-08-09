@@ -6,8 +6,6 @@ class BatchProcessAPI {
     //the main work flow
     func startGenerating(
             SizeVal: String,
-            LapicPatchState: Bool,
-            XCPMPatchState: Bool,
             cdrState: Bool,
             dropKernelState: Bool,
             extraDroppedFilePath: String,
@@ -24,8 +22,6 @@ class BatchProcessAPI {
             if delegate!.debugLog {
                 let options = [
                     SizeVal,
-                    LapicPatchState ? "true" : "false",
-                    XCPMPatchState ? "true" : "false",
                     cdrState ? "true" : "false",
                     dropKernelState ? "true" : "false",
                     extraDroppedFilePath,
@@ -55,18 +51,7 @@ class BatchProcessAPI {
             if dropKernelState {
                 Drop_Kernel()
             } else {
-                delegate!.didReceiveProgress(1)
-            }
-
-            var failedLapic = false
-            if LapicPatchState {
-                failedLapic = LAPIC_Patch(SystemVersion, "\(lazyImageMountPath)/System/Library/Kernels/kernel")
-            }
-
-            if XCPMPatchState {
-                XCPM_Patch(SystemVersion, "\(lazyImageMountPath)/System/Library/Kernels/kernel")
-            } else {
-                delegate!.didReceiveProgress(1)
+                delegate!.didReceiveProgress(2)
             }
 
             Command("/bin/cp", ["-R", extraDroppedFilePath, "\(lazyImageMountPath)/"], "#COPYEXTRA#", 2)
@@ -79,11 +64,7 @@ class BatchProcessAPI {
             } else {
                 Eject(cdrState, Path)
             }
-            if failedLapic {
-                delegate!.didReceiveProcessName("#Failed Lapic#")
-            } else {
-                delegate!.didReceiveProcessName("#FINISH#")
-            }
+            delegate!.didReceiveProcessName("#FINISH#")
             delegate!.didReceiveThreadExitMessage()
             self.AppDelegate.ProcessEnded()
         }
