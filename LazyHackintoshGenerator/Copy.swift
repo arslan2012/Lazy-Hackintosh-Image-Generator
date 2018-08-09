@@ -46,10 +46,17 @@ func Copy() {
     } else {
         privilegedCommand("/usr/sbin/diskutil", ["rename", "OS X Base System", "OS X Custom Installer"], "#COPYBASE#", 2)
     }
-    Command("/bin/cp", ["\(InstallESDMountPath)/BaseSystem.chunklist", lazyImageMountPath], "#Copy ESD#", 2)
-    Command("/bin/cp", [baseSystemFilePath, lazyImageMountPath], "#Copy ESD#", 2)
-    Command("/bin/cp", ["\(InstallESDMountPath)/AppleDiagnostics.chunklist", lazyImageMountPath], "#Copy ESD#", 2)
-    Command("/bin/cp", ["\(InstallESDMountPath)/AppleDiagnostics.dmg", lazyImageMountPath], "#Copy ESD#", 2)
+    if SystemVersion.SysVerBiggerThan("10.12.99") {
+        Command("/bin/cp", ["\(appFilePath)/Contents/SharedSupport/BaseSystem.chunklist", lazyImageMountPath], "#Copy ESD#", 2)
+        Command("/bin/cp", ["\(appFilePath)/Contents/SharedSupport/BaseSystem.dmg", lazyImageMountPath], "#Copy ESD#", 2)
+        Command("/bin/cp", ["\(appFilePath)/Contents/SharedSupport/AppleDiagnostics.chunklist", lazyImageMountPath], "#Copy ESD#", 2)
+        Command("/bin/cp", ["\(appFilePath)/Contents/SharedSupport/AppleDiagnostics.dmg", lazyImageMountPath], "#Copy ESD#", 2)
+    } else {
+        Command("/bin/cp", ["\(InstallESDMountPath)/BaseSystem.chunklist", lazyImageMountPath], "#Copy ESD#", 2)
+        Command("/bin/cp", ["\(InstallESDMountPath)/BaseSystem.dmg", lazyImageMountPath], "#Copy ESD#", 2)
+        Command("/bin/cp", ["\(InstallESDMountPath)/AppleDiagnostics.chunklist", lazyImageMountPath], "#Copy ESD#", 2)
+        Command("/bin/cp", ["\(InstallESDMountPath)/AppleDiagnostics.dmg", lazyImageMountPath], "#Copy ESD#", 2)
+    }
     Command("/bin/rm", ["-rf", "\(lazyImageMountPath)/System/Installation/Packages"], "#DELETEPACKAGE#", 2)
     privilegedCommand("/bin/cp", ["-R", "\(InstallESDMountPath)/Packages", "\(lazyImageMountPath)/System/Installation"], "#COPYPACKAGE#", 22)
     Command("/bin/mkdir", ["\(lazyImageMountPath)/System/Library/Kernels"], "#Create Kernels folder#", 1)

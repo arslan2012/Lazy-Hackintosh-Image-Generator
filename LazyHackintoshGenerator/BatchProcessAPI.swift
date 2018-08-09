@@ -6,7 +6,6 @@ class BatchProcessAPI {
     //the main work flow
     func startGenerating(
             SizeVal: String,
-            MBRPatchState: Bool,
             LapicPatchState: Bool,
             XCPMPatchState: Bool,
             cdrState: Bool,
@@ -24,15 +23,14 @@ class BatchProcessAPI {
             ////////////////////////////cleaning processes////////////////////////progress:3%
             if delegate!.debugLog {
                 let options = [
-                        SizeVal,
-                        MBRPatchState ? "true" : "false",
-                        LapicPatchState ? "true" : "false",
-                        XCPMPatchState ? "true" : "false",
-                        cdrState ? "true" : "false",
-                        dropKernelState ? "true" : "false",
-                        extraDroppedFilePath,
-                        Path,
-                        OSInstallerPath] as [String]
+                    SizeVal,
+                    LapicPatchState ? "true" : "false",
+                    XCPMPatchState ? "true" : "false",
+                    cdrState ? "true" : "false",
+                    dropKernelState ? "true" : "false",
+                    extraDroppedFilePath,
+                    Path,
+                    OSInstallerPath] as [String]
                 Logger("=======Workflow Starting======")
                 Logger(options.joined(separator: ","))
             }
@@ -41,23 +39,18 @@ class BatchProcessAPI {
             ////////////////////////////copying processes/////////////////////////progress:57%
             Copy()
             ////////////////////////////patching processes////////////////////////progress:6%
-            if(SystemVersion.SysVerBiggerThan("10.12.99")) {
+            if (SystemVersion.SysVerBiggerThan("10.12.99")) {
                 HighSierraMojaveCopyFile()
             } else {
-                if MBRPatchState {
-                    OSInstaller_Patch(SystemVersion, SystemBuildVersion, "\(lazyImageMountPath.replacingOccurrences(of: " ", with: "\\ "))/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller")
-                    if !SystemBuildVersion.SysBuildVerBiggerThan("16A284a") {
-                        OSInstall_mpkg_Patch(SystemVersion, "\(lazyImageMountPath)/System/Installation/Packages/OSInstall.mpkg")
-                    }
+                if OSInstallerPath != "" {
+                    Command("/bin/cp", ["-f", OSInstallerPath, "\(lazyImageMountPath)/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller"], "#Patch osinstaller#", 0)
                 } else {
-                    if OSInstallerPath != "" {
-                        Command("/bin/cp", ["-f", OSInstallerPath, "\(lazyImageMountPath)/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller"], "#Patch osinstaller#", 0)
-                        if !SystemBuildVersion.SysBuildVerBiggerThan("16A284a") {
-                            OSInstall_mpkg_Patch(SystemVersion, "\(lazyImageMountPath)/System/Installation/Packages/OSInstall.mpkg")
-                        }
-                    }
-                    delegate!.didReceiveProgress(2)
+                    OSInstaller_Patch(SystemVersion, SystemBuildVersion, "\(lazyImageMountPath.replacingOccurrences(of: " ", with: "\\ "))/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller")
                 }
+                if !SystemBuildVersion.SysBuildVerBiggerThan("16A284a") {
+                    OSInstall_mpkg_Patch(SystemVersion, "\(lazyImageMountPath)/System/Installation/Packages/OSInstall.mpkg")
+                }
+                delegate!.didReceiveProgress(2)
             }
             if dropKernelState {
                 Drop_Kernel()

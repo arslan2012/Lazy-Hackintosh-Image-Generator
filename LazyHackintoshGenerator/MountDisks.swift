@@ -19,6 +19,7 @@ func MountDisks(_ filePath: String) {
                         Command("/usr/bin/hdiutil", ["attach", "\(originalFileMountPath)/\(element)/Contents/SharedSupport/InstallESD.dmg", "-noverify", "-nobrowse", "-quiet", "-mountpoint", InstallESDMountPath], "#MOUNTESD#", 0)
                         if (URL(fileURLWithPath: "\(originalFileMountPath)/\(element)/Contents/SharedSupport/BaseSystem.dmg") as NSURL).checkResourceIsReachableAndReturnError(nil) {
                             baseSystemFilePath = "\(originalFileMountPath)/\(element)/Contents/SharedSupport/BaseSystem.dmg"
+                            appFilePath = "\(originalFileMountPath)/\(element)"
                         } else if (URL(fileURLWithPath: "\(InstallESDMountPath)/BaseSystem.dmg") as NSURL).checkResourceIsReachableAndReturnError(nil) {
                             baseSystemFilePath = "\(InstallESDMountPath)/BaseSystem.dmg"
                         } else {
@@ -41,6 +42,7 @@ func MountDisks(_ filePath: String) {
             } else {
                 delegate!.didReceiveErrorMessage("#Error in InstallESD image#")
             }
+            appFilePath = filePath
         } else {
             delegate!.didReceiveErrorMessage("#Error in InstallESD image#")
         }

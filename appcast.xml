@@ -6,20 +6,20 @@
 <description>added auto update feature</description>
 <language>en</language>
 <item>
-<title>Version 75</title>
+<title>Version 77</title>
 <sparkle:releaseNotesLink>https://hackintosh-generator-update.herokuapp.com/release/en</sparkle:releaseNotesLink>
 <sparkle:releaseNotesLink xml:lang="cn">https://hackintosh-generator-update.herokuapp.com/release/cn</sparkle:releaseNotesLink>
 <sparkle:releaseNotesLink xml:lang="hk">https://hackintosh-generator-update.herokuapp.com/release/cn</sparkle:releaseNotesLink>
 <sparkle:releaseNotesLink xml:lang="tw">https://hackintosh-generator-update.herokuapp.com/release/cn</sparkle:releaseNotesLink>
-<pubDate>Wed, 08 Aug 2018 22:04:50 +0800</pubDate>
+<pubDate>Thu, 09 Aug 2018 09:29:41 +0800</pubDate>
 <enclosure
 url="https://raw.githubusercontent.com/arslan2012/Lazy-Hackintosh-Image-Generator/master//LazyHackintoshGenerator.app.zip"
-sparkle:version="75"
+sparkle:version="77"
 sparkle:shortVersionString="V2.0"
 type="application/octet-stream"
-length="19517576"
-sparkle:dsaSignature="MEQCIFml9+sYAg0tpH1V049UpAvgeu4wq22z9wwNPZXQmM4NAiAaO3tU5WJx+KpA
-/RzqUf8fYsDcBWWKG4qy2theVms9pg=="
+length="19693079"
+sparkle:dsaSignature="MEQCIE2A+QtXZ9BjIudKzIlN9MJx7pK6yK9KKZoa6ryaLQwdAiAsz9jb3MfiDuJ9
+JvlPUeftU8HT+AlVxco5hGOudD2cVQ=="
 />
 </item>
 </channel>

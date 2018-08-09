@@ -1,3 +1,9 @@
+### 2.0.77
+###### released August 9, 2018
+MBR patch is now mandatory
+
+fix a bug where baseSystem.dmg copying fail thanks for @crazybirdy discovering it
+
 ### 2.0.75
 ###### released August 8, 2018
 thanks to [@crazybirdy](https://www.insanelymac.com/forum/files/file/944-mojave-mbr-hfs-firmware-check-patch/) we now have mojave support

@@ -6,7 +6,6 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
     @IBOutlet weak var extraFolderNameField: NSTextField!
     @IBOutlet weak var progressLable: NSTextField!
     @IBOutlet weak var start: NSButton!
-    @IBOutlet weak var MBRPatch: NSButton!
     @IBOutlet weak var LapicPatch: NSButton!
     @IBOutlet weak var XCPMPatch: NSButton!
     @IBOutlet weak var cdr: NSButton!
@@ -26,10 +25,7 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
     
     override func viewDidLoad() {
         delegate = self
-        if Command("/usr/bin/xcode-select", ["-p"], "", 0) != 0{
-            MBRPatch.isEnabled=false
-            MBRPatch.state = NSControl.StateValue.off
-        }else{
+        if Command("/usr/bin/xcode-select", ["-p"], "", 0) == 0{
             CLT.isHidden=true
             OSInstaller.isHidden=true
         }
@@ -43,7 +39,7 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
         XCPMPatch.state = NSControl.StateValue.off
         cdr.state = NSControl.StateValue.off
         exitButton.isHidden = true
-        buttons = [MBRPatch,LapicPatch,XCPMPatch,cdr,SizeCustomize,dropKernel,Output,OSInstaller,CLT]
+        buttons = [LapicPatch,XCPMPatch,cdr,SizeCustomize,dropKernel,Output,OSInstaller,CLT]
         for button in buttons{
             button.attributedTitle = NSAttributedString(string: (button.title), attributes: [ NSAttributedStringKey.foregroundColor : NSColor.white])
         }
@@ -92,7 +88,6 @@ class ViewController: NSViewController, NSWindowDelegate,BatchProcessAPIProtocol
             /////////////////////////////////////////////////////////////////////
             api.startGenerating(
                 SizeVal: UsingCustomSize ? CustomSize.stringValue : "7.15",
-                MBRPatchState: MBRPatch.state == NSControl.StateValue.on,
                 LapicPatchState: LapicPatch.state == NSControl.StateValue.on,
                 XCPMPatchState: XCPMPatch.state == NSControl.StateValue.on,
                 cdrState: cdr.state == NSControl.StateValue.on,

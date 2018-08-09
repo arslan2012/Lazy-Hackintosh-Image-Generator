@@ -1,3 +1,9 @@
+### 2.0.77
+###### 发布于 August 9, 2018
+MBR 现在强制开启
+
+修复了一个复制 baseSystem.dmg 失败的 bug, 感谢 @crazybirdy 提出这个问题
+
 ### 2.0.75
 ###### 发布于 August 8, 2018
 使用 [@crazybirdy](https://www.insanelymac.com/forum/files/file/944-mojave-mbr-hfs-firmware-check-patch/) 的补丁增加了对 mojave 的支持
