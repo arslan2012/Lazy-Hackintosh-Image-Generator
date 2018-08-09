@@ -17,5 +17,7 @@ Just drag the app/dmg file onto the image icon, click start and enjoy.
 ## Shut up and gimmi the app
 Just download the [LazyHackintoshGenerator.app.zip](https://raw.githubusercontent.com/arslan2012/Lazy-Hackintosh-Image-Generator/master/LazyHackintoshGenerator.app.zip). It will keep updating to the latest version.
 
+Also, you may use [this script](https://github.com/arslan2012/Lazy-Hackintosh-Image-Generator/releases/download/1.0/GetLatestLazy.command.zip) for downloading updates.
+
 ## You're a dev?
 my code is a mess, feel free to report an [issue](https://github.com/arslan2012/Lazy-Hackintosh-Image-Generator/issues/new), or open up a [pull request](https://github.com/arslan2012/Lazy-Hackintosh-Image-Generator/compare).
