@@ -1,6 +1,6 @@
 
 .idea
 
-LazyHackintoshGenerator.xcodeproj/project.xcworkspace/xcuserdata
+xcuserdata/
 
-LazyHackintoshGenerator.xcodeproj/xcuserdata
+Pods/

@@ -3,7 +3,7 @@
 //  LazyHackintoshGenerator
 //
 //  Created by Arslan Ablikim on 11/2/16.
-//  Copyright © 2016 PCBeta. All rights reserved.
+//  Copyright © 2016 Arslan Ablikim. All rights reserved.
 //
 
 import Foundation
@@ -14,12 +14,12 @@ func GetSystemVersionFromPlist(_ SystemVersionPlistPath: String) -> (String, Str
         SystemVersion = myDict.value(forKey: "ProductVersion") as! String
         SystemBuildVersion = myDict.value(forKey: "ProductBuildVersion") as! String
     } else {
-        delegate!.didReceiveErrorMessage("#Error in sysVer#")
+        viewController!.didReceiveErrorMessage("#Error in sysVer#")
     }
     if SystemVersion == "" || SystemBuildVersion == "" {
-        delegate!.didReceiveErrorMessage("#Error in sysVer#")
+        viewController!.didReceiveErrorMessage("#Error in sysVer#")
     }
-    if delegate!.debugLog {
+    if viewController!.debugLog {
         Logger("Detected System Version:\(SystemVersion) \(SystemBuildVersion)")
         Logger("===========================")
     }

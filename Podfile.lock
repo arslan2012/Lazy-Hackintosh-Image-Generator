@@ -1,0 +1,25 @@
+PODS:
+  - RxCocoa (4.3.1):
+    - RxSwift (~> 4.0)
+  - RxSwift (4.3.1)
+  - Sparkle (1.20.0)
+
+DEPENDENCIES:
+  - RxCocoa (~> 4.0)
+  - RxSwift (~> 4.0)
+  - Sparkle
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - RxCocoa
+    - RxSwift
+    - Sparkle
+
+SPEC CHECKSUMS:
+  RxCocoa: 78763c7b07d02455598d9fc3c1ad091a28b73635
+  RxSwift: fe0fd770a43acdb7d0a53da411c9b892e69bb6e4
+  Sparkle: 48999e7ee032f05ca05e28451eadf4af8ede6b44
+
+PODFILE CHECKSUM: bfec70a2b214295d400c5b2200b7de9a44b2ee72
+
+COCOAPODS: 1.5.3

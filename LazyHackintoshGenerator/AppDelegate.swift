@@ -1,4 +1,5 @@
 import Cocoa
+import RxSwift
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, MenuControlProtocol {
@@ -9,19 +10,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, MenuControlProtocol {
     @IBOutlet weak var update: NSMenuItem!
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        appDelegate = self
         do {
             let enumerator = try FileManager.default.contentsOfDirectory(atPath: "/tmp/tech.arslan2012.lazy")
-            for element in enumerator {
-                Command("/usr/bin/hdiutil", ["detach", "/tmp/tech.arslan2012.lazy/\(element)", "-force"], "#CleanDir#", 0)
-            }
+            Observable.from(enumerator).flatMap{element in
+                ShellCommand.shared.run("/usr/bin/hdiutil", ["detach", "/tmp/tech.arslan2012.lazy/\(element)", "-force"], "#CleanDir#", 0)
+                }.subscribe()
         } catch {
         }
-        Command("/bin/rm", ["-rf", "/tmp/tech.arslan2012.lazy"], "#CleanDir#", 0)
-        Command("/bin/mkdir", ["/tmp/tech.arslan2012.lazy"], "#CleanDir#", 0)
-    }
-
-    func applicationWillTerminate(_ aNotification: Notification) {
-        // Insert code here to tear down your application
     }
 
     @IBAction func DebugMenuPressed(_ sender: NSMenuItem) {

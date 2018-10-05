@@ -25,12 +25,14 @@
 		1B315ECA1DA4FA570060F141 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B315EC91DA4FA570060F141 /* Global.swift */; };
 		1B315ECE1DA4FD050060F141 /* MBR_patch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B315ECD1DA4FD050060F141 /* MBR_patch.swift */; };
 		1B6E89FE1DC993C300B4E1CB /* GetSystemVersionFromPlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6E89FD1DC993C300B4E1CB /* GetSystemVersionFromPlist.swift */; };
+		89E79B6993F1CB9086761101 /* Pods_LazyGenHelper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C913C81832301A887E8FE1C /* Pods_LazyGenHelper.framework */; };
 		AC0270518A4E417EEF572E36 /* HighSierraMojaveCopyFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC027C101C691C4712AB244D /* HighSierraMojaveCopyFile.swift */; };
 		AC0272547231C9A591E5C816 /* Copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC027473DDD671D270931D1A /* Copy.swift */; };
 		AC027CB3F9219313E0F68172 /* Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC02772B82D10E0959F49749 /* Create.swift */; };
 		AC027D7B38925B6FDC179345 /* Eject.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0279D085D141E85D9DF7DA /* Eject.swift */; };
 		AC027F31A469A10A40262B4C /* Drop_Kernel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0277E58DF04B8445D399BA /* Drop_Kernel.swift */; };
 		AC027F6E32B470335C85F5B2 /* MountDisks.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC027BE830D8515D6D6FA0F4 /* MountDisks.swift */; };
+		EB8D4FEC58B08FA8E31353E3 /* Pods_LazyHackintoshGenerator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B808A2A8BE9174AAD10DC530 /* Pods_LazyHackintoshGenerator.framework */; };
 		F50411871C644987003311DA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50411861C644987003311DA /* AppDelegate.swift */; };
 		F50411891C644987003311DA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50411881C644987003311DA /* ViewController.swift */; };
 		F504118E1C644987003311DA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F504118C1C644987003311DA /* Main.storyboard */; };
@@ -39,7 +41,6 @@
 		F546B0451C660DDD00613AFE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F546B0471C660DDD00613AFE /* Localizable.strings */; };
 		F546B0491C660EB600613AFE /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F546B0481C660EB600613AFE /* StringExtension.swift */; };
 		F55A4DDC1D487C18003C0B40 /* shellCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55A4DDB1D487C18003C0B40 /* shellCommand.swift */; };
-		F57F43071C64A1AA004C1EB5 /* STPrivilegedTask.m in Sources */ = {isa = PBXBuildFile; fileRef = F57F43061C64A1AA004C1EB5 /* STPrivilegedTask.m */; };
 		F5A0F04B1D23ED4700D1C791 /* image.png in Resources */ = {isa = PBXBuildFile; fileRef = F5A0F04A1D23ED4700D1C791 /* image.png */; };
 		F5A0F04D1D23F1B800D1C791 /* Chameleon.png in Resources */ = {isa = PBXBuildFile; fileRef = F5A0F04C1D23F1B800D1C791 /* Chameleon.png */; };
 		F5A0F0551D23F90700D1C791 /* drive.png in Resources */ = {isa = PBXBuildFile; fileRef = F5A0F0541D23F90700D1C791 /* drive.png */; };
@@ -47,11 +48,18 @@
 		F5C563E91CC49242001C00FF /* BatchProcessAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C563E81CC49242001C00FF /* BatchProcessAPI.swift */; };
 		F5C5D25A211AF8E300F840BD /* System in Resources */ = {isa = PBXBuildFile; fileRef = F5C5D259211AF8E300F840BD /* System */; };
 		F5C5D25C211B019F00F840BD /* mojave2core in Resources */ = {isa = PBXBuildFile; fileRef = F5C5D25B211B019F00F840BD /* mojave2core */; };
-		F5DC2D861D2FB6B800399552 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5DC2D851D2FB6B800399552 /* Sparkle.framework */; };
-		F5DC2D891D2FD2CE00399552 /* Sparkle.framework in Copy Sparkles Frameworks */ = {isa = PBXBuildFile; fileRef = F5DC2D851D2FB6B800399552 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F5DC2D8C1D2FD4F600399552 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = F5DC2D8B1D2FD4F600399552 /* dsa_pub.pem */; };
 		F5DDC8511D3181140068D755 /* Credits.rtfd in Resources */ = {isa = PBXBuildFile; fileRef = F5DDC8531D3181140068D755 /* Credits.rtfd */; };
 		F5E197CF1D168D0E006620F8 /* lzvn in Resources */ = {isa = PBXBuildFile; fileRef = F5E197CE1D168374006620F8 /* lzvn */; };
+		F5ECAFE02166250C0006D85F /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5ECAFDB2166250C0006D85F /* Helper.swift */; };
+		F5ECAFE12166250C0006D85F /* HelperAuthorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5ECAFDC2166250C0006D85F /* HelperAuthorization.swift */; };
+		F5ECAFE22166250C0006D85F /* HelperProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5ECAFDD2166250C0006D85F /* HelperProtocol.swift */; };
+		F5ECAFE32166250C0006D85F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5ECAFDE2166250C0006D85F /* main.swift */; };
+		F5ECAFE42166250C0006D85F /* ProcessProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5ECAFDF2166250C0006D85F /* ProcessProtocol.swift */; };
+		F5ECAFE5216625400006D85F /* HelperProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5ECAFDD2166250C0006D85F /* HelperProtocol.swift */; };
+		F5ECAFE6216625450006D85F /* HelperAuthorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5ECAFDC2166250C0006D85F /* HelperAuthorization.swift */; };
+		F5ECAFE7216625480006D85F /* ProcessProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5ECAFDF2166250C0006D85F /* ProcessProtocol.swift */; };
+		F5ECAFEC2166267D0006D85F /* tech.arslan2012.LazyHackintoshGeneratorHelper in Copy Helper */ = {isa = PBXBuildFile; fileRef = F5ECAFD3216624970006D85F /* tech.arslan2012.LazyHackintoshGeneratorHelper */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +70,13 @@
 			remoteGlobalIDString = F50411821C644987003311DA;
 			remoteInfo = LazyHackintoshGenerator;
 		};
+		F5ECAFED216633540006D85F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F504117B1C644987003311DA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F5ECAFD2216624970006D85F;
+			remoteInfo = LazyGenHelper;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -71,18 +86,40 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				F5DC2D891D2FD2CE00399552 /* Sparkle.framework in Copy Sparkles Frameworks */,
 			);
 			name = "Copy Sparkles Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F5ECAFD1216624970006D85F /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = usr/share/man/man1;
+			dstSubfolderSpec = 1;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		F5ECAFEB216626600006D85F /* Copy Helper */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Contents/Library/LaunchServices;
+			dstSubfolderSpec = 1;
+			files = (
+				F5ECAFEC2166267D0006D85F /* tech.arslan2012.LazyHackintoshGeneratorHelper in Copy Helper */,
+			);
+			name = "Copy Helper";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0C913C81832301A887E8FE1C /* Pods_LazyGenHelper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LazyGenHelper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B315EC91DA4FA570060F141 /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		1B315ECD1DA4FD050060F141 /* MBR_patch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MBR_patch.swift; sourceTree = "<group>"; };
 		1B6E89FD1DC993C300B4E1CB /* GetSystemVersionFromPlist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetSystemVersionFromPlist.swift; sourceTree = "<group>"; };
 		1BA9334A1DC81B03007CB003 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		264548A9269F480A7A75BC98 /* Pods-LazyHackintoshGenerator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LazyHackintoshGenerator.release.xcconfig"; path = "Pods/Target Support Files/Pods-LazyHackintoshGenerator/Pods-LazyHackintoshGenerator.release.xcconfig"; sourceTree = "<group>"; };
+		6A5E30121A4C102C826876A2 /* Pods-LazyHackintoshGenerator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LazyHackintoshGenerator.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LazyHackintoshGenerator/Pods-LazyHackintoshGenerator.debug.xcconfig"; sourceTree = "<group>"; };
 		8305E2D81D2DD83E00C4BB28 /* LazyHackintoshGenerator.app.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = LazyHackintoshGenerator.app.zip; sourceTree = "<group>"; };
 		AC027473DDD671D270931D1A /* Copy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Copy.swift; sourceTree = "<group>"; };
 		AC02772B82D10E0959F49749 /* Create.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Create.swift; sourceTree = "<group>"; };
@@ -90,6 +127,9 @@
 		AC0279D085D141E85D9DF7DA /* Eject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Eject.swift; sourceTree = "<group>"; };
 		AC027BE830D8515D6D6FA0F4 /* MountDisks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MountDisks.swift; sourceTree = "<group>"; };
 		AC027C101C691C4712AB244D /* HighSierraMojaveCopyFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighSierraMojaveCopyFile.swift; sourceTree = "<group>"; };
+		B1A57BF8DDC75913387485F7 /* Pods-LazyGenHelper.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LazyGenHelper.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LazyGenHelper/Pods-LazyGenHelper.debug.xcconfig"; sourceTree = "<group>"; };
+		B808A2A8BE9174AAD10DC530 /* Pods_LazyHackintoshGenerator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LazyHackintoshGenerator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D28257D339961C96AA6260ED /* Pods-LazyGenHelper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LazyGenHelper.release.xcconfig"; path = "Pods/Target Support Files/Pods-LazyGenHelper/Pods-LazyGenHelper.release.xcconfig"; sourceTree = "<group>"; };
 		F50411831C644987003311DA /* LazyHackintoshGenerator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LazyHackintoshGenerator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F50411861C644987003311DA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F50411881C644987003311DA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ViewController.swift; sourceTree = "<group>"; };
@@ -105,9 +145,6 @@
 		F55A4DDB1D487C18003C0B40 /* shellCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = shellCommand.swift; sourceTree = "<group>"; };
 		F56157E21CAA344700D1F581 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		F56C22281D2FD9EE00E8DE70 /* appcast.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = appcast.xml; sourceTree = "<group>"; };
-		F57F43051C64A1AA004C1EB5 /* LazyHackintoshGenerator-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LazyHackintoshGenerator-Bridging-Header.h"; sourceTree = "<group>"; };
-		F57F43061C64A1AA004C1EB5 /* STPrivilegedTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STPrivilegedTask.m; path = LazyHackintoshGenerator/STPrivilagedTask/STPrivilegedTask.m; sourceTree = "<group>"; };
-		F57F43081C64A1CE004C1EB5 /* STPrivilegedTask.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = STPrivilegedTask.h; path = LazyHackintoshGenerator/STPrivilagedTask/STPrivilegedTask.h; sourceTree = "<group>"; };
 		F5A0F04A1D23ED4700D1C791 /* image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = image.png; path = LazyHackintoshGenerator/Resources/image.png; sourceTree = "<group>"; };
 		F5A0F04C1D23F1B800D1C791 /* Chameleon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Chameleon.png; path = LazyHackintoshGenerator/Resources/Chameleon.png; sourceTree = "<group>"; };
 		F5A0F0541D23F90700D1C791 /* drive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = drive.png; path = LazyHackintoshGenerator/Resources/drive.png; sourceTree = "<group>"; };
@@ -116,11 +153,18 @@
 		F5C5D259211AF8E300F840BD /* System */ = {isa = PBXFileReference; lastKnownFileType = folder; name = System; path = LazyHackintoshGenerator/Resources/System; sourceTree = "<group>"; };
 		F5C5D25B211B019F00F840BD /* mojave2core */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = mojave2core; path = LazyHackintoshGenerator/Resources/mojave2core; sourceTree = "<group>"; };
 		F5C606411C66D8E30092EDA6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		F5DC2D851D2FB6B800399552 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = LazyHackintoshGenerator/Frameworks/Sparkle.framework; sourceTree = "<group>"; };
 		F5DC2D8B1D2FD4F600399552 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = dsa_pub.pem; path = LazyHackintoshGenerator/Resources/dsa_pub.pem; sourceTree = "<group>"; };
 		F5DDC8521D3181140068D755 /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.rtfd; name = en; path = en.lproj/Credits.rtfd; sourceTree = "<group>"; };
 		F5DDC8541D31811A0068D755 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = wrapper.rtfd; name = "zh-Hans"; path = "zh-Hans.lproj/Credits.rtfd"; sourceTree = "<group>"; };
 		F5E197CE1D168374006620F8 /* lzvn */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = lzvn; path = LazyHackintoshGenerator/Resources/lzvn; sourceTree = "<group>"; };
+		F5ECAFD3216624970006D85F /* tech.arslan2012.LazyHackintoshGeneratorHelper */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = tech.arslan2012.LazyHackintoshGeneratorHelper; sourceTree = BUILT_PRODUCTS_DIR; };
+		F5ECAFDB2166250C0006D85F /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		F5ECAFDC2166250C0006D85F /* HelperAuthorization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelperAuthorization.swift; sourceTree = "<group>"; };
+		F5ECAFDD2166250C0006D85F /* HelperProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelperProtocol.swift; sourceTree = "<group>"; };
+		F5ECAFDE2166250C0006D85F /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		F5ECAFDF2166250C0006D85F /* ProcessProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProcessProtocol.swift; sourceTree = "<group>"; };
+		F5ECAFE9216626080006D85F /* LazyGenHelper-Launchd.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "LazyGenHelper-Launchd.plist"; path = "LazyGenHelper/LazyGenHelper-Launchd.plist"; sourceTree = "<group>"; };
+		F5ECAFEA216626080006D85F /* LazyGenHelper-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "LazyGenHelper-Info.plist"; path = "LazyGenHelper/LazyGenHelper-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,7 +172,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F5DC2D861D2FB6B800399552 /* Sparkle.framework in Frameworks */,
+				EB8D4FEC58B08FA8E31353E3 /* Pods_LazyHackintoshGenerator.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F5ECAFD0216624970006D85F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				89E79B6993F1CB9086761101 /* Pods_LazyGenHelper.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -158,22 +210,36 @@
 		83E647D81D2878A500C822D1 /* Property lists */ = {
 			isa = PBXGroup;
 			children = (
+				F5ECAFEA216626080006D85F /* LazyGenHelper-Info.plist */,
+				F5ECAFE9216626080006D85F /* LazyGenHelper-Launchd.plist */,
 				F504118F1C644987003311DA /* Info.plist */,
 			);
 			name = "Property lists";
 			sourceTree = "<group>";
 		};
+		D1F7A3C637FB5F1DB9A5A079 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B1A57BF8DDC75913387485F7 /* Pods-LazyGenHelper.debug.xcconfig */,
+				D28257D339961C96AA6260ED /* Pods-LazyGenHelper.release.xcconfig */,
+				6A5E30121A4C102C826876A2 /* Pods-LazyHackintoshGenerator.debug.xcconfig */,
+				264548A9269F480A7A75BC98 /* Pods-LazyHackintoshGenerator.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		F504117A1C644987003311DA = {
 			isa = PBXGroup;
 			children = (
+				F5ECAFD4216624970006D85F /* LazyGenHelper */,
 				F5DC2D841D2FB69C00399552 /* Frameworks */,
 				834C96CC1D273FB200E2BA50 /* Introductions */,
 				F50411851C644987003311DA /* LazyHackintoshGenerator */,
-				F57F43041C64A173004C1EB5 /* STPrivilegedTask */,
 				83E647D81D2878A500C822D1 /* Property lists */,
 				F5DC2D8A1D2FD4CD00399552 /* Resources */,
 				8305E2D71D2DD82400C4BB28 /* Precompiled binary archive */,
 				F50411841C644987003311DA /* Products */,
+				D1F7A3C637FB5F1DB9A5A079 /* Pods */,
 			);
 			sourceTree = "<group>";
 			usesTabs = 0;
@@ -182,6 +248,7 @@
 			isa = PBXGroup;
 			children = (
 				F50411831C644987003311DA /* LazyHackintoshGenerator.app */,
+				F5ECAFD3216624970006D85F /* tech.arslan2012.LazyHackintoshGeneratorHelper */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -211,16 +278,6 @@
 			path = LazyHackintoshGenerator;
 			sourceTree = "<group>";
 		};
-		F57F43041C64A173004C1EB5 /* STPrivilegedTask */ = {
-			isa = PBXGroup;
-			children = (
-				F57F43061C64A1AA004C1EB5 /* STPrivilegedTask.m */,
-				F57F43081C64A1CE004C1EB5 /* STPrivilegedTask.h */,
-				F57F43051C64A1AA004C1EB5 /* LazyHackintoshGenerator-Bridging-Header.h */,
-			);
-			name = STPrivilegedTask;
-			sourceTree = "<group>";
-		};
 		F5A0F0491D23ED3800D1C791 /* Pictures */ = {
 			isa = PBXGroup;
 			children = (
@@ -243,7 +300,8 @@
 		F5DC2D841D2FB69C00399552 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F5DC2D851D2FB6B800399552 /* Sparkle.framework */,
+				0C913C81832301A887E8FE1C /* Pods_LazyGenHelper.framework */,
+				B808A2A8BE9174AAD10DC530 /* Pods_LazyHackintoshGenerator.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -269,6 +327,18 @@
 			name = "Executable files";
 			sourceTree = "<group>";
 		};
+		F5ECAFD4216624970006D85F /* LazyGenHelper */ = {
+			isa = PBXGroup;
+			children = (
+				F5ECAFDB2166250C0006D85F /* Helper.swift */,
+				F5ECAFDC2166250C0006D85F /* HelperAuthorization.swift */,
+				F5ECAFDD2166250C0006D85F /* HelperProtocol.swift */,
+				F5ECAFDE2166250C0006D85F /* main.swift */,
+				F5ECAFDF2166250C0006D85F /* ProcessProtocol.swift */,
+			);
+			path = LazyGenHelper;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -276,20 +346,42 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F50411921C644987003311DA /* Build configuration list for PBXNativeTarget "LazyHackintoshGenerator" */;
 			buildPhases = (
+				48BABDD8C9596987B498503C /* [CP] Check Pods Manifest.lock */,
 				F504117F1C644987003311DA /* Sources */,
 				F50411801C644987003311DA /* Frameworks */,
 				F5DC2D881D2FD2AE00399552 /* Copy Sparkles Frameworks */,
 				F50411811C644987003311DA /* Resources */,
 				F5AFF7341D150D4100FFDD73 /* Update Version Number */,
+				F5ECAFEB216626600006D85F /* Copy Helper */,
+				5B56A1C1E7C20828AC9A0184 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				F5ECAFEE216633540006D85F /* PBXTargetDependency */,
 			);
 			name = LazyHackintoshGenerator;
 			productName = LazyHackintoshGenerator;
 			productReference = F50411831C644987003311DA /* LazyHackintoshGenerator.app */;
 			productType = "com.apple.product-type.application";
+		};
+		F5ECAFD2216624970006D85F /* LazyGenHelper */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F5ECAFD9216624970006D85F /* Build configuration list for PBXNativeTarget "LazyGenHelper" */;
+			buildPhases = (
+				B6906DCDD473644D10693E0F /* [CP] Check Pods Manifest.lock */,
+				F5ECAFCF216624970006D85F /* Sources */,
+				F5ECAFD0216624970006D85F /* Frameworks */,
+				F5ECAFD1216624970006D85F /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LazyGenHelper;
+			productName = LazyGenHelper;
+			productReference = F5ECAFD3216624970006D85F /* tech.arslan2012.LazyHackintoshGeneratorHelper */;
+			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
 
@@ -297,16 +389,22 @@
 		F504117B1C644987003311DA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0800;
-				ORGANIZATIONNAME = PCBeta;
+				LastSwiftUpdateCheck = 1000;
+				LastUpgradeCheck = 1000;
+				ORGANIZATIONNAME = Arslan;
 				TargetAttributes = {
 					F50411821C644987003311DA = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = 7XX95HRPFP;
 						LastSwiftMigration = 0940;
 					};
 					F53D58A71D30B618007EDD1B = {
 						CreatedOnToolsVersion = 7.3.1;
+					};
+					F5ECAFD2216624970006D85F = {
+						CreatedOnToolsVersion = 10.0;
+						DevelopmentTeam = 7XX95HRPFP;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -326,6 +424,7 @@
 			targets = (
 				F50411821C644987003311DA /* LazyHackintoshGenerator */,
 				F53D58A71D30B618007EDD1B /* Update */,
+				F5ECAFD2216624970006D85F /* LazyGenHelper */,
 			);
 		};
 /* End PBXProject section */
@@ -353,6 +452,64 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		48BABDD8C9596987B498503C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LazyHackintoshGenerator-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5B56A1C1E7C20828AC9A0184 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-LazyHackintoshGenerator/Pods-LazyHackintoshGenerator-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${PODS_ROOT}/Sparkle/Sparkle.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Sparkle.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LazyHackintoshGenerator/Pods-LazyHackintoshGenerator-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B6906DCDD473644D10693E0F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LazyGenHelper-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		F53D58AB1D30B625007EDD1B /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 12;
@@ -392,17 +549,31 @@
 				1B315ECE1DA4FD050060F141 /* MBR_patch.swift in Sources */,
 				F546B0491C660EB600613AFE /* StringExtension.swift in Sources */,
 				F55A4DDC1D487C18003C0B40 /* shellCommand.swift in Sources */,
-				F57F43071C64A1AA004C1EB5 /* STPrivilegedTask.m in Sources */,
 				F50411961C644B0C003311DA /* FileDropZone.swift in Sources */,
 				F5C563E91CC49242001C00FF /* BatchProcessAPI.swift in Sources */,
+				F5ECAFE5216625400006D85F /* HelperProtocol.swift in Sources */,
 				1B6E89FE1DC993C300B4E1CB /* GetSystemVersionFromPlist.swift in Sources */,
 				1B315ECA1DA4FA570060F141 /* Global.swift in Sources */,
+				F5ECAFE6216625450006D85F /* HelperAuthorization.swift in Sources */,
 				AC027F6E32B470335C85F5B2 /* MountDisks.swift in Sources */,
 				AC0272547231C9A591E5C816 /* Copy.swift in Sources */,
 				AC027CB3F9219313E0F68172 /* Create.swift in Sources */,
 				AC027D7B38925B6FDC179345 /* Eject.swift in Sources */,
+				F5ECAFE7216625480006D85F /* ProcessProtocol.swift in Sources */,
 				AC027F31A469A10A40262B4C /* Drop_Kernel.swift in Sources */,
 				AC0270518A4E417EEF572E36 /* HighSierraMojaveCopyFile.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F5ECAFCF216624970006D85F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F5ECAFE32166250C0006D85F /* main.swift in Sources */,
+				F5ECAFE22166250C0006D85F /* HelperProtocol.swift in Sources */,
+				F5ECAFE02166250C0006D85F /* Helper.swift in Sources */,
+				F5ECAFE12166250C0006D85F /* HelperAuthorization.swift in Sources */,
+				F5ECAFE42166250C0006D85F /* ProcessProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -413,6 +584,11 @@
 			isa = PBXTargetDependency;
 			target = F50411821C644987003311DA /* LazyHackintoshGenerator */;
 			targetProxy = F53D58B01D30C24B007EDD1B /* PBXContainerItemProxy */;
+		};
+		F5ECAFEE216633540006D85F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F5ECAFD2216624970006D85F /* LazyGenHelper */;
+			targetProxy = F5ECAFED216633540006D85F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -457,14 +633,22 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -505,14 +689,22 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -539,51 +731,50 @@
 		};
 		F50411931C644987003311DA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6A5E30121A4C102C826876A2 /* Pods-LazyHackintoshGenerator.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/LazyHackintoshGenerator/Frameworks",
-				);
+				DEVELOPMENT_TEAM = 7XX95HRPFP;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = LazyHackintoshGenerator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = tech.arslan2012.LazyHackintoshGenerator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OBJC_BRIDGING_HEADER = "LazyHackintoshGenerator-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				VALID_ARCHS = x86_64;
 			};
 			name = Debug;
 		};
 		F50411941C644987003311DA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 264548A9269F480A7A75BC98 /* Pods-LazyHackintoshGenerator.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/LazyHackintoshGenerator/Frameworks",
-				);
+				DEVELOPMENT_TEAM = 7XX95HRPFP;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = LazyHackintoshGenerator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = tech.arslan2012.LazyHackintoshGenerator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "LazyHackintoshGenerator-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				VALID_ARCHS = x86_64;
 			};
 			name = Release;
@@ -599,6 +790,93 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		F5ECAFD7216624970006D85F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B1A57BF8DDC75913387485F7 /* Pods-LazyGenHelper.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7XX95HRPFP;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "$(SRCROOT)/LazyGenHelper/LazyGenHelper-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = (
+					"-sectcreate",
+					__TEXT,
+					__info_plist,
+					"\"$(SRCROOT)/LazyGenHelper/LazyGenHelper-Info.plist\"",
+					"-sectcreate",
+					__TEXT,
+					__launchd_plist,
+					"\"$(SRCROOT)/LazyGenHelper/LazyGenHelper-Launchd.plist\"",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = tech.arslan2012.LazyHackintoshGeneratorHelper;
+				PRODUCT_NAME = tech.arslan2012.LazyHackintoshGeneratorHelper;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 4.2;
+			};
+			name = Debug;
+		};
+		F5ECAFD8216624970006D85F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D28257D339961C96AA6260ED /* Pods-LazyGenHelper.release.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7XX95HRPFP;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "$(SRCROOT)/LazyGenHelper/LazyGenHelper-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = (
+					"-sectcreate",
+					__TEXT,
+					__info_plist,
+					"\"$(SRCROOT)/LazyGenHelper/LazyGenHelper-Info.plist\"",
+					"-sectcreate",
+					__TEXT,
+					__launchd_plist,
+					"\"$(SRCROOT)/LazyGenHelper/LazyGenHelper-Launchd.plist\"",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = tech.arslan2012.LazyHackintoshGeneratorHelper;
+				PRODUCT_NAME = tech.arslan2012.LazyHackintoshGeneratorHelper;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -628,6 +906,15 @@
 			buildConfigurations = (
 				F53D58A81D30B618007EDD1B /* Debug */,
 				F53D58A91D30B618007EDD1B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F5ECAFD9216624970006D85F /* Build configuration list for PBXNativeTarget "LazyGenHelper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F5ECAFD7216624970006D85F /* Debug */,
+				F5ECAFD8216624970006D85F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

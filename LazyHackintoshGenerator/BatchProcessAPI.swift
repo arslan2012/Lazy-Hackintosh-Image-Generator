@@ -1,10 +1,10 @@
 import Foundation
+import RxSwift
 
 class BatchProcessAPI {
-    var AppDelegate: MenuControlProtocol = NSApplication.shared.delegate as! MenuControlProtocol
-
     //the main work flow
     func startGenerating(
+            InstallerPath: String,
             SizeVal: String,
             cdrState: Bool,
             dropKernelState: Bool,
@@ -12,14 +12,10 @@ class BatchProcessAPI {
             Path: String,
             OSInstallerPath: String
     ) {
-        DispatchQueue.main.async {
-            self.maintainAuth()
-            _ = Timer.scheduledTimer(timeInterval: 30, target: self, selector: #selector(self.maintainAuth), userInfo: nil, repeats: true)
-        }
         DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
-            self.AppDelegate.ProcessStarted()
+            appDelegate!.ProcessStarted()
             ////////////////////////////cleaning processes////////////////////////progress:3%
-            if delegate!.debugLog {
+            if viewController!.debugLog {
                 let options = [
                     SizeVal,
                     cdrState ? "true" : "false",
@@ -30,51 +26,48 @@ class BatchProcessAPI {
                 Logger("=======Workflow Starting======")
                 Logger(options.joined(separator: ","))
             }
-            ////////////////////////////creating processes////////////////////////progress:28%
-            Create(SizeVal)
-            ////////////////////////////copying processes/////////////////////////progress:57%
-            Copy()
-            ////////////////////////////patching processes////////////////////////progress:6%
-            if (SystemVersion.SysVerBiggerThan("10.12.99")) {
-                HighSierraMojaveCopyFile()
-            } else {
-                if OSInstallerPath != "" {
-                    Command("/bin/cp", ["-f", OSInstallerPath, "\(lazyImageMountPath)/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller"], "#Patch osinstaller#", 0)
+            ShellCommand.shared.sudo("/bin/rm", ["-rf", "/tmp/tech.arslan2012.lazy"], "#CleanDir#", 0).flatMap { _ in
+                ShellCommand.shared.run("/bin/mkdir", ["/tmp/tech.arslan2012.lazy"], "#CleanDir#", 0)
+            }.flatMap { _ in
+                ////////////////////////////mounting processes////////////////////////
+                MountDisks(InstallerPath)
+            }.flatMap { _ in
+                ////////////////////////creating processes////////////////////////progress:28%
+                Create(SizeVal)
+            }.flatMap { _ in
+                ////////////////////////copying processes/////////////////////////progress:57%
+                Copy()
+            }.flatMap { _ -> Observable<Void> in
+                ////////////////////////patching processes////////////////////////progress:6%
+                if (SystemVersion.SysVerBiggerThan("10.12.99")) {
+                    return HighSierraMojaveCopyFile()
                 } else {
-                    OSInstaller_Patch(SystemVersion, SystemBuildVersion, "\(lazyImageMountPath.replacingOccurrences(of: " ", with: "\\ "))/System/Library/PrivateFrameworks/OSInstaller.framework/Versions/A/OSInstaller")
+                    return MBR_Patch(OSInstallerPath: OSInstallerPath)
                 }
-                if !SystemBuildVersion.SysBuildVerBiggerThan("16A284a") {
-                    OSInstall_mpkg_Patch(SystemVersion, "\(lazyImageMountPath)/System/Installation/Packages/OSInstall.mpkg")
+            }.flatMap { _ -> Observable<Void> in
+                if dropKernelState {
+                    return Drop_Kernel()
+                } else {
+                    viewController!.didReceiveProgress(2)
+                    return Observable.of(())
                 }
-                delegate!.didReceiveProgress(2)
-            }
-            if dropKernelState {
-                Drop_Kernel()
-            } else {
-                delegate!.didReceiveProgress(2)
-            }
-
-            Command("/bin/cp", ["-R", extraDroppedFilePath, "\(lazyImageMountPath)/"], "#COPYEXTRA#", 2)
-            if delegate!.debugLog {
-                Logger("=======patching done========")
-            }
-            ////////////////////////////ejecting processes////////////////////////progress:9%
-            if Path == "" {
-                Eject(cdrState)
-            } else {
-                Eject(cdrState, Path)
-            }
-            delegate!.didReceiveProcessName("#FINISH#")
-            delegate!.didReceiveThreadExitMessage()
-            self.AppDelegate.ProcessEnded()
+            }.flatMap { _ -> Observable<Void> in
+                ShellCommand.shared.run("/bin/cp", ["-R", extraDroppedFilePath, "\(lazyImageMountPath)/"], "#COPYEXTRA#", 2).map({ _ in })
+            }.flatMap { _ -> Observable<Void> in
+                if viewController!.debugLog {
+                    Logger("=======patching done========")
+                }
+                ////////////////////////////ejecting processes////////////////////////progress:9%
+                if Path == "" {
+                    return Eject(cdrState)
+                } else {
+                    return Eject(cdrState, Path)
+                }
+            }.subscribe(onNext: { _ in
+                viewController!.didReceiveProcessName("#FINISH#")
+                viewController!.didReceiveThreadExitMessage()
+                appDelegate!.ProcessEnded()
+            })
         }
-    }
-
-    @objc func maintainAuth() {
-        STPrivilegedTask.extendAuthorizationRef()
-    }
-
-    @objc func asrTimeout(timer: Timer) {
-        delegate!.didReceiveErrorMessage("#Asr Timeout#")
     }
 }
