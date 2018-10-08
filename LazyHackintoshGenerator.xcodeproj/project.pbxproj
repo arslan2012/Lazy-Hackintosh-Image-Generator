@@ -45,7 +45,7 @@
 		F5A0F04D1D23F1B800D1C791 /* Chameleon.png in Resources */ = {isa = PBXBuildFile; fileRef = F5A0F04C1D23F1B800D1C791 /* Chameleon.png */; };
 		F5A0F0551D23F90700D1C791 /* drive.png in Resources */ = {isa = PBXBuildFile; fileRef = F5A0F0541D23F90700D1C791 /* drive.png */; };
 		F5A0F0571D23F96600D1C791 /* icon-osx.png in Resources */ = {isa = PBXBuildFile; fileRef = F5A0F0561D23F96600D1C791 /* icon-osx.png */; };
-		F5C563E91CC49242001C00FF /* BatchProcessAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C563E81CC49242001C00FF /* BatchProcessAPI.swift */; };
+		F5C563E91CC49242001C00FF /* workFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C563E81CC49242001C00FF /* workFlow.swift */; };
 		F5C5D25A211AF8E300F840BD /* System in Resources */ = {isa = PBXBuildFile; fileRef = F5C5D259211AF8E300F840BD /* System */; };
 		F5C5D25C211B019F00F840BD /* mojave2core in Resources */ = {isa = PBXBuildFile; fileRef = F5C5D25B211B019F00F840BD /* mojave2core */; };
 		F5DC2D8C1D2FD4F600399552 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = F5DC2D8B1D2FD4F600399552 /* dsa_pub.pem */; };
@@ -149,7 +149,7 @@
 		F5A0F04C1D23F1B800D1C791 /* Chameleon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Chameleon.png; path = LazyHackintoshGenerator/Resources/Chameleon.png; sourceTree = "<group>"; };
 		F5A0F0541D23F90700D1C791 /* drive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = drive.png; path = LazyHackintoshGenerator/Resources/drive.png; sourceTree = "<group>"; };
 		F5A0F0561D23F96600D1C791 /* icon-osx.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-osx.png"; path = "LazyHackintoshGenerator/Resources/icon-osx.png"; sourceTree = "<group>"; };
-		F5C563E81CC49242001C00FF /* BatchProcessAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatchProcessAPI.swift; sourceTree = "<group>"; };
+		F5C563E81CC49242001C00FF /* workFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = workFlow.swift; sourceTree = "<group>"; };
 		F5C5D259211AF8E300F840BD /* System */ = {isa = PBXFileReference; lastKnownFileType = folder; name = System; path = LazyHackintoshGenerator/Resources/System; sourceTree = "<group>"; };
 		F5C5D25B211B019F00F840BD /* mojave2core */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = mojave2core; path = LazyHackintoshGenerator/Resources/mojave2core; sourceTree = "<group>"; };
 		F5C606411C66D8E30092EDA6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -260,7 +260,7 @@
 				F50411861C644987003311DA /* AppDelegate.swift */,
 				F546B0481C660EB600613AFE /* StringExtension.swift */,
 				F50411881C644987003311DA /* ViewController.swift */,
-				F5C563E81CC49242001C00FF /* BatchProcessAPI.swift */,
+				F5C563E81CC49242001C00FF /* workFlow.swift */,
 				1B315ECD1DA4FD050060F141 /* MBR_patch.swift */,
 				1B315EC91DA4FA570060F141 /* Global.swift */,
 				F50411951C644B0C003311DA /* FileDropZone.swift */,
@@ -550,7 +550,7 @@
 				F546B0491C660EB600613AFE /* StringExtension.swift in Sources */,
 				F55A4DDC1D487C18003C0B40 /* shellCommand.swift in Sources */,
 				F50411961C644B0C003311DA /* FileDropZone.swift in Sources */,
-				F5C563E91CC49242001C00FF /* BatchProcessAPI.swift in Sources */,
+				F5C563E91CC49242001C00FF /* workFlow.swift in Sources */,
 				F5ECAFE5216625400006D85F /* HelperProtocol.swift in Sources */,
 				1B6E89FE1DC993C300B4E1CB /* GetSystemVersionFromPlist.swift in Sources */,
 				1B315ECA1DA4FA570060F141 /* Global.swift in Sources */,

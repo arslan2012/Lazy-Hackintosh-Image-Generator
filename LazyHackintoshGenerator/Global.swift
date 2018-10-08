@@ -9,7 +9,6 @@
 import Foundation
 
 protocol BatchProcessAPIProtocol {
-    var debugLog: Bool { get set }
     func didReceiveProcessName(_ results: String)
     func didReceiveProgress(_ results: Double)
     func didReceiveErrorMessage(_ results: String)
@@ -22,11 +21,14 @@ protocol MenuControlProtocol {
 }
 
 var viewController: BatchProcessAPIProtocol? = nil
-var appDelegate: MenuControlProtocol? = nil
-let lazyImageMountPath = "/tmp/tech.arslan2012.lazy/lazyMount"
-let originalFileMountPath = "/tmp/tech.arslan2012.lazy/originMount"
-let baseSystemMountPath = "/tmp/tech.arslan2012.lazy/baseMount"
-var InstallESDMountPath = "/tmp/tech.arslan2012.lazy/ESDMount"
+var debugLog = false
+
+let tempFolderPath = "/tmp/tech.arslan2012.lazy"
+let lazyImageMountPath = "\(tempFolderPath)/lazyMount"
+let originalFileMountPath = "\(tempFolderPath)/originMount"
+let baseSystemMountPath = "\(tempFolderPath)/baseMount"
+
+var InstallESDMountPath = "\(tempFolderPath)/ESDMount"
 var baseSystemFilePath = ""
 var appFilePath = ""
 var SystemVersion = ""

@@ -38,7 +38,7 @@ func MountDisks(_ filePath: String) -> Observable<Void> {
         })
     } else if filePath.hasSuffix("app") {
         if (URL(fileURLWithPath: "\(filePath)/Contents/SharedSupport/InstallESD.dmg") as NSURL).checkResourceIsReachableAndReturnError(nil) {
-            result = ShellCommand.shared.run("/usr/bin/hdiutil", ["attach", "\(filePath)/Contents/SharedSupport/InstallESD.dmg", "-noverify", "-nobrowse", "-quiet", "-mountpoint", InstallESDMountPath], "#MOUNTESD#", 0).map({_ in
+            result = ShellCommand.shared.run("/usr/bin/hdiutil", ["attach", "\(filePath)/Contents/SharedSupport/InstallESD.dmg", "-noverify", "-nobrowse", "-quiet", "-mountpoint", InstallESDMountPath], "#MOUNTESD#", 0).map({ _ in
                 if (URL(fileURLWithPath: "\(filePath)/Contents/SharedSupport/BaseSystem.dmg") as NSURL).checkResourceIsReachableAndReturnError(nil) {
                     baseSystemFilePath = "\(filePath)/Contents/SharedSupport/BaseSystem.dmg"
                 } else if (URL(fileURLWithPath: "\(InstallESDMountPath)/BaseSystem.dmg") as NSURL).checkResourceIsReachableAndReturnError(nil) {
@@ -53,12 +53,12 @@ func MountDisks(_ filePath: String) -> Observable<Void> {
         }
     }
     //////////////////mount BaseSystem.dmg to determine the system version
-    result = result.flatMap({_ in
+    result = result.flatMap({ _ in
         ShellCommand.shared.run("/usr/bin/hdiutil", ["attach", baseSystemFilePath, "-noverify", "-nobrowse", "-quiet", "-mountpoint", baseSystemMountPath], "#MOUNTORG#", 0)
-    }).map({_ in
+    }).map({ _ in
         (SystemVersion, SystemBuildVersion) = GetSystemVersionFromPlist("\(baseSystemMountPath)/System/Library/CoreServices/SystemVersion.plist")
 
-        if viewController!.debugLog {
+        if debugLog {
             Logger("=======mounting done========")
         }
     })

@@ -8,15 +8,15 @@
 
 import Foundation
 
-class Helper: NSObject, HelperProtocol, NSXPCListenerDelegate{
+class Helper: NSObject, HelperProtocol, NSXPCListenerDelegate {
 
     private var connections = [NSXPCConnection]()
-    private var listener:NSXPCListener
+    private var listener: NSXPCListener
     private var shouldQuit = false
     private var shouldQuitCheckInterval = 1.0
 
-    override init(){
-        self.listener = NSXPCListener(machServiceName:HelperConstants.machServiceName)
+    override init() {
+        self.listener = NSXPCListener(machServiceName: HelperConstants.machServiceName)
         super.init()
         self.listener.delegate = self
     }
@@ -24,7 +24,7 @@ class Helper: NSObject, HelperProtocol, NSXPCListenerDelegate{
     /* 
         Starts the helper tool
      */
-    func run(){
+    func run() {
         self.listener.resume()
 
         // Kepp the helper running until shouldQuit variable is set to true.
@@ -37,14 +37,13 @@ class Helper: NSObject, HelperProtocol, NSXPCListenerDelegate{
     /*
         Called when the application connects to the helper
      */
-    func listener(_ listener:NSXPCListener, shouldAcceptNewConnection newConnection: NSXPCConnection) -> Bool
-    {
+    func listener(_ listener: NSXPCListener, shouldAcceptNewConnection newConnection: NSXPCConnection) -> Bool {
 
         // MARK: Here a check should be added to verify the application that is calling the helper
         // For example, checking that the codesigning is equal on the calling binary as this helper.
 
         newConnection.remoteObjectInterface = NSXPCInterface(with: ProcessProtocol.self)
-        newConnection.exportedInterface = NSXPCInterface(with:HelperProtocol.self)
+        newConnection.exportedInterface = NSXPCInterface(with: HelperProtocol.self)
         newConnection.exportedObject = self;
         newConnection.invalidationHandler = (() -> Void)? {
             if let indexValue = self.connections.index(of: newConnection) {
@@ -70,8 +69,7 @@ class Helper: NSObject, HelperProtocol, NSXPCListenerDelegate{
     /*
         Not really used in this test app, but there might be reasons to support multiple simultaneous connections.
      */
-    private func connection() -> NSXPCConnection
-    {
+    private func connection() -> NSXPCConnection {
         //
         return self.connections.last!
     }
@@ -92,11 +90,11 @@ class Helper: NSObject, HelperProtocol, NSXPCListenerDelegate{
         let errpipe = Pipe()
         task.standardError = errpipe
         if let remoteObject = self.connection().remoteObjectProxy as? ProcessProtocol {
-                let outdata = outpipe.fileHandleForReading.readDataToEndOfFile()
-                let output = String(data: outdata, encoding: String.Encoding.utf8)!
-                let errdata = errpipe.fileHandleForReading.readDataToEndOfFile()
-                let error = String(data: errdata, encoding: String.Encoding.utf8)!
-                remoteObject.saveLog(path, arg, output, error)
+            let outdata = outpipe.fileHandleForReading.readDataToEndOfFile()
+            let output = String(data: outdata, encoding: String.Encoding.utf8)!
+            let errdata = errpipe.fileHandleForReading.readDataToEndOfFile()
+            let error = String(data: errdata, encoding: String.Encoding.utf8)!
+            remoteObject.saveLog(path, arg, output, error)
         }
         task.terminationHandler = { task in
             reply(task.terminationStatus)

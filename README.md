@@ -21,3 +21,15 @@ Also, you may use [this script](https://github.com/arslan2012/Lazy-Hackintosh-Im
 
 ## You're a dev?
 my code is a mess, feel free to report an [issue](https://github.com/arslan2012/Lazy-Hackintosh-Image-Generator/issues/new), or open up a [pull request](https://github.com/arslan2012/Lazy-Hackintosh-Image-Generator/compare).
+
+### Build
+
+This project relys on [CocoaPods](https://cocoapods.org/) to manage dependencies, after you have installed it on your system, run `pod install `  to download dependencies of the project.
+
+Then set the build target to **LazyHackintoshGenerator** and build.
+
+Should the build succeed it will likely generate a defect app. You'll need to use [SMJobBlessUtil.py](https://developer.apple.com/library/content/samplecode/SMJobBless/Listings/SMJobBlessUtil_py.html) to check if the app had been built correctly.
+
+Use it like this: `./SMJobBlessUtil.py check /path/to/LazyHackintoshGenerator.app`
+
+and correct anything report by it in *info.plist* and *LazyGenHelper-Info.plist* until it doesn't show any output.

@@ -19,9 +19,24 @@ func GetSystemVersionFromPlist(_ SystemVersionPlistPath: String) -> (String, Str
     if SystemVersion == "" || SystemBuildVersion == "" {
         viewController!.didReceiveErrorMessage("#Error in sysVer#")
     }
-    if viewController!.debugLog {
+    if debugLog {
         Logger("Detected System Version:\(SystemVersion) \(SystemBuildVersion)")
         Logger("===========================")
     }
     return (SystemVersion: SystemVersion, SystemBuildVersion: SystemBuildVersion)
+}
+
+func getCustomInstallerName() -> String {
+    if SystemVersion.SysVerBiggerThan("10.13.99") {
+        return "Mojave Custom Installer"
+    } else if SystemVersion.SysVerBiggerThan("10.12.99") {
+        return "High Sierra Custom Installer"
+    } else if SystemVersion.SysVerBiggerThan("10.11.99") {
+        return "Sierra Custom Installer"
+    } else if SystemVersion.SysVerBiggerThan("10.10.99") {
+        return "El Capitan Custom Installer"
+    } else if SystemVersion.SysVerBiggerThan("10.9.99") {
+        return "Yosemite Custom Installer"
+    }
+    return "Lazy Installer"
 }

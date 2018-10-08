@@ -147,7 +147,7 @@ class ShellCommand: ProcessProtocol {
     }
 
     func saveLog(_ path: String, _ arg: [String], _ output: String, _ error: String) {
-        if viewController!.debugLog {
+        if debugLog {
             let components = (Calendar.current as NSCalendar).components([.hour, .minute, .second], from: Date())
             Logger("[\(components.hour!):\(components.minute!):\(components.second!)]: \(path) \(arg.joined(separator: " "))")
             Logger(output)

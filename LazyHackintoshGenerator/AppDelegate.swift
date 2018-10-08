@@ -10,29 +10,22 @@ class AppDelegate: NSObject, NSApplicationDelegate, MenuControlProtocol {
     @IBOutlet weak var update: NSMenuItem!
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        appDelegate = self
         do {
-            let enumerator = try FileManager.default.contentsOfDirectory(atPath: "/tmp/tech.arslan2012.lazy")
-            Observable.from(enumerator).flatMap{element in
-                ShellCommand.shared.run("/usr/bin/hdiutil", ["detach", "/tmp/tech.arslan2012.lazy/\(element)", "-force"], "#CleanDir#", 0)
-                }.subscribe()
+            let enumerator = try FileManager.default.contentsOfDirectory(atPath: tempFolderPath)
+            Observable.from(enumerator).flatMap { element in
+                ShellCommand.shared.run("/usr/bin/hdiutil", ["detach", "\(tempFolderPath)/\(element)", "-force"], "#CleanDir#", 0)
+            }.subscribe()
         } catch {
         }
     }
 
     @IBAction func DebugMenuPressed(_ sender: NSMenuItem) {
         if sender.title == "#Debug On#".localized() {
+            debugLog = true
             sender.title = "#Debug Off#".localized()
         } else {
+            debugLog = false
             sender.title = "#Debug On#".localized()
-        }
-    }
-
-    func getDebugStatus() -> Bool {
-        if debugging.title == "#Debug Off#".localized() {
-            return true
-        } else {
-            return false
         }
     }
 
@@ -43,7 +36,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, MenuControlProtocol {
     }
 
     func ProcessEnded() {
-        InstallESDMountPath = "/tmp/tech.arslan2012.lazy/ESDMount"
+        InstallESDMountPath = "\(tempFolderPath)/ESDMount"
         baseSystemFilePath = ""
         SystemVersion = ""
         SystemBuildVersion = ""

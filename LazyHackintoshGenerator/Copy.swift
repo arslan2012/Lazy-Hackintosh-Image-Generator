@@ -22,7 +22,7 @@ func Copy() -> Observable<Void> {
         }
         return Observable.zip(detaches)
     }).flatMap({ _ in
-        return ShellCommand.shared.run("/usr/bin/hdiutil", ["attach", "/tmp/tech.arslan2012.lazy/Lazy Installer.dmg", "-noverify", "-nobrowse", "-quiet", "-mountpoint", lazyImageMountPath], "#Wait Asr#", 0)
+        return ShellCommand.shared.run("/usr/bin/hdiutil", ["attach", "\(tempFolderPath)/Lazy Installer.dmg", "-noverify", "-nobrowse", "-quiet", "-mountpoint", lazyImageMountPath], "#Wait Asr#", 0)
     }).flatMap({ _ -> Observable<Int32> in
         do {
             let enumerator = try FileManager.default.contentsOfDirectory(atPath: "\(lazyImageMountPath)")
@@ -32,19 +32,7 @@ func Copy() -> Observable<Void> {
         } catch {
             viewController!.didReceiveErrorMessage("#Error in lazy image#")
         }
-        if SystemVersion.SysVerBiggerThan("10.13.99") {
-            return ShellCommand.shared.sudo("/usr/sbin/diskutil", ["rename", "OS X Base System", "Mojave Custom Installer"], "#COPYBASE#", 2)
-        } else if SystemVersion.SysVerBiggerThan("10.12.99") {
-            return ShellCommand.shared.sudo("/usr/sbin/diskutil", ["rename", "OS X Base System", "High Sierra Custom Installer"], "#COPYBASE#", 2)
-        } else if SystemVersion.SysVerBiggerThan("10.11.99") {
-            return ShellCommand.shared.sudo("/usr/sbin/diskutil", ["rename", "OS X Base System", "Sierra Custom Installer"], "#COPYBASE#", 2)
-        } else if SystemVersion.SysVerBiggerThan("10.10.99") {
-            return ShellCommand.shared.sudo("/usr/sbin/diskutil", ["rename", "OS X Base System", "El Capitan Custom Installer"], "#COPYBASE#", 2)
-        } else if SystemVersion.SysVerBiggerThan("10.9.99") {
-            return ShellCommand.shared.sudo("/usr/sbin/diskutil", ["rename", "OS X Base System", "Yosemite Custom Installer"], "#COPYBASE#", 2)
-        } else {
-            return ShellCommand.shared.sudo("/usr/sbin/diskutil", ["rename", "OS X Base System", "OS X Custom Installer"], "#COPYBASE#", 2)
-        }
+        return ShellCommand.shared.sudo("/usr/sbin/diskutil", ["rename", "OS X Base System", getCustomInstallerName()], "#COPYBASE#", 2)
     }).flatMap({ _ -> Observable<[Int32]> in
         var copies: [Observable<Int32>] = []
         if SystemVersion.SysVerBiggerThan("10.12.99") {
@@ -65,8 +53,8 @@ func Copy() -> Observable<Void> {
         ShellCommand.shared.sudo("/bin/cp", ["-R", "\(InstallESDMountPath)/Packages", "\(lazyImageMountPath)/System/Installation"], "#COPYPACKAGE#", 22)
     }).flatMap({ _ in
         ShellCommand.shared.run("/bin/mkdir", ["\(lazyImageMountPath)/System/Library/Kernels"], "#Create Kernels folder#", 1)
-    }).map({_ in
-        if viewController!.debugLog {
+    }).map({ _ in
+        if debugLog {
             Logger("========copying done========")
         }
     })

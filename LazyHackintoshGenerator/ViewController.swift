@@ -17,19 +17,17 @@ class ViewController: NSViewController, NSWindowDelegate, BatchProcessAPIProtoco
     @IBOutlet weak var CLT: NSButton!
     @IBOutlet weak var Output: NSButton!
     @IBOutlet weak var OSInstaller: NSButton!
-    var buttons: [NSButton] = [], debugLog = false, Path = "", OSInstallerPath = "", InstallerPath = "", extraFolderPath = ""
-
-    lazy var api: BatchProcessAPI = BatchProcessAPI()
+    var buttons: [NSButton] = [], Path = "", OSInstallerPath = "", InstallerPath = "", extraFolderPath = ""
 
     override func viewDidLoad() {
         viewController = self
         ShellCommand.shared.run("/usr/bin/xcode-select", ["-p"], "", 0, "")
-            .subscribe(onNext: {exitCode in
-            if exitCode == 0 {
-                self.CLT.isHidden = true
-                self.OSInstaller.isHidden = true
-            }
-        })
+                .subscribe(onNext: { exitCode in
+                    if exitCode == 0 {
+                        self.CLT.isHidden = true
+                        self.OSInstaller.isHidden = true
+                    }
+                })
         super.viewDidLoad()
         extra.viewDelegate = self
         Installer.viewDelegate = self
@@ -63,8 +61,6 @@ class ViewController: NSViewController, NSWindowDelegate, BatchProcessAPIProtoco
             a.messageText = "#Input is void#".localized()
             a.runModal()
         } else {
-            let appDelegate = NSApplication.shared.delegate as! AppDelegate
-            debugLog = appDelegate.getDebugStatus()
             start.isHidden = true
             CLT.isHidden = true
             progress.isHidden = false
@@ -81,20 +77,20 @@ class ViewController: NSViewController, NSWindowDelegate, BatchProcessAPIProtoco
                     UsingCustomSize = true
                 }
             }
-            let button = view.window?.standardWindowButton(NSWindow.ButtonType.closeButton)
-            button?.isEnabled = false
+            let closeButton = view.window?.standardWindowButton(NSWindow.ButtonType.closeButton)
+            closeButton?.isEnabled = false
             for button in buttons {
                 button.isEnabled = false
             }
-                /////////////////////////////////////////////////////////////////////
-                api.startGenerating(
-                        InstallerPath: InstallerPath,
-                        SizeVal: UsingCustomSize ? CustomSize.stringValue : "7.15",
-                        cdrState: cdr.state == NSControl.StateValue.on,
-                        dropKernelState: dropKernel.state == NSControl.StateValue.on,
-                        extraDroppedFilePath: extraFolderPath,
-                        Path: Path,
-                        OSInstallerPath: OSInstallerPath)
+            workFlow(
+                    InstallerPath: InstallerPath,
+                    SizeVal: UsingCustomSize ? CustomSize.stringValue : "7.15",
+                    cdrState: cdr.state == NSControl.StateValue.on,
+                    dropKernelState: dropKernel.state == NSControl.StateValue.on,
+                    extraDroppedFilePath: extraFolderPath,
+                    Path: Path,
+                    OSInstallerPath: OSInstallerPath
+            )
         }
     }
 

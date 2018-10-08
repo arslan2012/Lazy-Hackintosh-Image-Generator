@@ -21,7 +21,7 @@ func MBR_Patch(OSInstallerPath: String) -> Observable<Void> {
             OSInstall_mpkg_Patch(SystemVersion, "\(lazyImageMountPath)/System/Installation/Packages/OSInstall.mpkg")
         })
     }
-    return result.map({_ in
+    return result.map({ _ in
         viewController!.didReceiveProgress(2)
     })
 }
@@ -44,34 +44,34 @@ func OSInstaller_Patch(_ SystemVersion: String, _ SystemBuildVersion: String, _ 
 
 func OSInstall_mpkg_Patch(_ SystemVersion: String, _ OSInstallPath: String) -> Observable<Int32> {//progress:0%
     var patch: Observable<Int32>
-    patch = ShellCommand.shared.run("/bin/mkdir", ["/tmp/tech.arslan2012.lazy/osinstallmpkg"], "#Patch osinstall.mpkg#", 0).flatMap({ _ in
-        ShellCommand.shared.run("/usr/bin/xar", ["-x", "-f", OSInstallPath, "-C", "/tmp/tech.arslan2012.lazy/osinstallmpkg"], "#Patch osinstall.mpkg#", 0)
+    patch = ShellCommand.shared.run("/bin/mkdir", ["\(tempFolderPath)/osinstallmpkg"], "#Patch osinstall.mpkg#", 0).flatMap({ _ in
+        ShellCommand.shared.run("/usr/bin/xar", ["-x", "-f", OSInstallPath, "-C", "\(tempFolderPath)/osinstallmpkg"], "#Patch osinstall.mpkg#", 0)
     })
     if !SystemVersion.SysVerBiggerThan("10.11.99") {// 10.10.x and 10.11.x
         patch = patch.flatMap({ _ in
-            ShellCommand.shared.run("/usr/bin/sed", ["-i", "\'\'", "--", "s/1024/512/g", "/tmp/tech.arslan2012.lazy/osinstallmpkg/Distribution"], "#Patch osinstall.mpkg#", 0)
+            ShellCommand.shared.run("/usr/bin/sed", ["-i", "\'\'", "--", "s/1024/512/g", "\(tempFolderPath)/osinstallmpkg/Distribution"], "#Patch osinstall.mpkg#", 0)
         }).flatMap({ _ in
-            ShellCommand.shared.run("/usr/bin/sed", ["-i", "\'\'", "--", "s/var minRam = 2048/var minRam = 1024/g", "/tmp/tech.arslan2012.lazy/osinstallmpkg/Distribution"], "#Patch osinstall.mpkg#", 0)
+            ShellCommand.shared.run("/usr/bin/sed", ["-i", "\'\'", "--", "s/var minRam = 2048/var minRam = 1024/g", "\(tempFolderPath)/osinstallmpkg/Distribution"], "#Patch osinstall.mpkg#", 0)
         }).flatMap({ _ in
-            ShellCommand.shared.run("/usr/bin/sed", ["-i", "\'\'", "--", "s/osVersion=......... osBuildVersion=.......//g", "/tmp/tech.arslan2012.lazy/osinstallmpkg/Distribution"], "#Patch osinstall.mpkg#", 0)
+            ShellCommand.shared.run("/usr/bin/sed", ["-i", "\'\'", "--", "s/osVersion=......... osBuildVersion=.......//g", "\(tempFolderPath)/osinstallmpkg/Distribution"], "#Patch osinstall.mpkg#", 0)
         }).flatMap({ _ in
-            ShellCommand.shared.run("/usr/bin/sed", ["-i", "\'\'", "--", "/\\<installation-check script=\"installCheckScript()\"\\/>/d", "/tmp/tech.arslan2012.lazy/osinstallmpkg/Distribution"], "#Patch osinstall.mpkg#", 0)
+            ShellCommand.shared.run("/usr/bin/sed", ["-i", "\'\'", "--", "/\\<installation-check script=\"installCheckScript()\"\\/>/d", "\(tempFolderPath)/osinstallmpkg/Distribution"], "#Patch osinstall.mpkg#", 0)
         }).flatMap({ _ in
-            ShellCommand.shared.run("/usr/bin/sed", ["-i", "\'\'", "--", "/\\<volume-check script=\"volCheckScript()\"\\/>/d", "/tmp/tech.arslan2012.lazy/osinstallmpkg/Distribution"], "#Patch osinstall.mpkg#", 0)
+            ShellCommand.shared.run("/usr/bin/sed", ["-i", "\'\'", "--", "/\\<volume-check script=\"volCheckScript()\"\\/>/d", "\(tempFolderPath)/osinstallmpkg/Distribution"], "#Patch osinstall.mpkg#", 0)
         })
     } else {// 10.12+ and deprecated since DB5/PB4
         patch = patch.flatMap({ _ in
-            ShellCommand.shared.run("/usr/bin/sed", ["-i", "\'\'", "--", "/\\<installation-check script=\"InstallationCheck()\"\\/>/d", "/tmp/tech.arslan2012.lazy/osinstallmpkg/Distribution"], "#Patch osinstall.mpkg#", 0)
+            ShellCommand.shared.run("/usr/bin/sed", ["-i", "\'\'", "--", "/\\<installation-check script=\"InstallationCheck()\"\\/>/d", "\(tempFolderPath)/osinstallmpkg/Distribution"], "#Patch osinstall.mpkg#", 0)
         }).flatMap({ _ in
-            ShellCommand.shared.run("/usr/bin/sed", ["-i", "\'\'", "--", "/\\<volume-check script=\"VolumeCheck()\"\\/>/d", "/tmp/tech.arslan2012.lazy/osinstallmpkg/Distribution"], "#Patch osinstall.mpkg#", 0)
+            ShellCommand.shared.run("/usr/bin/sed", ["-i", "\'\'", "--", "/\\<volume-check script=\"VolumeCheck()\"\\/>/d", "\(tempFolderPath)/osinstallmpkg/Distribution"], "#Patch osinstall.mpkg#", 0)
         })
     }
     patch = patch.flatMap({ _ in
         ShellCommand.shared.run("/bin/rm", [OSInstallPath], "#Patch osinstall.mpkg#", 0)
     }).flatMap({ _ in
-        ShellCommand.shared.run("/bin/rm", ["/tmp/tech.arslan2012.lazy/osinstallmpkg/Distribution\'\'"], "#Patch osinstall.mpkg#", 0)
+        ShellCommand.shared.run("/bin/rm", ["\(tempFolderPath)/osinstallmpkg/Distribution\'\'"], "#Patch osinstall.mpkg#", 0)
     }).flatMap({ _ in
-        ShellCommand.shared.run("/usr/bin/xar", ["-cf", OSInstallPath, "."], "#Patch osinstall.mpkg#", 0, "/tmp/tech.arslan2012.lazy/osinstallmpkg")
+        ShellCommand.shared.run("/usr/bin/xar", ["-cf", OSInstallPath, "."], "#Patch osinstall.mpkg#", 0, "\(tempFolderPath)/osinstallmpkg")
     })
     return patch
 }
