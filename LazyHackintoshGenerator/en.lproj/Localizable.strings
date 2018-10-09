@@ -1,7 +1,7 @@
 	//UI Messages
 "#Title#" =  "Lazy Hackintosh Image Generator";
-"#Debug On#" = "Enable debug logging";
-"#Debug Off#" = "Disable debug logging";
+"#Debug On#" = "Save log to desktop";
+"#Debug Off#" = "Don't save log to desktop";
 "#Input is void#" =  "Image didn't set!";
 "#Custom Size#" = "Custom Image Size";
 

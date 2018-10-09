@@ -19,10 +19,8 @@ func GetSystemVersionFromPlist(_ SystemVersionPlistPath: String) -> (String, Str
     if SystemVersion == "" || SystemBuildVersion == "" {
         viewController!.didReceiveErrorMessage("#Error in sysVer#")
     }
-    if debugLog {
-        Logger("Detected System Version:\(SystemVersion) \(SystemBuildVersion)")
-        Logger("===========================")
-    }
+    Logger("Detected System Version:\(SystemVersion) \(SystemBuildVersion)")
+    Logger("===========================")
     return (SystemVersion: SystemVersion, SystemBuildVersion: SystemBuildVersion)
 }
 

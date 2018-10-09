@@ -6,8 +6,6 @@
 //  Copyright © 2016 Arslan Ablikim. All rights reserved.
 //
 
-import Foundation
-
 protocol BatchProcessAPIProtocol {
     func didReceiveProcessName(_ results: String)
     func didReceiveProgress(_ results: Double)

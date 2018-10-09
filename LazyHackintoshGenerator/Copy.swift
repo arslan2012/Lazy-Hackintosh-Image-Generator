@@ -3,11 +3,10 @@
 // Copyright (c) 2017 Arslan Ablikim. All rights reserved.
 //
 
-import Foundation
 import RxSwift
 
 func Copy() -> Observable<Void> {
-    return ShellCommand.shared.sudo("/usr/sbin/asr", ["restore", "--source", baseSystemFilePath, "--target", lazyImageMountPath, "--erase", "--format", "HFS+", "--noprompt", "--noverify"], "#COPYBASE#", 17.0).flatMap({ _ -> Observable<[Int32]> in
+    return ShellCommand.shared.sudo("/usr/sbin/asr", ["restore", "--source", baseSystemFilePath, "--target", lazyImageMountPath, "--erase", "--format", "HFS+", "--noprompt", "--noverify"], "#COPYBASE#", 17.0).flatMap { _ -> Observable<[Int32]> in
         var detaches: [Observable<Int32>] = []
         do {
             let enumerator = try FileManager.default.contentsOfDirectory(atPath: "/Volumes")
@@ -21,9 +20,9 @@ func Copy() -> Observable<Void> {
         } catch {
         }
         return Observable.zip(detaches)
-    }).flatMap({ _ in
+    }.flatMap { _ in
         return ShellCommand.shared.run("/usr/bin/hdiutil", ["attach", "\(tempFolderPath)/Lazy Installer.dmg", "-noverify", "-nobrowse", "-quiet", "-mountpoint", lazyImageMountPath], "#Wait Asr#", 0)
-    }).flatMap({ _ -> Observable<Int32> in
+    }.flatMap { _ -> Observable<Int32> in
         do {
             let enumerator = try FileManager.default.contentsOfDirectory(atPath: "\(lazyImageMountPath)")
             if enumerator.count > 2 {
@@ -33,7 +32,7 @@ func Copy() -> Observable<Void> {
             viewController!.didReceiveErrorMessage("#Error in lazy image#")
         }
         return ShellCommand.shared.sudo("/usr/sbin/diskutil", ["rename", "OS X Base System", getCustomInstallerName()], "#COPYBASE#", 2)
-    }).flatMap({ _ -> Observable<[Int32]> in
+    }.flatMap { _ -> Observable<[Int32]> in
         var copies: [Observable<Int32>] = []
         if SystemVersion.SysVerBiggerThan("10.12.99") {
             copies.append(ShellCommand.shared.run("/bin/cp", ["\(appFilePath)/Contents/SharedSupport/BaseSystem.chunklist", lazyImageMountPath], "#Copy ESD#", 2))
@@ -47,15 +46,13 @@ func Copy() -> Observable<Void> {
             copies.append(ShellCommand.shared.run("/bin/cp", ["\(InstallESDMountPath)/AppleDiagnostics.dmg", lazyImageMountPath], "#Copy ESD#", 2))
         }
         return Observable.zip(copies)
-    }).flatMap({ _ in
+    }.flatMap { _ in
         ShellCommand.shared.run("/bin/rm", ["-rf", "\(lazyImageMountPath)/System/Installation/Packages"], "#DELETEPACKAGE#", 2)
-    }).flatMap({ _ in
+    }.flatMap { _ in
         ShellCommand.shared.sudo("/bin/cp", ["-R", "\(InstallESDMountPath)/Packages", "\(lazyImageMountPath)/System/Installation"], "#COPYPACKAGE#", 22)
-    }).flatMap({ _ in
+    }.flatMap { _ in
         ShellCommand.shared.run("/bin/mkdir", ["\(lazyImageMountPath)/System/Library/Kernels"], "#Create Kernels folder#", 1)
-    }).map({ _ in
-        if debugLog {
-            Logger("========copying done========")
-        }
-    })
+    }.map { _ in
+        Logger("========copying done========")
+    }
 }

@@ -72,8 +72,11 @@ extension Data {
 }
 
 func Logger(_ log: String) {
+    let components = (Calendar.current as NSCalendar).components([.hour, .minute, .second], from: Date())
+    let log = ("[\(components.hour!):\(components.minute!):\(components.second!)]: \(log)")
+    print(log)
     do {
-        try log.appendLineToURL(URL(fileURLWithPath: "\(NSHomeDirectory())/Desktop/Lazy log.txt"))
+        try log.appendLineToURL(URL(fileURLWithPath: "\(tempFolderPath).log"))
     } catch {
     }
 }

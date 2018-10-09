@@ -1,7 +1,7 @@
     //UI Messages
 "#Title#" =  "懒人版镜像制作器";
-"#Debug On#" = "开启调试日志";
-"#Debug Off#" = "关闭调试日志";
+"#Debug On#" = "保存日志到桌面";
+"#Debug Off#" = "关闭保存日志到桌面";
 "#Input is void#" =  "未设置镜像！";
 "#Custom Size#" = "自定义生成镜像大小";
 

@@ -2,24 +2,57 @@ import Cocoa
 
 class ViewController: NSViewController, NSWindowDelegate, BatchProcessAPIProtocol, FileDropZoneProtocol {
     @IBOutlet weak var fileNameField: NSTextField!
-    @IBOutlet weak var progress: NSProgressIndicator!
-    @IBOutlet weak var extraFolderNameField: NSTextField!
-    @IBOutlet weak var progressLable: NSTextField!
-    @IBOutlet weak var start: NSButton!
-    @IBOutlet weak var cdr: NSButton!
-    @IBOutlet weak var Installer: FileDropZone!
-    @IBOutlet weak var extra: FileDropZone!
-    @IBOutlet weak var SizeCustomize: NSButton!
-    @IBOutlet weak var CustomSize: NSTextField!
-    @IBOutlet weak var SizeUnit: NSTextField!
-    @IBOutlet weak var exitButton: NSButton!
     @IBOutlet weak var dropKernel: NSButton!
     @IBOutlet weak var CLT: NSButton!
     @IBOutlet weak var Output: NSButton!
     @IBOutlet weak var OSInstaller: NSButton!
+    @IBOutlet weak var start: NSButton!
+    @IBOutlet weak var extraFolderNameField: NSTextField!
+    @IBOutlet weak var SizeCustomize: NSButton!
+    @IBOutlet weak var progress: NSProgressIndicator! {
+        didSet {
+            progress.isHidden = true
+        }
+    }
+    @IBOutlet weak var progressLable: NSTextField! {
+        didSet {
+            progressLable.isHidden = true
+        }
+    }
+    @IBOutlet weak var cdr: NSButton! {
+        didSet {
+            cdr.state = NSControl.StateValue.off
+        }
+    }
+    @IBOutlet weak var Installer: FileDropZone! {
+        didSet {
+            Installer.viewDelegate = self
+        }
+    }
+    @IBOutlet weak var extra: FileDropZone! {
+        didSet {
+            extra.viewDelegate = self
+        }
+    }
+    @IBOutlet weak var CustomSize: NSTextField! {
+        didSet {
+            CustomSize.isHidden = true
+        }
+    }
+    @IBOutlet weak var SizeUnit: NSTextField! {
+        didSet {
+            SizeUnit.isHidden = true
+        }
+    }
+    @IBOutlet weak var exitButton: NSButton! {
+        didSet {
+            exitButton.isHidden = true
+        }
+    }
     var buttons: [NSButton] = [], Path = "", OSInstallerPath = "", InstallerPath = "", extraFolderPath = ""
 
     override func viewDidLoad() {
+        super.viewDidLoad()
         viewController = self
         ShellCommand.shared.run("/usr/bin/xcode-select", ["-p"], "", 0, "")
                 .subscribe(onNext: { exitCode in
@@ -28,15 +61,6 @@ class ViewController: NSViewController, NSWindowDelegate, BatchProcessAPIProtoco
                         self.OSInstaller.isHidden = true
                     }
                 })
-        super.viewDidLoad()
-        extra.viewDelegate = self
-        Installer.viewDelegate = self
-        progress.isHidden = true
-        progressLable.isHidden = true
-        CustomSize.isHidden = true
-        SizeUnit.isHidden = true
-        cdr.state = NSControl.StateValue.off
-        exitButton.isHidden = true
         buttons = [cdr, SizeCustomize, dropKernel, Output, OSInstaller, CLT]
         for button in buttons {
             button.attributedTitle = NSAttributedString(string: (button.title), attributes: [NSAttributedString.Key.foregroundColor: NSColor.white])
@@ -56,9 +80,14 @@ class ViewController: NSViewController, NSWindowDelegate, BatchProcessAPIProtoco
     }
 
     @IBAction func StartProcessing(_ sender: NSButton) {
+        let size = CustomSize.doubleValue
         if InstallerPath == "" || !(URL(fileURLWithPath: InstallerPath) as NSURL).checkResourceIsReachableAndReturnError(nil) {
             let a = NSAlert()
             a.messageText = "#Input is void#".localized()
+            a.runModal()
+        } else if SizeCustomize.state == NSControl.StateValue.on && !(1...100 ~= size) {
+            let a = NSAlert()
+            a.messageText = "#WRONGSIZE#".localized()
             a.runModal()
         } else {
             start.isHidden = true
@@ -66,17 +95,6 @@ class ViewController: NSViewController, NSWindowDelegate, BatchProcessAPIProtoco
             progress.isHidden = false
             progressLable.isHidden = false
             progress.startAnimation(self)
-            var UsingCustomSize = false
-            if SizeCustomize.state == NSControl.StateValue.on {
-                if CustomSize.doubleValue <= 0 || CustomSize.doubleValue > 100 {
-                    let a = NSAlert()
-                    a.messageText = "#WRONGSIZE#".localized()
-                    a.runModal()
-                    exit(0)
-                } else {
-                    UsingCustomSize = true
-                }
-            }
             let closeButton = view.window?.standardWindowButton(NSWindow.ButtonType.closeButton)
             closeButton?.isEnabled = false
             for button in buttons {
@@ -84,7 +102,7 @@ class ViewController: NSViewController, NSWindowDelegate, BatchProcessAPIProtoco
             }
             workFlow(
                     InstallerPath: InstallerPath,
-                    SizeVal: UsingCustomSize ? CustomSize.stringValue : "7.15",
+                    SizeVal: SizeCustomize.state == NSControl.StateValue.on ? CustomSize.stringValue : "7.15",
                     cdrState: cdr.state == NSControl.StateValue.on,
                     dropKernelState: dropKernel.state == NSControl.StateValue.on,
                     extraDroppedFilePath: extraFolderPath,
@@ -191,6 +209,9 @@ class ViewController: NSViewController, NSWindowDelegate, BatchProcessAPIProtoco
 
     func didReceiveErrorMessage(_ results: String) {
         DispatchQueue.main.async {
+            if debugLog {
+                ShellCommand.shared.run("/bin/mv", ["\(tempFolderPath).log", "\(NSHomeDirectory())/Desktop/"], "#MV#", 0).subscribe()
+            }
             let a = NSAlert()
             a.messageText = results.localized()
             a.runModal()
@@ -200,6 +221,7 @@ class ViewController: NSViewController, NSWindowDelegate, BatchProcessAPIProtoco
 
     func didReceiveThreadExitMessage() {
         DispatchQueue.main.async {
+            self.progress.doubleValue = 100
             self.progress.stopAnimation(self)
             self.fileNameField.stringValue = ""
             self.exitButton.isHidden = false

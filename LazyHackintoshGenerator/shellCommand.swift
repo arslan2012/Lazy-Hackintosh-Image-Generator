@@ -35,7 +35,7 @@ class ShellCommand: ProcessProtocol {
             let helperInfo = helperBundleInfo as! NSDictionary
             let helperVersion = helperInfo["CFBundleVersion"] as! String
 
-            print("Helper: Bundle Version => \(helperVersion)")
+            Logger("Helper: Bundle Version => \(helperVersion)")
 
             let helper = self.helperConnection()?.remoteObjectProxyWithErrorHandler({
                 _ in
@@ -44,7 +44,7 @@ class ShellCommand: ProcessProtocol {
 
             helper.getVersion(reply: {
                 installedVersion in
-                print("Helper: Installed Version => \(installedVersion)")
+                Logger("Helper: Installed Version => \(installedVersion)")
                 callback(helperVersion == installedVersion)
             })
         } else {
@@ -61,14 +61,14 @@ class ShellCommand: ProcessProtocol {
         let status = AuthorizationCreate(&authRights, nil, authFlags, &authRef)
         if (status != errAuthorizationSuccess) {
             let error = NSError(domain: NSOSStatusErrorDomain, code: Int(status), userInfo: nil)
-            NSLog("Authorization error: \(error)")
+            Logger("Authorization error: \(error)")
         } else {
             var cfError: Unmanaged<CFError>? = nil
             if !SMJobBless(kSMDomainSystemLaunchd, HelperConstants.machServiceName as CFString, authRef, &cfError) {
                 let blessError = cfError!.takeRetainedValue() as Error
-                NSLog("Bless Error: \(blessError)")
+                Logger("Bless Error: \(blessError)")
             } else {
-                NSLog("\(HelperConstants.machServiceName) installed successfully")
+                Logger("\(HelperConstants.machServiceName) installed successfully")
             }
         }
     }
@@ -92,7 +92,7 @@ class ShellCommand: ProcessProtocol {
                 self.xpcHelperConnection?.invalidationHandler = nil
                 OperationQueue.main.addOperation() {
                     self.xpcHelperConnection = nil
-                    NSLog("XPC Connection Invalidated\n")
+                    Logger("XPC Connection Invalidated")
                 }
             }
             self.xpcHelperConnection?.resume()
@@ -110,7 +110,7 @@ class ShellCommand: ProcessProtocol {
         return Observable.create { observer in
             viewController!.didReceiveProcessName(label)
             let xpcService = self.helperConnection()?.remoteObjectProxyWithErrorHandler() { error -> Void in
-                print("XPCService error: %@", error)
+                Logger("XPCService error: \(error)")
             } as? HelperProtocol
 
             xpcService?.runTask(path, arg, currentDirectoryPath) { terminationStatus in
@@ -147,11 +147,6 @@ class ShellCommand: ProcessProtocol {
     }
 
     func saveLog(_ path: String, _ arg: [String], _ output: String, _ error: String) {
-        if debugLog {
-            let components = (Calendar.current as NSCalendar).components([.hour, .minute, .second], from: Date())
-            Logger("[\(components.hour!):\(components.minute!):\(components.second!)]: \(path) \(arg.joined(separator: " "))")
-            Logger(output)
-            Logger(error)
-        }
+        Logger("\(path) \(arg.joined(separator: " "))\n\(output)\n\(error)")
     }
 }

@@ -3,7 +3,6 @@
 // Copyright (c) 2017 Arslan Ablikim. All rights reserved.
 //
 
-import Foundation
 import RxSwift
 
 func Eject(_ cdrState: Bool, _ Path: String?) -> Observable<Void> {
@@ -15,14 +14,21 @@ func Eject(_ cdrState: Bool, _ Path: String?) -> Observable<Void> {
     ShellCommand.shared.run("/usr/bin/hdiutil", ["detach", originalFileMountPath, "-force"], "#EJECTORG#", 0).subscribe()
     ShellCommand.shared.run("/usr/bin/hdiutil", ["detach", InstallESDMountPath, "-force"], "#EJECTESD#", 1).subscribe()
     ShellCommand.shared.run("/usr/bin/hdiutil", ["detach", lazyImageMountPath, "-force"], "#EJECTLAZY#", 1).subscribe()
+    var result: Observable<Int32>;
     if cdrState {
-        return ShellCommand.shared.run("/usr/bin/hdiutil", ["convert", "\(tempFolderPath)/Lazy Installer.dmg", "-ov", "-format", "UDTO", "-o", "\(tempFolderPath)/Lazy Installer.cdr"], "#Create CDR#", 7).flatMap({ _ in
+        result = ShellCommand.shared.run("/usr/bin/hdiutil", ["convert", "\(tempFolderPath)/Lazy Installer.dmg", "-ov", "-format", "UDTO", "-o", "\(tempFolderPath)/Lazy Installer.cdr"], "#Create CDR#", 7).flatMap { _ in
             ShellCommand.shared.run("/bin/mv", ["\(tempFolderPath)/Lazy Installer.dmg", name], "#MV#", 0)
-        }).flatMap({ _ in
+        }.flatMap { _ in
             ShellCommand.shared.run("/bin/mv", ["\(tempFolderPath)/Lazy Installer.cdr", name.replacingOccurrences(of: "dmg", with: "cdr")], "#MV#", 0)
-        }).map({ _ in })
+        }
     } else {
         viewController!.didReceiveProgress(4)
-        return ShellCommand.shared.run("/bin/mv", ["\(tempFolderPath)/Lazy Installer.dmg", name], "#MV#", 3).map({ _ in })
+        result = ShellCommand.shared.run("/bin/mv", ["\(tempFolderPath)/Lazy Installer.dmg", name], "#MV#", 3)
     }
+    if debugLog {
+        result = result.flatMap { _ in
+            ShellCommand.shared.run("/bin/mv", ["\(tempFolderPath).log", "\(NSHomeDirectory())/Desktop/"], "#MV#", 0)
+        }
+    }
+    return result.map { _ in}
 }
