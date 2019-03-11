@@ -6,12 +6,13 @@
 import RxSwift
 
 func Copy() -> Observable<Void> {
+    let BaseImageName = SystemVersion.SysVerBiggerThan("10.14.3") ? "macOS Base System" : "OS X Base System"
     return ShellCommand.shared.sudo("/usr/sbin/asr", ["restore", "--source", baseSystemFilePath, "--target", lazyImageMountPath, "--erase", "--format", "HFS+", "--noprompt", "--noverify"], "#COPYBASE#", 17.0).flatMap { _ -> Observable<[Int32]> in
         var detaches: [Observable<Int32>] = []
         do {
             let enumerator = try FileManager.default.contentsOfDirectory(atPath: "/Volumes")
             for element in enumerator {
-                if element.hasPrefix("OS X Base System") {
+                if element.hasPrefix(BaseImageName) {
                     if (URL(fileURLWithPath: "/Volumes/\(element)") as NSURL).checkResourceIsReachableAndReturnError(nil) {
                         detaches.append(ShellCommand.shared.run("/usr/bin/hdiutil", ["detach", "/Volumes/\(element)", "-force"], "#Wait Asr#", 0))
                     }
@@ -31,7 +32,7 @@ func Copy() -> Observable<Void> {
         } catch {
             viewController!.didReceiveErrorMessage("#Error in lazy image#")
         }
-        return ShellCommand.shared.sudo("/usr/sbin/diskutil", ["rename", "OS X Base System", getCustomInstallerName()], "#COPYBASE#", 2)
+        return ShellCommand.shared.sudo("/usr/sbin/diskutil", ["rename", BaseImageName, getCustomInstallerName()], "#COPYBASE#", 2)
     }.flatMap { _ -> Observable<[Int32]> in
         var copies: [Observable<Int32>] = []
         if SystemVersion.SysVerBiggerThan("10.12.99") {

@@ -1,3 +1,8 @@
+### 2.0.83
+###### released March 11, 2019
+added support for 10.14.4
+Rewrote code using RxSwift
+
 ### 2.0.79
 ###### released August 9, 2018
 removed XCPM and LAPIC patch ability since chameleon has it already
