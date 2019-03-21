@@ -223,9 +223,6 @@ class ViewController: NSViewController, NSWindowDelegate, BatchProcessAPIProtoco
 
     func didReceiveErrorMessage(_ results: String) {
         DispatchQueue.main.async {
-            if debugLog {
-                ShellCommand.shared.run("/bin/mv", ["\(tempFolderPath).log", "\(NSHomeDirectory())/Desktop/"], "#MV#", 0).subscribe()
-            }
             let a = NSAlert()
             a.messageText = results.localized()
             a.runModal()

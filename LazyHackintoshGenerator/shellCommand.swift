@@ -62,11 +62,13 @@ class ShellCommand: ProcessProtocol {
         if (status != errAuthorizationSuccess) {
             let error = NSError(domain: NSOSStatusErrorDomain, code: Int(status), userInfo: nil)
             Logger("Authorization error: \(error)")
+            exit(0)
         } else {
             var cfError: Unmanaged<CFError>? = nil
             if !SMJobBless(kSMDomainSystemLaunchd, HelperConstants.machServiceName as CFString, authRef, &cfError) {
                 let blessError = cfError!.takeRetainedValue() as Error
                 Logger("Bless Error: \(blessError)")
+                exit(0)
             } else {
                 Logger("\(HelperConstants.machServiceName) installed successfully")
             }

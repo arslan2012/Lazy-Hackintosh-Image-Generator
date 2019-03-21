@@ -19,16 +19,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, MenuControlProtocol {
         }
     }
 
-    @IBAction func DebugMenuPressed(_ sender: NSMenuItem) {
-        if sender.title == "#Debug On#".localized() {
-            debugLog = true
-            sender.title = "#Debug Off#".localized()
-        } else {
-            debugLog = false
-            sender.title = "#Debug On#".localized()
-        }
-    }
-
     func ProcessStarted() {
         for item in [about, debugging, quit, update] {
             item?.isEnabled = false

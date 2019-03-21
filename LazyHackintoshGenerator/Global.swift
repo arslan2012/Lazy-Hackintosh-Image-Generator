@@ -19,7 +19,6 @@ protocol MenuControlProtocol {
 }
 
 var viewController: BatchProcessAPIProtocol? = nil
-var debugLog = false
 
 let tempFolderPath = "/tmp/tech.arslan2012.lazy"
 let lazyImageMountPath = "\(tempFolderPath)/lazyMount"

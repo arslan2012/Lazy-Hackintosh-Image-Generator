@@ -25,10 +25,5 @@ func Eject(_ cdrState: Bool, _ Path: String?) -> Observable<Void> {
         viewController!.didReceiveProgress(4)
         result = ShellCommand.shared.run("/bin/mv", ["\(tempFolderPath)/Lazy Installer.dmg", name], "#MV#", 3)
     }
-    if debugLog {
-        result = result.flatMap { _ in
-            ShellCommand.shared.run("/bin/mv", ["\(tempFolderPath).log", "\(NSHomeDirectory())/Desktop/"], "#MV#", 0)
-        }
-    }
     return result.map { _ in}
 }
