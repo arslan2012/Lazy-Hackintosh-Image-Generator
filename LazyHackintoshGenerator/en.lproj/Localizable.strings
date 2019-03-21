@@ -50,3 +50,4 @@
 "#FINISH#" = "Done!";
 "#MV#" = "Moving files to desktop";
 "#LAPICPATCH#" = "Patching Lapic";
+"#CLTFAILED#" = "Installing Command Line Tool failed! Maybe you already have it?";

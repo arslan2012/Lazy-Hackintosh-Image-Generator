@@ -1,3 +1,7 @@
+### 3.0.1
+###### released March 21, 2019
+fixes install CLT button
+
 ### 2.0.83
 ###### released March 11, 2019
 added support for 10.14.4

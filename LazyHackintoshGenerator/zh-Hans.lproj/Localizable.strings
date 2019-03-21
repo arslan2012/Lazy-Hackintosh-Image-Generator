@@ -50,3 +50,4 @@
 "#MV#" = "正在将文件移动到桌面上...";
 "#Create CDR#" = "生成CDR";
 "#LAPICPATCH#" = "内核Lapic补丁";
+"#CLTFAILED#" = "无法安装命令行工具! 莫非您已经安装过了?";

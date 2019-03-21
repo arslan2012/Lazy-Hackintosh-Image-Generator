@@ -3,12 +3,20 @@ import Cocoa
 class ViewController: NSViewController, NSWindowDelegate, BatchProcessAPIProtocol, FileDropZoneProtocol {
     @IBOutlet weak var fileNameField: NSTextField!
     @IBOutlet weak var dropKernel: NSButton!
-    @IBOutlet weak var CLT: NSButton!
     @IBOutlet weak var Output: NSButton!
-    @IBOutlet weak var OSInstaller: NSButton!
     @IBOutlet weak var start: NSButton!
     @IBOutlet weak var extraFolderNameField: NSTextField!
     @IBOutlet weak var SizeCustomize: NSButton!
+    @IBOutlet weak var CLT: NSButton! {
+        didSet {
+            CLT.isHidden = true
+        }
+    }
+    @IBOutlet weak var OSInstaller: NSButton! {
+        didSet {
+            OSInstaller.isHidden = true
+        }
+    }
     @IBOutlet weak var progress: NSProgressIndicator! {
         didSet {
             progress.isHidden = true
@@ -56,12 +64,12 @@ class ViewController: NSViewController, NSWindowDelegate, BatchProcessAPIProtoco
         viewController = self
         ShellCommand.shared.run("/usr/bin/xcode-select", ["-p"], "", 0, "")
                 .subscribe(onNext: { exitCode in
-                    if exitCode == 0 {
-                        self.CLT.isHidden = true
-                        self.OSInstaller.isHidden = true
+                    if exitCode != 0 {
+                        self.CLT.isHidden = false
+                        self.OSInstaller.isHidden = false
                     }
                 })
-        buttons = [cdr, SizeCustomize, dropKernel, Output, OSInstaller, CLT]
+        buttons = [cdr, SizeCustomize, dropKernel, Output, OSInstaller]
         for button in buttons {
             button.attributedTitle = NSAttributedString(string: (button.title), attributes: [NSAttributedString.Key.foregroundColor: NSColor.white])
         }
@@ -188,7 +196,13 @@ class ViewController: NSViewController, NSWindowDelegate, BatchProcessAPIProtoco
     }
 
     @IBAction func CLTButtonPressed(_ sender: NSButton) {
-        ShellCommand.shared.run("/bin/sh", ["-c", "xcode-select --install"], "", 0).subscribe()
+        ShellCommand.shared.run("/bin/sh", ["-c", "xcode-select --install"], "", 0).subscribe(onNext: { exitCode in
+            if exitCode != 0 {
+                let a = NSAlert()
+                a.messageText = "#CLTFAILED#".localized()
+                a.runModal()
+            }
+        })
     }
 
     @IBAction func exitButtonPressed(_ sender: NSButton) {

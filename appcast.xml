@@ -6,20 +6,20 @@
 <description>added auto update feature</description>
 <language>en</language>
 <item>
-<title>Version 83</title>
+<title>Version 1</title>
 <sparkle:releaseNotesLink>https://hackintosh-generator-update.herokuapp.com/release/en</sparkle:releaseNotesLink>
 <sparkle:releaseNotesLink xml:lang="cn">https://hackintosh-generator-update.herokuapp.com/release/cn</sparkle:releaseNotesLink>
 <sparkle:releaseNotesLink xml:lang="hk">https://hackintosh-generator-update.herokuapp.com/release/cn</sparkle:releaseNotesLink>
 <sparkle:releaseNotesLink xml:lang="tw">https://hackintosh-generator-update.herokuapp.com/release/cn</sparkle:releaseNotesLink>
-<pubDate>Mon, 11 Mar 2019 15:18:05 +0800</pubDate>
+<pubDate>Thu, 21 Mar 2019 17:23:38 +0800</pubDate>
 <enclosure
 url="https://raw.githubusercontent.com/arslan2012/Lazy-Hackintosh-Image-Generator/master//LazyHackintoshGenerator.app.zip"
-sparkle:version="83"
-sparkle:shortVersionString="V2.0"
+sparkle:version="1"
+sparkle:shortVersionString="V3.0"
 type="application/octet-stream"
-length="24488787"
-sparkle:dsaSignature="MEUCIQCFRjHGt47jriDQu6IO3zHtoqx7qBjQeQYiVvmE/+TeHAIgcbPdQ3S/8IYx
-RCJ8BN3wwSjNj3uuaCOh8qTcS0ltaUc="
+length="24489122"
+sparkle:dsaSignature="MEQCIGHCGx+aYucsJwaWglI2ZJw0vkoPdPfHgPmtWHCl2vhJAiBjaq5dcZHRQjgN
+OrLgVPCxvBYClt9HJk5y6/k5pg167w=="
 />
 </item>
 </channel>
