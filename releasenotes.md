@@ -1,3 +1,7 @@
+### 3.0.5
+###### released March 31, 2019
+fixed a bug where helper stucks on newer systems
+
 ### 3.0.1
 ###### released March 21, 2019
 fixes install CLT button

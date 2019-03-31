@@ -89,14 +89,14 @@ class Helper: NSObject, HelperProtocol, NSXPCListenerDelegate {
         task.standardOutput = outpipe
         let errpipe = Pipe()
         task.standardError = errpipe
-        if let remoteObject = self.connection().remoteObjectProxy as? ProcessProtocol {
-            let outdata = outpipe.fileHandleForReading.readDataToEndOfFile()
-            let output = String(data: outdata, encoding: String.Encoding.utf8)!
-            let errdata = errpipe.fileHandleForReading.readDataToEndOfFile()
-            let error = String(data: errdata, encoding: String.Encoding.utf8)!
-            remoteObject.saveLog(path, arg, output, error)
-        }
         task.terminationHandler = { task in
+            if let remoteObject = self.connection().remoteObjectProxy as? ProcessProtocol {
+                let outdata = outpipe.fileHandleForReading.readDataToEndOfFile()
+                let output = String(data: outdata, encoding: String.Encoding.utf8)!
+                let errdata = errpipe.fileHandleForReading.readDataToEndOfFile()
+                let error = String(data: errdata, encoding: String.Encoding.utf8)!
+                remoteObject.saveLog(path, arg, output, error)
+            }
             reply(task.terminationStatus)
         }
         task.launch()
