@@ -1,3 +1,7 @@
+### 3.0.7
+###### released April 2, 2019
+fixed a bug that prevents cdr file to be generated
+
 ### 3.0.5
 ###### released March 31, 2019
 fixed a bug where helper stucks on newer systems

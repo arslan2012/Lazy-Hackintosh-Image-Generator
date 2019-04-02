@@ -38,14 +38,14 @@ func workFlow(
         }
     }.flatMap { _ -> Observable<Void> in
         if dropKernelState {
-            return Drop_Kernel()
+            return Drop_Kernel().map { _ in }
         } else {
             viewController!.didReceiveProgress(2)
             return Observable.of(())
         }
     }.flatMap {
         ShellCommand.shared.run("/bin/cp", ["-R", extraDroppedFilePath, "\(lazyImageMountPath)/"], "#COPYEXTRA#", 2)
-    }.flatMap { _ -> Observable<Void> in
+    }.flatMap { _ -> Observable<Int32> in
         Logger("=======patching done========")
         return Eject(cdrState, Path == "" ? nil : Path)
     }.subscribe(onNext: { _ in
