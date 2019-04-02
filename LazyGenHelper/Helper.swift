@@ -46,7 +46,7 @@ class Helper: NSObject, HelperProtocol, NSXPCListenerDelegate {
         newConnection.exportedInterface = NSXPCInterface(with: HelperProtocol.self)
         newConnection.exportedObject = self;
         newConnection.invalidationHandler = (() -> Void)? {
-            if let indexValue = self.connections.index(of: newConnection) {
+            if let indexValue = self.connections.firstIndex(of: newConnection) {
                 self.connections.remove(at: indexValue)
             }
 
