@@ -5,7 +5,7 @@
 
 import RxSwift
 
-func Drop_Kernel() -> Observable<Int32> {//progress:2%
+func Drop_Kernel() -> Observable<Void> {//progress:2%
     return ShellCommand.shared.run(Bundle.main.path(forResource: Optional.init("lzvn"), ofType: nil)!, ["-d", "\(lazyImageMountPath)/System/Library/PrelinkedKernels/prelinkedkernel", "kernel"], "#COPYKERNELF#", 0, "\(tempFolderPath)/").flatMap { _ in
         ShellCommand.shared.run("/bin/cp", ["\(tempFolderPath)/kernel", "\(lazyImageMountPath)/System/Library/Kernels"], "#COPYKERNELF#", 2)
     }.flatMap { _ -> Observable<[Int32]> in
@@ -34,5 +34,6 @@ func Drop_Kernel() -> Observable<Int32> {//progress:2%
         return Observable.zip(patches)
     }.flatMap { _ in
         ShellCommand.shared.run("/bin/chmod", ["+x", "\(lazyImageMountPath)/System/Library/Kernels/kernel"], "#COPYKERNELF#", 0)
+    }.map { _ in
     }
 }
