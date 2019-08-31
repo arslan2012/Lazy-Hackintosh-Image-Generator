@@ -12,7 +12,7 @@
 	<string>1.0.1</string>
 	<key>SMAuthorizedClients</key>
 	<array>
-		<string>identifier &quot;tech.arslan2012.LazyHackintoshGenerator&quot; and anchor apple generic and certificate leaf[subject.CN] = &quot;Mac Developer: 604457827@qq.com (45VW5X2LPP)&quot; and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
+		<string>identifier "tech.arslan2012.LazyHackintoshGenerator" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: 604457827@qq.com (45VW5X2LPP)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
 	</array>
 </dict>
 </plist>
