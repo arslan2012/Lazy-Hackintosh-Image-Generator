@@ -14,7 +14,7 @@ target 'LazyHackintoshGenerator' do
   use_frameworks!
 
   pod 'Sparkle'
-  pod 'RxSwift',    '~> 4.0'
-  pod 'RxCocoa',    '~> 4.0'
+  pod 'RxSwift', '6.0.0-rc.2'
+  pod 'RxCocoa', '6.0.0-rc.2'
 
 end

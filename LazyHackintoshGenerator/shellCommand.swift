@@ -122,7 +122,7 @@ class ShellCommand: ProcessProtocol {
             }
 
             return Disposables.create()
-        }.observeOn(MainScheduler.instance).subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+        }.observe(on: MainScheduler.instance).subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
     }
 
     func sudo(_ path: String,
@@ -145,7 +145,7 @@ class ShellCommand: ProcessProtocol {
                 observer.onCompleted()
             }, self.cachedHelperAuthData!)
             return Disposables.create()
-        }.observeOn(MainScheduler.instance).subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+        }.observe(on: MainScheduler.instance).subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
     }
 
     func saveLog(_ path: String, _ arg: [String], _ output: String, _ error: String) {

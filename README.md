@@ -1,3 +1,7 @@
+## Installer patching is deprecated since macOS 11, please use OpenCore.
+
+## This should only be used with macOS 10.X
+
 # Lazy Hackintosh Image Generator
 [![Swift 5](https://img.shields.io/badge/Swift-5-orange.svg?style=flat)](https://swift.org)
 ## What is this?

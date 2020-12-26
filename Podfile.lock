@@ -1,29 +1,30 @@
 PODS:
-  - RxAtomic (4.4.2)
-  - RxCocoa (4.4.2):
-    - RxSwift (>= 4.4.2, ~> 4.4)
-  - RxSwift (4.4.2):
-    - RxAtomic (>= 4.4.2, ~> 4.4)
-  - Sparkle (1.21.3)
+  - RxCocoa (6.0.0-rc.2):
+    - RxRelay (= 6.0.0-rc.2)
+    - RxSwift (= 6.0.0-rc.2)
+  - RxRelay (6.0.0-rc.2):
+    - RxSwift (= 6.0.0-rc.2)
+  - RxSwift (6.0.0-rc.2)
+  - Sparkle (1.24.0)
 
 DEPENDENCIES:
-  - RxCocoa (~> 4.0)
-  - RxSwift (~> 4.0)
+  - RxCocoa (= 6.0.0-rc.2)
+  - RxSwift (= 6.0.0-rc.2)
   - Sparkle
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
-    - RxAtomic
+  trunk:
     - RxCocoa
+    - RxRelay
     - RxSwift
     - Sparkle
 
 SPEC CHECKSUMS:
-  RxAtomic: d00e97c10db88c6f08540e0bf2752fc5a2404167
-  RxCocoa: 477990dc3b4c3ff55fb0ac77e1cc06244e0aaec8
-  RxSwift: 74c29b693c8e42b0f64400e8b06564575742d649
-  Sparkle: 3f75576db8b0265adef36c43249d747f22d0b708
+  RxCocoa: 38445a25751be5907f52f7ea02c137f52ce2e7f2
+  RxRelay: b9e2483e83f46e4e7bf1234c6fe418e5c2eaf825
+  RxSwift: ada35be6643bedf6881cdbd6bbfb27aeea527670
+  Sparkle: 270cd27377bf04e9c128af06e3a22d0f572d6ee3
 
-PODFILE CHECKSUM: bfec70a2b214295d400c5b2200b7de9a44b2ee72
+PODFILE CHECKSUM: c24b9a557c2987e0c58e5aca29b597a83a51e989
 
-COCOAPODS: 1.7.5
+COCOAPODS: 1.10.0
